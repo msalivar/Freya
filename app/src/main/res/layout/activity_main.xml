@@ -26,4 +26,14 @@
         android:layout_toEndOf="@+id/textView"
         android:layout_marginBottom="88dp" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button2"
+        android:layout_below="@+id/checkBox"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginTop="47dp" />
+
 </RelativeLayout>
