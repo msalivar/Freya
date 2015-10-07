@@ -9,29 +9,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
 
-    <Button
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
-        android:layout_marginTop="87dp" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
-        android:layout_alignStart="@+id/button" />
-
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
+        android:text="New CheckBox"
+        android:id="@+id/checkBox"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toEndOf="@+id/textView" />
 
 </RelativeLayout>
