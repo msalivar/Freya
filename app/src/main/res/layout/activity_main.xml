@@ -26,6 +26,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="@string/delete"
         android:id="@+id/delete"
         android:layout_below="@+id/read"
@@ -50,4 +51,21 @@
         android:layout_alignStart="@+id/update"
         android:layout_marginTop="42dp"
         android:layout_alignParentEnd="true" />
+=======
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_above="@+id/checkBox"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="73dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New RadioButton"
+        android:id="@+id/radioButton"
+        android:layout_below="@+id/checkBox"
+        android:layout_centerHorizontal="true" />
+
+>>>>>>> add49f76501e56a3c374cfbfb23d1a4e0d1e78f9
 </RelativeLayout>
