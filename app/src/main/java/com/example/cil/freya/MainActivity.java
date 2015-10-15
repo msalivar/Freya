@@ -1,41 +1,23 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
+import android.app.Application;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.JsonToken;
+import android.util.JsonReader;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.util.JsonReader;
-import android.util.JsonWriter;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.InputStream;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
-import java.net.HttpURLConnection;
-import java.io.*;
 import java.util.Map;
 
 
-public class MainActivity  extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     Button create, read, update, delete;
     TextView createText;
@@ -90,10 +72,11 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 break;
 
             case (R.id.read):
-                readMessage();
+                new readMessage().execute();
                 createText.setText("read");
                 break;
             case (R.id.delete):
+
                 createText.setText("delete");
                 break;
             case (R.id.update):
@@ -103,7 +86,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
     }
 
     public void writeMessage() {
-        String sb = "";
+/*        String sb = "";
         URL url = null;
         int one = 1;
         HttpURLConnection urlConnection = null;
@@ -169,41 +152,56 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
             if(urlConnection != null)
                 urlConnection.disconnect();
-        }
+        }*/
     }
 
-    public void readMessage()
-    {
-        URL url;
-        HttpURLConnection urlConnection = null;
-        try {
-            url = new URL("http://sensor.nevada.edu/GS/Services/people/");
+    /*public class readMessage extends AsyncTask<String, Void, URL> {
 
-            urlConnection = (HttpURLConnection) url
-                    .openConnection();
-
-            InputStream in = urlConnection.getInputStream();
-
-            InputStreamReader isw = new InputStreamReader(in);
-
-            int data = isw.read();
-            while (data != -1) {
-                char current = (char) data;
-                data = isw.read();
-                System.out.print(current);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+        @Override
+        protected URL doInBackground(String... params) {
+            URL url = null;
             try {
-                urlConnection.disconnect();
+
+                url = new URL("http://www.google.com/");
+                URLConnection conn = url.openConnection();
+                Map<String, List<String>> map = conn.getHeaderFields();
+
+                System.out.println("Printing All Response Header for URL: "
+                        + url.toString() + "\n");
+
+                for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+                    System.out.println(entry.getKey() + " : " + entry.getValue());
+                }
+
+                System.out.println("\nGet Response Header By Key ...\n");
+                List<String> contentLength = map.get("Content-Length");
+
+                if (contentLength == null) {
+                    System.out
+                            .println("'Content-Length' doesn't present in Header!");
+                } else {
+                    for (String header : contentLength) {
+                        System.out.println("Content-Length: " + header);
+                    }
+                }
+
             } catch (Exception e) {
-                e.printStackTrace(); //If you want further info on failure...
+                e.printStackTrace();
+            } finally {
+                return url;
             }
         }
+            protected void onPostExecute(URL url){
+                System.out.println(url);
+        }
     }
+}*/
 
-    }
+   //public class deleteMessage extends AsyncTask<String, Void, URL> {
+
+
+    //}
+
 
 
 
