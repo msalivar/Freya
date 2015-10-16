@@ -16,10 +16,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug{
+            debuggable=true
+        }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.json:json:20141113'
+    //compile 'org.json:json:20141113'
+    // compile files('libs/unirest-java-1.4.7.jar')
+    //compile files('/home/cil/Senior Projects 15-16/Matt/libs/unirest-java-1.4.7.jar')
 }
