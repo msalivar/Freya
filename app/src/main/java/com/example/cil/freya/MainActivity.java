@@ -2,14 +2,16 @@ package com.example.cil.freya;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,10 +32,10 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    public final static String JSON_TEXT = "MESSAGE";
     Button create, read, update, delete;
-    int one = 1;
     TextView createText;
-    JsonReader test;
+    JSONObject saved = new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,25 +85,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 createText.setText("create");
                 break;
             case (R.id.read):
-                String json_str = "";
-                try {
-                    json_str = new readMessage().execute("http://sensor.nevada.edu/GS/Services/people/").get();
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
-                try
-                {
-                    JSONObject obj = new JSONObject(json_str);
-                    JSONArray persons = obj.getJSONArray("People");
-                    String name = persons.getJSONObject(0).getString("First Name");
-                    createText.setText(name);
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
+                getAllRequest();
                 break;
             case (R.id.delete):
-
                 createText.setText("delete");
                 break;
             case (R.id.update):
@@ -114,7 +100,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date(0));
-        byte[] data = new byte[10];
         jsonParam.put("Creation Date", date);
         jsonParam.put("Email", "test@email.com");
         jsonParam.put("First Name", "Matt");
@@ -122,10 +107,75 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("Modification Date", date);
         jsonParam.put("Organization", "UNR");
         jsonParam.put("Phone", "(775)313-7829");
-        // What needs to go here?
-        jsonParam.put("Photo", data);
+        jsonParam.put("Photo", null);
         jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABB7");
         return jsonParam;
+    }
+
+    public void getAllRequest()
+    {
+        String json_str = "";
+        try {
+            json_str = new readMessage().execute("http://sensor.nevada.edu/GS/Services/people/").get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        try
+        {
+            JSONObject obj = new JSONObject(json_str);
+            JSONArray persons = obj.getJSONArray("People");
+            Intent intent = new Intent(this, DisplayMessageActivity.class);
+            String[] people = new String[persons.length()];
+            for (int i = 0; i < persons.length(); i++)
+            {
+                people[i] = persons.getJSONObject(i).toString();
+            }
+            intent.putExtra(JSON_TEXT, people);
+            startActivity(intent);
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public class readMessage extends AsyncTask<String, Void, String>
+    {
+
+        private Exception exception;
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection urlConnection = null;
+            try {
+                URL url = new URL(params[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Content-length", "0");
+                urlConnection.setUseCaches(false);
+                urlConnection.setAllowUserInteraction(false);
+                urlConnection.connect();
+                int code = urlConnection.getResponseCode();
+                if (code == 200)
+                {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null)
+                    {
+                        sb.append(line).append("\n");
+                    }
+                    br.close();
+                    return sb.toString();
+                }
+                return "error";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "error";
+            } finally {
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+        }
+
     }
 
     public class writeMessage extends AsyncTask<Void, Void, Void>
@@ -189,45 +239,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     urlConnection.disconnect();
             }
             return null;
-        }
-    }
-
-    public class readMessage extends AsyncTask<String, Void, String>
-    {
-        private Exception exception;
-
-        @Override
-        protected String doInBackground(String... params) {
-            HttpURLConnection urlConnection = null;
-            try {
-                URL url = new URL(params[0]);
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.setRequestProperty("Content-length", "0");
-                urlConnection.setUseCaches(false);
-                urlConnection.setAllowUserInteraction(false);
-                urlConnection.connect();
-                int code = urlConnection.getResponseCode();
-                if (code == 200)
-                {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null)
-                    {
-                        sb.append(line).append("\n");
-                    }
-                    br.close();
-                    return sb.toString();
-                }
-                return "error";
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "error";
-            } finally {
-                if(urlConnection != null)
-                    urlConnection.disconnect();
-            }
         }
     }
 }
