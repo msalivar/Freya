@@ -81,17 +81,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 new writeMessage().execute();
                 createText.setText("create");
                 break;
-
             case (R.id.read):
-                Integer test = new Integer(0);
+                String json_str = "";
                 try {
-                    test = new readMessage().execute("https://www.google.com/").get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
+                    json_str = new readMessage().execute("http://sensor.nevada.edu/GS/Services/people/").get();
+                } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
-                createText.setText(test.toString());
+                try
+                {
+                    JSONObject json = new JSONObject(json_str);
+                    String name = json.getJSONObject("People").getString("First Name");
+                    createText.setText(name);
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
                 break;
             case (R.id.delete):
 
@@ -115,7 +120,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("Modification Date", date);
         jsonParam.put("Organization", "UNR");
         jsonParam.put("Phone", "(775)313-7829");
-
         // What needs to go here?
         jsonParam.put("Photo", data);
         jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABB7");
@@ -186,23 +190,38 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public class readMessage extends AsyncTask<String, Void, Integer>
+    public class readMessage extends AsyncTask<String, Void, String>
     {
         private Exception exception;
 
         @Override
-        protected Integer doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             HttpURLConnection urlConnection = null;
             try {
                 URL url = new URL(params[0]);
                 urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Content-length", "0");
+                urlConnection.setUseCaches(false);
+                urlConnection.setAllowUserInteraction(false);
                 urlConnection.connect();
                 int code = urlConnection.getResponseCode();
-                System.out.println(code);
-                return code;
+                if (code == 200)
+                {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null)
+                    {
+                        sb.append(line).append("\n");
+                    }
+                    br.close();
+                    return sb.toString();
+                }
+                return "error";
             } catch (Exception e) {
                 e.printStackTrace();
-                return 0;
+                return "error";
             } finally {
                 if(urlConnection != null)
                     urlConnection.disconnect();
