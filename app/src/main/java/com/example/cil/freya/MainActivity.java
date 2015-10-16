@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,8 +91,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 try
                 {
-                    JSONObject json = new JSONObject(json_str);
-                    String name = json.getJSONObject("People").getString("First Name");
+                    JSONObject obj = new JSONObject(json_str);
+                    JSONArray persons = obj.getJSONArray("People");
+                    String name = persons.getJSONObject(0).getString("First Name");
                     createText.setText(name);
                 } catch (JSONException e)
                 {
