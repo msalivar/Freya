@@ -1,7 +1,6 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.content.Intent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +27,8 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener
+{
 
     public final static String JSON_TEXT = "MESSAGE";
     Button create, read, update, delete;
@@ -38,7 +36,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     JSONObject saved = new JSONObject();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -55,21 +54,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 
@@ -77,8 +79,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
 
             case (R.id.create):
                 new writeMessage().execute();
@@ -96,28 +100,31 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public JSONObject createJSON() throws JSONException {
+    public JSONObject createJSON() throws JSONException
+    {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
-        String date = sdf.format(new Date(0));
+        String date = sdf.format(new Date());
         jsonParam.put("Creation Date", date);
         jsonParam.put("Email", "test@email.com");
-        jsonParam.put("First Name", "Matt");
-        jsonParam.put("Last Name", "Salivar");
+        jsonParam.put("First Name", "Sam");
+        jsonParam.put("Last Name", "Grant");
         jsonParam.put("Modification Date", date);
         jsonParam.put("Organization", "UNR");
         jsonParam.put("Phone", "(775)313-7829");
-        jsonParam.put("Photo", null);
-        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABB7");
+        jsonParam.put("Photo", 0);
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABA0");
         return jsonParam;
     }
 
     public void getAllRequest()
     {
         String json_str = "";
-        try {
+        try
+        {
             json_str = new readMessage().execute("http://sensor.nevada.edu/GS/Services/people/").get();
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e)
+        {
             e.printStackTrace();
         }
         try
@@ -142,10 +149,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     {
 
         private Exception exception;
+
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String... params)
+        {
             HttpURLConnection urlConnection = null;
-            try {
+            try
+            {
                 URL url = new URL(params[0]);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -167,11 +177,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     return sb.toString();
                 }
                 return "error";
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 e.printStackTrace();
                 return "error";
-            } finally {
-                if(urlConnection != null)
+            } finally
+            {
+                if (urlConnection != null)
                     urlConnection.disconnect();
             }
         }
@@ -181,13 +193,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public class writeMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Void... params)
+        {
             String sb = "";
             URL url = null;
             int one = 1;
             HttpURLConnection urlConnection = null;
             String test = "http://sensor.nevada.edu/GS/Services/people/";
-            try {
+            try
+            {
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
@@ -207,40 +221,48 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 out.close();
 
                 int HttpResult = urlConnection.getResponseCode();
-                if(HttpResult == HttpURLConnection.HTTP_OK){
+                if (HttpResult == HttpURLConnection.HTTP_OK)
+                {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
-                            urlConnection.getInputStream(),"utf-8"));
+                            urlConnection.getInputStream(), "utf-8"));
                     String line = null;
-                    while ((line = br.readLine()) != null) {
+                    while ((line = br.readLine()) != null)
+                    {
                         sb += (line + "\n");
                     }
                     br.close();
 
                     System.out.println("" + sb);
 
-                }else{
+                } else
+                {
                     System.out.println(urlConnection.getResponseMessage());
                 }
-            } catch (MalformedURLException e) {
+            } catch (MalformedURLException e)
+            {
 
                 e.printStackTrace();
 
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
 
                 e.printStackTrace();
 
-            } catch (JSONException e) {
+            } catch (JSONException e)
+            {
 
                 e.printStackTrace();
 
-            } finally{
+            } finally
+            {
 
-                if(urlConnection != null)
+                if (urlConnection != null)
                     urlConnection.disconnect();
             }
             return null;
         }
     }
+
 }
 
 
