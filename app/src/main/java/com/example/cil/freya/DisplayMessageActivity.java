@@ -1,9 +1,11 @@
 package com.example.cil.freya;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.widget.EditText;
+import android.os.Bundle;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class DisplayMessageActivity extends Activity
 {
@@ -15,11 +17,29 @@ public class DisplayMessageActivity extends Activity
         // Get the message from the intent
         String[] people = getIntent().getStringArrayExtra(MainActivity.JSON_TEXT);
         String message = "";
-        for (String str : people)
-        {
-            message += str + "\n";
-        }
 
+        try
+        {
+            for(int j = 0; j < people.length; j++)
+            {
+                JSONObject obj = new JSONObject(people[j]);
+
+                message += "Creation Date: " + obj.getString("Creation Date") + "\n";
+                message += "Email: " + obj.getString("Email") + "\n";
+                message += "First Name: " + obj.getString("First Name") + "\n";
+                message += "Last Name: " + obj.getString("Last Name") + "\n";
+                message += "Modification Date: " + obj.getString("Modification Date") + "\n";
+                message += "Organization: " + obj.getString("Organization") + "\n";
+                message += "Phone: " + obj.getString("Phone") + "\n";
+                message += "\n";
+
+            }
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
         // Create the text view
         TextView jsonText = new TextView(this);
         jsonText.setText(message);
