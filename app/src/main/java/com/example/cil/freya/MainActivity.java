@@ -1,7 +1,6 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.content.Intent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,6 +85,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 getAllRequest();
                 break;
             case (R.id.delete):
+                new deleteMessage().execute();
                 createText.setText("delete");
                 break;
             case (R.id.update):
@@ -99,7 +97,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public JSONObject createJSON() throws JSONException {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
-        String date = sdf.format(new Date(0));
+        String date = sdf.format(new Date());
         jsonParam.put("Creation Date", date);
         jsonParam.put("Email", "test@email.com");
         jsonParam.put("First Name", "Matt");
@@ -107,8 +105,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("Modification Date", date);
         jsonParam.put("Organization", "UNR");
         jsonParam.put("Phone", "(775)313-7829");
-        jsonParam.put("Photo", null);
-        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABB7");
+        jsonParam.put("Photo", 0);
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80A27ABB7");
         return jsonParam;
     }
 
@@ -140,7 +138,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public class readMessage extends AsyncTask<String, Void, String>
     {
-
         private Exception exception;
         @Override
         protected String doInBackground(String... params) {
@@ -175,7 +172,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     urlConnection.disconnect();
             }
         }
-
     }
 
     public class writeMessage extends AsyncTask<Void, Void, Void>
@@ -230,6 +226,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
 
             } catch (JSONException e) {
+
+                e.printStackTrace();
+
+            } finally{
+
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+    }
+
+    public class deleteMessage extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params) {
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA0";
+            try {
+                url = new URL(test);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("DELETE");
+                urlConnection.setUseCaches(false);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+                int HttpResult = urlConnection.getResponseCode();
+
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+
+            } catch (IOException e) {
 
                 e.printStackTrace();
 
