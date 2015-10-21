@@ -92,6 +92,7 @@ public class MainActivity extends Activity implements View.OnClickListener
                 getAllRequest();
                 break;
             case (R.id.delete):
+                new deleteMessage().execute();
                 createText.setText("delete");
                 break;
             case (R.id.update):
@@ -113,7 +114,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         jsonParam.put("Organization", "UNR");
         jsonParam.put("Phone", "(775)313-7829");
         jsonParam.put("Photo", 0);
-        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABA0");
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABB7");
         return jsonParam;
     }
 
@@ -147,7 +148,6 @@ public class MainActivity extends Activity implements View.OnClickListener
 
     public class readMessage extends AsyncTask<String, Void, String>
     {
-
         private Exception exception;
 
         @Override
@@ -187,7 +187,6 @@ public class MainActivity extends Activity implements View.OnClickListener
                     urlConnection.disconnect();
             }
         }
-
     }
 
     public class writeMessage extends AsyncTask<Void, Void, Void>
@@ -262,7 +261,6 @@ public class MainActivity extends Activity implements View.OnClickListener
             return null;
         }
     }
-
 }
 
 
