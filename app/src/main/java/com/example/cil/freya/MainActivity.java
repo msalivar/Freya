@@ -89,6 +89,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 createText.setText("delete");
                 break;
             case (R.id.update):
+                new updateMessage().execute();
                 createText.setText("update");
                 break;
         }
@@ -103,10 +104,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("First Name", "Matt");
         jsonParam.put("Last Name", "Salivar");
         jsonParam.put("Modification Date", date);
-        jsonParam.put("Organization", "UNR");
+        jsonParam.put("Organization", "Updated");
         jsonParam.put("Phone", "(775)313-7829");
         jsonParam.put("Photo", 0);
-        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80A27ABB7");
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABA3");
         return jsonParam;
     }
 
@@ -260,6 +261,70 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
 
             } catch (IOException e) {
+
+                e.printStackTrace();
+
+            } finally{
+
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+    }
+
+    public class updateMessage extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params) {
+            String sb = "";
+            URL url = null;
+            int one = 1;
+            HttpURLConnection urlConnection = null;
+            String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA3";
+            try {
+                url = new URL(test);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("PUT");
+                urlConnection.setDoOutput(true);
+                urlConnection.setUseCaches(false);
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+
+                //Create JSONObject here
+                JSONObject JSON = createJSON();
+
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write(JSON.toString());
+                out.close();
+
+                int HttpResult = urlConnection.getResponseCode();
+                if(HttpResult == HttpURLConnection.HTTP_OK){
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            urlConnection.getInputStream(),"utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb += (line + "\n");
+                    }
+                    br.close();
+
+                    System.out.println("" + sb);
+
+                }else{
+                    System.out.println(urlConnection.getResponseMessage());
+                }
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            } catch (JSONException e) {
 
                 e.printStackTrace();
 
