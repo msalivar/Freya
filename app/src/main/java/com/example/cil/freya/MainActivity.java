@@ -1,13 +1,18 @@
 package com.example.cil.freya;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -26,9 +31,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    private DrawerLayout mDrawerLayout;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
+    private ListView mDrawerList;
+    private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
     public final static String JSON_TEXT = "MESSAGE";
     Button create, read, update, delete;
     TextView createText;
@@ -39,16 +48,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mDrawerList = (ListView)findViewById(R.id.navList);
         create = (Button) findViewById(R.id.create);
         read = (Button) findViewById(R.id.read);
         update = (Button) findViewById(R.id.update);
         delete = (Button) findViewById(R.id.delete);
         createText = (TextView) findViewById(R.id.editText);
 
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0);
         create.setOnClickListener(this);
         read.setOnClickListener(this);
         update.setOnClickListener(this);
         delete.setOnClickListener(this);
+        addDrawerItems();
+    }
+
+    private void addDrawerItems()
+    {
+        String[] osArray = { "One", "Two", "Three" };
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
     }
 
     @Override
@@ -79,18 +98,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             case (R.id.create):
                 new writeMessage().execute();
-                createText.setText("create");
                 break;
             case (R.id.read):
                 getAllRequest();
                 break;
             case (R.id.delete):
                 new deleteMessage().execute();
-                createText.setText("delete");
                 break;
             case (R.id.update):
                 new updateMessage().execute();
-                createText.setText("update");
                 break;
         }
     }
@@ -107,7 +123,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("Organization", "Updated");
         jsonParam.put("Phone", "(775)313-7829");
         jsonParam.put("Photo", 0);
-        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABA3");
+        jsonParam.put("Unique Identifier", "");
         return jsonParam;
     }
 
