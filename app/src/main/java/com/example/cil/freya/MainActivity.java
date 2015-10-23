@@ -3,6 +3,7 @@ package com.example.cil.freya;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -33,33 +35,44 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    private DrawerLayout mDrawerLayout;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
-    private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
     public final static String JSON_TEXT = "MESSAGE";
     Button create, read, update, delete;
     TextView createText;
-    JSONObject saved = new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
+        {
+            public void onDrawerClosed(View view)
+            {
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View drawerView)
+            {
+                super.onDrawerOpened(drawerView);
+            }
+        };
         create = (Button) findViewById(R.id.create);
         read = (Button) findViewById(R.id.read);
         update = (Button) findViewById(R.id.update);
         delete = (Button) findViewById(R.id.delete);
         createText = (TextView) findViewById(R.id.editText);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0);
         create.setOnClickListener(this);
         read.setOnClickListener(this);
         update.setOnClickListener(this);
         delete.setOnClickListener(this);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
         addDrawerItems();
     }
 
@@ -68,6 +81,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
         String[] osArray = { "One", "Two", "Three" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener
+    {
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) { selectItem(position); }
+    }
+
+    private void selectItem(int position)
+    {
+        mDrawerList.setItemChecked(position, true);
+        getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -83,6 +122,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (mDrawerToggle.onOptionsItemSelected(item)) { return true; }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
