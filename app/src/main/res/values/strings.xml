@@ -6,5 +6,6 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="title_activity_display_message">People</string>
+    <string name="firstName">First Name</string>
 
 </resources>
