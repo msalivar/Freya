@@ -24,13 +24,15 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener
+{
 
     public final static String JSON_TEXT = "MESSAGE";
     Button create, read, update, delete;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -47,21 +49,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 
@@ -69,11 +74,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+<<<<<<< HEAD
     public void onClick(View v) {
         EditText id = (EditText) findViewById(R.id.uniqueID);
         String uniqueID = id.getText().toString();
 
         switch (v.getId()) {
+=======
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
 
             case (R.id.create):
                 new HTTP_Post().execute();
@@ -90,33 +102,56 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+<<<<<<< HEAD
    /* public JSONObject createJSON(String id) throws JSONException {
+=======
+    public JSONObject createJSON() throws JSONException
+    {
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
         jsonParam.put("Creation Date", date);
+<<<<<<< HEAD
         EditText info = (EditText) findViewById(R.id.email);
         jsonParam.put("Email", info.getText().toString());
         *//*info = (EditText) findViewById(R.id.firstName);
         jsonParam.put("First Name", info.getText().toString());
         info = (EditText) findViewById(R.id.lastName);
         jsonParam.put("Last Name", info.getText().toString());
+=======
+        jsonParam.put("Email", "test@email.com");
+        jsonParam.put("First Name", "Sam");
+        jsonParam.put("Last Name", "Grant");
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
         jsonParam.put("Modification Date", date);
         info = (EditText) findViewById(R.id.organization);
         jsonParam.put("Organization", info.getText().toString());
         info = (EditText) findViewById(R.id.phone);
         jsonParam.put("Phone", info.getText().toString());
         jsonParam.put("Photo", 0);
+<<<<<<< HEAD
         jsonParam.put("Unique Identifier", id.toString());*//*
+=======
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E27ABB7");
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
         return jsonParam;
     }
 */
     public void getAllRequest()
     {
         String json_str = "";
+<<<<<<< HEAD
         try {
             json_str = new HTTP_Get().execute("http://sensor.nevada.edu/GS/Services/people/").get();
         } catch (InterruptedException | ExecutionException e) {
+=======
+        try
+        {
+            json_str = new readMessage().execute("http://sensor.nevada.edu/GS/Services/people/").get();
+        } catch (InterruptedException | ExecutionException e)
+        {
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
             e.printStackTrace();
         }
         try
@@ -137,18 +172,72 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+<<<<<<< HEAD
     public class updateMessage extends AsyncTask<Void, Void, Void>
+=======
+    public class readMessage extends AsyncTask<String, Void, String>
+    {
+        private Exception exception;
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            HttpURLConnection urlConnection = null;
+            try
+            {
+                URL url = new URL(params[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Content-length", "0");
+                urlConnection.setUseCaches(false);
+                urlConnection.setAllowUserInteraction(false);
+                urlConnection.connect();
+                int code = urlConnection.getResponseCode();
+                if (code == 200)
+                {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null)
+                    {
+                        sb.append(line).append("\n");
+                    }
+                    br.close();
+                    return sb.toString();
+                }
+                return "error";
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+                return "error";
+            } finally
+            {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+        }
+    }
+
+    public class writeMessage extends AsyncTask<Void, Void, Void>
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
     {
         EditText id = (EditText) findViewById(R.id.uniqueID);
         String uniqueID = id.getText().toString();
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Void... params)
+        {
             String sb = "";
             URL url = null;
             int one = 1;
             HttpURLConnection urlConnection = null;
+<<<<<<< HEAD
             String test = "http://sensor.nevada.edu/GS/Services/people/"+uniqueID;
             try {
+=======
+            String test = "http://sensor.nevada.edu/GS/Services/people/";
+            try
+            {
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("PUT");
@@ -168,20 +257,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 out.close();
 
                 int HttpResult = urlConnection.getResponseCode();
-                if(HttpResult == HttpURLConnection.HTTP_OK){
+                if (HttpResult == HttpURLConnection.HTTP_OK)
+                {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
-                            urlConnection.getInputStream(),"utf-8"));
+                            urlConnection.getInputStream(), "utf-8"));
                     String line = null;
-                    while ((line = br.readLine()) != null) {
+                    while ((line = br.readLine()) != null)
+                    {
                         sb += (line + "\n");
                     }
                     br.close();
 
                     System.out.println("" + sb);
 
-                }else{
+                } else
+                {
                     System.out.println(urlConnection.getResponseMessage());
                 }
+<<<<<<< HEAD
             } catch (MalformedURLException e) {
 
                 e.printStackTrace();
@@ -191,8 +284,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
 
             }  finally{
+=======
+            } catch (MalformedURLException e)
+            {
 
-                if(urlConnection != null)
+                e.printStackTrace();
+
+            } catch (IOException e)
+            {
+
+                e.printStackTrace();
+
+            } catch (JSONException e)
+            {
+
+                e.printStackTrace();
+
+            } finally
+            {
+>>>>>>> c4033b6e47e2902854156aa37daff2c6006199e7
+
+                if (urlConnection != null)
                     urlConnection.disconnect();
             }
             return null;
