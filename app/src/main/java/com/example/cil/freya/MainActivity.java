@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void addDrawerItems()
     {
-        String[] osArray = { "One", "Two", "Three" };
+        String[] osArray = { "Pick Photo", "Two", "Three" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
@@ -98,9 +98,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void selectItem(int position)
     {
-        mDrawerList.setItemChecked(position, true);
-        getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
-        mDrawerLayout.closeDrawer(mDrawerList);
+        if (position == 0)
+        {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image");
+            startActivityForResult(photoPickerIntent, 1);
+        } else
+        {
+            mDrawerList.setItemChecked(position, true);
+            getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }
     }
 
     @Override
