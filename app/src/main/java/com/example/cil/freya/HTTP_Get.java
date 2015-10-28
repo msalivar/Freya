@@ -12,6 +12,7 @@ import java.net.URL;
  */
 public class HTTP_Get extends AsyncTask<String, Void, String>
 {
+
     protected String doInBackground(String... params) {
         HttpURLConnection urlConnection = null;
         try {

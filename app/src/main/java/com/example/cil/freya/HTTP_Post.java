@@ -44,9 +44,10 @@ public class HTTP_Post extends AsyncTask<Void, Void, Void>
 
             try
             {
+                MainActivity mainActivity = new MainActivity();
                 String uniqueID = UUID.randomUUID().toString();
-                HelperFunctions c = new HelperFunctions();
-                JSON = c.createJSON(uniqueID);
+
+                JSON = mainActivity.createJSON(uniqueID);
             }
 
             catch (JSONException e)
