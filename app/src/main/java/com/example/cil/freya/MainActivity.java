@@ -4,16 +4,22 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,9 +28,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,8 +49,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
+    private final int SELECT_PHOTO = 1;
+    Bitmap selectedImage = null;
     Button create, read, update, delete;
     TextView createText;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +73,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 super.onDrawerOpened(drawerView);
             }
         };
+        imageView = (ImageView)findViewById(R.id.imageView);
         create = (Button) findViewById(R.id.create);
         read = (Button) findViewById(R.id.read);
         update = (Button) findViewById(R.id.update);
@@ -101,13 +115,34 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (position == 0)
         {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image");
-            startActivityForResult(photoPickerIntent, 1);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, SELECT_PHOTO);
         } else
         {
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
+    {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        switch (requestCode)
+        {
+            case SELECT_PHOTO:
+                if (resultCode == RESULT_OK)
+                {
+                    try {
+                        final Uri imageUri = imageReturnedIntent.getData();
+                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                        selectedImage = BitmapFactory.decodeStream(imageStream);
+                        imageView.setImageBitmap(selectedImage);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
     }
 
@@ -159,19 +194,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public JSONObject createJSON() throws JSONException {
+    public JSONObject createJSON() throws JSONException, UnsupportedEncodingException
+    {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
         jsonParam.put("Creation Date", date);
         jsonParam.put("Email", "test@email.com");
-        jsonParam.put("First Name", "Matt");
-        jsonParam.put("Last Name", "Salivar");
+        jsonParam.put("First Name", "Picture");
+        jsonParam.put("Last Name", "Tester");
         jsonParam.put("Modification Date", date);
-        jsonParam.put("Organization", "Updated");
-        jsonParam.put("Phone", "(775)313-7829");
-        jsonParam.put("Photo", 0);
-        jsonParam.put("Unique Identifier", "");
+        jsonParam.put("Organization", "wat");
+        jsonParam.put("Phone", "(775)555-0000");
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E17ABA7");
+
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        //b = Base64.decode(b, Base64.DEFAULT);
+
+        jsonParam.put("Photo", b);
         return jsonParam;
     }
 
@@ -244,8 +290,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... params) {
             String sb = "";
-            URL url = null;
-            int one = 1;
+            URL url;
             HttpURLConnection urlConnection = null;
             String test = "http://sensor.nevada.edu/GS/Services/people/";
             try {
@@ -271,7 +316,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if(HttpResult == HttpURLConnection.HTTP_OK){
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             urlConnection.getInputStream(),"utf-8"));
-                    String line = null;
+                    String line;
                     while ((line = br.readLine()) != null) {
                         sb += (line + "\n");
                     }
@@ -282,10 +327,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }else{
                     System.out.println(urlConnection.getResponseMessage());
                 }
-            } catch (MalformedURLException e) {
-
-                e.printStackTrace();
-
             } catch (IOException e) {
 
                 e.printStackTrace();
