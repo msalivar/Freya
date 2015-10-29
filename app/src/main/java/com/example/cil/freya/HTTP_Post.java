@@ -17,21 +17,20 @@ import java.util.UUID;
 /**
  * Created by cil on 10/22/15.
  */
-public class HTTP_Post extends AsyncTask<Void, Void, Void>
+public class HTTP_Post extends AsyncTask<String, Void, Void>
 {
     JSONObject JSON = null;
 
     @Override
-    protected Void doInBackground(Void... params)
+    protected Void doInBackground(String... params)
     {
         String sb = "";
         URL url = null;
         HttpURLConnection urlConnection = null;
-        String test = "http://sensor.nevada.edu/GS/Services/people/";
 
         try
         {
-            url = new URL(test);
+            url = new URL(params[0]);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
