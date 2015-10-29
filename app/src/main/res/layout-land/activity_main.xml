@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/firstName"
             android:layout_marginBottom="60dp"
             android:layout_above="@+id/delete"
             android:layout_alignParentEnd="true" />
@@ -65,7 +65,7 @@
             android:ems="10"
             android:id="@+id/editText2"
             android:layout_alignTop="@+id/read"
-            android:layout_alignStart="@+id/editText" />
+            android:layout_alignStart="@+id/firstName" />
 
         <EditText
             android:layout_width="wrap_content"

@@ -50,20 +50,20 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/editText"
-            android:layout_marginBottom="60dp"
-            android:layout_above="@+id/delete"
-            android:layout_alignParentEnd="true" />
+            android:id="@+id/firstName"
+            android:layout_above="@+id/lastName"
+            android:layout_alignParentEnd="true"
+            android:hint="First Name"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/lastName"
-        android:layout_alignTop="@+id/read"
-        android:layout_alignStart="@+id/firstName"
-        android:hint="Last Name"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/lastName"
+            android:hint="Last Name"
+            android:layout_above="@+id/email"
+            android:layout_alignStart="@+id/firstName"/>
 
     <EditText
         android:layout_width="wrap_content"

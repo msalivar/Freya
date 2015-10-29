@@ -1,20 +1,24 @@
 package com.example.cil.freya;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -22,7 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -31,6 +37,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 
@@ -70,7 +77,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         read = (Button) findViewById(R.id.read);
         update = (Button) findViewById(R.id.update);
         delete = (Button) findViewById(R.id.delete);
-        createText = (TextView) findViewById(R.id.editText);
+        createText = (TextView) findViewById(R.id.firstName);
 
         create.setOnClickListener(this);
         read.setOnClickListener(this);
@@ -173,14 +180,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        EditText id = (EditText) findViewById(R.id.uniqueID);
-        String uniqueID = id.getText().toString();
-
-        switch (v.getId())
+             switch (v.getId())
         {
             case (R.id.create):
                 new writeMessage().execute();
-                createText.setText("create");
                 break;
             case (R.id.read):
                 GetAllPeople();
@@ -287,7 +290,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... params) {
             String sb = "";
-            URL url;
+            URL url = null;
+            int one = 1;
             HttpURLConnection urlConnection = null;
             String test = "http://sensor.nevada.edu/GS/Services/people/";
             try {
@@ -303,7 +307,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 urlConnection.connect();
 
                 //Create JSONObject here
-                JSONObject JSON = createJSON();
+                String uniqueID = UUID.randomUUID().toString();
+                JSONObject JSON = createJSON(uniqueID);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(JSON.toString());
@@ -313,7 +318,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if(HttpResult == HttpURLConnection.HTTP_OK){
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             urlConnection.getInputStream(),"utf-8"));
-                    String line;
+                    String line = null;
                     while ((line = br.readLine()) != null) {
                         sb += (line + "\n");
                     }
@@ -324,6 +329,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }else{
                     System.out.println(urlConnection.getResponseMessage());
                 }
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+
             } catch (IOException e) {
 
                 e.printStackTrace();
@@ -377,13 +386,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public class updateMessage extends AsyncTask<Void, Void, Void>
     {
+        EditText id = (EditText) findViewById(R.id.uniqueID);
+        String uniqueID = id.getText().toString();
         @Override
         protected Void doInBackground(Void... params) {
             String sb = "";
             URL url = null;
             int one = 1;
             HttpURLConnection urlConnection = null;
-            String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA3";
+            String test = "http://sensor.nevada.edu/GS/Services/people/"+uniqueID;
             try {
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -397,7 +408,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 urlConnection.connect();
 
                 //Create JSONObject here
-                JSONObject JSON = createJSON();
+                JSONObject JSON = createJSON(uniqueID);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(JSON.toString());
