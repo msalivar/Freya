@@ -327,11 +327,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }else{
                     System.out.println(urlConnection.getResponseMessage());
                 }
-            } catch (IOException e) {
-
-                e.printStackTrace();
-
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
 
                 e.printStackTrace();
 
