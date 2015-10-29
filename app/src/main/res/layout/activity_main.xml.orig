@@ -37,23 +37,17 @@
             android:layout_below="@+id/read"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/update"
-            android:id="@+id/update"
-            android:layout_below="@+id/delete"
-            android:layout_alignParentLeft="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editText"
-            android:layout_marginBottom="60dp"
-            android:layout_above="@+id/delete"
-            android:layout_alignParentEnd="true" />
+<<<<<<< HEAD
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/firstName"
+        android:layout_marginBottom="60dp"
+        android:layout_above="@+id/delete"
+        android:layout_alignParentEnd="true"
+        android:hint="@string/firstName"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -94,7 +88,8 @@
         android:layout_alignStart="@+id/phone"
         android:hint="Organization"
         android:maxLength="100"/>
-  <EditText
+
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/uniqueID"
@@ -103,8 +98,65 @@
         android:layout_below="@+id/create"
         android:layout_toEndOf="@+id/create"
         android:layout_alignParentStart="true"/>
-        
-	<ImageView
+=======
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            android:id="@+id/update"
+            android:layout_below="@+id/delete"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_marginBottom="60dp"
+            android:layout_above="@+id/delete"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:layout_alignTop="@+id/read"
+            android:layout_alignStart="@+id/editText" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:layout_above="@+id/update"
+            android:layout_alignStart="@+id/editText2"
+            android:text="email" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/editText4"
+            android:layout_alignBottom="@+id/update"
+            android:layout_alignStart="@+id/editText3"
+            android:text="#" />
+>>>>>>> e7ca498515f9e68f2fa455331a2a4ad10ca796d4
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText5"
+            android:layout_alignBottom="@+id/create"
+            android:layout_alignStart="@+id/editText4"
+            android:text="Org" />
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
