@@ -30,7 +30,7 @@ import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
-// Test
+
     public final static String JSON_TEXT = "MESSAGE";
     Button create, read, update, delete;
     TextView createText;
