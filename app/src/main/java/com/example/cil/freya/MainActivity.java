@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,29 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 
@@ -49,8 +34,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String JSON_TEXT = "MESSAGE";
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
-    Button create, read, update, delete;
-    TextView createText;
     ImageView imageView;
 
     @Override
@@ -58,6 +41,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageView = (ImageView) findViewById(R.id.imageView);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
@@ -72,17 +56,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 super.onDrawerOpened(drawerView);
             }
         };
-        imageView = (ImageView)findViewById(R.id.imageView);
-        create = (Button) findViewById(R.id.create);
-        read = (Button) findViewById(R.id.read);
-        update = (Button) findViewById(R.id.update);
-        delete = (Button) findViewById(R.id.delete);
-        createText = (TextView) findViewById(R.id.firstName);
 
-        create.setOnClickListener(this);
-        read.setOnClickListener(this);
-        update.setOnClickListener(this);
-        delete.setOnClickListener(this);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,7 +66,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void addDrawerItems()
     {
-        String[] osArray = { "Pick Photo", "Two", "Three" };
+        String[] osArray = { "Pick Photo", "People", "Project" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
@@ -117,6 +91,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+        }
+        if (position == 1){
+         //  Intent intent = new Intent(this, PeopleClasses.class);
+            startActivity(new Intent(this, PeopleClasses.class));
+
         } else
         {
             mDrawerList.setItemChecked(position, true);
@@ -183,21 +162,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
              switch (v.getId())
         {
             case (R.id.create):
-                new writeMessage().execute();
+              //  new writeMessage().execute();
                 break;
             case (R.id.read):
-                GetAllPeople();
+              //  GetAllPeople();
                 break;
             case (R.id.delete):
-                new deleteMessage().execute();
+               // new deleteMessage().execute();
                 break;
             case (R.id.update):
-                new updateMessage().execute();
+              //  new updateMessage().execute();
                 break;
         }
     }
 
-    public JSONObject createJSON(String id) throws JSONException
+   /* public JSONObject createJSON(String id) throws JSONException
     {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
@@ -218,13 +197,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("Unique Identifier", id.toString());
 
         return jsonParam;
-    }
+    }*/
 
-    public void GetAllPeople()
+    public void Read(String urlTitle)
     {
         String json_str = "";
         try {
-            json_str = new HTTP_Get().execute("http://sensor.nevada.edu/GS/Services/people/").get();
+            json_str = new HTTP_Get().execute("http://sensor.nevada.edu/GS/Services/" + urlTitle+ "/").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -239,53 +218,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
             {
                 people[i] = persons.getJSONObject(i).toString();
             }
+            //startActivity(new Intent(this, PeopleClasses.class));
             intent.putExtra(JSON_TEXT, people);
+
             startActivity(intent);
+
         } catch (JSONException e)
         {
             e.printStackTrace();
         }
     }
 
-    public class readMessage extends AsyncTask<String, Void, String>
-    {
-        private Exception exception;
-        @Override
-        protected String doInBackground(String... params) {
-            HttpURLConnection urlConnection = null;
-            try {
-                URL url = new URL(params[0]);
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.setRequestProperty("Content-length", "0");
-                urlConnection.setUseCaches(false);
-                urlConnection.setAllowUserInteraction(false);
-                urlConnection.connect();
-                int code = urlConnection.getResponseCode();
-                if (code == 200)
-                {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null)
-                    {
-                        sb.append(line).append("\n");
-                    }
-                    br.close();
-                    return sb.toString();
-                }
-                return "error";
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "error";
-            } finally {
-                if(urlConnection != null)
-                    urlConnection.disconnect();
-            }
-        }
-    }
 
-    public class writeMessage extends AsyncTask<Void, Void, Void>
+    /*public class writeMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
         protected Void doInBackground(Void... params) {
@@ -352,11 +297,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public class deleteMessage extends AsyncTask<Void, Void, Void>
     {
+        EditText id = (EditText) findViewById(R.id.uniqueID);
+        String uniqueID = id.getText().toString();
         @Override
         protected Void doInBackground(Void... params) {
             URL url = null;
             HttpURLConnection urlConnection = null;
-            String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA0";
+
+
+            String test = "http://sensor.nevada.edu/GS/Services/people/" + uniqueID;
             try {
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -383,6 +332,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return null;
         }
     }
+
 
     public class updateMessage extends AsyncTask<Void, Void, Void>
     {
@@ -448,7 +398,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
             return null;
         }
-    }
+    }*/
 }
 
 

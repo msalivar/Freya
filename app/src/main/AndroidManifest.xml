@@ -26,6 +26,10 @@
             android:name=".ImagePickerActivity"
             android:label="@string/title_imagePicker" >
         </activity>
+        <activity
+            android:name=".PeopleClasses"
+            android:label="@string/title_people_display" >
+        </activity>
     </application>
 
 </manifest>
