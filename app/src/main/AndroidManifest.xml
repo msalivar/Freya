@@ -22,6 +22,8 @@
             android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message" >
         </activity>
+        <activity android:name=".ProjectListActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -51,8 +51,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String JSON_TEXT = "MESSAGE";
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
-    Button create, read, update, delete;
-    TextView createText;
+    Button browseButton, createButton;
     ImageView imageView;
 
     @Override
@@ -74,15 +73,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         };
         imageView = (ImageView)findViewById(R.id.imageView);
-        create = (Button) findViewById(R.id.create);
-        read = (Button) findViewById(R.id.read);
-        update = (Button) findViewById(R.id.update);
-        delete = (Button) findViewById(R.id.delete);
-        createText = (TextView) findViewById(R.id.editText);
-        create.setOnClickListener(this);
-        read.setOnClickListener(this);
-        update.setOnClickListener(this);
-        delete.setOnClickListener(this);
+        browseButton = (Button)findViewById(R.id.browseButton);
+        createButton = (Button)findViewById(R.id.createButton);
+        browseButton.setOnClickListener(this);
+        createButton.setOnClickListener(this);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -176,20 +170,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case (R.id.create):
-                new writeMessage().execute();
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case (R.id.browseButton):
+                Intent listIntent = new Intent(this, ProjectListActivity.class);
+                startActivity(listIntent);
                 break;
-            case (R.id.read):
-                getAllRequest();
-                break;
-            case (R.id.delete):
-                new deleteMessage().execute();
-                break;
-            case (R.id.update):
-                new updateMessage().execute();
+            case (R.id.createButton):
                 break;
         }
     }
@@ -206,18 +195,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
         jsonParam.put("Modification Date", date);
         jsonParam.put("Organization", "wat");
         jsonParam.put("Phone", "(775)555-0000");
-        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E17ABA7");
-
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        //b = Base64.decode(b, Base64.DEFAULT);
-
-        jsonParam.put("Photo", b);
+        jsonParam.put("Unique Identifier", "0E984725-C51C-4BF4-9960-E1C80E17CCC7");
+        if (selectedImage != null)
+        {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            selectedImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] bArray = baos.toByteArray();
+            String encoded = Base64.encodeToString(bArray, Base64.DEFAULT);
+            jsonParam.put("Photo", encoded);
+        }
+        else
+        {
+            jsonParam.put("Photo", 0);
+        }
         return jsonParam;
     }
 
@@ -346,7 +336,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         protected Void doInBackground(Void... params) {
             URL url = null;
             HttpURLConnection urlConnection = null;
-            String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA0";
+            String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E17CCC7";
             try {
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
