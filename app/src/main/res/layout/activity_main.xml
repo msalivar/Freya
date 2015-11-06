@@ -3,41 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/unr_off_white">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
         android:background="#FFC9C8CB">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/profile_name"
-            android:id="@+id/textView"
-            android:textColor="@color/black"
-            android:textAlignment="textStart"
-            android:width="300dp"
-            android:textSize="34dp"
-            android:paddingTop="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageView"
-            android:paddingBottom="10dp"/>
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/imageView"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/textView"
-            android:contentDescription="@string/profile_picture"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:layout_alignParentEnd="false"
-            android:minHeight="80dp"
-            android:minWidth="80dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -61,11 +34,18 @@
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/browseButton"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
     </RelativeLayout>
 
     <ListView
         android:id="@+id/navList"
-        android:layout_width="240dp"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"

@@ -3,6 +3,8 @@
     package="com.example.cil.freya" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.har.camera"
+                  android:required="false" />
 
     <application
         android:allowBackup="true"

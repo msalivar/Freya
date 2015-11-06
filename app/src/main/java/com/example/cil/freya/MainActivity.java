@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +52,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
     private final int SELECT_PHOTO = 1;
+    private final int REQUEST_IMAGE = 2;
     Bitmap selectedImage = null;
     Button browseButton, createButton;
     ImageView imageView;
@@ -86,9 +89,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void addDrawerItems()
     {
-        String[] osArray = { "Pick Photo", "Two", "Three" };
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        String[] osArray = { getString(R.string.photo_intent), getString(R.string.two), getString(R.string.three)};
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(getActionBar().getThemedContext(), R.layout.drawer_list_item, R.id.label, osArray);
         mDrawerList.setAdapter(mAdapter);
+    }
+
+    private void dispatchTakePictureEvent()
+    {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) { startActivityForResult(cameraIntent, REQUEST_IMAGE); }
+        else { Toast.makeText(getApplicationContext(), "Error launching camera.", Toast.LENGTH_SHORT).show(); }
     }
 
     @Override
@@ -137,6 +147,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         e.printStackTrace();
                     }
                 }
+            case REQUEST_IMAGE:
+                if (resultCode == RESULT_OK)
+                {
+                    Bundle extras = imageReturnedIntent.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    imageView.setImageBitmap(imageBitmap);
+                }
         }
     }
 
@@ -147,7 +164,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -163,9 +181,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "Settings Goes Here", Toast.LENGTH_SHORT).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -179,6 +197,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(listIntent);
                 break;
             case (R.id.createButton):
+                dispatchTakePictureEvent();
                 break;
         }
     }
