@@ -74,6 +74,24 @@
             android:layout_marginBottom="27dp"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/createButton"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Longitude"
+            android:id="@+id/lon"
+            android:layout_below="@+id/lat"
+            android:layout_alignStart="@+id/lat"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Latitude"
+            android:id="@+id/lat"
+            android:layout_below="@+id/imageView"
+            android:layout_toEndOf="@+id/sync"/>
     </RelativeLayout>
 
     <ListView
