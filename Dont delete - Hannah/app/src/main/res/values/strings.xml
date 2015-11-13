@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">NRDC</string>
+    <string name="action_settings"></string>
+    <string name="create">Create</string>
+    <string name="read">Read</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_display_message">People</string>
+    <string name="title_imagePicker">Image Picker</string>
+    <string name="title_ProjectCreate">Start New Project</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="profile_name">User Name</string>
+</resources>
