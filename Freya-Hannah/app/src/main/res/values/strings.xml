@@ -9,7 +9,7 @@
     <string name="title_imagePicker">Image Picker</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="profile_name">User Name</string>
-    <string name="lat_label"/>
-    <string name="long_label"/>
     <string name="no_location_detected">No Location Detected</string>
+    <string name="latitude_label">Latitude</string>
+    <string name="longitude_label">Longitude</string>
 </resources>

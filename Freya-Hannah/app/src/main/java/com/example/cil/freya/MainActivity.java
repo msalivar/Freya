@@ -23,8 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
@@ -42,12 +42,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends Activity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+public class MainActivity extends Activity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
 
     // Entry point to Google Play Services
@@ -59,6 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Goog
     protected String mLongitudeLabel;
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
+
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
@@ -101,22 +104,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Goog
         getActionBar().setHomeButtonEnabled(true);
         addDrawerItems();
 
-        mLatitudeLabel = getResources().getString(R.string.lat_label);
-        mLongitudeLabel = getResources().getString(R.string.long_label);
-
-        mLatitudeText = (TextView) findViewById((R.id.lat));
-        mLongitudeText = (TextView) findViewById((R.id.lon));
-
         buildGoogleApiClient();
-
-        onStart();
-
-        onConnected(savedInstanceState);
-
     }
 
-    protected synchronized void buildGoogleApiClient()
-    {
+    protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -124,44 +115,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Goog
                 .build();
     }
 
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
 
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if(mGoogleApiClient.isConnected()){
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    @Override
-    public void onConnected(Bundle connectionHint){
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation != null) {
-            mLatitudeText.setText(String.format("%s: %f", mLatitudeLabel,
-                    mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel,
-                    mLastLocation.getLongitude()));
-        } else {
-            Toast.makeText(this, R.string.no_location_detected, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        System.out.print("Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
-    }
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-        System.out.print("Connection suspended");
-        mGoogleApiClient.connect();
-    }
 
     private void addDrawerItems()
     {
