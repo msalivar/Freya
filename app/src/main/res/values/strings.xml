@@ -5,7 +5,13 @@
     <string name="read">Read</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+<<<<<<< HEAD
     <string name="title_activity_display_message">People</string>
     <string name="firstName">First Name</string>
 
+=======
+    <string name="title_activity_display_message">Main</string>
+    <string name="title_imagePicker">Image Picker</string>
+    <string name="title_people_display">People</string>
+>>>>>>> e23a86aa9412a05832ba810c78751ec5e7930605
 </resources>

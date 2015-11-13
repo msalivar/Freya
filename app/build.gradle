@@ -14,13 +14,17 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android.txt', 'proguard-rules.pro')
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+<<<<<<< HEAD
     // compile files('libs/unirest-java-1.4.7.jar')
     //compile files('/home/cil/Senior Projects 15-16/Matt/libs/unirest-java-1.4.7.jar')
+=======
+    compile 'com.android.support:appcompat-v7:+'
+>>>>>>> e23a86aa9412a05832ba810c78751ec5e7930605
 }

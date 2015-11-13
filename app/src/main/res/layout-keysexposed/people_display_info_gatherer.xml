@@ -1,11 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.DrawerLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.cil.freya.PeopleClasses">
 
-<<<<<<< HEAD
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +39,7 @@
         android:text="@string/delete"
         android:id="@+id/delete"
         android:layout_below="@+id/read"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -46,10 +55,9 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/firstName"
-        android:layout_marginBottom="60dp"
-        android:layout_above="@+id/delete"
+        android:layout_above="@+id/lastName"
         android:layout_alignParentEnd="true"
-        android:hint="@string/firstName"/>
+        android:hint="First Name"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -57,9 +65,9 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/lastName"
-        android:layout_alignTop="@+id/read"
-        android:layout_alignStart="@+id/firstName"
-        android:hint="Last Name"/>
+        android:hint="Last Name"
+        android:layout_above="@+id/email"
+        android:layout_alignStart="@+id/firstName"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -90,7 +98,6 @@
         android:layout_alignStart="@+id/phone"
         android:hint="Organization"
         android:maxLength="100"/>
-
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -101,32 +108,23 @@
         android:layout_toEndOf="@+id/create"
         android:layout_alignParentStart="true"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/editText5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/read"/>
+
 </RelativeLayout>
-=======
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:background="#ffffffff">
 
-
-	<ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="48dp"
-            android:contentDescription="@string/read"/>
-
-    </RelativeLayout>
-
-    <ListView
-        android:id="@+id/navList"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:background="#ffeeeeee" />
+<ListView
+    android:id="@+id/navList"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:background="#ffeeeeee" />
 
 </android.support.v4.widget.DrawerLayout>
->>>>>>> e23a86aa9412a05832ba810c78751ec5e7930605
