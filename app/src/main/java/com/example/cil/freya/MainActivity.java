@@ -79,7 +79,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 super.onDrawerOpened(drawerView);
             }
         };
-        imageView = (ImageView)findViewById(R.id.imageView);
         browseButton = (Button)findViewById(R.id.browseButton);
         createButton = (Button)findViewById(R.id.createButton);
         syncButton = (Button)findViewById(R.id.sync);
