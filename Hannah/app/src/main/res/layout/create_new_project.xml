@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:weightSum="1"
+              android:orientation="vertical"
+                android:paddingTop="15dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grant"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="18dp"
+        android:textColor="@color/unr_blue"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/grant_label"
+        />
+
+    <TextView
+        android:layout_width="65dp"
+        android:layout_height="37dp"
+        android:text="Grant:"
+        android:id="@+id/grant_label"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:width="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"/>
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/prininvest"
+        android:inputType="textCapWords"
+        android:textColor="@color/unr_blue"
+        android:layout_alignStart="@+id/post"
+        android:layout_below="@+id/institution"
+        android:paddingTop="3dip"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post"
+        android:id="@+id/post"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/prininvest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="@color/unr_blue"
+        />
+
+    <TextView
+        android:layout_width="65dp"
+        android:layout_height="35dp"
+        android:text="Name:"
+        android:id="@+id/name_label"
+        android:textColor="@color/unr_blue"
+        android:textSize="22dp"
+        android:width="40dp"
+        android:layout_below="@+id/grant"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="18dp"
+        android:layout_toEndOf="@+id/name_label"
+        android:layout_alignBottom="@+id/name_label"
+        android:textColor="@color/unr_blue"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Original Funding Agency:"
+        android:id="@+id/OFA_label"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:layout_below="@+id/name_label"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/funding"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="18dp"
+        android:layout_alignBottom="@+id/OFA_label"
+        android:layout_toEndOf="@+id/OFA_label"
+        android:textColor="@color/unr_blue"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Institution:"
+        android:id="@+id/inst_label"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:layout_below="@+id/funding"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/institution"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="18dp"
+        android:layout_alignBottom="@+id/inst_label"
+        android:layout_toEndOf="@+id/inst_label"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Investigator:"
+        android:id="@+id/invest_label"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:layout_below="@+id/inst_label"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
+
+</RelativeLayout>
