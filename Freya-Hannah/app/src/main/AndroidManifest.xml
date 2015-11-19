@@ -24,6 +24,14 @@
         </activity>
         <activity android:name=".ProjectListActivity" >
         </activity>
+        <activity
+            android:name=".CreateNewProject"
+            android:label="@string/title_ProjectCreate" >
+        </activity>
+        <activity
+            android:name=".CreateNewSite"
+            android:label="@string/title_SiteCreate" >
+        </activity>
     </application>
 
 </manifest>

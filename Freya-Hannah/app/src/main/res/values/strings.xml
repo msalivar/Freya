@@ -7,6 +7,8 @@
     <string name="delete">Delete</string>
     <string name="title_activity_display_message">People</string>
     <string name="title_imagePicker">Image Picker</string>
+    <string name="title_ProjectCreate">Start New Project</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="profile_name">User Name</string>
+    <string name="title_SiteCreate">Site</string>
 </resources>

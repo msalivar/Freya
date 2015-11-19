@@ -11,7 +11,7 @@ public class ProjectListActivity extends Activity
 {
     ListView projectList;
     ArrayAdapter<String> listAdapter;
-     String[] projects;
+    String[] projects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,9 +31,8 @@ public class ProjectListActivity extends Activity
                 for (int i = 0; i < MainActivity.projectNames.length; i++)
                 {
                     projects[i] = MainActivity.projectNames[i];
-                    Toast.makeText(this, "Unsuccessful", Toast.LENGTH_LONG).show();
-                    SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
+                   // SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+                    //SharedPreferences.Editor editor = preferences.edit();
 
                 }
 

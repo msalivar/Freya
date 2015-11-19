@@ -52,6 +52,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button browseButton, createButton, syncButton;
     ImageView imageView;
     static String projectNames[];
+    static String uniqueID [];
+    static String investigators [];
+    static String mainURL = "http://sensor.nevada.edu/GS/Services/";
+    static String peopleURL = "people/";
+    static String projectsURL = "projects/";
+    static String edgeURL = "edge/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +90,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         addDrawerItems();
+
+        getAllRequest();
     }
 
     private void addDrawerItems()
@@ -181,6 +189,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(listIntent);
                 break;
             case (R.id.createButton):
+                Intent intent = new Intent(this, CreateNewProject.class);
+                startActivity(intent);
                 break;
             case (R.id.sync):
                 getAllRequest();
@@ -188,7 +198,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public JSONObject createJSON() throws JSONException, UnsupportedEncodingException
+    public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
     {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
@@ -216,32 +226,61 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return jsonParam;
     }
 
+
     public void getAllRequest()
     {
-        String json_str = "";
+        String projects_str = "";
+        String people_str = "";
         try {
-            json_str = new readMessage().execute("http://sensor.nevada.edu/GS/Services/projects/").get();
+            projects_str = new readMessage().execute(mainURL+projectsURL).get();
+            people_str = new readMessage().execute(mainURL+peopleURL).get();
         } catch (InterruptedException | ExecutionException e) {
             Toast.makeText(this, "Sync Unsuccessful" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         try
         {
-            JSONObject obj = new JSONObject(json_str);
-            JSONArray projects = obj.getJSONArray("Projects");
-           // Intent intent = new Intent(this, DisplayMessageActivity.class);
+            JSONObject proj_obj = new JSONObject(projects_str);
+            JSONArray projects = proj_obj.getJSONArray("Projects");
             String[] project = new String[projects.length()];
             for (int i = 0; i < projects.length(); i++)
             {
                 project[i] = projects.getJSONObject(i).toString();
             }
             ProjectNames(projects);
-            //intent.putExtra(JSON_TEXT, project);
-            //startActivity(intent);
+
+            JSONObject peep_obj = new JSONObject(people_str);
+            JSONArray peoples = peep_obj.getJSONArray("People");
+            String[] people = new String[peoples.length()];
+            for (int i = 0; i < peoples.length(); i++)
+            {
+                people[i] = peoples.getJSONObject(i).toString();
+            }
+            PeopleNames(peoples);
+
             Toast.makeText(this, "Sync Successful! ", Toast.LENGTH_LONG).show();
 
         } catch (JSONException e) {
             Toast.makeText(this, "Sync Unsuccessful. Unable to reach Server.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    void PeopleNames (JSONArray people)
+    {
+        try
+        {
+            if (people != null)
+            {
+                investigators = new String[people.length()];
+                for (int i = 0; i < people.length(); i++)
+                {
+                    JSONObject p = (JSONObject) people.get(i);
+                    investigators[i] = p.getString("First Name") + " " + p.getString("Last Name");
+                }
+            }
+        } catch (JSONException e) {
+            Toast.makeText(this, "Unable to Populate People List" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
@@ -252,10 +291,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             if (projects != null)
             {
                 projectNames = new String[projects.length()];
+                uniqueID = new String [projects.length()];
                 for (int i = 0; i < projects.length(); i++)
                 {
                     JSONObject p = (JSONObject) projects.get(i);
-                    projectNames[i] = p.getString("Project Name:");
+                    projectNames[i] = p.getString("Name");
+                    uniqueID[i] = p.getString("Unique Identifier");
                 }
             }
         } catch (JSONException e) {
@@ -302,8 +343,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-
-
     public class writeMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
@@ -325,7 +364,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 urlConnection.connect();
 
                 //Create JSONObject here
-                JSONObject JSON = createJSON();
+                JSONObject JSON = createPeopleJSON();
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(JSON.toString());
@@ -415,7 +454,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 urlConnection.connect();
 
                 //Create JSONObject here
-                JSONObject JSON = createJSON();
+                JSONObject JSON = createPeopleJSON();
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(JSON.toString());
@@ -456,6 +495,91 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return null;
         }
     }
+
+
+    static JSONArray createEdge(JSONObject current) throws JSONException
+    {
+        JSONArray edge = new JSONArray();
+        JSONArray notHere = new JSONArray();
+        JSONObject outside = new JSONObject();
+
+         if (current.has ("Person")){
+            edge.put (current);
+        } else {
+             outside.put("Person", notHere);
+
+             edge.put(outside);
+             outside = new JSONObject();
+         }
+
+        if (current.has ("Project")){
+            edge.put (current);
+        } else {
+            outside.put("Project", notHere);
+
+            edge.put(outside);
+            outside = new JSONObject();
+        }
+
+        if (current.has ("Site")){
+            edge.put (current);
+        } else {
+            outside.put("Site", notHere);
+
+            edge.put(outside);
+            outside = new JSONObject();
+        }
+
+        if (current.has ("System")){
+            edge.put (current);
+        } else {
+            outside.put("System", notHere);
+
+            edge.put(outside);
+            outside = new JSONObject();
+        }
+
+        if (current.has ("Deployment")){
+            edge.put (current);
+        } else {
+            outside.put("Deployment", notHere);
+
+            edge.put(outside);
+            outside = new JSONObject();
+        }
+
+        if (current.has ("Component")){
+            edge.put (current);
+        } else {
+            outside.put("Component", notHere);
+
+            edge.put(outside);
+            outside = new JSONObject();
+        }
+
+
+        if (current.has ("Document")){
+            edge.put (current);
+        } else {
+            outside.put("Document", notHere);
+
+            edge.put(outside);
+            outside = new JSONObject();
+        }
+
+
+        if (current.has ("Service Entry")){
+            edge.put (current);
+        } else
+        {
+            outside.put("Service Entry", notHere);
+
+            edge.put(outside);
+        }
+
+        return edge;
+    }
+
 }
 
 
