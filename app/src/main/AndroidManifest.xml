@@ -32,6 +32,10 @@
             android:name=".CreateNewSite"
             android:label="@string/title_SiteCreate" >
         </activity>
+        <activity
+            android:name=".CreateNewSystem"
+            android:label="@string/title_SystemCreate" >
+        </activity>
     </application>
 
 </manifest>
