@@ -19,6 +19,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:divider="@color/unr_silver"
-        android:dividerHeight="4sp"
+        android:dividerHeight="2sp"
         />
 </RelativeLayout>

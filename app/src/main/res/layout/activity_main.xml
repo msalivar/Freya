@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:background="#FFC9C8CB">
+        android:background="@color/unr_off_white">
 
         <Button
             android:layout_width="wrap_content"
@@ -48,8 +48,9 @@
             android:textColor="@color/unr_silver"
             android:width="80dp"
             android:layout_marginBottom="27dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/createButton"/>
+            android:layout_alignStart="@+id/createButton"
+            android:layout_below="@+id/createButton"
+            android:layout_marginTop="30dp"/>
     </RelativeLayout>
 
     <ListView
@@ -60,6 +61,6 @@
         android:choiceMode="singleChoice"
         android:background="@color/unr_off_white"
         android:divider="@color/unr_silver"
-        android:dividerHeight="4sp"/>
+        android:dividerHeight="2sp"/>
 
 </android.support.v4.widget.DrawerLayout>
