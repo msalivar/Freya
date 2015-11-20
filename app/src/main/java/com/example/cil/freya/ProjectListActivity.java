@@ -38,7 +38,7 @@ public class ProjectListActivity extends Activity
 
 
                 projectList = (ListView) findViewById(R.id.projectList);
-                listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, projects);
+                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projects);
                 projectList.setAdapter(listAdapter);
             }catch (NullPointerException e){
                 Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();

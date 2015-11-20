@@ -32,7 +32,11 @@
             android:textColor="@color/unr_silver"
             android:background="@color/unr_blue"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/browseButton"
+            android:layout_marginTop="15dp"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -54,6 +58,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="#ffeeeeee" />
+        android:background="@color/unr_off_white"
+        android:divider="@color/unr_silver"
+        android:dividerHeight="4sp"/>
 
 </android.support.v4.widget.DrawerLayout>
