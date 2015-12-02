@@ -12,45 +12,33 @@
         android:background="@color/unr_off_white">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Browse Projects"
             android:id="@+id/browseButton"
-            android:width="300dp"
             android:textColor="@color/unr_silver"
-            android:background="@color/unr_blue"
-            android:layout_marginTop="169dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/createButton"/>
+            android:textSize="22dp"
+            android:layout_width="275dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_alignParentTop="false"
+            android:layout_marginTop="200dp"
+            android:layout_centerHorizontal="true"
+            android:enabled="true"
+            android:textAllCaps="false"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Create New Project"
             android:id="@+id/createButton"
             android:width="300dp"
             android:textColor="@color/unr_silver"
-            android:background="@color/unr_blue"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
+            android:textSize="22dp"
+            android:layout_width="275dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
             android:layout_below="@+id/browseButton"
-            android:layout_marginTop="15dp"/>
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false"
+            android:layout_marginTop="36dp"/>
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sync"
-            android:id="@+id/sync"
-            android:background="@color/unr_blue"
-            android:textColor="@color/unr_silver"
-            android:width="80dp"
-            android:layout_marginBottom="27dp"
-            android:layout_alignStart="@+id/createButton"
-            android:layout_below="@+id/createButton"
-            android:layout_marginTop="30dp"/>
     </RelativeLayout>
 
     <ListView

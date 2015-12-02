@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -81,10 +79,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         };
         browseButton = (Button)findViewById(R.id.browseButton);
         createButton = (Button)findViewById(R.id.createButton);
-        syncButton = (Button)findViewById(R.id.sync);
+        //syncButton = (Button)findViewById(R.id.sync);
         browseButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
-        syncButton.setOnClickListener(this);
+        //syncButton.setOnClickListener(this);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -172,7 +170,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (mDrawerToggle.onOptionsItemSelected(item)) { return true; }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.sync) {
+                getAllRequest();
             return true;
         }
 
@@ -191,9 +190,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case (R.id.createButton):
                 Intent intent = new Intent(this, CreateNewProject.class);
                 startActivity(intent);
-                break;
-            case (R.id.sync):
-                getAllRequest();
                 break;
         }
     }
@@ -272,11 +268,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         {
             if (people != null)
             {
-                investigators = new String[people.length()];
+                investigators = new String[people.length()+1];
+                investigators[0] = "Choose Investigator";
                 for (int i = 0; i < people.length(); i++)
                 {
                     JSONObject p = (JSONObject) people.get(i);
-                    investigators[i] = p.getString("First Name") + " " + p.getString("Last Name");
+                    investigators[i+1] = p.getString("First Name") + " " + p.getString("Last Name");
                 }
             }
         } catch (JSONException e) {
