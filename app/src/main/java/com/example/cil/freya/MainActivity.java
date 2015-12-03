@@ -1,6 +1,8 @@
 package com.example.cil.freya;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,6 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 super.onDrawerOpened(drawerView);
             }
         };
+
         browseButton = (Button)findViewById(R.id.browseButton);
         createButton = (Button)findViewById(R.id.createButton);
         //syncButton = (Button)findViewById(R.id.sync);
@@ -85,12 +89,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //syncButton.setOnClickListener(this);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
         addDrawerItems();
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
+       // actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setIcon(R.drawable.sync_icon);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
 
         getAllRequest();
     }
+
 
     private void addDrawerItems()
     {
@@ -170,11 +181,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (mDrawerToggle.onOptionsItemSelected(item)) { return true; }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.sync) {
+      if (id == R.id.sync) {
                 getAllRequest();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

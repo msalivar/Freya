@@ -97,9 +97,19 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                     urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
                     urlConnection.connect();
 
-                    //Create JSONObject here
-                    JSONObject JSON = createProjectJSON();
 
+                        //Create JSONObject here
+                        JSONObject JSON = createProjectJSON();
+
+                        if ( JSON.getString("Grant Number String") == null)
+                        {
+                            //Toast.makeText(CreateNewProject.this, "Need Grant Number.", Toast.LENGTH_LONG).show();
+                            throw new JSONException("Need Grant Number.");
+                        }
+
+
+
+                  //  JSON.getJSONObject()
                     OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                     out.write(JSON.toString());
                     out.close();
@@ -157,9 +167,11 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             jsonParam.put("Name", info.getText().toString());
             info = (EditText) findViewById(R.id.funding);
             jsonParam.put("Original Funding Agency", info.getText().toString());
-            info = (EditText) findViewById(R.id.prininvest);
-            Integer investigator = Integer.parseInt(info.getText().toString());
-            jsonParam.put("Principal Investigator", investigator);
+            //info = (EditText) findViewById(R.id.prininvest);
+            Spinner spinner=(Spinner) findViewById(R.id.prininvest);
+            String text = spinner.getSelectedItem().toString();
+            //Integer investigator = Integer.parseInt(text);
+            jsonParam.put("Principal Investigator", text);
             jsonParam.put("Start Date", date);
             jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
             return jsonParam;
