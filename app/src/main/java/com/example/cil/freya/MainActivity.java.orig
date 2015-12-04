@@ -1,29 +1,58 @@
 package com.example.cil.freya;
 
+<<<<<<< HEAD
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+=======
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
+<<<<<<< HEAD
+=======
+import android.view.LayoutInflater;
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+<<<<<<< HEAD
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+=======
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -43,16 +72,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String JSON_TEXT = "MESSAGE";
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
+<<<<<<< HEAD
     static JSONObject selected_project = null;
     static JSONArray projects;
     static String projectNames [];
+=======
+    Button browseButton, createButton, syncButton;
+    ImageView imageView;
+    static String projectNames[];
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     static String uniqueID [];
     static String investigators [];
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
     static String peopleURL = "people/";
     static String projectsURL = "projects/";
+<<<<<<< HEAD
     ArrayAdapter<String> listAdapter;
     ListView projectList;
+=======
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +101,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
         {
+<<<<<<< HEAD
             public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
             public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
         };
@@ -71,15 +110,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         addDrawerItems();
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowCustomEnabled(true);
-       // actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setIcon(R.drawable.sync_icon);
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
-
         getAllRequest();
         if (savedInstanceState != null)
         {
@@ -135,6 +165,45 @@ public class MainActivity extends Activity implements View.OnClickListener {
     {
         String[] osArray = { "Project Options" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
+=======
+            public void onDrawerClosed(View view)
+            {
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View drawerView)
+            {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        browseButton = (Button)findViewById(R.id.browseButton);
+        createButton = (Button)findViewById(R.id.createButton);
+        //syncButton = (Button)findViewById(R.id.sync);
+        browseButton.setOnClickListener(this);
+        createButton.setOnClickListener(this);
+        //syncButton.setOnClickListener(this);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        addDrawerItems();
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
+       // actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setIcon(R.drawable.sync_icon);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
+        getAllRequest();
+    }
+
+
+    private void addDrawerItems()
+    {
+        String[] osArray = { "Pick Photo", "Two", "Three" };
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, R.layout.menu_layout, osArray);
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
         mDrawerList.setAdapter(mAdapter);
     }
 
@@ -170,7 +239,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
     {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+<<<<<<< HEAD
         /*switch (requestCode)
+=======
+        switch (requestCode)
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
         {
             case SELECT_PHOTO:
                 if (resultCode == RESULT_OK)
@@ -184,7 +257,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         e.printStackTrace();
                     }
                 }
+<<<<<<< HEAD
         }*/
+=======
+        }
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     }
 
     @Override
@@ -209,17 +286,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (mDrawerToggle.onOptionsItemSelected(item)) { return true; }
 
         //noinspection SimplifiableIfStatement
+<<<<<<< HEAD
         if (id == R.id.sync) {
                 getAllRequest();
             return true;
         }
 
+=======
+      if (id == R.id.sync) {
+                getAllRequest();
+            return true;
+        }
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onClick(View v)
     {
+<<<<<<< HEAD
         /*switch (v.getId())
         {
             case (R.id.browseButton):
@@ -227,6 +312,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(listIntent);
                 break;
         }*/
+=======
+        switch (v.getId())
+        {
+            case (R.id.browseButton):
+                Intent listIntent = new Intent(this, ProjectListActivity.class);
+                startActivity(listIntent);
+                break;
+            case (R.id.createButton):
+                Intent intent = new Intent(this, CreateNewProject.class);
+                startActivity(intent);
+                break;
+        }
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     }
 
     public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
@@ -272,7 +370,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         try
         {
             JSONObject proj_obj = new JSONObject(projects_str);
+<<<<<<< HEAD
             projects = proj_obj.getJSONArray("Projects");
+=======
+            JSONArray projects = proj_obj.getJSONArray("Projects");
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
             String[] project = new String[projects.length()];
             for (int i = 0; i < projects.length(); i++)
             {
