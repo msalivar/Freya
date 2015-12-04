@@ -11,7 +11,6 @@
         tools:context=".MainActivity"
         android:background="@color/unr_off_white">
 
-<<<<<<< HEAD
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -21,36 +20,7 @@
             android:layout_alignParentStart="true"
             android:divider="@color/unr_silver"
             android:dividerHeight="0.75sp"/>
-=======
-        <Button
-            android:text="Browse Projects"
-            android:id="@+id/browseButton"
-            android:textColor="@color/unr_silver"
-            android:textSize="22dp"
-            android:layout_width="275dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button"
-            android:layout_alignParentTop="false"
-            android:layout_marginTop="200dp"
-            android:layout_centerHorizontal="true"
-            android:enabled="true"
-            android:textAllCaps="false"/>
 
-        <Button
-            android:text="Create New Project"
-            android:id="@+id/createButton"
-            android:width="300dp"
-            android:textColor="@color/unr_silver"
-            android:textSize="22dp"
-            android:layout_width="275dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button"
-            android:layout_below="@+id/browseButton"
-            android:layout_centerHorizontal="true"
-            android:textAllCaps="false"
-            android:layout_marginTop="36dp"/>
-
->>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     </RelativeLayout>
 
     <ListView
@@ -61,10 +31,8 @@
         android:choiceMode="singleChoice"
         android:background="@color/unr_off_white"
         android:divider="@color/unr_silver"
-<<<<<<< HEAD
+
         android:dividerHeight="0.75sp"/>
-=======
-        android:dividerHeight="2sp"/>
->>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
+
 
 </android.support.v4.widget.DrawerLayout>
