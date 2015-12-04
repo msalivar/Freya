@@ -215,6 +215,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
                 getAllRequest();
+                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
+                projectList.setAdapter(listAdapter);
             return true;
         }
         if(id == R.id.upload){
@@ -312,12 +314,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         {
             if (people != null)
             {
-                investigators = new String[people.length()+1];
-                investigators[0] = "Choose Investigator";
+                investigators = new String[people.length()];
                 for (int i = 0; i < people.length(); i++)
                 {
                     JSONObject p = (JSONObject) people.get(i);
-                    investigators[i+1] = p.getString("First Name") + " " + p.getString("Last Name");
+                    investigators[i] = p.getString("First Name") + " " + p.getString("Last Name");
                 }
             }
         } catch (JSONException e) {

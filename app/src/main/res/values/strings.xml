@@ -10,4 +10,5 @@
     <string name="title_ProjectCreate">Start New Project</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="profile_name">User Name</string>
+    <string name="spinner_prompt">Choose Investigator</string>
 </resources>

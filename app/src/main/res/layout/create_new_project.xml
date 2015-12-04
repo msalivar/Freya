@@ -181,7 +181,9 @@
         android:layout_alignStart="@+id/institution"
         android:layout_marginRight="15dp"
         android:layout_marginTop="75dp"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:spinnerMode="dialog"
+        android:prompt="@string/spinner_prompt"/>
 
     <Button
         android:id="@+id/post"
