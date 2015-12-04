@@ -5,6 +5,9 @@
         <item name="android:colorPrimary">@color/primary_material_light</item>
         <item name="colorPrimary">@android:color/background_light</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:navigationBarColor">@color/unr_blue</item>
+        <item name="android:colorAccent">@color/unr_blue</item>
+        <item name="android:colorForeground">@color/unr_blue</item>
     </style>
     <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/unr_silver</item>

@@ -25,9 +25,6 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.Date;
 
-/**
- * Created by cil on 11/10/15.
- */
 public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL+ MainActivity.projectsURL;
@@ -86,7 +83,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                 HttpURLConnection urlConnection = null;
                 String test = projectsURL;
                 try {
-
                     url = new URL(test);
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod("POST");
@@ -101,34 +97,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                     //Create JSONObject here
                     JSONObject JSON = createProjectJSON();
 
-                    if ( JSON.getString("Grant Number String").length() == 0)
-                    {
-                        success = 2;
-                        throw new JSONException("Need Grant Number");
-                    }
-                    if ( JSON.getString("Name").length() == 0)
-                    {
-                        success = 3;
-                        throw new JSONException("Need Project Name");
-                    }
-                    if ( JSON.getString("Original Funding Agency").length() == 0)
-                    {
-                        success = 4;
-                        throw new JSONException("Need Original Funding Agency");
-                    }
-                    if ( JSON.getString("Institution Name").length() == 0)
-                    {
-                        success = 5;
-                        throw new JSONException("Need Institution Name");
-                    }
-                    if ( JSON.getInt("Principal Investigator") == 0)
-                    {
-                        success = 6;
-                        throw new JSONException("Choose Principal investigator");
-                    }
-
-
-                    //  JSON.getJSONObject()
                     OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                     out.write(JSON.toString());
                     out.close();
@@ -161,25 +129,13 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                 }
                 return null;
             }
-
             protected void onPostExecute(Void param) {
-                switch(success){
-                    case 1:  Toast.makeText(CreateNewProject.this, "Post successful.", Toast.LENGTH_LONG).show();
-                        break;
-                    case 2: Toast.makeText(CreateNewProject.this, "Need Grant Number", Toast.LENGTH_LONG).show();
-                        break;
-                    case 3: Toast.makeText(CreateNewProject.this, "Need Project Name", Toast.LENGTH_LONG).show();
-                        break;
-                    case 4: Toast.makeText(CreateNewProject.this, "Need Original Funding Agency", Toast.LENGTH_LONG).show();
-                        break;
-                    case 5: Toast.makeText(CreateNewProject.this, "Need Institution", Toast.LENGTH_LONG).show();
-                        break;
-                    case 6: Toast.makeText(CreateNewProject.this, "Choose Investigator", Toast.LENGTH_LONG).show();
-                        break;
-                    default:
-                        Toast.makeText(CreateNewProject.this, "Could not connect to server.", Toast.LENGTH_LONG).show();
+                if (success ==1){
+                    Toast.makeText(CreateNewProject.this, "Post successful.", Toast.LENGTH_LONG).show();
                 }
-
+                else{
+                    Toast.makeText(CreateNewProject.this, "Could not connect to server.", Toast.LENGTH_LONG).show();
+                }
             }
         }
 
@@ -198,14 +154,10 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             jsonParam.put("Name", info.getText().toString());
             info = (EditText) findViewById(R.id.funding);
             jsonParam.put("Original Funding Agency", info.getText().toString());
-            //info = (EditText) findViewById(R.id.prininvest);
-            Spinner spinner=(Spinner) findViewById(R.id.prininvest);
-            int investigator = spinner.getSelectedItemPosition();
-           // investigator -= 1;
-            //String text = spinner.getSelectedItem().toString();
-            //Integer investigator = Integer.parseInt(text);
+            info = (EditText) findViewById(R.id.prininvest);
+            Integer investigator = Integer.parseInt(info.getText().toString());
             jsonParam.put("Principal Investigator", investigator);
-            jsonParam.put("Started Date", date);
+            jsonParam.put("Start Date", date);
             jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
             return jsonParam;
         }
