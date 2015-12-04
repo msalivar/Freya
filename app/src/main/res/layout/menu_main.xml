@@ -1,7 +1,5 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-<<<<<<< HEAD
-=======
 
     <item android:id="@+id/search" android:title="search"
             android:orderInCategory="100" android:showAsAction="always"
@@ -9,14 +7,10 @@
             android:layout_marginRight="50dp"
           />
 
->>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     <item android:id="@+id/sync" android:title="Sync"
           android:orderInCategory="100" android:showAsAction="always"
           android:icon="@drawable/sync_icon"
           android:layout_marginRight="50dp"
-<<<<<<< HEAD
-          />
-=======
         />
 
     <item android:id="@+id/upload" android:title="Upload"
@@ -24,5 +18,4 @@
           android:icon="@drawable/upload_icon"
           android:layout_marginRight="50dp"
         />
->>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
-</menu>
+</layout>

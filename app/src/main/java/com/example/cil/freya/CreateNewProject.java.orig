@@ -25,9 +25,12 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.Date;
 
+<<<<<<< HEAD
+=======
 /**
  * Created by cil on 11/10/15.
  */
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
 public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL+ MainActivity.projectsURL;
@@ -86,7 +89,10 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                 HttpURLConnection urlConnection = null;
                 String test = projectsURL;
                 try {
+<<<<<<< HEAD
+=======
 
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
                     url = new URL(test);
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod("POST");
@@ -101,6 +107,8 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                     //Create JSONObject here
                     JSONObject JSON = createProjectJSON();
 
+<<<<<<< HEAD
+=======
                     if ( JSON.getString("Grant Number String").length() == 0)
                     {
                         success = 2;
@@ -129,6 +137,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
 
 
                     //  JSON.getJSONObject()
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
                     OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                     out.write(JSON.toString());
                     out.close();
@@ -161,6 +170,15 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                 }
                 return null;
             }
+<<<<<<< HEAD
+            protected void onPostExecute(Void param) {
+                if (success ==1){
+                    Toast.makeText(CreateNewProject.this, "Post successful.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(CreateNewProject.this, "Could not connect to server.", Toast.LENGTH_LONG).show();
+                }
+=======
 
             protected void onPostExecute(Void param) {
                 switch(success){
@@ -180,6 +198,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                         Toast.makeText(CreateNewProject.this, "Could not connect to server.", Toast.LENGTH_LONG).show();
                 }
 
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
             }
         }
 
@@ -198,6 +217,12 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             jsonParam.put("Name", info.getText().toString());
             info = (EditText) findViewById(R.id.funding);
             jsonParam.put("Original Funding Agency", info.getText().toString());
+<<<<<<< HEAD
+            info = (EditText) findViewById(R.id.prininvest);
+            Integer investigator = Integer.parseInt(info.getText().toString());
+            jsonParam.put("Principal Investigator", investigator);
+            jsonParam.put("Start Date", date);
+=======
             //info = (EditText) findViewById(R.id.prininvest);
             Spinner spinner=(Spinner) findViewById(R.id.prininvest);
             int investigator = spinner.getSelectedItemPosition();
@@ -206,6 +231,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             //Integer investigator = Integer.parseInt(text);
             jsonParam.put("Principal Investigator", investigator);
             jsonParam.put("Started Date", date);
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
             jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
             return jsonParam;
         }

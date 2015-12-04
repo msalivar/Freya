@@ -2,7 +2,11 @@
 <resources>
     <color name="unr_silver">#FFC9C8CB</color>
     <color name="unr_light_silver">#FFEDEDED</color>
+<<<<<<< HEAD
     <color name="unr_blue">#092e55</color>
+=======
+    <color name="unr_blue">#FF09396B</color>
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     <color name="unr_off_white">#E4E4E4</color>
     <color name="hint_color">#FF919093</color>
     <color name="background_material_light">#ffffff</color>
@@ -13,7 +17,11 @@
     <color name="primary_text_material_light">#c9c8cb</color>
     <color name="primary_text_material_dark">#c9c8cb</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
+<<<<<<< HEAD
     <color name="accent_material_light">#f60202</color>
+=======
+    <color name="accent_material_light">#09396b</color>
+>>>>>>> 957e7043c2b6c52d21999cc386ec2c8c9fc3891d
     <color name="black">#000000</color>
     <color name="foreground_material_light">#ff0000</color>
     <color name="windowBackground">#e4e4e4</color>
