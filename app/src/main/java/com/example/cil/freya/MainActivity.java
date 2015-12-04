@@ -1,29 +1,38 @@
 package com.example.cil.freya;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -43,16 +52,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String JSON_TEXT = "MESSAGE";
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
-    static JSONObject selected_project = null;
-    static JSONArray projects;
-    static String projectNames [];
+    Button browseButton, createButton, syncButton;
+    ImageView imageView;
+    static String projectNames[];
     static String uniqueID [];
     static String investigators [];
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
     static String peopleURL = "people/";
     static String projectsURL = "projects/";
-    ArrayAdapter<String> listAdapter;
-    ListView projectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,69 +70,43 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
         {
-            public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
-            public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
+            public void onDrawerClosed(View view)
+            {
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View drawerView)
+            {
+                super.onDrawerOpened(drawerView);
+            }
         };
+
+        browseButton = (Button)findViewById(R.id.browseButton);
+        createButton = (Button)findViewById(R.id.createButton);
+        //syncButton = (Button)findViewById(R.id.sync);
+        browseButton.setOnClickListener(this);
+        createButton.setOnClickListener(this);
+        //syncButton.setOnClickListener(this);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
         addDrawerItems();
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
+       // actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setIcon(R.drawable.sync_icon);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
         getAllRequest();
-        if (savedInstanceState != null)
-        {
-            projectNames = savedInstanceState.getStringArray(null);
-            Toast.makeText(this, "load state", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            try
-            {
-                projectList = (ListView) findViewById(R.id.projectList);
-                projectList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                    {
-                        String selected_name = ((TextView) view).getText().toString();
-                        selected_project = null;
-                        String pTitle;
-                        try
-                        {
-                            for (int i = 0; i < projects.length(); i++)
-                            {
-                                    JSONObject p = (JSONObject) projects.get(i);
-                                    String val = p.getString("Name");
-                                    if (val == selected_name)
-                                    {
-                                        selected_project = p;
-                                        break;
-                                    }
-                            }
-                            Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
-                            startActivity(intent);
-                        } catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
-                projectList.setAdapter(listAdapter);
-            }
-            catch (NullPointerException e)
-            {
-                Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-        }
     }
+
 
     private void addDrawerItems()
     {
-        String[] osArray = { "Project Options" };
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
+        String[] osArray = { "Pick Photo", "Two", "Three" };
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
 
@@ -161,7 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
     {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        /*switch (requestCode)
+        switch (requestCode)
         {
             case SELECT_PHOTO:
                 if (resultCode == RESULT_OK)
@@ -175,7 +156,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         e.printStackTrace();
                     }
                 }
-        }*/
+        }
     }
 
     @Override
@@ -200,24 +181,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (mDrawerToggle.onOptionsItemSelected(item)) { return true; }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.sync) {
+      if (id == R.id.sync) {
                 getAllRequest();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onClick(View v)
     {
-        /*switch (v.getId())
+        switch (v.getId())
         {
             case (R.id.browseButton):
-                Intent listIntent = new Intent(this, .class);
+                Intent listIntent = new Intent(this, ProjectListActivity.class);
                 startActivity(listIntent);
                 break;
-        }*/
+            case (R.id.createButton):
+                Intent intent = new Intent(this, CreateNewProject.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
@@ -263,7 +247,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         try
         {
             JSONObject proj_obj = new JSONObject(projects_str);
-            projects = proj_obj.getJSONArray("Projects");
+            JSONArray projects = proj_obj.getJSONArray("Projects");
             String[] project = new String[projects.length()];
             for (int i = 0; i < projects.length(); i++)
             {
