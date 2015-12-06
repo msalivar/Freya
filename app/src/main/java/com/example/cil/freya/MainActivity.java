@@ -1,6 +1,10 @@
 package com.example.cil.freya;
 
 import android.app.ActionBar;
+<<<<<<< HEAD
+=======
+import android.app.Activity;
+>>>>>>> 50082870b3c74adf8d2edb614aa90ab2e40bcd9d
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -236,6 +240,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 getAllRequest();
                 listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
                 projectList.setAdapter(listAdapter);
+            return true;
+        }
+        if(id == R.id.upload){
+            Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
+            startActivity(intent);
             return true;
         }
         if(id == R.id.upload){
