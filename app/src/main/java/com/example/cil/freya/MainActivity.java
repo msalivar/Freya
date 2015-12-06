@@ -1,13 +1,15 @@
 package com.example.cil.freya;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
@@ -39,7 +41,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
@@ -137,7 +139,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void addDrawerItems()
     {
-        String[] osArray = { "Project Options" };
+        String[] osArray = { "Project Options", "Map" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
@@ -162,7 +164,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-        } else
+        }
+        else if(position == 1)
+        {
+            Fragment fragment = null;
+            Class fragmentClass;
+            fragmentClass = MapsActivity.class;
+
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.map_fragment, fragment).commit();
+        }
+        else
         {
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
