@@ -1,13 +1,16 @@
 package com.example.cil.freya;
 
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
@@ -20,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.MapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +44,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
@@ -80,9 +85,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         actionBar.setDisplayShowCustomEnabled(true);
        // actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setIcon(R.drawable.sync_icon);
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         actionBar.setIcon(R.drawable.upload_icon);
+        actionBar.setIcon(R.drawable.map_icon);
 
         getAllRequest();
         if (savedInstanceState != null)
@@ -162,8 +168,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-        } else
-        {
+        }
+        else {
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -222,6 +228,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if(id == R.id.upload){
             Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
             startActivity(intent);
+            return true;
+        }
+        if(id == R.id.search){
+            //TODO write search page
+            return true;
+        }
+
+        if(id == R.id.map){
+           // TODO Map
+
             return true;
         }
 
