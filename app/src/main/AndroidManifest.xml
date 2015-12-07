@@ -31,9 +31,11 @@
             android:name=".CreateNewProject"
             android:label="@string/title_ProjectCreate">
         </activity>
-        <activity android:name=".ProjectDisplay">
+        <activity
+            android:name=".ProjectDisplay">
         </activity>
-        <activity android:name=".MapsActivity"
+        <activity
+            android:name=".MapsActivity"
             android:label="Maps">
         </activity>
     </application>

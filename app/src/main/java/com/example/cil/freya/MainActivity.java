@@ -1,6 +1,8 @@
 package com.example.cil.freya;
 
 import android.app.ActionBar;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -9,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
@@ -22,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.MapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,9 +85,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         actionBar.setDisplayShowCustomEnabled(true);
        // actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setIcon(R.drawable.sync_icon);
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         actionBar.setIcon(R.drawable.upload_icon);
+        actionBar.setIcon(R.drawable.map_icon);
 
         getAllRequest();
         if (savedInstanceState != null)
@@ -139,7 +143,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void addDrawerItems()
     {
-        String[] osArray = { "Project Options", "Map" };
+        String[] osArray = { "Project Options" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
@@ -165,24 +169,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
         }
-        else if(position == 1)
-        {
-            Fragment fragment = null;
-            Class fragmentClass;
-            fragmentClass = MapsActivity.class;
-
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // Insert the fragment by replacing any existing fragment
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.map_fragment, fragment).commit();
-        }
-        else
-        {
+        else {
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -243,9 +230,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             startActivity(intent);
             return true;
         }
-        if(id == R.id.upload){
-            Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
-            startActivity(intent);
+        if(id == R.id.search){
+            //TODO write search page
+            return true;
+        }
+
+        if(id == R.id.map){
+           // TODO Map
+
             return true;
         }
 
