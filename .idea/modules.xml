@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/CS425.iml" filepath="$PROJECT_DIR$/CS425.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/Merge_12_3.iml" filepath="$PROJECT_DIR$/Merge_12_3.iml" />
->>>>>>> 50082870b3c74adf8d2edb614aa90ab2e40bcd9d
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
