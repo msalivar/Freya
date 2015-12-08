@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:weightSum="1"
     android:orientation="vertical"
     android:paddingTop="15dp"
-    android:background="@color/unr_off_white">
+    android:background="@color/unr_off_white"
+    tools:context="com.example.cil.freya.CreateNewSite">
 
     <EditText
         android:layout_width="match_parent"
@@ -86,6 +88,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:hint="Enter Notes"/>
+        android:hint="Enter Notes"
+        android:textColor="@color/unr_blue"
+        android:inputType="textCapSentences"/>
 
 </RelativeLayout>
