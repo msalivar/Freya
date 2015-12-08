@@ -142,7 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void addDrawerItems()
     {
-        String[] osArray = { "Project Options" };
+        String[] osArray = { "Project Options","Create New Site" };
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
@@ -174,7 +174,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         {
             Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
             startActivity(intent);
-        } else if (position == 1)
+        }
+        else if(position == 1)
+        {
+            Intent intent = new Intent(MainActivity.this, CreateNewSite.class);
+            startActivity(intent);
+        }
+        else if (position == 2)
         {
             // mDrawerLayout.closeDrawer(mDrawerList);
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
