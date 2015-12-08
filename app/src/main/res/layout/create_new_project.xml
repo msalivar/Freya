@@ -182,12 +182,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="75dp"
         android:paddingLeft="10dp"
-<<<<<<< HEAD
         android:dropDownSelector="@color/unr_blue"/>
-=======
-        android:spinnerMode="dialog"
-        android:prompt="@string/spinner_prompt"/>
->>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
 
     <Button
         android:id="@+id/post"

@@ -2,7 +2,6 @@
 <items version="2" >
 
     <item
-<<<<<<< HEAD
         jar="/home/cil/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -29,77 +28,6 @@
         revision="23.0.1"
         sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
         <dex dex="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-144190e2ea2959652cfe5a976c15bed53a05cda5.jar" />
-=======
-<<<<<<< HEAD
-        jar="/home/sammie/Desktop/CS425/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/home/sammie/Desktop/CS425/app/build/intermediates/pre-dexed/debug/classes-32ce728649b35bd7c9fbec7ab82c50df1b8da672.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Desktop/CS425/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="/home/sammie/Desktop/CS425/app/build/intermediates/pre-dexed/debug/classes-11f5e6ccea84d7ea6b14cda87fb1d8807b88ae2e.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Desktop/CS425/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/sammie/Desktop/CS425/app/build/intermediates/pre-dexed/debug/classes-71b84c5ff49bf6226c79ec3ea4c79962202df3e3.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/home/sammie/Desktop/CS425/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-64c754183913472624f7f303a8aabe68d3f490ef.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Desktop/CS425/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/home/sammie/Desktop/CS425/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-35cef18c0958c8ce1cd4eb220504ea16f4ad71ec.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Desktop/CS425/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="/home/sammie/Desktop/CS425/app/build/intermediates/pre-dexed/debug/classes-ec5968d903b9f7483064b2c8c5657f7d148bc75c.jar" />
-=======
-        jar="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/pre-dexed/debug/classes-f642763d876efa70bb261286c93e88826d6a04c7.jar" />
-    </item>
-    <item
-        jar="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/pre-dexed/debug/classes-56785640e29a5b8e0344c3f273bdf14091ea5d26.jar" />
-    </item>
-    <item
-        jar="/home/cil/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-631809219828581c226c07b98f3c8059b5fb402c.jar" />
-    </item>
-    <item
-        jar="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/home/cil/SeniorProjects15-16/Merge_12_3/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-002a5fe26dab7c5d3a5a295974efa665e07ba4b4.jar" />
->>>>>>> 50082870b3c74adf8d2edb614aa90ab2e40bcd9d
->>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
     </item>
 
 </items>

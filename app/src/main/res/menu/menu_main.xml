@@ -6,15 +6,6 @@
             android:layout_marginRight="50dp"
           />
 
-<<<<<<< HEAD
-=======
-    <item android:id="@+id/map" android:title="Sync"
-        android:orderInCategory="100" android:showAsAction="always"
-        android:icon="@drawable/map_icon"
-        android:layout_marginRight="50dp"
-        />
-
->>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
     <item android:id="@+id/sync" android:title="Sync"
           android:orderInCategory="100" android:showAsAction="always"
           android:icon="@drawable/sync_icon"

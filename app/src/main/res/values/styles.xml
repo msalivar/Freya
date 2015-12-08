@@ -8,19 +8,13 @@
         <item name="android:navigationBarColor">@color/unr_blue</item>
         <item name="android:colorAccent">@color/unr_blue</item>
         <item name="android:colorForeground">@color/unr_blue</item>
-<<<<<<< HEAD
         <item name="android:dropDownListViewStyle">@style/Theme.MyListView</item>
-=======
->>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
     </style>
     <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/unr_silver</item>
         <item name="android:colorControlNormal">@color/unr_silver</item>
     </style>
-<<<<<<< HEAD
     <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light.ListView">
         <item name="android:listSelector">@color/unr_blue</item>
     </style>
-=======
->>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
 </resources>

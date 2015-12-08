@@ -16,10 +16,6 @@
         android:id="@+id/pName"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-<<<<<<< HEAD
         android:layout_alignParentEnd="true"
         android:textColor="@color/unr_blue"/>
-=======
-        android:layout_alignParentEnd="true"/>
->>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
 </RelativeLayout>
