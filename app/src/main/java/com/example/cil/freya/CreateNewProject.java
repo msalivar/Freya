@@ -42,12 +42,24 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         createButton = (Button) findViewById(R.id.post);
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
+<<<<<<< HEAD
         try
         {
             ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, MainActivity.investigators);
             spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             prininvest.setAdapter(spinAdapter);
             prininvest.setOnItemSelectedListener(this);
+=======
+
+        try
+        {
+            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item_layout, MainActivity.investigators);
+
+            prininvest.setOnItemSelectedListener(this);
+            spinAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+            prininvest.setAdapter(spinAdapter);
+
+>>>>>>> d1e14c3bccbb03f1754854bc5e88f64097f5eff1
         }catch (NullPointerException e){
             Toast.makeText(this, "Unable to populate People. Sync before trying again.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
