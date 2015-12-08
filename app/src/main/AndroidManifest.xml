@@ -3,6 +3,17 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+>>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
+>>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
 
     <application
         android:allowBackup="true"
@@ -26,6 +37,7 @@
             android:name=".CreateNewProject"
             android:label="@string/title_ProjectCreate">
         </activity>
+<<<<<<< HEAD
         <activity android:name=".ProjectDisplay">
         </activity>
         <activity android:name=".ChooseProjects">
@@ -33,6 +45,24 @@
         <activity android:name=".ProjectFilterActivity">
         </activity>
         <activity android:name=".SearchActivity">
+=======
+<<<<<<< HEAD
+        <activity android:name=".ProjectDisplay">
+        </activity>
+        <activity android:name=".ChooseProjects">
+        </activity>
+        <activity android:name=".ProjectFilterActivity">
+        </activity>
+        <activity android:name=".SearchActivity">
+=======
+        <activity
+            android:name=".ProjectDisplay">
+        </activity>
+        <activity
+            android:name=".MapsActivity"
+            android:label="Maps">
+>>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
+>>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
         </activity>
     </application>
 

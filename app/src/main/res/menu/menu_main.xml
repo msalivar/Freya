@@ -6,6 +6,18 @@
             android:layout_marginRight="50dp"
           />
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    <item android:id="@+id/map" android:title="Sync"
+        android:orderInCategory="100" android:showAsAction="always"
+        android:icon="@drawable/map_icon"
+        android:layout_marginRight="50dp"
+        />
+
+>>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
+>>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
     <item android:id="@+id/sync" android:title="Sync"
           android:orderInCategory="100" android:showAsAction="always"
           android:icon="@drawable/sync_icon"
