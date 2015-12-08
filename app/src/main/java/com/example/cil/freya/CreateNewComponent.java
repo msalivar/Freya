@@ -8,6 +8,7 @@ import android.os.Bundle;
  */
 public class CreateNewComponent extends Activity {
 
+// display create new component GUI
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
