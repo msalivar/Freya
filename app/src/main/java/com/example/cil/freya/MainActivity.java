@@ -44,7 +44,7 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-
+//delcare all variables
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
@@ -53,20 +53,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Bitmap selectedImage = null;
     static JSONObject selected_project = null;
     static JSONArray projects;
+    // put JSONs in here
     static String projectNames [];
     static String uniqueID [];
     static String investigators [];
+    // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
     static String peopleURL = "people/";
     static String projectsURL = "projects/";
+    // lists
     ArrayAdapter<String> listAdapter;
     ListView projectList;
 
+// set up GUI here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
@@ -74,45 +79,64 @@ public class MainActivity extends Activity implements View.OnClickListener {
             public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
             public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
         };
+        // enable drawer listener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        addDrawerItems();
+        
+        // create action bar
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        addDrawerItems();
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
+        
+        // put in icons from drawables
         actionBar.setIcon(R.drawable.sync_icon);
-        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         actionBar.setIcon(R.drawable.upload_icon);
         actionBar.setIcon(R.drawable.search_icon);
+        
+        // infate action bar
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        // go to getAllRequest
         getAllRequest();
+        
+        // load state testing, will be used to implement saving infomation into the app so syncing will not have to occur everytime the user opens the app
         if (savedInstanceState != null)
         {
             projectNames = savedInstanceState.getStringArray(null);
             Toast.makeText(this, "load state", Toast.LENGTH_LONG).show();
         }
+        // if no load state
         else
         {
+            // if list is empty, will throw exception
             try
             {
+                // create listen and set listener
                 projectList = (ListView) findViewById(R.id.projectList);
                 projectList.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
+                    // what happens when the list is clicked on
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                     {
+                        // get the selected name
                         String selected_name = ((TextView) view).getText().toString();
                         selected_project = null;
                         String pTitle;
+                        // throws JSON exception if the project cannot be found
                         try
                         {
+                            // for everything in the JSON
                             for (int i = 0; i < projects.length(); i++)
                             {
+                                // get the object 
                                 JSONObject p = (JSONObject) projects.get(i);
+                                // search for name
                                 String val = p.getString("Name");
+                                // if it's the name the user is looking for, assign it to selected name
                                 if (val == selected_name)
                                 {
                                     selected_project = p;
@@ -120,51 +144,65 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                 }
 
                             }
+                            //test 
                             Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
+                            // start projectDisplay intent
                             Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
                             startActivity(intent);
                         } catch (JSONException e)
                         {
+                            // if list empty, print to logcat
                             e.printStackTrace();
                         }
                     }
                 });
+                // redisplay the list and set listen
                 listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
                 projectList.setAdapter(listAdapter);
             }
             catch (NullPointerException e)
             {
+                // usually shown when the app cant connect to the server
                 Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }
     }
 
+// when creating a drawer
     private void addDrawerItems()
     {
+        // list of options
         String[] osArray = { "Project Options","Create New Site", "Create New Component" };
+        //  display and set listener
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
 
+// once GUI  is created
     @Override
     protected void onPostCreate(Bundle savedInstanceState)
     {
+        // will do stuff once saved states are enabled
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
 
+// generated, does nothing
     @Override
     public void onClick(View v) {
 
     }
 
+// drawer lsitener
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
+        // got to onItemClick
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) { selectItem(position); }
     }
 
+// if an item is selected from the drawer
     private void selectItem(int position)
     {
         /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -172,27 +210,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
         if (position == 0)
         {
+            // start filtering intent
             Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
             startActivity(intent);
         }
         else if(position == 1)
         {
+            // start NewSite intent
             Intent intent = new Intent(MainActivity.this, CreateNewSite.class);
             startActivity(intent);
         }
         else if (position == 2)
         {
+            // start component intent
             Intent intent = new Intent(MainActivity.this, CreateNewComponent.class);
             startActivity(intent);
         }
         else if (position == 3)
         {
+            // start photo picker intent
             // mDrawerLayout.closeDrawer(mDrawerList);
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
         }
         else {
+            // close the drawer
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -200,6 +243,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    // photo picker code, not currently implemented, but in place for implemenation
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
     {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
@@ -220,11 +264,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }*/
     }
 
+// automatically generated
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -250,12 +296,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
             projectList.setAdapter(listAdapter);
             return true;
         }
+        // if upload is chosen
         if (id == R.id.upload) {
+            // start createnewproject intent
             Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
             startActivity(intent);
             return true;
         }
+        //  if search is chosen
         if (id == R.id.search) {
+            // create new searchactivity intent
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
             return super.onOptionsItemSelected(item);
@@ -264,8 +314,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return false;
     }
 
-
-    public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
+// the people test JSON. Was our first try. Is included for refrence, but is no longer used
+    /*public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
     {
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
@@ -291,31 +341,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
             jsonParam.put("Photo", 0);
         }
         return jsonParam;
-    }
+    }*/
 
-
+// get all information from the server
     public void getAllRequest()
     {
         String projects_str = "";
         String people_str = "";
+        // try to read from URL
         try {
+            // set up from the URL
             projects_str = new readMessage().execute(mainURL+projectsURL).get();
             people_str = new readMessage().execute(mainURL+peopleURL).get();
         } catch (InterruptedException | ExecutionException e) {
+            // usually thrown if the app is unable to sync to the server
             Toast.makeText(this, "Sync Unsuccessful" + e, Toast.LENGTH_LONG).show();
+            // print to logcat
             e.printStackTrace();
         }
+        // try to fill JSON
         try
         {
+            
             JSONObject proj_obj = new JSONObject(projects_str);
+            // gather projects JSON. Put all names in string
             projects = proj_obj.getJSONArray("Projects");
             String[] project = new String[projects.length()];
             for (int i = 0; i < projects.length(); i++)
             {
                 project[i] = projects.getJSONObject(i).toString();
             }
+            // create projects list
             ProjectNames(projects);
-
+            
+            // gather people JSON. Put all in names in string
             JSONObject peep_obj = new JSONObject(people_str);
             JSONArray peoples = peep_obj.getJSONArray("People");
             String[] people = new String[peoples.length()];
@@ -323,38 +382,52 @@ public class MainActivity extends Activity implements View.OnClickListener {
             {
                 people[i] = peoples.getJSONObject(i).toString();
             }
+            // create people list
             PeopleNames(peoples);
 
+            // confirm that action was successful 
             Toast.makeText(this, "Sync Successful! ", Toast.LENGTH_LONG).show();
 
         } catch (JSONException e) {
+            // usually thrown if the app can't connect to the server
             Toast.makeText(this, "Sync Unsuccessful. Unable to reach Server.", Toast.LENGTH_LONG).show();
+            // print to log cat
             e.printStackTrace();
         }
     }
 
+// get stuff from the people JSON
     void PeopleNames (JSONArray people) {
+        // tries to get the JSON
         try {
+            // if there are entries, keeps app from crashing
             if (people != null) {
+                // gather investigator list
                 investigators = new String[people.length() + 1];
                 investigators[0] = "Choose Investigator";
+                // combine first and last name. put in investigator array
                 for (int i = 0; i < people.length(); i++) {
                     JSONObject p = (JSONObject) people.get(i);
                     investigators[i + 1] = p.getString("First Name") + " " + p.getString("Last Name");
                 }
             }
         } catch (JSONException e) {
+            //  throws if unable to connect to server, no people JSON
             Toast.makeText(this, "Unable to Populate People List" + e, Toast.LENGTH_LONG).show();
+            // print to log cat
             e.printStackTrace();
         }
     }
 
-
+// get projects json
     void ProjectNames (JSONArray projects){
+         // tries to get the JSON
         try
         {
+            // if there are enteries, keeps it from crashing the app
             if (projects != null)
             {
+                // gets list of project names and their unique ids
                 projectNames = new String[projects.length()];
                 uniqueID = new String [projects.length()];
                 for (int i = 0; i < projects.length(); i++)
@@ -365,18 +438,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
         } catch (JSONException e) {
+            // thrown if unabvle to connect to server or if json is empty
             Toast.makeText(this, "Unable to Populate Project List" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
     }
 
+
+// general  readmessge template. We tried moving each CRUD to their own class, but since they are done in a thread it did not work correctly
     public class readMessage extends AsyncTask<String, Void, String>
     {
         @Override
         protected String doInBackground(String... params) {
             HttpURLConnection urlConnection = null;
             try {
+                // connect to URL. "GET" code
                 URL url = new URL(params[0]);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -385,8 +462,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 urlConnection.setAllowUserInteraction(false);
                 urlConnection.connect();
                 int code = urlConnection.getResponseCode();
+                // if it was succesfully created
                 if (code == 200)
                 {
+                    // read in from URL
                     BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     StringBuilder sb = new StringBuilder();
                     String line;
@@ -399,19 +478,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 return "error";
             } catch (Exception e) {
+                // prints error to logcat
                 e.printStackTrace();
                 return "error";
             } finally {
+                // if the connection was succesfull, disconnect
                 if(urlConnection != null)
                     urlConnection.disconnect();
             }
         }
     }
 
+// write message to people URL. Same issue. Used as template
     public class writeMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
         protected Void doInBackground(Void... params) {
+            // connect to URL
             String sb = "";
             URL url;
             HttpURLConnection urlConnection = null;
@@ -431,11 +514,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 //Create JSONObject here
                 JSONObject JSON = createPeopleJSON();
 
+                // get output writer
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(JSON.toString());
                 out.close();
 
+                // if connection is good
                 int HttpResult = urlConnection.getResponseCode();
+                // output
                 if(HttpResult == HttpURLConnection.HTTP_OK){
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             urlConnection.getInputStream(),"utf-8"));
@@ -448,14 +534,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     System.out.println("" + sb);
 
                 }else{
+                    //  prints wrror code from server
                     System.out.println(urlConnection.getResponseMessage());
                 }
             } catch (IOException | JSONException e) {
-
+                // print to stack trace
                 e.printStackTrace();
 
             } finally{
-
+                // if connection was successful  disconnect
                 if(urlConnection != null)
                     urlConnection.disconnect();
             }
@@ -463,14 +550,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+//  delete test. SAme problem as above
     public class deleteMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
         protected Void doInBackground(Void... params) {
             URL url = null;
             HttpURLConnection urlConnection = null;
+            // URL is attached to theunique ID to identify which part of the JSON needs to be deleted
             String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E17CCC7";
             try {
+                // connect to URL
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("DELETE");
@@ -481,15 +571,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 int HttpResult = urlConnection.getResponseCode();
 
             } catch (MalformedURLException e) {
-
+                // print to log cat
                 e.printStackTrace();
 
             } catch (IOException e) {
-
+                // print to log cat
                 e.printStackTrace();
 
             } finally{
-
+                // if connection was successful, disconnect
                 if(urlConnection != null)
                     urlConnection.disconnect();
             }
@@ -497,6 +587,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+// update test. Same as aboce
     public class updateMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
@@ -505,8 +596,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             URL url = null;
             int one = 1;
             HttpURLConnection urlConnection = null;
+            // update via Unqiue ID
             String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA3";
             try {
+                // connect to URL
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("PUT");
@@ -521,11 +614,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 //Create JSONObject here
                 JSONObject JSON = createPeopleJSON();
 
+                // output to URL
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(JSON.toString());
                 out.close();
 
                 int HttpResult = urlConnection.getResponseCode();
+                // if connection is good
                 if(HttpResult == HttpURLConnection.HTTP_OK){
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             urlConnection.getInputStream(),"utf-8"));
@@ -541,19 +636,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     System.out.println(urlConnection.getResponseMessage());
                 }
             } catch (MalformedURLException e) {
-
+                // output to log cat
                 e.printStackTrace();
 
             } catch (IOException e) {
-
+                // output to log cat
                 e.printStackTrace();
 
             } catch (JSONException e) {
-
+                // output to log cat
                 e.printStackTrace();
 
             } finally{
-
+                // if connection is successful, disconnect
                 if(urlConnection != null)
                     urlConnection.disconnect();
             }
