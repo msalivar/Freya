@@ -1,30 +1,18 @@
 package com.example.cil.freya;
 
 import android.app.ActionBar;
-<<<<<<< HEAD
 import android.app.Activity;
-=======
-<<<<<<< HEAD
 import android.app.Activity;
-=======
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
@@ -37,15 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-=======
-import com.google.android.gms.maps.MapFragment;
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
-
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,26 +82,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
-<<<<<<< HEAD
-        // actionBar.setDisplayShowTitleEnabled(false);
-=======
-<<<<<<< HEAD
-        // actionBar.setDisplayShowTitleEnabled(false);
-=======
-       // actionBar.setDisplayShowTitleEnabled(false);
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
         actionBar.setIcon(R.drawable.sync_icon);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         actionBar.setIcon(R.drawable.upload_icon);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-        actionBar.setIcon(R.drawable.map_icon);
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
+        actionBar.setIcon(R.drawable.search_icon);
 
         getAllRequest();
         if (savedInstanceState != null)
@@ -147,10 +111,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         {
                             for (int i = 0; i < projects.length(); i++)
                             {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
                                 JSONObject p = (JSONObject) projects.get(i);
                                 String val = p.getString("Name");
                                 if (val == selected_name)
@@ -158,18 +118,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                     selected_project = p;
                                     break;
                                 }
-<<<<<<< HEAD
-=======
-=======
-                                    JSONObject p = (JSONObject) projects.get(i);
-                                    String val = p.getString("Name");
-                                    if (val == selected_name)
-                                    {
-                                        selected_project = p;
-                                        break;
-                                    }
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
+
                             }
                             Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
@@ -205,6 +154,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerToggle.syncState();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
         @Override
@@ -218,18 +172,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
         if (position == 0)
         {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
             Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
             startActivity(intent);
-        } else
+        } else if (position == 1)
         {
             // mDrawerLayout.closeDrawer(mDrawerList);
-<<<<<<< HEAD
-=======
-=======
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
@@ -238,8 +185,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
         }
     }
 
@@ -283,64 +228,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (mDrawerToggle.onOptionsItemSelected(item)) { return true; }
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
-                getAllRequest();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
-                projectList.setAdapter(listAdapter);
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
+            getAllRequest();
+            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
+            projectList.setAdapter(listAdapter);
             return true;
         }
-        if(id == R.id.upload){
+        if (id == R.id.upload) {
             Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
             startActivity(intent);
             return true;
         }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
-        if(id == R.id.search)
-        {
+        if (id == R.id.search) {
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
-<<<<<<< HEAD
-=======
-=======
-        if(id == R.id.search){
-            //TODO write search page
-            return true;
+
+            if (id == R.id.search) {
+                //TODO write search page
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
 
-        if(id == R.id.map){
-           // TODO Map
-
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        /*switch (v.getId())
-        {
-            case (R.id.browseButton):
-                Intent listIntent = new Intent(this, .class);
-                startActivity(listIntent);
-                break;
-        }*/
-    }
 
     public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
     {
@@ -410,66 +328,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    void PeopleNames (JSONArray people)
-    {
-        try
-        {
-            if (people != null)
-            {
-<<<<<<< HEAD
-                investigators = new String[people.length()+1];
+    void PeopleNames (JSONArray people) {
+        try {
+            if (people != null) {
+                investigators = new String[people.length() + 1];
                 investigators[0] = "Choose Investigator";
-                for (int i = 0; i < people.length(); i++)
-                {
+                for (int i = 0; i < people.length(); i++) {
                     JSONObject p = (JSONObject) people.get(i);
-                    investigators[i+1] = p.getString("First Name") + " " + p.getString("Last Name");
-=======
-<<<<<<< HEAD
-                investigators = new String[people.length()+1];
-                investigators[0] = "Choose Investigator";
-                for (int i = 0; i < people.length(); i++)
-                {
-                    JSONObject p = (JSONObject) people.get(i);
-                    investigators[i+1] = p.getString("First Name") + " " + p.getString("Last Name");
-=======
-                investigators = new String[people.length()];
-                for (int i = 0; i < people.length(); i++)
-                {
-                    JSONObject p = (JSONObject) people.get(i);
-                    investigators[i] = p.getString("First Name") + " " + p.getString("Last Name");
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
->>>>>>> 4ef8a69d4305901c185f349d55c7c7aa477213fa
+                    investigators[i + 1] = p.getString("First Name") + " " + p.getString("Last Name");
                 }
             }
         } catch (JSONException e) {
             Toast.makeText(this, "Unable to Populate People List" + e, Toast.LENGTH_LONG).show();
-<<<<<<< HEAD
-=======
             e.printStackTrace();
         }
     }
 
-    void ProjectNames (JSONArray projects){
-        try
-        {
-            if (projects != null)
-            {
-                projectNames = new String[projects.length()];
-                uniqueID = new String [projects.length()];
-                for (int i = 0; i < projects.length(); i++)
-                {
-                    JSONObject p = (JSONObject) projects.get(i);
-                    projectNames[i] = p.getString("Name");
-                    uniqueID[i] = p.getString("Unique Identifier");
-                }
-            }
-        } catch (JSONException e) {
-            Toast.makeText(this, "Unable to Populate Project List" + e, Toast.LENGTH_LONG).show();
->>>>>>> ee1cf5a19f431af248a7e4d675e8fd8c3f275eb0
-            e.printStackTrace();
-        }
-
-    }
 
     void ProjectNames (JSONArray projects){
         try
