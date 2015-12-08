@@ -6,6 +6,7 @@ import android.os.Bundle;
 public class ChooseProjects extends Activity
 {
 
+    // when create, display projects list
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
