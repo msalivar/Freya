@@ -3,6 +3,7 @@ package com.example.cil.freya;
 import android.app.Activity;
 import android.os.Bundle;
 
+// class to choose projects from
 public class ChooseProjects extends Activity
 {
 
