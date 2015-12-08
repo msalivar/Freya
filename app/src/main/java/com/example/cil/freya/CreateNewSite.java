@@ -6,6 +6,7 @@ import android.os.Bundle;
 public class CreateNewSite extends Activity
 {
 
+// shows create new Site GUI
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
