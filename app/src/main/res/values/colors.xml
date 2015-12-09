@@ -1,3 +1,4 @@
+<!--list  of colors used in the app. We can  called them by name an standardize all colors this way-->
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="unr_silver">#FFC9C8CB</color>
