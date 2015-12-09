@@ -1,4 +1,5 @@
 <resources>
+    <!--activity titles-->
     <string name="app_name">NRDC</string>
     <string name="action_settings"></string>
     <string name="create">Create</string>
@@ -10,5 +11,6 @@
     <string name="title_ProjectCreate">Start New Project</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="profile_name">User Name</string>
+    <!--The first value in the spinner in createNewProject. this way it cannot be selected as aan optioni-->
     <string name="spinner_prompt">Choose Investigator</string>
 </resources>
