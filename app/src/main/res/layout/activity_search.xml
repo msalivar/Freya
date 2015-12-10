@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Creates the layout for the search layout.
+    Sets the spinner so the user can select a module to search in.
+    Sets the box so that the user can enter a keyword to search.
+    Creates the button for the user to search with!-->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
