@@ -1,3 +1,5 @@
+<!--creates the choose project activity. Since the list is dynamically adding during run time, it's just a blank page. 
+    Height and width set to match device-->
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,5 +11,4 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.cil.freya.ChooseProjects">
-
 </RelativeLayout>
