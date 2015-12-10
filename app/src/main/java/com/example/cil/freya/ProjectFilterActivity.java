@@ -13,15 +13,21 @@ import android.widget.TextView;
 
 public class ProjectFilterActivity extends Activity
 {
+    // Declare variables
     ListView projectList;
     ProjectEntry[] listItems;
 
+    // Create project list screen
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Display new activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_filter);
         projectList = (ListView)findViewById(R.id.projectList);
+        
+        // Populate list with a template
+        // Options can be checked on the screen
         listItems = new ProjectEntry[5];
         listItems[0] = new ProjectEntry("One", false);
         listItems[1] = new ProjectEntry("Two", true);
