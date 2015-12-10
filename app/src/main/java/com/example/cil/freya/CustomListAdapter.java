@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 public class CustomListAdapter extends ArrayAdapter
 {
+    // Declare variables
     ProjectEntry[] items = null;
     Context context;
+    
+    // Create custom adapter for project entries
     public CustomListAdapter(Context context, ProjectEntry[] resource)
     {
         super(context, R.layout.row, resource);
@@ -21,6 +24,8 @@ public class CustomListAdapter extends ArrayAdapter
         this.items = resource;
     }
 
+    // Display Projects  in a list with checkboxes
+    // Enable the ability to check the boxes
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
