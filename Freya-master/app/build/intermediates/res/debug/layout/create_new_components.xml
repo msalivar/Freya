@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Creates the layout for the Create New Components screen.
+    Displays the labels and boxes for users input!-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:background="@color/unr_off_white">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/installation_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Installation"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:paddingRight="15dp"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/installation"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:hint="Installation Details"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:paddingStart="10dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textCapWords"
+        android:password="false"
+        android:layout_alignTop="@+id/installation_label" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/manufacturer_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Manufacturer"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/installation_label" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/manufacturer"
+        android:hint="Enter Manufacturer"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignTop="@+id/manufacturer_label"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/model_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Model"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/manufacturer_label" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/model"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:hint="Enter Model"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:paddingLeft="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/model_label"
+        android:layout_marginRight="15dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/name_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Name"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/model_label" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/name"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor = "@color/unr_blue"
+        android:hint="Enter Name"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
+        android:layout_alignTop="@+id/name_label"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/serial_number_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Serial Number"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/name_label"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/serial_number"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor = "@color/unr_blue"
+        android:hint="Enter Serial Number"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/serial_number_label" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/supplier_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Supplier"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/serial_number_label"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/supplier"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor = "@color/unr_blue"
+        android:hint="Enter Supplier"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
+        android:layout_alignParentStart="false"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/supplier_label" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/vendor_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Vendor"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/supplier_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/vendor"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor = "@color/unr_blue"
+        android:hint="Enter Vendor"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/vendor_label" />
+
+
+
+
+</RelativeLayout>
+<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya-master/app/src/main/res/layout/create_new_components.xml -->
