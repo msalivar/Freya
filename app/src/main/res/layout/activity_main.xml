@@ -1,3 +1,5 @@
+<!--creates and sets properties for the drawer-->
+<!-- matches drawer height and width to device. Sets ID to drawer_layout-->
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -5,12 +7,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--sets background color for main activity-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
         android:background="@color/unr_off_white">
-
+        
+<!-- sets the properties for main activity background. Sets ID to projectList.
+     Creates divider, sets color and height-->
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -23,6 +28,7 @@
 
     </RelativeLayout>
 
+<!--sets ID for the drawer list to navlist. Sets properties and creates a divider. Sets divider color and height.--> 
     <ListView
         android:id="@+id/navList"
         android:layout_width="240dp"

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Displays the new sites screen.
+    Displays all labels and boxes for the user to enter data.
+    Aligns to the screen according to size!-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:background="@color/unr_off_white"
+    tools:context="com.example.cil.freya.CreateNewSite">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/alias_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Alias"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:paddingRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@+id/prininvest" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/alias"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:hint="Enter Alias"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:paddingStart="10dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textCapWords"
+        android:password="false"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="150dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/landmark_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="GPS Landmark"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/alias_label"
+        android:layout_alignStart="@+id/alias_label"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:id="@+id/landmark"
+        android:hint="Enter GPS Landmark"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignTop="@+id/landmark_label"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/notes"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/landmark_label"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:hint="Enter Notes"
+        android:textColor="@color/unr_blue"
+        android:inputType="textCapSentences"/>
+
+</RelativeLayout>
