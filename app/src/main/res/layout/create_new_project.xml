@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Creates the layout for new projects screen.
+    Displays labels and boxes for the user to enter data.
+    Aligns everything according to the screen of the device!-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
@@ -182,9 +185,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="75dp"
         android:paddingLeft="10dp"
-        android:spinnerMode="dialog"
-        android:prompt="@string/spinner_prompt"/>
-
+        android:dropDownSelector="@color/unr_blue"/>
     <Button
         android:id="@+id/post"
 
