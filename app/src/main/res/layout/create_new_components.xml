@@ -130,7 +130,7 @@
     <EditText
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:id="@+id/name"
+        android:id="@+id/projName"
         android:layout_gravity="center_horizontal"
         android:inputType="textCapWords"
         android:textSize="20dp"

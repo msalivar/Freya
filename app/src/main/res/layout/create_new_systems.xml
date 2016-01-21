@@ -70,7 +70,7 @@
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:id="@+id/name"
+        android:id="@+id/projName"
         android:inputType="textCapWords"
         android:textColor="@color/unr_blue"
         android:paddingTop="3dip"
@@ -99,7 +99,7 @@
         android:layout_marginLeft="15dp"
         android:inputType="none"
         android:paddingRight="15dp"
-        android:layout_below="@+id/name"
+        android:layout_below="@+id/projName"
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp"
         android:textAlignment="center"/>

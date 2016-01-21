@@ -45,23 +45,16 @@
             android:name=".SearchActivity">
         </activity>
         <activity
-            android:name=".ProjectDisplay">
-        </activity>
-        <activity
-            android:name=".ChooseProjects">
-        </activity>
-
-        <activity
-            android:name=".ProjectFilterActivity">
-        </activity>
-        <activity
-            android:name=".ProjectDisplay">
-        </activity>
-        <activity
             android:name=".CreateNewSite">
         </activity>
         <activity
             android:name=".CreateNewComponent">
+        </activity>
+        <activity
+            android:name=".CreateNewDeployment">
+        </activity>
+        <activity
+            android:name=".CreateNewSystem">
         </activity>
     </application>
 

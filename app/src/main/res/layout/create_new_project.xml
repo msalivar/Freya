@@ -24,7 +24,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:inputType="none"
-        android:layout_alignEnd="@+id/name"
+        android:layout_alignEnd="@+id/projName"
         android:paddingRight="15dp"
         android:layout_marginTop="15dp"/>
 
@@ -69,7 +69,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:id="@+id/name"
+        android:id="@+id/projName"
         android:hint="Enter Project Name"
         android:textColorHint="@color/hint_color"
         android:layout_gravity="center_horizontal"
@@ -114,10 +114,10 @@
         android:textColorHint="@color/hint_color"
         android:background="@drawable/shapes"
         android:layout_alignEnd="@+id/prininvest"
-        android:layout_alignStart="@+id/name"
+        android:layout_alignStart="@+id/projName"
         android:paddingLeft="10dp"
         android:layout_marginTop="75dp"
-        android:layout_alignTop="@+id/name"/>
+        android:layout_alignTop="@+id/projName"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -139,7 +139,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/institution"
+        android:id="@+id/institutionName"
         android:layout_gravity="center_horizontal"
         android:inputType="textCapWords"
         android:textSize="20dp"
@@ -181,7 +181,7 @@
         android:gravity="bottom"
         android:background="@drawable/shapes"
         android:layout_alignTop="@+id/insitution_label"
-        android:layout_alignStart="@+id/institution"
+        android:layout_alignStart="@+id/institutionName"
         android:layout_marginRight="15dp"
         android:layout_marginTop="75dp"
         android:paddingLeft="10dp"
