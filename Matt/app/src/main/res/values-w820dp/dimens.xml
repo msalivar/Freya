@@ -1,0 +1,4 @@
+<resources>
+    <!-- Sets the margins for the screen -->
+    <dimen name="activity_horizontal_margin">64dp</dimen>
+</resources>

@@ -1,0 +1,18 @@
+<resources>
+    <!--activity titles-->
+    <string name="app_name">NRDC</string>
+    <string name="action_settings"></string>
+    <string name="create">Create</string>
+    <string name="read">Read</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_display_message">People</string>
+    <string name="title_imagePicker">Image Picker</string>
+    <string name="title_ProjectCreate">Start New Project</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="profile_name">User Name</string>
+    <!--The first value in the spinner in createNewProject. this way it cannot be selected as aan optioni-->
+    <string name="spinner_prompt">Choose Investigator</string>
+    <string name="title_activity_project_tab_display">Project Entry Viewer</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
