@@ -9,11 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-<<<<<<< HEAD
-=======
-import android.graphics.BitmapFactory;
-import android.net.Uri;
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,38 +16,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Base64;
-<<<<<<< HEAD
 import android.view.LayoutInflater;
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-<<<<<<< HEAD
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-=======
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-<<<<<<< HEAD
-=======
-import java.io.FileNotFoundException;
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -65,18 +44,13 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-<<<<<<< HEAD
 //delcare all variables
-=======
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
-<<<<<<< HEAD
     static JSONObject selected_project = null;
     static JSONArray projects;
     // put JSONs in here
@@ -92,27 +66,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ListView projectList;
 
 // set up GUI here
-=======
-    Button browseButton, createButton, syncButton;
-    ImageView imageView;
-    static String projectNames[];
-    static String uniqueID [];
-    static String investigators [];
-    static String mainURL = "http://sensor.nevada.edu/GS/Services/";
-    static String peopleURL = "people/";
-    static String projectsURL = "projects/";
-    static String edgeURL = "edge/";
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
         // create the drawer
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
@@ -120,17 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
             public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
         };
-<<<<<<< HEAD
         // enable drawer listener
-=======
-        imageView = (ImageView)findViewById(R.id.imageView);
-        browseButton = (Button)findViewById(R.id.browseButton);
-        createButton = (Button)findViewById(R.id.createButton);
-        syncButton = (Button)findViewById(R.id.sync);
-        browseButton.setOnClickListener(this);
-        createButton.setOnClickListener(this);
-        syncButton.setOnClickListener(this);
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         addDrawerItems();
@@ -138,7 +87,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // create action bar
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-<<<<<<< HEAD
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -219,25 +167,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
-=======
-        addDrawerItems();
-
-        getAllRequest();
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     }
 
 // when creating a drawer
     private void addDrawerItems()
     {
-<<<<<<< HEAD
         // list of options
         String[] osArray = { "Project Options","Create New Site", "Create New Component" };
         //  display and set listener
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
-=======
-        String[] osArray = { "Pick Photo", "Two", "Three" };
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
         mDrawerList.setAdapter(mAdapter);
     }
 
@@ -295,14 +233,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-<<<<<<< HEAD
         }
         else {
             // close the drawer
-=======
-        } else
-        {
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             mDrawerList.setItemChecked(position, true);
             getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -357,7 +290,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         //noinspection SimplifiableIfStatement
-<<<<<<< HEAD
         if (id == R.id.sync) {
             getAllRequest();
             listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
@@ -377,40 +309,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
             return super.onOptionsItemSelected(item);
-=======
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
-            case (R.id.browseButton):
-                Intent listIntent = new Intent(this, ProjectListActivity.class);
-                startActivity(listIntent);
-                break;
-            case (R.id.createButton):
-                Intent intent = new Intent(this, CreateNewProject.class);
-                startActivity(intent);
-                break;
-            case (R.id.sync):
-                getAllRequest();
-                break;
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
         }
 
         return false;
     }
 
-<<<<<<< HEAD
 // the people test JSON. Was our first try. Is included for refrence, but is no longer used
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
     {
         JSONObject jsonParam = new JSONObject();
@@ -439,16 +343,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return jsonParam;
     }
 
-<<<<<<< HEAD
 // get all information from the server
-=======
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     public void getAllRequest()
     {
         String projects_str = "";
         String people_str = "";
-<<<<<<< HEAD
         // try to read from URL
         try {
             // set up from the URL
@@ -458,19 +357,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // usually thrown if the app is unable to sync to the server
             Toast.makeText(this, "Sync Unsuccessful" + e, Toast.LENGTH_LONG).show();
             // print to logcat
-=======
-        try {
-            projects_str = new readMessage().execute(mainURL+projectsURL).get();
-            people_str = new readMessage().execute(mainURL+peopleURL).get();
-        } catch (InterruptedException | ExecutionException e) {
-            Toast.makeText(this, "Sync Unsuccessful" + e, Toast.LENGTH_LONG).show();
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             e.printStackTrace();
         }
         // try to fill JSON
         try
         {
-<<<<<<< HEAD
             
             JSONObject proj_obj = new JSONObject(projects_str);
             // gather projects JSON. Put all names in string
@@ -501,35 +392,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // usually thrown if the app can't connect to the server
             Toast.makeText(this, "Sync Unsuccessful. Unable to reach Server.", Toast.LENGTH_LONG).show();
             // print to log cat
-=======
-            JSONObject proj_obj = new JSONObject(projects_str);
-            JSONArray projects = proj_obj.getJSONArray("Projects");
-            String[] project = new String[projects.length()];
-            for (int i = 0; i < projects.length(); i++)
-            {
-                project[i] = projects.getJSONObject(i).toString();
-            }
-            ProjectNames(projects);
-
-            JSONObject peep_obj = new JSONObject(people_str);
-            JSONArray peoples = peep_obj.getJSONArray("People");
-            String[] people = new String[peoples.length()];
-            for (int i = 0; i < peoples.length(); i++)
-            {
-                people[i] = peoples.getJSONObject(i).toString();
-            }
-            PeopleNames(peoples);
-
-            Toast.makeText(this, "Sync Successful! ", Toast.LENGTH_LONG).show();
-
-        } catch (JSONException e) {
-            Toast.makeText(this, "Sync Unsuccessful. Unable to reach Server.", Toast.LENGTH_LONG).show();
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             e.printStackTrace();
         }
     }
 
-<<<<<<< HEAD
 // get stuff from the people JSON
     void PeopleNames (JSONArray people) {
         // tries to get the JSON
@@ -549,28 +415,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //  throws if unable to connect to server, no people JSON
             Toast.makeText(this, "Unable to Populate People List" + e, Toast.LENGTH_LONG).show();
             // print to log cat
-=======
-    void PeopleNames (JSONArray people)
-    {
-        try
-        {
-            if (people != null)
-            {
-                investigators = new String[people.length()];
-                for (int i = 0; i < people.length(); i++)
-                {
-                    JSONObject p = (JSONObject) people.get(i);
-                    investigators[i] = p.getString("First Name") + " " + p.getString("Last Name");
-                }
-            }
-        } catch (JSONException e) {
-            Toast.makeText(this, "Unable to Populate People List" + e, Toast.LENGTH_LONG).show();
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             e.printStackTrace();
         }
     }
 
-<<<<<<< HEAD
 // get projects json
     void ProjectNames (JSONArray projects){
          // tries to get the JSON
@@ -580,13 +428,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             if (projects != null)
             {
                 // gets list of project names and their unique ids
-=======
-    void ProjectNames (JSONArray projects){
-        try
-        {
-            if (projects != null)
-            {
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
                 projectNames = new String[projects.length()];
                 uniqueID = new String [projects.length()];
                 for (int i = 0; i < projects.length(); i++)
@@ -597,10 +438,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
         } catch (JSONException e) {
-<<<<<<< HEAD
             // thrown if unabvle to connect to server or if json is empty
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             Toast.makeText(this, "Unable to Populate Project List" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -700,11 +538,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     System.out.println(urlConnection.getResponseMessage());
                 }
             } catch (IOException | JSONException e) {
-<<<<<<< HEAD
                 // print to stack trace
-=======
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
                 e.printStackTrace();
 
             } finally{
@@ -723,10 +557,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         protected Void doInBackground(Void... params) {
             URL url = null;
             HttpURLConnection urlConnection = null;
-<<<<<<< HEAD
             // URL is attached to theunique ID to identify which part of the JSON needs to be deleted
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E17CCC7";
             try {
                 // connect to URL
@@ -744,19 +575,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
 
             } catch (IOException e) {
-<<<<<<< HEAD
                 // print to log cat
                 e.printStackTrace();
 
             } finally{
                 // if connection was successful, disconnect
-=======
-
-                e.printStackTrace();
-
-            } finally{
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
                 if(urlConnection != null)
                     urlConnection.disconnect();
             }
@@ -764,10 +587,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-<<<<<<< HEAD
 // update test. Same as aboce
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     public class updateMessage extends AsyncTask<Void, Void, Void>
     {
         @Override
@@ -776,10 +596,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             URL url = null;
             int one = 1;
             HttpURLConnection urlConnection = null;
-<<<<<<< HEAD
             // update via Unqiue ID
-=======
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
             String test = "http://sensor.nevada.edu/GS/Services/people/0E984725-C51C-4BF4-9960-E1C80E27ABA3";
             try {
                 // connect to URL
@@ -838,94 +655,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return null;
         }
     }
-<<<<<<< HEAD
-=======
-
-
-    static JSONArray createEdge(JSONObject current) throws JSONException
-    {
-        JSONArray edge = new JSONArray();
-        JSONArray notHere = new JSONArray();
-        JSONObject outside = new JSONObject();
-
-         if (current.has ("Person")){
-            edge.put (current);
-        } else {
-             outside.put("Person", notHere);
-
-             edge.put(outside);
-             outside = new JSONObject();
-         }
-
-        if (current.has ("Project")){
-            edge.put (current);
-        } else {
-            outside.put("Project", notHere);
-
-            edge.put(outside);
-            outside = new JSONObject();
-        }
-
-        if (current.has ("Site")){
-            edge.put (current);
-        } else {
-            outside.put("Site", notHere);
-
-            edge.put(outside);
-            outside = new JSONObject();
-        }
-
-        if (current.has ("System")){
-            edge.put (current);
-        } else {
-            outside.put("System", notHere);
-
-            edge.put(outside);
-            outside = new JSONObject();
-        }
-
-        if (current.has ("Deployment")){
-            edge.put (current);
-        } else {
-            outside.put("Deployment", notHere);
-
-            edge.put(outside);
-            outside = new JSONObject();
-        }
-
-        if (current.has ("Component")){
-            edge.put (current);
-        } else {
-            outside.put("Component", notHere);
-
-            edge.put(outside);
-            outside = new JSONObject();
-        }
-
-
-        if (current.has ("Document")){
-            edge.put (current);
-        } else {
-            outside.put("Document", notHere);
-
-            edge.put(outside);
-            outside = new JSONObject();
-        }
-
-
-        if (current.has ("Service Entry")){
-            edge.put (current);
-        } else
-        {
-            outside.put("Service Entry", notHere);
-
-            edge.put(outside);
-        }
-
-        return edge;
-    }
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
 }
 
 

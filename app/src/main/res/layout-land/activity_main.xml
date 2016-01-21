@@ -48,7 +48,6 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
             android:text="Sync"
             android:id="@+id/sync"
             android:background="@color/unr_blue"
@@ -58,61 +57,6 @@
             android:layout_alignStart="@+id/createButton"
             android:layout_below="@+id/createButton"
             android:layout_marginTop="30dp"/>
-=======
-            android:text="@string/update"
-            android:id="@+id/update"
-            android:layout_below="@+id/delete"
-            android:layout_alignParentLeft="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editText"
-            android:layout_marginBottom="60dp"
-            android:layout_above="@+id/delete"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:id="@+id/editText2"
-            android:layout_alignTop="@+id/read"
-            android:layout_alignStart="@+id/editText" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/editText3"
-            android:layout_above="@+id/update"
-            android:layout_alignStart="@+id/editText2"
-            android:text="email" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/editText4"
-            android:layout_alignBottom="@+id/update"
-            android:layout_alignStart="@+id/editText3"
-            android:text="#" />
-
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText5"
-            android:layout_alignBottom="@+id/create"
-            android:layout_alignStart="@+id/editText4"
-            android:text="Org" />
-
->>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
     </RelativeLayout>
 <!-- used in the drawer. ID for which choice is chosen in the drawer.-->
     <ListView
