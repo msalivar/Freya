@@ -57,11 +57,27 @@
         <activity
             android:name=".ProjectDisplay">
         </activity>
+<<<<<<< HEAD
         <activity
             android:name=".CreateNewSite">
         </activity>
         <activity
             android:name=".CreateNewComponent">
+=======
+        <activity android:name=".ProjectListActivity" >
+        </activity>
+        <activity
+            android:name=".CreateNewProject"
+            android:label="@string/title_ProjectCreate" >
+        </activity>
+        <activity
+            android:name=".CreateNewSite"
+            android:label="@string/title_SiteCreate" >
+        </activity>
+        <activity
+            android:name=".CreateNewSystem"
+            android:label="@string/title_SystemCreate" >
+>>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
         </activity>
     </application>
 

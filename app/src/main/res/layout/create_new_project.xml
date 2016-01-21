@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <!--Creates the layout for new projects screen.
     Displays labels and boxes for the user to enter data.
     Aligns everything according to the screen of the device!-->
@@ -201,3 +202,51 @@
 
 
 </RelativeLayout>
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grant"
+        android:layout_gravity="center_horizontal"
+        android:hint="Grant"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/institutionName"
+        android:layout_gravity="center_horizontal"
+        android:hint="Institution Name"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/projName"
+        android:hint="Name"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/funding"
+        android:layout_gravity="right"
+        android:hint="Original Funding Agency"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/prininvest"/>
+        <!--android:spinnerMode="dropdown"-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/post"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
+>>>>>>> 148cff6e8e33bc0448d5d9882d9d06026c2a3bbd
