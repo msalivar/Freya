@@ -187,17 +187,17 @@
         android:paddingLeft="10dp"
         android:dropDownSelector="@color/unr_blue"/>
     <Button
-        android:id="@+id/post"
-
-        android:text="Post"
+        android:id="@+id/newProjectButton"
+        android:text="Next"
         android:textColor="@color/unr_silver"
-        android:textSize="30sp"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:background="@drawable/button"
-        android:layout_below="@+id/investigator_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@+id/prininvest"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"/>
 
 
 </RelativeLayout>

@@ -170,7 +170,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void addDrawerItems()
     {
         // list of options
-        String[] osArray = { "Project Options","Create New Site", "Create New Component" };
+        String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component" };
         //  display and set listener
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -205,6 +205,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image*//*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
+
         if (position == 0)
         {
             // start filtering intent
@@ -214,23 +215,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
         else if(position == 1)
         {
             // start NewSite intent
+            Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
+            startActivity(intent);
+        }
+        else if(position == 2)
+        {
+            // start NewSite intent
             Intent intent = new Intent(MainActivity.this, CreateNewSite.class);
             startActivity(intent);
         }
-        else if (position == 2)
+        else if(position == 3)
+        {
+            // start NewSite intent
+            Intent intent = new Intent(MainActivity.this, CreateNewSystem.class);
+            startActivity(intent);
+        }else if(position == 4)
+        {
+            // start NewSite intent
+            Intent intent = new Intent(MainActivity.this, CreateNewDeployment.class);
+            startActivity(intent);
+        }
+        else if (position == 5)
         {
             // start component intent
             Intent intent = new Intent(MainActivity.this, CreateNewComponent.class);
             startActivity(intent);
         }
-        else if (position == 3)
+       /* else if (position == 3)
         {
             // start photo picker intent
             // mDrawerLayout.closeDrawer(mDrawerList);
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-        }
+        }*/
         else {
             // close the drawer
             mDrawerList.setItemChecked(position, true);

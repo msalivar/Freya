@@ -5,10 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * Created by cil on 11/18/15.
@@ -16,23 +22,32 @@ import org.json.JSONObject;
 public class CreateNewSite extends Activity implements View.OnClickListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
-    Button createButton;
+    Button createButton, previousButton;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_site);
-        //createButton = (Button) findViewById(R.id.button);
-        //createButton.setOnClickListener(this);
+        createButton = (Button) findViewById(R.id.newSiteButton);
+        createButton.setOnClickListener(this);
+        previousButton = (Button) findViewById(R.id.backSiteButton);
+        previousButton.setOnClickListener(this);
     }
 
+
     public void onClick (View v){
+        Intent intent;
         switch (v.getId()){
-            case (R.id.button):
+            case (R.id.newSiteButton):
                 try
                 { newSite();} catch (JSONException e) {e.printStackTrace();}
 
-                Intent intent = new Intent(this, CreateNewSystem.class);
+                intent = new Intent(this, CreateNewSystem.class);
+                startActivity(intent);
+                break;
+
+            case (R.id.backSiteButton):
+                intent = new Intent(this, CreateNewProject.class);
                 startActivity(intent);
                 break;
         }
@@ -60,9 +75,9 @@ public class CreateNewSite extends Activity implements View.OnClickListener
 
     public JSONObject createSiteJSON() throws JSONException{
         JSONObject jsonParam = new JSONObject();
-        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        EditText info = (EditText) findViewById(R.id.aliasTag);
+        EditText info = (EditText) findViewById(R.id.alias_label);
         jsonParam.put("Alias", info.getText().toString());
         info = (EditText) findViewById(R.id.landmark);
         jsonParam.put("GPS Landmark", info.getText().toString());
@@ -70,9 +85,9 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         jsonParam.put("Landmark Photo", null);
         info = (EditText) findViewById(R.id.location);
         jsonParam.put("Location",info.getText().toString());
-        info = (EditText) findViewById(R.id.name);
+        info = (EditText) findViewById(R.id.site_name);
         jsonParam.put("Name",info.getText().toString());
-        info = (EditText) findViewById(R.id.note);
+        info = (EditText) findViewById(R.id.notes);
         jsonParam.put("Notes",info.getText().toString());
         info = (EditText) findViewById(R.id.permit);
         jsonParam.put("Permit Holder",info.getText().toString());
@@ -82,7 +97,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         jsonParam.put("Time Zone Name", null);
         jsonParam.put("Time Zone Offset", null);
         jsonParam.put("Alias",info);
-        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());*/
+        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
         return jsonParam;
     }
 }

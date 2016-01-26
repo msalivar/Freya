@@ -1,7 +1,6 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -30,15 +30,20 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     Button createButton;
     JSONArray edge;
     static JSONObject complete = new JSONObject();
+    private EditText txtEditor;
+    private final static String storetext = "storetext.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_project);
-        createButton = (Button) findViewById(R.id.post);
+        createButton = (Button) findViewById(R.id.newProjectButton);
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
+
+        txtEditor = (EditText) findViewById(R.id.projName);
+
         try
         {
             ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.investigators);
@@ -54,23 +59,38 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     {
         switch (v.getId())
         {
-            case (R.id.post):
-                try
-                {newProject();} catch (JSONException e)
-                {e.printStackTrace();}
-                Intent intent = new Intent(this, CreateNewSite.class);
-                startActivity(intent);
-                // Toast.makeText(CreateNewProject.this, "Post Successful", Toast.LENGTH_LONG).show();
-                break;
+            case (R.id.newProjectButton):
+//                try
+//                {
+//                    newProject();
+//                }
+//                catch (JSONException e)
+//                {
+//                    e.printStackTrace();}
+//                    Intent intent = new Intent(this, CreateNewSite.class);
+//                    startActivity(intent);
+//                    // Toast.makeText(CreateNewProject.this, "Post Successful", Toast.LENGTH_LONG).show();
+//                break;
+
+                try{
+
+                    OutputStreamWriter out = new OutputStreamWriter(openFileOutput(storetext,0));
+                    out.write(txtEditor.getText().toString());
+                    out.close();
+                    Toast.makeText(this,"The contents are saved in the file.", Toast.LENGTH_LONG).show();
+                }
+                catch(Throwable t){
+                    Toast.makeText(this,"Exception:" +t.toString(), Toast.LENGTH_LONG).show();
+                }
         }
     }
 
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
-        Toast.makeText(parent.getContext(),
+        /*Toast.makeText(parent.getContext(),
                 "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-                Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_SHORT).show();*/
     }
 
     @Override
