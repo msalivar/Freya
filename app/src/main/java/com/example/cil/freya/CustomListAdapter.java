@@ -34,34 +34,41 @@ public class CustomListAdapter extends ArrayAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        convertView = inflater.inflate(R.layout.row, parent, false);
-
-        ProjectEntry entry = new ProjectEntry();
-        entry.name = (TextView) convertView.findViewById(R.id.textView1);
-        entry.checked = (CheckBox) convertView.findViewById(R.id.checkBox1);
-        convertView.setTag(entry);
-        entry.checked.setOnClickListener( new View.OnClickListener()
+        ProjectEntry entry = null;
+        if (convertView == null)
         {
-            public void onClick(View v)
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            convertView = inflater.inflate(R.layout.row, parent, false);
+            entry = new ProjectEntry();
+            entry.name = (TextView) convertView.findViewById(R.id.textView1);
+            entry.checked = (CheckBox) convertView.findViewById(R.id.checkBox1);
+            convertView.setTag(entry);
+            entry.checked.setOnClickListener(new View.OnClickListener()
             {
-                CheckBox cb = (CheckBox) v;
-                ProjectEntry this_entry = (ProjectEntry) cb.getTag();
-                if (cb.isChecked())
+                public void onClick(View v)
                 {
-                    this_entry.checked.setChecked(true);
+                    CheckBox cb = (CheckBox) v;
+                    ProjectEntry this_entry = (ProjectEntry) cb.getTag();
+                    if (cb.isChecked())
+                    {
+                        this_entry.checked.setChecked(true);
+                    } else
+                    {
+                        this_entry.checked.setChecked(false);
+                    }
                 }
-                else
-                {
-                    this_entry.checked.setChecked(false);
-                }
-            }
-        });
+            });
+        }
+        else
+        {
+            entry = (ProjectEntry) convertView.getTag();
+        }
 
-        entry = projectList.get(position);
-        entry.name.setText(entry.getName());
-        entry.checked.setChecked(entry.getValue());
-        entry.checked.setTag(entry);
+        ProjectEntry temp_entry = projectList.get(position);
+        entry.name.setText(temp_entry.getName());
+        entry.checked.setChecked(temp_entry.getValue());
+        entry.checked.setTag(temp_entry);
+
         return convertView;
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 public class ProjectFilterActivity extends Activity implements View.OnClickListener
 {
     // Declare variables
+    CustomListAdapter adapter = null;
     ListView projectList;
     Button saveButton;
 
@@ -30,7 +31,7 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
         saveButton.setOnClickListener(this);
         projectList = (ListView)findViewById(R.id.projectList);
         // Options can be checked on the screen
-        CustomListAdapter adapter = new CustomListAdapter(this, MainActivity.projectEntries);
+        adapter = new CustomListAdapter(this, MainActivity.projectEntries);
         projectList.setAdapter(adapter);
     }
     @Override
