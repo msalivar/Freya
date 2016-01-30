@@ -35,12 +35,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-//delcare all variables
+
+    //declare all variables
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
@@ -50,6 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     static JSONObject selected_project = null;
     static JSONArray projects;
     // put JSONs in here
+    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
     static String projectNames [];
     static String uniqueID [];
     static String investigators [];
@@ -58,11 +62,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     static String peopleURL = "people/";
     static String projectsURL = "projects/";
     // lists
-    ArrayAdapter<String> listAdapter;
-    ListView projectList;
+    static ArrayAdapter<String> listAdapter;
+    static ListView projectList;
     static String edgeURL = "edge/";
 
-// set up GUI here
+    // set up GUI here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -93,7 +97,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         actionBar.setIcon(R.drawable.upload_icon);
         actionBar.setIcon(R.drawable.search_icon);
         
-        // infate action bar
+        // inflate action bar
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // go to getAllRequest
@@ -122,7 +126,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         // get the selected name
                         String selected_name = ((TextView) view).getText().toString();
                         selected_project = null;
-                        String pTitle;
                         // throws JSON exception if the project cannot be found
                         try
                         {
@@ -134,7 +137,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                 // search for name
                                 String val = p.getString("Name");
                                 // if it's the name the user is looking for, assign it to selected name
-                                if (val == selected_name)
+                                if (Objects.equals(val, selected_name))
                                 {
                                     selected_project = p;
                                     break;
@@ -191,7 +194,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-// drawer lsitener
+// drawer listener
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
         // got to onItemClick
@@ -434,34 +437,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-// get projects json
-    void ProjectNames (JSONArray projects){
-         // tries to get the JSON
+    // get projects json
+    void ProjectNames (JSONArray projects)
+    {
+        // tries to get the JSON
         try
         {
-            // if there are enteries, keeps it from crashing the app
+            // if there are entries, keeps it from crashing the app
             if (projects != null)
             {
                 // gets list of project names and their unique ids
+                ArrayList<ProjectEntry> temp_entries = new ArrayList<>();
                 projectNames = new String[projects.length()];
                 uniqueID = new String [projects.length()];
                 for (int i = 0; i < projects.length(); i++)
                 {
                     JSONObject p = (JSONObject) projects.get(i);
-                    projectNames[i] = p.getString("Name");
+                    String name = p.getString("Name");
+                    temp_entries.add(new ProjectEntry());
+                    projectNames[i] = name;
                     uniqueID[i] = p.getString("Unique Identifier");
                 }
+                projectEntries = temp_entries;
             }
         } catch (JSONException e) {
-            // thrown if unabvle to connect to server or if json is empty
+            // thrown if unable to connect to server or if json is empty
             Toast.makeText(this, "Unable to Populate Project List" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
     }
 
-
-// general  readmessge template. We tried moving each CRUD to their own class, but since they are done in a thread it did not work correctly
+    // general readMessage template. We tried moving each CRUD to their own class, but since they are done in a thread it did not work correctly
     public class readMessage extends AsyncTask<String, Void, String>
     {
         @Override
@@ -477,7 +483,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 urlConnection.setAllowUserInteraction(false);
                 urlConnection.connect();
                 int code = urlConnection.getResponseCode();
-                // if it was succesfully created
+                // if it was successfully created
                 if (code == 200)
                 {
                     // read in from URL
@@ -497,7 +503,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
                 return "error";
             } finally {
-                // if the connection was succesfull, disconnect
+                // if the connection was successful, disconnect
                 if(urlConnection != null)
                     urlConnection.disconnect();
             }

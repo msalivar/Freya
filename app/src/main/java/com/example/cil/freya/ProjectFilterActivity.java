@@ -1,21 +1,23 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.NavUtils;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-public class ProjectFilterActivity extends Activity
+import java.util.LinkedList;
+import java.util.List;
+
+public class ProjectFilterActivity extends Activity implements View.OnClickListener
 {
     // Declare variables
     ListView projectList;
-    ProjectEntry[] listItems;
+    Button saveButton;
 
     // Create project list screen
     @Override
@@ -24,18 +26,31 @@ public class ProjectFilterActivity extends Activity
         // Display new activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_filter);
+        saveButton = (Button)findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
         projectList = (ListView)findViewById(R.id.projectList);
-        
-        // Populate list with a template
         // Options can be checked on the screen
-        listItems = new ProjectEntry[5];
-        listItems[0] = new ProjectEntry("One", false);
-        listItems[1] = new ProjectEntry("Two", true);
-        listItems[2] = new ProjectEntry("Three", true);
-        listItems[3] = new ProjectEntry("Four", true);
-        listItems[4] = new ProjectEntry("Five", true);
-        CustomListAdapter adapter = new CustomListAdapter(this, listItems);
+        CustomListAdapter adapter = new CustomListAdapter(this, MainActivity.projectEntries);
         projectList.setAdapter(adapter);
+    }
+    @Override
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case (R.id.saveButton):
+                List<String> checked = new LinkedList<>();
+                for (ProjectEntry projectEntry : MainActivity.projectEntries)
+                {
+                    if (projectEntry.getValue())
+                    {
+                        checked.add(projectEntry.getName());
+                    }
+                }
+                MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+                MainActivity.projectList.setAdapter(MainActivity.listAdapter);
+                finish();
+        }
     }
 }
 
