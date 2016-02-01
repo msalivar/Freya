@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,22 +18,27 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
 {
     // Declare variables
     CustomListAdapter adapter = null;
-    ListView projectList;
+    ArrayList<Boolean> checkValues = new ArrayList<>();
     Button saveButton;
 
     // Create project list screen
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         // Display new activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_filter);
         saveButton = (Button)findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
-        projectList = (ListView)findViewById(R.id.projectList);
+        for(Boolean entry : MainActivity.projectHideValues)
+        {
+            if (entry) { checkValues.add(true); }
+            else { checkValues.add(false); }
+        }
         // Options can be checked on the screen
-        adapter = new CustomListAdapter(this, MainActivity.projectEntries);
-        projectList.setAdapter(adapter);
+        adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, checkValues);
+        ListView listView = (ListView) findViewById(R.id.projectList);
+        listView.setAdapter(adapter);
     }
     @Override
     public void onClick(View view)
@@ -41,11 +47,11 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
         {
             case (R.id.saveButton):
                 List<String> checked = new LinkedList<>();
-                for (ProjectEntry projectEntry : MainActivity.projectEntries)
+                for (int i = 0; i < MainActivity.projectEntries.size(); i++)
                 {
-                    if (projectEntry.getValue())
+                    if (checkValues.get(i))
                     {
-                        checked.add(projectEntry.getName());
+                        checked.add(MainActivity.projectEntries.get(i).getName());
                     }
                 }
                 MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);

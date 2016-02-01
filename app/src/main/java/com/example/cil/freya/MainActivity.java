@@ -52,8 +52,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Bitmap selectedImage = null;
     static JSONObject selected_project = null;
     static JSONArray projects;
-    // put JSONs in here
     static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
+    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
+    // put JSONs in here
     static String projectNames [];
     static String uniqueID [];
     static String investigators [];
@@ -450,11 +451,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 ArrayList<ProjectEntry> temp_entries = new ArrayList<>();
                 projectNames = new String[projects.length()];
                 uniqueID = new String [projects.length()];
+                projectHideValues.clear();
+
                 for (int i = 0; i < projects.length(); i++)
                 {
                     JSONObject p = (JSONObject) projects.get(i);
                     String name = p.getString("Name");
+
                     temp_entries.add(new ProjectEntry());
+                    temp_entries.get(i).text = name;
+                    temp_entries.get(i).value = true;
+                    projectHideValues.add(true);
+
                     projectNames[i] = name;
                     uniqueID[i] = p.getString("Unique Identifier");
                 }
