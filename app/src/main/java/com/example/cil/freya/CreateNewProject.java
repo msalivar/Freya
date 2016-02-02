@@ -1,6 +1,7 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,8 +35,8 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     Button createButton;
     JSONArray edge;
     static JSONObject complete = new JSONObject();
-    private EditText txtEditor;
-    private final static String storetext = "storetext.txt";
+    EditText info = null;
+    String ProjectFile = "ProjectFile.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,7 +47,11 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
-        txtEditor = (EditText) findViewById(R.id.projName);
+        try {
+            read();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try
         {
@@ -60,28 +69,25 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         switch (v.getId())
         {
             case (R.id.newProjectButton):
-//                try
-//                {
-//                    newProject();
-//                }
-//                catch (JSONException e)
-//                {
-//                    e.printStackTrace();}
-//                    Intent intent = new Intent(this, CreateNewSite.class);
-//                    startActivity(intent);
-//                    // Toast.makeText(CreateNewProject.this, "Post Successful", Toast.LENGTH_LONG).show();
-//                break;
-
-                try{
-
-                    OutputStreamWriter out = new OutputStreamWriter(openFileOutput(storetext,0));
-                    out.write(txtEditor.getText().toString());
-                    out.close();
-                    Toast.makeText(this,"The contents are saved in the file.", Toast.LENGTH_LONG).show();
+                try
+                {
+                    newProject();
                 }
-                catch(Throwable t){
-                    Toast.makeText(this,"Exception:" +t.toString(), Toast.LENGTH_LONG).show();
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
                 }
+                Intent intent = new Intent(this, CreateNewSite.class);
+                startActivity(intent);
+                try {
+                    read();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+
         }
     }
 
@@ -140,5 +146,37 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         jsonParam.put("Started Date", date);
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
         return jsonParam;
+    }
+
+    public void write() throws FileNotFoundException {
+        try {
+            FileOutputStream FileOut = openFileOutput(ProjectFile, MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
+            outputWriter.write(info.getText().toString());
+            outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void read() throws FileNotFoundException {
+        try {
+            FileInputStream FileIn = openFileInput(ProjectFile);
+            InputStreamReader InputRead= new InputStreamReader(FileIn);
+
+            char[] inputBuffer= new char[100];
+            String s="";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
+                s += ReadString;
+            }
+            InputRead.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

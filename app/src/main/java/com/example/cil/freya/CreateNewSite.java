@@ -11,6 +11,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -23,6 +28,8 @@ public class CreateNewSite extends Activity implements View.OnClickListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Button createButton, previousButton;
+    EditText info = null;
+    String SiteFile = "SiteFile.txt";
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -32,6 +39,12 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         createButton.setOnClickListener(this);
         previousButton = (Button) findViewById(R.id.backSiteButton);
         previousButton.setOnClickListener(this);
+
+        try {
+            read();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -44,11 +57,21 @@ public class CreateNewSite extends Activity implements View.OnClickListener
 
                 intent = new Intent(this, CreateNewSystem.class);
                 startActivity(intent);
+                try {
+                    write();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
 
             case (R.id.backSiteButton):
                 intent = new Intent(this, CreateNewProject.class);
                 startActivity(intent);
+                try {
+                    write();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -63,7 +86,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         between.put(JSON);
 
         JSONObject attrs = new JSONObject();
-        attrs.put ("Attrs",between);
+        attrs.put("Attrs", between);
 
 
         JSONArray site = new JSONArray();
@@ -99,5 +122,37 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         jsonParam.put("Alias",info);
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
         return jsonParam;
+    }
+
+    public void write() throws FileNotFoundException {
+        try {
+            FileOutputStream FileOut = openFileOutput(SiteFile, MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
+            outputWriter.write(info.getText().toString());
+            outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void read() throws FileNotFoundException {
+        try {
+            FileInputStream FileIn = openFileInput(SiteFile);
+            InputStreamReader InputRead= new InputStreamReader(FileIn);
+
+            char[] inputBuffer= new char[100];
+            String s="";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
+                s += ReadString;
+            }
+            InputRead.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

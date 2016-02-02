@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +39,7 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         createButton.setOnClickListener(this);
         backButton = (Button) findViewById(R.id.backDeploymentButton);
         backButton.setOnClickListener(this);
+
         try {
             read();
         } catch (FileNotFoundException e) {
