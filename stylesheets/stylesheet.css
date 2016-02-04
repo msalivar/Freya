@@ -759,7 +759,9 @@ footer .owner p a {
 }
 
 .markdown-body h3 {
-  font-size: 20px;
+  font-size: 25px;
+  font-family: monospace;
+  text-align: center;
 }
 
 .markdown-body h4 {
@@ -893,7 +895,7 @@ footer .owner p a {
   height: 90px;
   margin-left: -60px;
   margin-top: -25px;
-  content: "‟";
+  content: "â€Ÿ";
   display: block;
   float: left;
 }
