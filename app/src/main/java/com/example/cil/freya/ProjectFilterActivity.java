@@ -3,22 +3,31 @@ package com.example.cil.freya;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectFilterActivity extends Activity implements View.OnClickListener
 {
     // Declare variables
     CustomListAdapter adapter = null;
-    ArrayList<Boolean> checkValues = new ArrayList<>();
     Button saveButton;
 
     // Create project list screen
@@ -32,11 +41,11 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
         saveButton.setOnClickListener(this);
         for(Boolean entry : MainActivity.projectHideValues)
         {
-            if (entry) { checkValues.add(true); }
-            else { checkValues.add(false); }
+            if (entry) { MainActivity.checkValues.add(true); }
+            else { MainActivity.checkValues.add(false); }
         }
         // Options can be checked on the screen
-        adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, checkValues);
+        adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, MainActivity.checkValues);
         ListView listView = (ListView) findViewById(R.id.projectList);
         listView.setAdapter(adapter);
     }
@@ -46,17 +55,41 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
         switch (view.getId())
         {
             case (R.id.saveButton):
-                List<String> checked = new LinkedList<>();
+                String toWrite = "";
                 for (int i = 0; i < MainActivity.projectEntries.size(); i++)
                 {
-                    if (checkValues.get(i))
-                    {
-                        checked.add(MainActivity.projectEntries.get(i).getName());
-                    }
+                    toWrite += MainActivity.projectEntries.get(i).getName() + ";" + MainActivity.checkValues.get(i).toString() + ',';
                 }
-                MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
-                MainActivity.projectList.setAdapter(MainActivity.listAdapter);
+                try
+                {
+                    write(toWrite);
+                    List<String> checked = new LinkedList<>();
+                    for (int i = 0; i < MainActivity.projectEntries.size(); i++)
+                    {
+                        if (MainActivity.checkValues.get(i))
+                        {
+                            checked.add(MainActivity.projectEntries.get(i).getName());
+                        }
+                    }
+                    MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+                    MainActivity.projectList.setAdapter(MainActivity.listAdapter);
+                } catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
                 finish();
+        }
+    }
+
+    public void write(String input) throws FileNotFoundException
+    {
+        try {
+            FileOutputStream FileOut = openFileOutput(MainActivity.ProjectFile, MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
+            outputWriter.write(input);
+            outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

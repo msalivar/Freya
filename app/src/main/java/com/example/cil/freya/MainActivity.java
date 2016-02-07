@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -36,7 +38,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -54,6 +60,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     static JSONArray projects;
     static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
     static ArrayList<Boolean> projectHideValues = new ArrayList<>();
+    static ArrayList<Boolean> checkValues = new ArrayList<>();
+    static String ProjectFile = "FilterSettings.txt";
     // put JSONs in here
     static String projectNames [];
     static String uniqueID [];
@@ -158,7 +166,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 });
                 // redisplay the list and set listen
-                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
+                if (checkValues.isEmpty()) { listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames); }
+                else
+                {
+                    List<String> checked = new LinkedList<>();
+                    for (int i = 0; i < projectEntries.size(); i++)
+                    {
+                        if (checkValues.get(i))
+                        {
+                            checked.add(projectEntries.get(i).getName());
+                        }
+                    }
+                    listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+                }
                 projectList.setAdapter(listAdapter);
             }
             catch (NullPointerException e)
@@ -311,8 +331,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
             getAllRequest();
-            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, projectNames);
-            projectList.setAdapter(listAdapter);
             return true;
         }
         // if upload is chosen
@@ -467,10 +485,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     uniqueID[i] = p.getString("Unique Identifier");
                 }
                 projectEntries = temp_entries;
+                readProjectFilter();
             }
         } catch (JSONException e) {
             // thrown if unable to connect to server or if json is empty
             Toast.makeText(this, "Unable to Populate Project List" + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        } catch (FileNotFoundException e)
+        {
             e.printStackTrace();
         }
     }
@@ -682,6 +704,54 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     urlConnection.disconnect();
             }
             return null;
+        }
+    }
+
+    public void readProjectFilter() throws FileNotFoundException
+    {
+        try {
+            FileInputStream FileIn = openFileInput(ProjectFile);
+            InputStreamReader InputRead= new InputStreamReader(FileIn);
+
+            char[] inputBuffer= new char[100];
+            String s = "";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
+                s += ReadString;
+            }
+            InputRead.close();
+            Boolean[] newValues = new Boolean[projectEntries.size()];
+            Arrays.fill(newValues, true);
+            String[] array = s.split(",");
+            for(String str : array)
+            {
+                String[] contents = str.split(";");
+                for(int i = 0; i < projectEntries.size(); i++)
+                {
+                    if(Objects.equals(projectEntries.get(i).getName(), contents[0]))
+                    {
+                        newValues[i] = Boolean.valueOf(contents[1]);
+                    }
+                }
+            }
+            checkValues.clear();
+            Collections.addAll(checkValues, newValues);
+            List<String> checked = new LinkedList<>();
+            for (int i = 0; i < projectEntries.size(); i++)
+            {
+                if (checkValues.get(i))
+                {
+                    checked.add(projectEntries.get(i).getName());
+                }
+            }
+            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+            projectList.setAdapter(listAdapter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
