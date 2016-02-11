@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--creating the action bar and setting the colors and types
+        sets main themes for the action bar throughout the app-->
+    <style name="MainTheme" parent="@style/Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="android:colorPrimary">@color/primary_material_light</item>
+        <item name="colorPrimary">@android:color/background_light</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:navigationBarColor">@color/unr_blue</item>
+        <item name="android:colorAccent">@color/unr_blue</item>
+        <item name="android:colorForeground">@color/unr_blue</item>
+        <item name="android:dropDownListViewStyle">@style/Theme.MyListView</item>
+    </style>
+    <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/unr_silver</item>
+        <item name="android:colorControlNormal">@color/unr_silver</item>
+    </style>
+    <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light.ListView">
+        <item name="android:listSelector">@color/unr_blue</item>
+    </style>
+</resources>
