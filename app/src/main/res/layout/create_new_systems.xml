@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Displays the new systems screen.
+    Displays all labels and boxes for the user to enter data.
+    Aligns to the screen according to size!-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:weightSum="1"
+                android:orientation="vertical"
+                android:paddingTop="15dp"
+                android:background="@color/unr_off_white"
+                tools:context="com.example.cil.freya.CreateNewSite">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/details"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/landmark_label"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:hint="Enter Details"
+        android:textColor="@color/unr_blue"
+        android:inputType="textCapSentences"
+        android:capitalize="sentences"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/installation_location_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Installation\nLocation"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:paddingRight="15dp"
+        android:layout_below="@+id/details"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/installation_location"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:hint="Enter Installation\nLocation"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="10dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textCapWords"
+        android:password="false"
+        android:layout_marginLeft="150dp"
+        android:layout_alignTop="@+id/installation_location_label"
+        android:layout_alignEnd="@+id/installation_location_label"
+        android:layout_alignParentEnd="true"/>
+
+<!--
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/projName"
+        android:inputType="textCapWords"
+        android:textColor="@color/unr_blue"
+        android:paddingTop="3dip"
+        android:gravity="bottom"
+        android:background="@drawable/shapes"
+        android:layout_alignStart="@+id/installation_label"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:dropDownSelector="@color/unr_blue"
+        android:layout_below="@+id/installation_location_label"
+        android:layout_marginLeft="15dp"/>-->
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/power_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Power"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:paddingRight="15dp"
+        android:layout_below="@+id/projName"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/power"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:hint="Enter Power"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="10dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textCapWords"
+        android:password="false"
+        android:layout_marginLeft="150dp"
+        android:layout_alignEnd="@+id/installation_location_label"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/power_label"/>
+
+    <Button
+        android:id="@+id/button"
+        android:text="Upload Photo"
+        android:textColor="@color/unr_silver"
+        android:textSize="15dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button"
+        android:layout_below="@+id/installation_location_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/newSystemButton"
+
+        android:text="Next"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_marginRight="20dp"
+        android:layout_alignTop="@+id/backSystemButton"
+        android:layout_alignEnd="@+id/power_label"/>
+
+    <Button
+        android:id="@+id/backSystemButton"
+
+        android:text="Previous"
+        android:textColor="@color/unr_silver"
+        android:textSize="22dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/power_label"
+        android:layout_marginBottom="24dp"/>
+
+</RelativeLayout>
