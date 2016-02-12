@@ -747,8 +747,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     checked.add(projectEntries.get(i).getName());
                 }
             }
-            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
-            projectList.setAdapter(listAdapter);
 
         } catch (Exception e) {
             e.printStackTrace();
