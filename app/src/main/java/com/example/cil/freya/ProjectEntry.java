@@ -1,32 +1,27 @@
 package com.example.cil.freya;
 
-import android.widget.CheckBox;
-import android.widget.TextView;
-
 public class ProjectEntry
 {
     // Declare variables
-    TextView name;
-    CheckBox checked;
-    String text;
-    Boolean value;
+    String name;
+    boolean checked;
 
     // Constructor
-    public ProjectEntry()
+    public ProjectEntry(String name, boolean value)
     {
-        text = "ph";
-        value = true;
+        this.name = name;
+        this.checked = value;
     }
 
     // Get the projected name
     public String getName()
     {
-        return text;
+        return this.name;
     }
     
     // See if the option is checked on the screen
     public boolean getValue()
     {
-        return checked.isChecked();
+        return this.checked;
     }
 }

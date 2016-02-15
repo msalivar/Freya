@@ -15,11 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -35,8 +31,9 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     Button createButton;
     JSONArray edge;
     static JSONObject complete = new JSONObject();
-    EditText info = null;
     String ProjectFile = "ProjectFile.txt";
+    private EditText txtEditor;
+    int inNumb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,15 +44,13 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
-        try {
-            read();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        txtEditor = (EditText) findViewById(R.id.projName);
+        try{components.read(ProjectFile,this);}
+        catch(FileNotFoundException e){e.printStackTrace();}
 
         try
         {
-            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.investigators);
+            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getInfo.investigators);
             spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             prininvest.setAdapter(spinAdapter);
             prininvest.setOnItemSelectedListener(this);
@@ -70,33 +65,21 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         {
             case (R.id.newProjectButton):
                 try
-                {
-                    newProject();
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
+                {newProject();} catch (JSONException e)
+                {e.printStackTrace();}
                 Intent intent = new Intent(this, CreateNewSite.class);
                 startActivity(intent);
-                try {
-                    read();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
+                try{components.read(ProjectFile,this);}
+                catch(FileNotFoundException e){e.printStackTrace();}
                 break;
-
-
         }
     }
 
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
-        /*Toast.makeText(parent.getContext(),
-                "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-                Toast.LENGTH_SHORT).show();*/
+        if (position > 0)
+            inNumb = getInfo.investNumber[position-1];
     }
 
     @Override
@@ -111,14 +94,8 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         //Create JSONObject here
         JSONObject JSON = createProjectJSON();
 
-        JSONArray between = new JSONArray();
-        between.put(JSON);
-
-        JSONObject attrs = new JSONObject();
-        attrs.put("Attrs", between);
-
         JSONArray project = new JSONArray();
-        project.put(attrs);
+        project.put(JSON);
 
         complete.put("Project", project);
 
@@ -130,53 +107,31 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        jsonParam.put("Create Date", date);
-        EditText info = (EditText) findViewById(R.id.grant);
-        jsonParam.put("Grant Number String", info.getText().toString());
-        info = (EditText) findViewById(R.id.projName);
+        EditText info = null;
+
+        info = (EditText) findViewById(R.id.institutionName);
         jsonParam.put("Institution Name", info.getText().toString());
-        jsonParam.put("Modification Date", date);
+
+        info = (EditText) findViewById(R.id.grant);
+        jsonParam.put("Grant Number String", info.getText().toString());
+
+        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+
         info = (EditText) findViewById(R.id.projName);
         jsonParam.put("Name", info.getText().toString());
+
+
+        jsonParam.put("Principal Investigator",1);
+
         info = (EditText) findViewById(R.id.funding);
         jsonParam.put("Original Funding Agency", info.getText().toString());
-        // info = (EditText) findViewById(R.id.prininvest);
-        // Integer investigator = Integer.parseInt(info.getText().toString());
-        jsonParam.put("Principal Investigator", 1);
+
+        jsonParam.put("Modification Date", date);
+
+        jsonParam.put("Creation Date", date);
+
         jsonParam.put("Started Date", date);
-        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+
         return jsonParam;
-    }
-
-    public void write() throws FileNotFoundException {
-        try {
-            FileOutputStream FileOut = openFileOutput(ProjectFile, MODE_PRIVATE);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
-            outputWriter.write(info.getText().toString());
-            outputWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void read() throws FileNotFoundException {
-        try {
-            FileInputStream FileIn = openFileInput(ProjectFile);
-            InputStreamReader InputRead= new InputStreamReader(FileIn);
-
-            char[] inputBuffer= new char[100];
-            String s="";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
-                s += ReadString;
-            }
-            InputRead.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
