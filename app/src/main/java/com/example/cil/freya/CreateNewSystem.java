@@ -2,11 +2,17 @@ package com.example.cil.freya;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +20,7 @@ import org.json.JSONObject;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
@@ -26,9 +33,11 @@ import java.util.UUID;
  */
 public class CreateNewSystem extends Activity implements View.OnClickListener
 {
-    Button createButton, backButton;
+    Button createButton, backButton, photoButton;
     EditText info = null;
     String SystemFile = "SystemFile.txt";
+    private final int SELECT_PHOTO = 1;
+    private final int TAKE_PHOTO = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,11 +48,70 @@ public class CreateNewSystem extends Activity implements View.OnClickListener
         createButton.setOnClickListener(this);
         backButton = (Button) findViewById(R.id.backSystemButton);
         backButton.setOnClickListener(this);
+        photoButton = (Button) findViewById(R.id.photoButton);
+        photoButton.setOnClickListener(this);
+        registerForContextMenu(photoButton);
 
         try {
             read();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        menu.setHeaderTitle("Pick One");
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        super.onContextItemSelected(item);
+        switch (item.getItemId())
+        {
+            case R.id.choose_photo:
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                return true;
+            case R.id.take_photo:
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                //Uri fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+                //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+                // start the image capture Intent
+                startActivityForResult(cameraIntent, TAKE_PHOTO);
+
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    // photo picker code
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
+    {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        switch (requestCode)
+        {
+            case SELECT_PHOTO:
+                if (resultCode == RESULT_OK)
+                {
+                    try {
+                        final Uri imageUri = imageReturnedIntent.getData();
+                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                        // change some text here to indicate photo picked
+                        //selectedImage = BitmapFactory.decodeStream(imageStream);
+                        //imageView.setImageBitmap(selectedImage);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
     }
 
@@ -72,6 +140,10 @@ public class CreateNewSystem extends Activity implements View.OnClickListener
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+                break;
+
+            case (R.id.photoButton):
+                this.openContextMenu(v);
                 break;
         }
     }

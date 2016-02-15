@@ -54,7 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
-    private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
     static JSONObject selected_project = null;
     static JSONArray projects;
@@ -226,10 +225,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 // if an item is selected from the drawer
     private void selectItem(int position)
     {
-        /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image*//*");
-            startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
-
         if (position == 0)
         {
             // start filtering intent
@@ -265,42 +260,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(MainActivity.this, CreateNewComponent.class);
             startActivity(intent);
         }
-       /* else if (position == 3)
-        {
-            // start photo picker intent
-            // mDrawerLayout.closeDrawer(mDrawerList);
-            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/*");
-            startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-        }*/
         else {
             // close the drawer
-            mDrawerList.setItemChecked(position, true);
-            getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
         }
-    }
-
-    @Override
-    // photo picker code, not currently implemented, but in place for implemenation
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
-    {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        /*switch (requestCode)
-        {
-            case SELECT_PHOTO:
-                if (resultCode == RESULT_OK)
-                {
-                    try {
-                        final Uri imageUri = imageReturnedIntent.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        selectedImage = BitmapFactory.decodeStream(imageStream);
-                        imageView.setImageBitmap(selectedImage);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-        }*/
     }
 
 // automatically generated

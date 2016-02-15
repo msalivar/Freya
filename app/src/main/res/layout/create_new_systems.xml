@@ -125,7 +125,7 @@
         android:layout_alignTop="@+id/power_label"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/photoButton"
         android:text="Upload Photo"
         android:textColor="@color/unr_silver"
         android:textSize="15dp"
