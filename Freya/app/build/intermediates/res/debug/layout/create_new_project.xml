@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Creates the layout for new projects screen.
+    Displays labels and boxes for the user to enter data.
+    Aligns everything according to the screen of the device!-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:weightSum="1"
+              android:orientation="vertical"
+                android:paddingTop="15dp"
+                android:background="@color/unr_off_white">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/grant_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Grant"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:layout_alignEnd="@+id/projName"
+        android:paddingRight="15dp"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="127dp"
+        android:layout_height="50dp"
+        android:id="@+id/grant"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:hint="Enter Grant Number"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:paddingStart="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="135dp"
+        android:inputType="textCapWords"
+        android:password="false"
+        android:layout_alignRight="@+id/post"
+        android:layout_marginTop="15dp"
+        android:layout_alignLeft="@+id/name_label"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/name_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Name"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/grant"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/projName"
+        android:hint="Enter Project Name"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignStart="@+id/grant"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/grant"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/funding_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Funding"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:layout_toStartOf="@+id/funding"
+        android:layout_alignEnd="@+id/grant_label"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/name_label"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/funding"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:hint="Enter Funding Agency"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:layout_alignEnd="@+id/prininvest"
+        android:layout_alignStart="@+id/projName"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/projName"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/insitution_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Institution"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_alignStart="@+id/funding_label"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/funding_label"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/institutionName"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor = "@color/unr_blue"
+        android:hint="Enter Institution"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/grant"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/funding"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/investigator_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Investigator"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_alignStart="@+id/insitution_label"
+        android:layout_marginTop="75dp"
+        android:layout_alignTop="@+id/insitution_label"/>
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/prininvest"
+        android:inputType="textCapWords"
+        android:textColor="@color/unr_blue"
+        android:paddingTop="3dip"
+        android:gravity="bottom"
+        android:background="@drawable/shapes"
+        android:layout_alignTop="@+id/insitution_label"
+        android:layout_alignStart="@+id/institutionName"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="75dp"
+        android:paddingLeft="10dp"
+        android:dropDownSelector="@color/unr_blue"/>
+    <Button
+        android:id="@+id/newProjectButton"
+        android:text="Next"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@+id/prininvest"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"/>
+
+
+</RelativeLayout>
+<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya-Hannah/app/src/main/res/layout/create_new_project.xml -->

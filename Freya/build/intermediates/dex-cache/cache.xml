@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-c68b23862691ebba4e5881f24a6a8ea1b3c630c9.jar" />
+    </item>
+    <item
+        jar="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/pre-dexed/debug/classes-e979cd7126e158ac788bcee11df9a9394388fe2f.jar" />
+    </item>
+    <item
+        jar="/home/cil/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-41d2e90f3d54d78b15fe8f31f68f04e4f4406628.jar" />
+    </item>
+    <item
+        jar="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya-Hannah/app/build/intermediates/pre-dexed/debug/classes-e4fa3e3d26e63e6b0d24e56465b5a5aef40b66b3.jar" />
+    </item>
+
+</items>

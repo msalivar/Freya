@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Displays the new sites screen.
+    Displays all labels and boxes for the user to enter data.
+    Aligns to the screen according to size!-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:weightSum="1"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:background="@color/unr_off_white"
+            tools:context="com.example.cil.freya.CreateNewSite" android:fillViewport="false"
+            android:paddingBottom="15dp">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:background="@color/unr_off_white"
+    tools:context="com.example.cil.freya.CreateNewSite">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/alias_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Alias"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:inputType="none"
+        android:paddingRight="15dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/alias"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:hint="Enter Alias"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:paddingStart="10dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textCapWords"
+        android:password="false"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="150dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/landmark_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="GPS Landmark"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/alias_label"
+        android:layout_alignStart="@+id/alias_label"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:id="@+id/landmark"
+        android:hint="Enter GPS Landmark"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignTop="@+id/landmark_label"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/location_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Location"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/landmark_label"
+        android:layout_alignStart="@+id/landmark_label"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:id="@+id/location"
+        android:hint="Enter Location"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignTop="@+id/location_label"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/landOwner_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Land Owner"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/location_label"
+        android:layout_alignStart="@+id/location_label"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:id="@+id/landOwner"
+        android:hint="Enter Land Owner"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignTop="@+id/landOwner_label"
+        android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/site_name_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Name"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/landOwner_label"
+        android:layout_alignStart="@+id/landmark_label"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:id="@+id/site_name"
+        android:hint="Enter Name"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignTop="@+id/site_name_label"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/permit_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Permit Holder"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/site_name_label"
+        android:layout_alignStart="@+id/landmark_label"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:id="@+id/permit"
+        android:hint="Enter Permit Holder"
+        android:textColorHint="@color/hint_color"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textCapWords"
+        android:textSize="20dp"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:layout_marginRight="15dp"
+        android:paddingStart="10dp"
+        android:layout_alignBottom="@+id/permit_label"
+        android:layout_alignStart="@+id/alias"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/project_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Project"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/permit_label"
+        android:layout_alignStart="@+id/landmark_label"
+        android:layout_marginTop="15dp" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/project"
+        android:inputType="textCapWords"
+        android:textColor="@color/unr_blue"
+        android:paddingTop="3dip"
+        android:gravity="bottom"
+        android:background="@drawable/shapes"
+        android:layout_alignTop="@+id/permit_label"
+        android:layout_alignStart="@+id/alias"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="64dp"
+        android:paddingLeft="10dp"
+        android:dropDownSelector="@color/unr_blue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/notes"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Enter Notes"
+        android:textColor="@color/unr_blue"
+        android:inputType="textCapSentences"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/project_label"
+        android:layout_alignStart="@+id/permit_label"/>
+
+    <Button
+        android:id="@+id/newSiteButton"
+
+        android:text="Next"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@+id/notes"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:id="@+id/backSiteButton"
+        android:text="Back"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_marginRight="20dp"
+        android:layout_alignBottom="@+id/newSiteButton"
+        android:layout_toStartOf="@+id/site_name"/>
+
+
+
+
+</RelativeLayout>
+</ScrollView><!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya-Hannah/app/src/main/res/layout/create_new_site.xml -->
