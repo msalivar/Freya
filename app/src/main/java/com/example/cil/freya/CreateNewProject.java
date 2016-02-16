@@ -3,11 +3,15 @@ package com.example.cil.freya;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,18 +39,47 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     private EditText txtEditor;
     int inNumb;
 
+
+    //TODO
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mDrawerToggle;
+    private ListView mDrawerList;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_project);
+        // create the drawer
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
+        {
+            public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
+            public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
+        };
+
+        // enable drawer listener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        addDrawerItems();
+
+
+
         createButton = (Button) findViewById(R.id.newProjectButton);
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
         txtEditor = (EditText) findViewById(R.id.projName);
-        try{components.read(ProjectFile,this);}
-        catch(FileNotFoundException e){e.printStackTrace();}
+        try
+        {
+            components.read(ProjectFile, this);
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
 
         try
         {
@@ -54,32 +87,87 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             prininvest.setAdapter(spinAdapter);
             prininvest.setOnItemSelectedListener(this);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e)
+        {
             Toast.makeText(this, "Unable to populate People. Sync before trying again.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
+
+    public void addDrawerItems()
+    {
+        // list of options
+        String[] osArray = {"Project Options", "Create New Project", "Create New Site", "Create New System", "Create New Deployment", "Create New Component"};
+        //  display and set listener
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
+        mDrawerList.setAdapter(mAdapter);
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener
+    {
+        // got to onItemClick
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id)
+        {
+            selectItem(position);
+        }
+    }
+
+    private void selectItem(int position)
+    {
+        /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image*//*");
+            startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
+
+
+        switch (position)
+        {
+
+            default:
+                // close the drawer
+                mDrawerList.setItemChecked(position, true);
+                //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
+                mDrawerLayout.closeDrawer(mDrawerList);
+        }
+
+    }
+
     public void onClick(View v)
     {
         switch (v.getId())
         {
             case (R.id.newProjectButton):
                 try
-                {newProject();} catch (JSONException e)
-                {e.printStackTrace();}
+                {
+                    newProject();
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(this, CreateNewSite.class);
                 startActivity(intent);
-                try{components.read(ProjectFile,this);}
-                catch(FileNotFoundException e){e.printStackTrace();}
+                try
+                {
+                    components.read(ProjectFile, this);
+                } catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
 
     @Override
-    public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
         if (position > 0)
-            inNumb = getInfo.investNumber[position-1];
+            inNumb = getInfo.investNumber[position - 1];
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
     }
 
     @Override
@@ -87,6 +175,13 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     {
         //autogenerated, do nothing
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        return true;
+    }
+
 
     public void newProject() throws JSONException
     {
@@ -121,7 +216,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         jsonParam.put("Name", info.getText().toString());
 
 
-        jsonParam.put("Principal Investigator",1);
+        jsonParam.put("Principal Investigator", 1);
 
         info = (EditText) findViewById(R.id.funding);
         jsonParam.put("Original Funding Agency", info.getText().toString());

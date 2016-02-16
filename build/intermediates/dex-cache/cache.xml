@@ -2,32 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/home/sammie/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jar="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/home/sammie/Desktop/Freya/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-64c754183913472624f7f303a8aabe68d3f490ef.jar" />
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/pre-dexed/debug/classes-78921258411e7c5dcd74490c0941202950350e42.jar" />
     </item>
     <item
-        jar="/home/sammie/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jar="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/sammie/Desktop/Freya/app/build/intermediates/pre-dexed/debug/classes-7b75a8135d1692fd4a600265eb1c118e79183886.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/home/sammie/Desktop/Freya/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-1d66da356cecc905ed5627f057d96b860f3e20a1.jar" />
-    </item>
-    <item
-        jar="/home/sammie/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/home/sammie/Desktop/Freya/app/build/intermediates/pre-dexed/debug/classes-40cc7b83382bc40d83b7443e0f58dfea05630a29.jar" />
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/pre-dexed/debug/classes-2d22da6288da9f265395921c811db945f0649404.jar" />
     </item>
 
 </items>

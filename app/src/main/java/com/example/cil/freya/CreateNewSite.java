@@ -3,30 +3,20 @@ package com.example.cil.freya;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -42,6 +32,8 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
     int numb;
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
+    EditText info;
+    String SiteFile = "SiteFile.txt";
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -53,7 +45,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         previousButton.setOnClickListener(this);
 
 
-        proj = (Spinner) findViewById(R.id.project);
+        proj = (Spinner) findViewById(R.id.projSite);
 
         try
         {
@@ -69,7 +61,6 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
 
 
     public void onClick (View v){
-        Intent intent;
         switch (v.getId()){
             case (R.id.newSiteButton):
                 try
@@ -78,7 +69,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
                 Intent intent = new Intent(this, CreateNewSystem.class);
                 startActivity(intent);
                 try {
-                    write();
+                    components.write(info, SiteFile, this);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -88,7 +79,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
                 intent = new Intent(this, CreateNewProject.class);
                 startActivity(intent);
                 try {
-                    write();
+                    components.write(info, SiteFile, this);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -100,6 +91,12 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
         numb = getInfo.projectNumber[position];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+
     }
 
     public void newSite()throws JSONException{
@@ -114,7 +111,6 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        EditText info = null;
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
@@ -131,7 +127,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         jsonParam.put("Location",info.getText().toString());
         info = (EditText) findViewById(R.id.name);
         jsonParam.put("Name",info.getText().toString());
-        info = (EditText) findViewById(R.id.note);
+        info = (EditText) findViewById(R.id.notes);
         jsonParam.put("Notes",info.getText().toString());
         info = (EditText) findViewById(R.id.permit);
         jsonParam.put("Permit Holder", info.getText().toString());

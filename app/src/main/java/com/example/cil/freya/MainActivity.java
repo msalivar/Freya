@@ -72,6 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // enable drawer listener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        addDrawerItems();
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         ActionBar actionBar = getActionBar();
@@ -157,7 +158,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
 // when creating a drawer
-    private void addDrawerItems()
+    public void addDrawerItems()
     {
         // list of options
         String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component" };
@@ -364,54 +365,54 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
 
-    public void readProjectFilter() throws FileNotFoundException
-    {
-        try {
-            FileInputStream FileIn = openFileInput(ProjectFile);
-            InputStreamReader InputRead= new InputStreamReader(FileIn);
-
-            char[] inputBuffer= new char[100];
-            String s = "";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
-                s += ReadString;
-            }
-            InputRead.close();
-            Boolean[] newValues = new Boolean[projectEntries.size()];
-            Arrays.fill(newValues, true);
-            String[] array = s.split(",");
-            for(String str : array)
-            {
-                String[] contents = str.split(";");
-                for(int i = 0; i < projectEntries.size(); i++)
-                {
-                    if(Objects.equals(projectEntries.get(i).getName(), contents[0]))
-                    {
-                        newValues[i] = Boolean.valueOf(contents[1]);
-                    }
-                }
-            }
-            checkValues.clear();
-            Collections.addAll(checkValues, newValues);
-            List<String> checked = new LinkedList<>();
-            for (int i = 0; i < projectEntries.size(); i++)
-            {
-                if (checkValues.get(i))
-                {
-                    checked.add(projectEntries.get(i).getName());
-                }
-            }
-            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
-            projectList.setAdapter(listAdapter);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
+//    public void readProjectFilter() throws FileNotFoundException
+//    {
+//        try {
+//            FileInputStream FileIn = openFileInput(ProjectFile);
+//            InputStreamReader InputRead= new InputStreamReader(FileIn);
+//
+//            char[] inputBuffer= new char[100];
+//            String s = "";
+//            int charRead;
+//
+//            while ((charRead=InputRead.read(inputBuffer))>0) {
+//                // char to string conversion
+//                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
+//                s += ReadString;
+//            }
+//            InputRead.close();
+//            Boolean[] newValues = new Boolean[projectEntries.size()];
+//            Arrays.fill(newValues, true);
+//            String[] array = s.split(",");
+//            for(String str : array)
+//            {
+//                String[] contents = str.split(";");
+//                for(int i = 0; i < projectEntries.size(); i++)
+//                {
+//                    if(Objects.equals(projectEntries.get(i).getName(), contents[0]))
+//                    {
+//                        newValues[i] = Boolean.valueOf(contents[1]);
+//                    }
+//                }
+//            }
+//            checkValues.clear();
+//            Collections.addAll(checkValues, newValues);
+//            List<String> checked = new LinkedList<>();
+//            for (int i = 0; i < projectEntries.size(); i++)
+//            {
+//                if (checkValues.get(i))
+//                {
+//                    checked.add(projectEntries.get(i).getName());
+//                }
+//            }
+//            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+//            projectList.setAdapter(listAdapter);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//       }
+//}
 
 
 
