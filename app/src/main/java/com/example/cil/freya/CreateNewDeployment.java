@@ -24,6 +24,7 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
 {
     Button createButton, backButton;
     String DeploymentFile = "DepolymentFile.txt";
+    EditText info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

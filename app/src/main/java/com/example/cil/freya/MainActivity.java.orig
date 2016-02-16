@@ -31,7 +31,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
-    private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
     static JSONObject selected_project = null;
     static JSONArray projects;
@@ -192,6 +191,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 // if an item is selected from the drawer
     private void selectItem(int position)
     {
+<<<<<<< HEAD
         /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image*//*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
@@ -199,6 +199,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     switch (position) {
         case 0:
+=======
+        if (position == 0)
+        {
+>>>>>>> 9488d86a6130fb879f29217a6edd60aa676e70aa
             // start filtering intent
             Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
             startActivity(intent);
@@ -232,6 +236,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // start component intent
             intent = new Intent(MainActivity.this, CreateNewComponent.class);
             startActivity(intent);
+<<<<<<< HEAD
             break;
 
 
@@ -247,31 +252,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // close the drawer
             mDrawerList.setItemChecked(position, true);
             //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
+=======
+        }
+        else {
+            // close the drawer
+>>>>>>> 9488d86a6130fb879f29217a6edd60aa676e70aa
             mDrawerLayout.closeDrawer(mDrawerList);
     }
 
-    }
-
-    @Override
-    // photo picker code, not currently implemented, but in place for implemenation
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
-    {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        /*switch (requestCode)
-        {
-            case SELECT_PHOTO:
-                if (resultCode == RESULT_OK)
-                {
-                    try {
-                        final Uri imageUri = imageReturnedIntent.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        selectedImage = BitmapFactory.decodeStream(imageStream);
-                        imageView.setImageBitmap(selectedImage);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-        }*/
     }
 
 // automatically generated
@@ -353,17 +341,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        return jsonParam;
 //    }
 
-
-}
-
-
-
-
-
-
-
-
-
+<<<<<<< HEAD
+=======
     public void readProjectFilter() throws FileNotFoundException
     {
         try {
@@ -404,13 +383,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     checked.add(projectEntries.get(i).getName());
                 }
             }
-            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
-            projectList.setAdapter(listAdapter);
+>>>>>>> 9488d86a6130fb879f29217a6edd60aa676e70aa
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 

@@ -34,6 +34,13 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
             else { MainActivity.checkValues.add(false); }
         }
         // Options can be checked on the screen
+        try
+        {
+            readProjectFilter();
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
         adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, MainActivity.checkValues);
         ListView listView = (ListView) findViewById(R.id.projectList);
         listView.setAdapter(adapter);
@@ -77,6 +84,44 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
             OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
             outputWriter.write(input);
             outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readProjectFilter() throws FileNotFoundException
+    {
+        try {
+            FileInputStream FileIn = openFileInput(MainActivity.ProjectFile);
+            InputStreamReader InputRead= new InputStreamReader(FileIn);
+
+            char[] inputBuffer= new char[100];
+            String s = "";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
+                s += ReadString;
+            }
+            InputRead.close();
+            String[] array = s.split(",");
+            for(String str : array)
+            {
+                String[] contents = str.split(";");
+                for(int i = 0; i < MainActivity.projectEntries.size(); i++)
+                {
+                    if(Objects.equals(MainActivity.projectEntries.get(i).getName(), contents[0]))
+                    {
+                        // Set MainActivity.projectEntries[i].value to checked value
+                        MainActivity.projectEntries.get(i).value = Boolean.valueOf(contents[1]);
+                    }
+                }
+            }
+            adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, MainActivity.checkValues);
+            ListView listView = (ListView) findViewById(R.id.projectList);
+            listView.setAdapter(adapter);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
