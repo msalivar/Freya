@@ -60,8 +60,9 @@ public class ProjectFilterActivity extends MainActivity implements View.OnClickL
                             checked.add(MainActivity.projectEntries.get(i).getName());
                         }
                     }
-                    MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
-                    MainActivity.projectList.setAdapter(MainActivity.listAdapter);
+                    // TODO: Update Adapter
+                    //MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+                    //MainActivity.projectList.setAdapter(MainActivity.listAdapter);
                 } catch (FileNotFoundException e)
                 {
                     e.printStackTrace();

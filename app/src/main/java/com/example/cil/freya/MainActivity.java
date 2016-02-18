@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,21 +25,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
-    private final int SELECT_PHOTO = 1;
-    Bitmap selectedImage = null;
     static JSONObject selected_project = null;
-    static JSONArray projects;
     static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
     static ArrayList<Boolean> projectHideValues = new ArrayList<>();
     static ArrayList<Boolean> checkValues = new ArrayList<>();
     static String ProjectFile = "FilterSettings.txt";
+    ExpandableListAdapter expandable;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -53,7 +57,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     // lists
     static ArrayAdapter<String> listAdapter;
-    static ListView projectList;
     static String edgeURL = "edge/";
 
     @Override
@@ -61,6 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
@@ -90,7 +94,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // go to getAllRequest
         GetInfo.getAllRequests();
 
-        // load state testing, will be used to implement saving infomation into the app so syncing will not have to occur everytime the user opens the app
+        // create expandable list view
+        expListView = (ExpandableListView) findViewById(R.id.expList);
+        prepareListData();
+
+        // load state testing, will be used to implement saving information into the app so syncing will not have to occur every time the user opens the app
         if (savedInstanceState != null)
         {
             GetInfo.projectNames = savedInstanceState.getStringArray(null);
@@ -103,8 +111,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             try
             {
                 // create listen and set listener
-                projectList = (ListView) findViewById(R.id.projectList);
-                projectList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                expListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     // what happens when the list is clicked on
                     @Override
@@ -135,8 +142,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             //test
                             Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
                             // start projectDisplay intent
-                            Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
-                            startActivity(intent);
+                            // Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
+                            // startActivity(intent);
                         } catch (JSONException e)
                         {
                             // if list empty, print to logcat
@@ -145,8 +152,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 });
                 // redisplay the list and set listen
-                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, GetInfo.projectNames);
-                projectList.setAdapter(listAdapter);
+                prepareListData();
             }
             catch (NullPointerException e)
             {
@@ -155,6 +161,47 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        listDataHeader.add("Projects");
+        listDataHeader.add("Main Module 2");
+        listDataHeader.add("Main Module 3");
+        listDataHeader.add("Main Module 4");
+
+        // Adding child data
+        List<String> projects = new ArrayList<String>();
+        for (String str : GetInfo.projectNames)
+        {
+            projects.add(str);
+        }
+
+        List<String> two = new ArrayList<String>();
+        two.add("1");
+        two.add("2");
+        two.add("3");
+
+        List<String> three = new ArrayList<String>();
+        three.add("1");
+        three.add("2");
+        three.add("3");
+
+        List<String> four = new ArrayList<String>();
+        four.add("1");
+        four.add("2");
+        four.add("3");
+
+        listDataChild.put(listDataHeader.get(0), projects); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), two);
+        listDataChild.put(listDataHeader.get(2), three);
+        listDataChild.put(listDataHeader.get(3), four);
+
+        expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        expListView.setAdapter(expandable);
     }
 
     // when creating a drawer
@@ -176,13 +223,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerToggle.syncState();
     }
 
-    // generated, does nothing
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    // drawer lsitener
+    // drawer listener
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
         // got to onItemClick
@@ -303,8 +344,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
             GetInfo.getAllRequests();
-            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, GetInfo.projectNames);
-            projectList.setAdapter(listAdapter);
+            prepareListData();
             return true;
         }
         // if upload is chosen
