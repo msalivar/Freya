@@ -24,6 +24,7 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
 {
     Button createButton, backButton;
     String DeploymentFile = "DepolymentFile.txt";
+    EditText info = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,7 +78,6 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        EditText info = null;
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 

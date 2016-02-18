@@ -93,7 +93,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener
         info = (EditText) findViewById(R.id.location);
         jsonParam.put("Installation Location",info);
 
-        info = (EditText) findViewById(R.id.name);
+        //info = (EditText) findViewById(R.id.name);
         jsonParam.put("Name", info.getText().toString());
 
         jsonParam.put("Create Date", date);

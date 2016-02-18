@@ -49,7 +49,7 @@ public class CreateNewComponent extends Activity {
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        EditText info = (EditText) findViewById(R.id.name);
+        EditText info = (EditText) findViewById(R.id.projName);
         jsonParam.put("Name", info.getText().toString());
 
         info = (EditText) findViewById(R.id.manufacturer);
@@ -69,9 +69,6 @@ public class CreateNewComponent extends Activity {
 
         info = (EditText) findViewById(R.id.installation);
         jsonParam.put("installation Details", info.getText().toString());
-
-        info = (EditText) findViewById(R.id.wiring_notes);
-        jsonParam.put("Wiring Notes", info.getText().toString());
 
         jsonParam.put("Installation Date", date);
 
