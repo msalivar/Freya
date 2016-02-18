@@ -13,7 +13,7 @@ import java.io.OutputStreamWriter;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ProjectFilterActivity extends Activity implements View.OnClickListener
+public class ProjectFilterActivity extends MainActivity implements View.OnClickListener
 {
     // Declare variables
     CustomListAdapter adapter = null;

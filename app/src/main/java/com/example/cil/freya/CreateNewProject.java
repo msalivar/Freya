@@ -1,13 +1,19 @@
 package com.example.cil.freya;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,7 +30,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/10/15.
  */
-public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewProject extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
@@ -32,8 +38,11 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     JSONArray edge;
     static JSONObject complete = new JSONObject();
     String ProjectFile = "ProjectFile.txt";
-    private EditText txtEditor;
+    private EditText info = null;
     int inNumb;
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mDrawerToggle;
+    private ListView mDrawerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,7 +53,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
-        txtEditor = (EditText) findViewById(R.id.projName);
+        info = (EditText) findViewById(R.id.projName);
         try{components.read(ProjectFile,this);}
         catch(FileNotFoundException e){e.printStackTrace();}
 
@@ -58,6 +67,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             Toast.makeText(this, "Unable to populate People. Sync before trying again.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+
     }
     public void onClick(View v)
     {
@@ -107,7 +117,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        EditText info = null;
 
         info = (EditText) findViewById(R.id.institutionName);
         jsonParam.put("Institution Name", info.getText().toString());

@@ -35,7 +35,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/18/15.
  */
-public class CreateNewSite extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class CreateNewSite extends MainActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Button createButton, previousButton;
     Spinner proj;

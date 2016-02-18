@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 // class to choose projects from
-public class ChooseProjects extends Activity
+public class ChooseProjects extends MainActivity
 {
 
     // when create, display projects list

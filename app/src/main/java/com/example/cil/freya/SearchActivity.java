@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class SearchActivity extends Activity
+public class SearchActivity extends MainActivity
 {
     // Declare Variables
     String[] types;

@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/19/15.
  */
-public class CreateNewSystem extends Activity implements View.OnClickListener
+public class CreateNewSystem extends MainActivity implements View.OnClickListener
 {
     Button createButton, backButton;
 

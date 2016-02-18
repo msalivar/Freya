@@ -72,6 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // enable drawer listener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        addDrawerItems();
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         ActionBar actionBar = getActionBar();

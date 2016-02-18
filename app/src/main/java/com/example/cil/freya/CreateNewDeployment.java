@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * Created by cil on 1/21/16.
  */
-public class CreateNewDeployment extends Activity implements View.OnClickListener
+public class CreateNewDeployment extends MainActivity implements View.OnClickListener
 {
     Button createButton, backButton;
     String DeploymentFile = "DepolymentFile.txt";

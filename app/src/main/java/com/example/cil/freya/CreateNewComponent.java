@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * Created by sammie on 12/7/15.
  */
-public class CreateNewComponent extends Activity {
+public class CreateNewComponent extends MainActivity {
 
     // display create new component GUI
     protected void onCreate(Bundle savedInstanceState)

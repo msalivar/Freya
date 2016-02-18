@@ -22,7 +22,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 /**
  * Created by cil on 2/5/16.
  */
-public class CreateNewDocument extends Activity implements OnItemSelectedListener
+public class CreateNewDocument extends MainActivity implements OnItemSelectedListener
 {
 //   Spinner selectedProject;
 //    Spinner selectedSite;
