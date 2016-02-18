@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="wiring_notes" type="id"/>
+    <item name="name" type="id"/>
+    <item name="newComponentButton" type="id"/>
+    <item name="backComponentButton" type="id"/>
+    <item name="landOwner" type="id"/>
+    <item name="project" type="id"/>
+    <item name="site" type="id"/>
+    <item name="manager" type="id"/>
+    <item name="deployment" type="id"/>
+    <item name="document_project" type="id"/>
+    <item name="document_site" type="id"/>
+    <item name="document_deployment" type="id"/>
+    <item name="document_component" type="id"/>
+    <item name="document_service" type="id"/>
+    <item name="document_name" type="id"/>
+    <item name="doc_notes" type="id"/>
+    <item name="path" type="id"/>
+    <item name="photoButton" type="id"/>
+</resources>
