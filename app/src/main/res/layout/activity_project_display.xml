@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.cil.freya.ProjectDisplay">
 
-<!-- sets id for chosen project to pName. Sets color and aligns-->
+    <!-- sets id for chosen project to pName. Sets color and aligns-->
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

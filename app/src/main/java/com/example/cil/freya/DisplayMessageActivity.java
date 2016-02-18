@@ -25,7 +25,7 @@ public class DisplayMessageActivity extends Activity
         {
             for(int j = 0; j < people.length; j++)
             {
-                
+
                 JSONObject obj = new JSONObject(people[j]);
                 // add parts to a JSON to message string
                 message += "Creation Date: " + obj.getString("Creation Date") + "\n";

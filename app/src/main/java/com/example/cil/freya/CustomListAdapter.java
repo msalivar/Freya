@@ -20,7 +20,7 @@ public class CustomListAdapter extends ArrayAdapter
     private ArrayList<ProjectEntry> projectList;
     private ArrayList<Boolean> mHideValues;
     Context mContext;
-    
+
     // Create custom adapter for project entries
     public CustomListAdapter(Context context, int textViewResourceId, ArrayList<ProjectEntry> resource, ArrayList<Boolean> hideValues)
     {
@@ -45,7 +45,6 @@ public class CustomListAdapter extends ArrayAdapter
             entry = new ProjectEntry();
             entry.name = (TextView) convertView.findViewById(R.id.textView1);
             entry.checked = (CheckBox) convertView.findViewById(R.id.checkBox1);
-            entry.checked.setChecked(mHideValues.get(position));
             convertView.setTag(entry);
         }
         else
@@ -59,20 +58,17 @@ public class CustomListAdapter extends ArrayAdapter
             public void onCheckedChanged(CompoundButton compoundButton, boolean b)
             {
                 if (entry.checked.isChecked())
-                { 
+                {
                     mHideValues.set(position, true);
-                    entry.value = true;
                 }
                 else
                 {
                     mHideValues.set(position, false);
-                    entry.value = false;
                 }
             }
         });
 
         ProjectEntry temp_entry = projectList.get(position);
-        //Log.d("Entry Value: ", String.valueOf(entry.checked.isChecked()));
         entry.name.setText(temp_entry.text);
         entry.checked.setChecked(temp_entry.value);
         entry.checked.setTag(temp_entry);

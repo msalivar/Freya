@@ -2,10 +2,19 @@ package com.example.cil.freya;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,19 +26,22 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.UUID;
 
 /**
  * Created by cil on 11/18/15.
  */
-public class CreateNewSite extends Activity implements View.OnClickListener
-{
+public class CreateNewSite extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Button createButton, previousButton;
-    EditText info = null;
-    String SiteFile = "SiteFile.txt";
+    Spinner proj;
+    int numb;
+    private final int SELECT_PHOTO = 1;
+    Bitmap selectedImage = null;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -40,9 +52,17 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         previousButton = (Button) findViewById(R.id.backSiteButton);
         previousButton.setOnClickListener(this);
 
-        try {
-            read();
-        } catch (FileNotFoundException e) {
+
+        proj = (Spinner) findViewById(R.id.project);
+
+        try
+        {
+            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GetInfo.projectNames);
+            spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            proj.setAdapter(spinAdapter);
+            proj.setOnItemSelectedListener(this);
+        }catch (NullPointerException e){
+            Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
@@ -55,7 +75,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener
                 try
                 { newSite();} catch (JSONException e) {e.printStackTrace();}
 
-                intent = new Intent(this, CreateNewSystem.class);
+                Intent intent = new Intent(this, CreateNewSystem.class);
                 startActivity(intent);
                 try {
                     write();
@@ -76,83 +96,73 @@ public class CreateNewSite extends Activity implements View.OnClickListener
         }
     }
 
+    @Override
+    public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
+    {
+        numb = GetInfo.projectNumber[position];
+    }
 
     public void newSite()throws JSONException{
 
         //Create JSONObject here
         JSONObject JSON = createSiteJSON();
 
-        JSONArray between = new JSONArray();
-        between.put(JSON);
-
-        JSONObject attrs = new JSONObject();
-        attrs.put("Attrs", between);
-
-
-        JSONArray site = new JSONArray();
-        site.put(attrs);
-
-        CreateNewProject.complete.put("Site", site);
-
+        CreateNewProject.complete.put("Site", JSON);
     }
 
     public JSONObject createSiteJSON() throws JSONException{
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        EditText info = (EditText) findViewById(R.id.alias_label);
-        jsonParam.put("Alias", info.getText().toString());
-        info = (EditText) findViewById(R.id.landmark);
-        jsonParam.put("GPS Landmark", info.getText().toString());
-        jsonParam.put("Land Owner", null);
-        jsonParam.put("Landmark Photo", null);
-        info = (EditText) findViewById(R.id.location);
-        jsonParam.put("Location",info.getText().toString());
+        EditText info = null;
+
+        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+
         info = (EditText) findViewById(R.id.site_name);
         jsonParam.put("Name",info.getText().toString());
+
         info = (EditText) findViewById(R.id.notes);
         jsonParam.put("Notes",info.getText().toString());
+
+        info = (EditText) findViewById(R.id.alias);
+        jsonParam.put("Alias", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.location);
+        jsonParam.put("Location",info.getText().toString());
+        info = (EditText) findViewById(R.id.name);
+        jsonParam.put("Name",info.getText().toString());
+        info = (EditText) findViewById(R.id.note);
+        jsonParam.put("Notes",info.getText().toString());
         info = (EditText) findViewById(R.id.permit);
-        jsonParam.put("Permit Holder",info.getText().toString());
-        jsonParam.put("Project",null);
-        jsonParam.put("Site",null);
-        jsonParam.put("Time Zone Abbreviation", null);
-        jsonParam.put("Time Zone Name", null);
-        jsonParam.put("Time Zone Offset", null);
-        jsonParam.put("Alias",info);
-        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+        jsonParam.put("Permit Holder", info.getText().toString());
+
+        jsonParam.put("Time Zone Name", TimeZone.getDefault().getDisplayName());
+
+        jsonParam.put("Time Zone Abbreviation", TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT));
+
+        //is this the correct format?
+        jsonParam.put("Time Zone Offset", TimeZone.getDefault().getRawOffset());
+
+        jsonParam.put("Project", numb);
+
+        info = (EditText) findViewById(R.id.landmark);
+        jsonParam.put("GPS Landmark", info.getText().toString());
+
+        //I have no idea how photos work
+        //jsonParam.put("Landmark Photo", null);
+//        if (selectedImage != null)
+//        {
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            selectedImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//            byte[] bArray = baos.toByteArray();
+//            String encoded = Base64.encodeToString(bArray, Base64.DEFAULT);
+//            jsonParam.put("Landmark Photo", encoded);
+//        }
+//        else
+//        {
+//            jsonParam.put("Landmark Photo", 0);
+//        }
+
         return jsonParam;
-    }
-
-    public void write() throws FileNotFoundException {
-        try {
-            FileOutputStream FileOut = openFileOutput(SiteFile, MODE_PRIVATE);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
-            outputWriter.write(info.getText().toString());
-            outputWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void read() throws FileNotFoundException {
-        try {
-            FileInputStream FileIn = openFileInput(SiteFile);
-            InputStreamReader InputRead= new InputStreamReader(FileIn);
-
-            char[] inputBuffer= new char[100];
-            String s="";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
-                s += ReadString;
-            }
-            InputRead.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

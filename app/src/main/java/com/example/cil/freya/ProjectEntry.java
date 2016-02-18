@@ -23,7 +23,7 @@ public class ProjectEntry
     {
         return text;
     }
-    
+
     // See if the option is checked on the screen
     public boolean getValue()
     {

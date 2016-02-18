@@ -2,27 +2,16 @@ package com.example.cil.freya;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 public class ProjectFilterActivity extends Activity implements View.OnClickListener
 {
@@ -45,13 +34,6 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
             else { MainActivity.checkValues.add(false); }
         }
         // Options can be checked on the screen
-        try
-        {
-            readProjectFilter();
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
         adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, MainActivity.checkValues);
         ListView listView = (ListView) findViewById(R.id.projectList);
         listView.setAdapter(adapter);
@@ -95,44 +77,6 @@ public class ProjectFilterActivity extends Activity implements View.OnClickListe
             OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
             outputWriter.write(input);
             outputWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readProjectFilter() throws FileNotFoundException
-    {
-        try {
-            FileInputStream FileIn = openFileInput(MainActivity.ProjectFile);
-            InputStreamReader InputRead= new InputStreamReader(FileIn);
-
-            char[] inputBuffer= new char[100];
-            String s = "";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
-                s += ReadString;
-            }
-            InputRead.close();
-            String[] array = s.split(",");
-            for(String str : array)
-            {
-                String[] contents = str.split(";");
-                for(int i = 0; i < MainActivity.projectEntries.size(); i++)
-                {
-                    if(Objects.equals(MainActivity.projectEntries.get(i).getName(), contents[0]))
-                    {
-                        // Set MainActivity.projectEntries[i].value to checked value
-                        MainActivity.projectEntries.get(i).value = Boolean.valueOf(contents[1]);
-                    }
-                }
-            }
-            adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, MainActivity.checkValues);
-            ListView listView = (ListView) findViewById(R.id.projectList);
-            listView.setAdapter(adapter);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
