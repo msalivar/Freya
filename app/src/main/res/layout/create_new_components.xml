@@ -2,12 +2,12 @@
 <!--Creates the layout for the Create New Components screen.
     Displays the labels and boxes for users input!-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:weightSum="1"
-    android:orientation="vertical"
-    android:paddingTop="15dp"
-    android:background="@color/unr_off_white">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1"
+                android:orientation="vertical"
+                android:paddingTop="15dp"
+                android:background="@color/unr_off_white">
 
     <EditText
         android:layout_width="match_parent"

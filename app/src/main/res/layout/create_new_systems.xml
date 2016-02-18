@@ -66,23 +66,23 @@
         android:layout_alignEnd="@+id/installation_location_label"
         android:layout_alignParentEnd="true"/>
 
-<!--
-    <Spinner
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:id="@+id/projName"
-        android:inputType="textCapWords"
-        android:textColor="@color/unr_blue"
-        android:paddingTop="3dip"
-        android:gravity="bottom"
-        android:background="@drawable/shapes"
-        android:layout_alignStart="@+id/installation_label"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="10dp"
-        android:dropDownSelector="@color/unr_blue"
-        android:layout_below="@+id/installation_location_label"
-        android:layout_marginLeft="15dp"/>-->
+    <!--
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/projName"
+            android:inputType="textCapWords"
+            android:textColor="@color/unr_blue"
+            android:paddingTop="3dip"
+            android:gravity="bottom"
+            android:background="@drawable/shapes"
+            android:layout_alignStart="@+id/installation_label"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="10dp"
+            android:dropDownSelector="@color/unr_blue"
+            android:layout_below="@+id/installation_location_label"
+            android:layout_marginLeft="15dp"/>-->
 
     <EditText
         android:layout_width="match_parent"
@@ -125,7 +125,7 @@
         android:layout_alignTop="@+id/power_label"/>
 
     <Button
-        android:id="@+id/photoButton"
+        android:id="@+id/button"
         android:text="Upload Photo"
         android:textColor="@color/unr_silver"
         android:textSize="15dp"

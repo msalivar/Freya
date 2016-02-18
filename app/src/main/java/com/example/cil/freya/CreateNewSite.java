@@ -35,13 +35,22 @@ import java.util.UUID;
 /**
  * Created by cil on 11/18/15.
  */
+<<<<<<< HEAD
 public class CreateNewSite extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+=======
+public class CreateNewSite extends MainActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Button createButton, previousButton;
     Spinner proj;
     int numb;
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
+<<<<<<< HEAD
+=======
+    EditText info = null;
+    String SiteFile = "SiteFile.txt";
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -53,11 +62,19 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         previousButton.setOnClickListener(this);
 
 
+<<<<<<< HEAD
         proj = (Spinner) findViewById(R.id.project);
 
         try
         {
             ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getInfo.projectNames);
+=======
+        //proj = (Spinner) findViewById(R.id.project);
+
+        try
+        {
+            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GetInfo.projectNames);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
             spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             proj.setAdapter(spinAdapter);
             proj.setOnItemSelectedListener(this);
@@ -69,7 +86,6 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
 
 
     public void onClick (View v){
-        Intent intent;
         switch (v.getId()){
             case (R.id.newSiteButton):
                 try
@@ -78,7 +94,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
                 Intent intent = new Intent(this, CreateNewSystem.class);
                 startActivity(intent);
                 try {
-                    write();
+                    components.write(info, SiteFile, this);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -88,7 +104,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
                 intent = new Intent(this, CreateNewProject.class);
                 startActivity(intent);
                 try {
-                    write();
+                    components.write(info, SiteFile, this);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -99,13 +115,27 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
+<<<<<<< HEAD
         numb = getInfo.projectNumber[position];
+=======
+        numb = GetInfo.projectNumber[position];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
     }
 
     public void newSite()throws JSONException{
 
+<<<<<<< HEAD
                 //Create JSONObject here
                 JSONObject JSON = createSiteJSON();
+=======
+        //Create JSONObject here
+        JSONObject JSON = createSiteJSON();
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
         CreateNewProject.complete.put("Site", JSON);
     }
@@ -114,7 +144,10 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
+<<<<<<< HEAD
         EditText info = null;
+=======
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 

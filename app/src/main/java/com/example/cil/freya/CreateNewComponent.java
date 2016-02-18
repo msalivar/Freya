@@ -19,9 +19,9 @@ import java.util.UUID;
 /**
  * Created by sammie on 12/7/15.
  */
-public class CreateNewComponent extends Activity {
+public class CreateNewComponent extends MainActivity {
 
-// display create new component GUI
+    // display create new component GUI
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,7 @@ public class CreateNewComponent extends Activity {
     }
 
 
+<<<<<<< HEAD
         public void newComponent() throws JSONException
         {
 
@@ -83,4 +84,57 @@ public class CreateNewComponent extends Activity {
 
             return jsonParam;
         }
+=======
+    public void newComponent() throws JSONException
+    {
+
+        //Create JSONObject here
+        JSONObject JSON = createComponentJSON();
+
+        JSONArray system = new JSONArray();
+        system.put(JSON);
+
+        CreateNewProject.complete.put("Component", system);
+    }
+
+    public JSONObject createComponentJSON() throws JSONException{
+        JSONObject jsonParam = new JSONObject();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+        String date = sdf.format(new Date());
+
+
+        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+
+        EditText info = (EditText) findViewById(R.id.projName);
+        jsonParam.put("Name", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.manufacturer);
+        jsonParam.put("Manufacturer", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.model);
+        jsonParam.put("Model",info);
+
+        info = (EditText) findViewById(R.id.serial_number);
+        jsonParam.put("Serial Number", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.supplier);
+        jsonParam.put("Supplier", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.serial_number);
+        jsonParam.put("Serial Number", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.installation);
+        jsonParam.put("installation Details", info.getText().toString());
+
+        jsonParam.put("Installation Date", date);
+
+        jsonParam.put("Modification Date", date);
+
+        jsonParam.put("Last Calibrated Date", date);
+
+        jsonParam.put("Creation Date", date);
+
+        return jsonParam;
+    }
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 }

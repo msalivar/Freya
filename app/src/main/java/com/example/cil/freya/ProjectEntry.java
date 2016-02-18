@@ -18,7 +18,7 @@ public class ProjectEntry
     {
         return this.name;
     }
-    
+
     // See if the option is checked on the screen
     public boolean getValue()
     {

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,21 +25,35 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+import java.util.List;
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
+<<<<<<< HEAD
     private final int SELECT_PHOTO = 1;
     Bitmap selectedImage = null;
+=======
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
     static JSONObject selected_project = null;
-    static JSONArray projects;
     static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
     static ArrayList<Boolean> projectHideValues = new ArrayList<>();
     static ArrayList<Boolean> checkValues = new ArrayList<>();
     static String ProjectFile = "FilterSettings.txt";
+<<<<<<< HEAD
+=======
+    ExpandableListAdapter expandable;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -53,7 +68,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     // lists
     static ArrayAdapter<String> listAdapter;
-    static ListView projectList;
     static String edgeURL = "edge/";
 
     @Override
@@ -61,6 +75,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
@@ -72,6 +87,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // enable drawer listener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+<<<<<<< HEAD
+=======
+        addDrawerItems();
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         ActionBar actionBar = getActionBar();
@@ -87,12 +106,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // go to getAllRequest
+<<<<<<< HEAD
         getInfo.getAllRequests();
 
         // load state testing, will be used to implement saving infomation into the app so syncing will not have to occur everytime the user opens the app
         if (savedInstanceState != null)
         {
             getInfo.projectNames = savedInstanceState.getStringArray(null);
+=======
+        GetInfo.getAllRequests();
+
+        // create expandable list view
+        expListView = (ExpandableListView) findViewById(R.id.expList);
+        prepareListData();
+
+        // load state testing, will be used to implement saving information into the app so syncing will not have to occur every time the user opens the app
+        if (savedInstanceState != null)
+        {
+            GetInfo.projectNames = savedInstanceState.getStringArray(null);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
             Toast.makeText(this, "load state", Toast.LENGTH_LONG).show();
         }
         // if no load state
@@ -102,8 +134,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             try
             {
                 // create listen and set listener
-                projectList = (ListView) findViewById(R.id.projectList);
-                projectList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                expListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     // what happens when the list is clicked on
                     @Override
@@ -117,10 +148,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         try
                         {
                             // for everything in the JSON
+<<<<<<< HEAD
                             for (int i = 0; i < getInfo.projects.length(); i++)
                             {
                                 // get the object 
                                 JSONObject p = (JSONObject) getInfo.projects.get(i);
+=======
+                            for (int i = 0; i < GetInfo.projects.length(); i++)
+                            {
+                                // get the object
+                                JSONObject p = (JSONObject) GetInfo.projects.get(i);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
                                 // search for name
                                 String val = p.getString("Name");
                                 // if it's the name the user is looking for, assign it to selected name
@@ -131,11 +169,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                 }
 
                             }
-                            //test 
+                            //test
                             Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
                             // start projectDisplay intent
-                            Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
-                            startActivity(intent);
+                            // Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
+                            // startActivity(intent);
                         } catch (JSONException e)
                         {
                             // if list empty, print to logcat
@@ -144,8 +182,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 });
                 // redisplay the list and set listen
+<<<<<<< HEAD
                 listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, getInfo.projectNames);
                 projectList.setAdapter(listAdapter);
+=======
+                prepareListData();
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
             }
             catch (NullPointerException e)
             {
@@ -156,7 +198,48 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-// when creating a drawer
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        listDataHeader.add("Projects");
+        listDataHeader.add("Main Module 2");
+        listDataHeader.add("Main Module 3");
+        listDataHeader.add("Main Module 4");
+
+        // Adding child data
+        List<String> projects = new ArrayList<String>();
+        for (String str : GetInfo.projectNames)
+        {
+            projects.add(str);
+        }
+
+        List<String> two = new ArrayList<String>();
+        two.add("1");
+        two.add("2");
+        two.add("3");
+
+        List<String> three = new ArrayList<String>();
+        three.add("1");
+        three.add("2");
+        three.add("3");
+
+        List<String> four = new ArrayList<String>();
+        four.add("1");
+        four.add("2");
+        four.add("3");
+
+        listDataChild.put(listDataHeader.get(0), projects); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), two);
+        listDataChild.put(listDataHeader.get(2), three);
+        listDataChild.put(listDataHeader.get(3), four);
+
+        expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        expListView.setAdapter(expandable);
+    }
+
+    // when creating a drawer
     private void addDrawerItems()
     {
         // list of options
@@ -166,7 +249,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerList.setAdapter(mAdapter);
     }
 
-// once GUI  is created
+    // once GUI  is created
     @Override
     protected void onPostCreate(Bundle savedInstanceState)
     {
@@ -175,6 +258,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerToggle.syncState();
     }
 
+<<<<<<< HEAD
 // generated, does nothing
     @Override
     public void onClick(View v) {
@@ -182,6 +266,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
 // drawer lsitener
+=======
+    // drawer listener
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
         // got to onItemClick
@@ -189,7 +276,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         public void onItemClick(AdapterView parent, View view, int position, long id) { selectItem(position); }
     }
 
-// if an item is selected from the drawer
+    // if an item is selected from the drawer
     private void selectItem(int position)
     {
         /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -197,6 +284,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
 
 
+<<<<<<< HEAD
     switch (position) {
         case 0:
             // start filtering intent
@@ -233,6 +321,44 @@ public class MainActivity extends Activity implements View.OnClickListener {
             intent = new Intent(MainActivity.this, CreateNewComponent.class);
             startActivity(intent);
             break;
+=======
+        switch (position) {
+            case 0:
+                // start filtering intent
+                Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
+                startActivity(intent);
+                break;
+
+            case 1:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewProject.class);
+                startActivity(intent);
+                break;
+
+            case 2:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewSite.class);
+                startActivity(intent);
+                break;
+
+            case 3:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewSystem.class);
+                startActivity(intent);
+                break;
+
+            case 4:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewDeployment.class);
+                startActivity(intent);
+                break;
+
+            case 5:
+                // start component intent
+                intent = new Intent(MainActivity.this, CreateNewComponent.class);
+                startActivity(intent);
+                break;
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
 
        /* else if (position == 3)
@@ -243,12 +369,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
         }*/
+<<<<<<< HEAD
         default:
             // close the drawer
             mDrawerList.setItemChecked(position, true);
             //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
             mDrawerLayout.closeDrawer(mDrawerList);
     }
+=======
+            default:
+                // close the drawer
+                mDrawerList.setItemChecked(position, true);
+                //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
+                mDrawerLayout.closeDrawer(mDrawerList);
+        }
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
     }
 
@@ -274,7 +409,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }*/
     }
 
-// automatically generated
+    // automatically generated
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -301,9 +436,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
+<<<<<<< HEAD
             getInfo.getAllRequests();
             listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, getInfo.projectNames);
             projectList.setAdapter(listAdapter);
+=======
+            GetInfo.getAllRequests();
+            prepareListData();
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
             return true;
         }
         // if upload is chosen
@@ -352,6 +492,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        }
 //        return jsonParam;
 //    }
+<<<<<<< HEAD
 
 
 }
@@ -419,3 +560,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
 
+=======
+}
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb

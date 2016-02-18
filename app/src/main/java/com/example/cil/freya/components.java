@@ -14,7 +14,11 @@ import java.io.OutputStreamWriter;
  */
 public class components
 {
+<<<<<<< HEAD
         static public void write(EditText info,String fileName, Context ctx) throws FileNotFoundException {
+=======
+    static public void write(EditText info,String fileName, Context ctx) throws FileNotFoundException {
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
         try {
             FileOutputStream FileOut = ctx.openFileOutput(fileName, ctx.MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(FileOut);

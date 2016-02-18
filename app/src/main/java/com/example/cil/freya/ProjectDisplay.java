@@ -7,7 +7,7 @@ import android.widget.EditText;
 import org.json.JSONException;
 
 // class to display projects list
-public class ProjectDisplay extends Activity
+public class ProjectDisplay extends MainActivity
 {
     EditText pName;
 

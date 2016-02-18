@@ -3,10 +3,10 @@
     Displays labels and boxes for the user to enter data.
     Aligns everything according to the screen of the device!-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:weightSum="1"
-              android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1"
+                android:orientation="vertical"
                 android:paddingTop="15dp"
                 android:background="@color/unr_off_white">
 

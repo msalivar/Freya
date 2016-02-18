@@ -20,11 +20,15 @@ import java.util.UUID;
 /**
  * Created by cil on 1/21/16.
  */
-public class CreateNewDeployment extends Activity implements View.OnClickListener
+public class CreateNewDeployment extends MainActivity implements View.OnClickListener
 {
     Button createButton, backButton;
     String DeploymentFile = "DepolymentFile.txt";
+<<<<<<< HEAD
     EditText info;
+=======
+    EditText info = null;
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,7 +82,10 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
+<<<<<<< HEAD
         EditText info = null;
+=======
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
@@ -87,6 +94,7 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
 
         info = (EditText) findViewById(R.id.purpose);
         jsonParam.put("Purpose", info);
+<<<<<<< HEAD
 
         info = (EditText) findViewById(R.id.centeroffset);
         jsonParam.put("Center Offset", info);
@@ -99,6 +107,20 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
 
         info = (EditText) findViewById(R.id.parentLogger);
 
+=======
+
+        info = (EditText) findViewById(R.id.centeroffset);
+        jsonParam.put("Center Offset", info);
+
+        info = (EditText) findViewById(R.id.location);
+        jsonParam.put("Location", info);
+
+        info = (EditText) findViewById(R.id.height);
+        jsonParam.put("Height From Ground", info);
+
+        info = (EditText) findViewById(R.id.parentLogger);
+
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
         jsonParam.put("Parent Logger", info);
 
         jsonParam.put("Established Date", date);

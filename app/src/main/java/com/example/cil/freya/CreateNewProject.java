@@ -1,13 +1,19 @@
 package com.example.cil.freya;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,7 +30,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/10/15.
  */
-public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewProject extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
@@ -32,8 +38,16 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     JSONArray edge;
     static JSONObject complete = new JSONObject();
     String ProjectFile = "ProjectFile.txt";
+<<<<<<< HEAD
     private EditText txtEditor;
     int inNumb;
+=======
+    private EditText info = null;
+    int inNumb;
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mDrawerToggle;
+    private ListView mDrawerList;
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,13 +58,21 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
+<<<<<<< HEAD
         txtEditor = (EditText) findViewById(R.id.projName);
+=======
+        info = (EditText) findViewById(R.id.projName);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
         try{components.read(ProjectFile,this);}
         catch(FileNotFoundException e){e.printStackTrace();}
 
         try
         {
+<<<<<<< HEAD
             ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getInfo.investigators);
+=======
+            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GetInfo.investigators);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
             spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             prininvest.setAdapter(spinAdapter);
             prininvest.setOnItemSelectedListener(this);
@@ -58,6 +80,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             Toast.makeText(this, "Unable to populate People. Sync before trying again.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+
     }
     public void onClick(View v)
     {
@@ -79,7 +102,11 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
         if (position > 0)
+<<<<<<< HEAD
             inNumb = getInfo.investNumber[position-1];
+=======
+            inNumb = GetInfo.investNumber[position-1];
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
     }
 
     @Override
@@ -107,7 +134,10 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
+<<<<<<< HEAD
         EditText info = null;
+=======
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 
         info = (EditText) findViewById(R.id.institutionName);
         jsonParam.put("Institution Name", info.getText().toString());

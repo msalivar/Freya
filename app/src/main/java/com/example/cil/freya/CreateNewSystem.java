@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/19/15.
  */
-public class CreateNewSystem extends Activity implements View.OnClickListener
+public class CreateNewSystem extends MainActivity implements View.OnClickListener
 {
     Button createButton, backButton;
 
@@ -49,7 +49,11 @@ public class CreateNewSystem extends Activity implements View.OnClickListener
                 try
                 {newSystem();} catch (JSONException e) {e.printStackTrace();}
                 intent = new Intent(this, CreateNewDeployment.class);
+<<<<<<< HEAD
                  startActivity(intent);
+=======
+                startActivity(intent);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
 //                try {
 //                    write();
 //                } catch (FileNotFoundException e) {
@@ -93,7 +97,11 @@ public class CreateNewSystem extends Activity implements View.OnClickListener
         info = (EditText) findViewById(R.id.location);
         jsonParam.put("Installation Location",info);
 
+<<<<<<< HEAD
         info = (EditText) findViewById(R.id.name);
+=======
+        //info = (EditText) findViewById(R.id.name);
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
         jsonParam.put("Name", info.getText().toString());
 
         jsonParam.put("Create Date", date);

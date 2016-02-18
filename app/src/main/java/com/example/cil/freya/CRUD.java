@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.example.cil.freya;
 
 import android.os.AsyncTask;
@@ -219,3 +220,226 @@ public class CRUD {
         }
     }
 }
+=======
+package com.example.cil.freya;
+
+import android.os.AsyncTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+/**
+ * Created by Hannah on 1/29/2016.
+ */
+public class CRUD {
+
+    public static class readMessage extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection urlConnection = null;
+            try {
+                // connect to URL. "GET" code
+                URL url = new URL(params[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Content-length", "0");
+                urlConnection.setUseCaches(false);
+                urlConnection.setAllowUserInteraction(false);
+                urlConnection.connect();
+                int code = urlConnection.getResponseCode();
+                // if it was succesfully created
+                if (code == 200)
+                {
+                    // read in from URL
+                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null)
+                    {
+                        sb.append(line).append("\n");
+                    }
+                    br.close();
+                    return sb.toString();
+                }
+                return "error";
+            } catch (Exception e) {
+                // prints error to logcat
+                e.printStackTrace();
+                return "error";
+            } finally {
+                // if the connection was succesfull, disconnect
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+        }
+    }
+
+    // write message to people URL. Same issue. Used as template
+    public static class writeMessage extends AsyncTask<JSONObject, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            // connect to URL
+            String sb = "";
+            URL url;
+            HttpURLConnection urlConnection = null;
+            String test = "http://sensor.nevada.edu/GS/Services/edge/";
+            try {
+                url = new URL(test);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setDoOutput(true);
+                urlConnection.setUseCaches(false);
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+
+
+                // get output writer
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write( params [0].toString());
+                out.close();
+
+                // if connection is good
+                int HttpResult = urlConnection.getResponseCode();
+                // output
+                if(HttpResult == HttpURLConnection.HTTP_OK){
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            urlConnection.getInputStream(),"utf-8"));
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb += (line + "\n");
+                    }
+                    br.close();
+
+                    System.out.println("" + sb);
+
+                }else{
+                    //  prints wrror code from server
+                    System.out.println(urlConnection.getResponseMessage());
+                }
+            } catch (IOException e) {
+                // print to stack trace
+                e.printStackTrace();
+
+            } finally{
+                // if connection was successful  disconnect
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+    }
+
+    //  delete test. SAme problem as above
+    public static class deleteMessage extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... params) {
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            // URL is attached to theunique ID to identify which part of the JSON needs to be deleted
+            String test = "http://sensor.nevada.edu/GS/Services/people/" + params [0] + "/";
+            try {
+                // connect to URL
+                url = new URL(test);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("DELETE");
+                urlConnection.setUseCaches(false);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+                int HttpResult = urlConnection.getResponseCode();
+
+            } catch (MalformedURLException e) {
+                // print to log cat
+                e.printStackTrace();
+
+            } catch (IOException e) {
+                // print to log cat
+                e.printStackTrace();
+
+            } finally{
+                // if connection was successful, disconnect
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+    }
+
+    // update test. Same as aboce
+    public static class updateMessage extends AsyncTask<String, JSONObject, Void>
+    {
+        @Override
+        protected Void doInBackground(String... params) {
+            String sb = "";
+            URL url = null;
+            int one = 1;
+            HttpURLConnection urlConnection = null;
+            // update via Unqiue ID
+            String test = "http://sensor.nevada.edu/GS/Services/people/" + params [0] + "/";
+            try {
+                // connect to URL
+                url = new URL(test);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("PUT");
+                urlConnection.setDoOutput(true);
+                urlConnection.setUseCaches(false);
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+
+
+                // output to URL
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write(params[1].toString());
+                out.close();
+
+                int HttpResult = urlConnection.getResponseCode();
+                // if connection is good
+                if(HttpResult == HttpURLConnection.HTTP_OK){
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            urlConnection.getInputStream(),"utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb += (line + "\n");
+                    }
+                    br.close();
+
+                    System.out.println("" + sb);
+
+                }else{
+                    System.out.println(urlConnection.getResponseMessage());
+                }
+            } catch (MalformedURLException e) {
+                // output to log cat
+                e.printStackTrace();
+
+            } catch (IOException e) {
+                // output to log cat
+                e.printStackTrace();
+
+            }  finally{
+                // if connection is successful, disconnect
+                if(urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+    }
+}
+>>>>>>> 4c1e3c4c41db9d96e966f57846c6bcf25b194adb
