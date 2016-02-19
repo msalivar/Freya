@@ -18,4 +18,11 @@
     <item name="doc_notes" type="id"/>
     <item name="path" type="id"/>
     <item name="photoButton" type="id"/>
+    <item name="operations" type="id"/>
+    <item name="SEnotes" type="id"/>
+    <item name="SEname" type="id"/>
+    <item name="SEprojects" type="id"/>
+    <item name="creator" type="id"/>
+    <item name="SEsystem" type="id"/>
+    <item name="SEcomponents" type="id"/>
 </resources>

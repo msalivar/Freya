@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     static String siteURL = "sites/";
     static String systemURL = "systems/";
     static String deploymentURL = "deployments/";
-    static String componentURL = "component/";
+    static String componentURL = "components/";
     static String documentURL = "documents/";
     static String serviceURL = "service_entries/";
 
@@ -206,7 +206,7 @@ public class MainActivity extends Activity {
     private void addDrawerItems()
     {
         // list of options
-        String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" };
+        String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" , "Create New Service Entry"};
         //  display and set listener
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -280,6 +280,11 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 break;
 
+            case 7:
+                // start document intent
+                intent = new Intent(MainActivity.this, CreateNewServiceEntry.class);
+                startActivity(intent);
+                break;
 
        /* else if (position == 3)
         {

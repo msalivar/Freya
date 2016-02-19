@@ -242,14 +242,14 @@ public class getInfo
 
     static public void getComponent()
     {
-        String deployment_str = null;
+        String component_str = null;
         // try to read from URL
         try {
             // set up from the URL
-            deployment_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.componentURL).get();
+            component_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.componentURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray components = convertObjecttoArray(deployment_str, "Components");
+        JSONArray components = convertObjecttoArray(component_str, "Components");
         // create people list
         componentNames(components);
     }
