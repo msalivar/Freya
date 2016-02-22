@@ -37,7 +37,7 @@ public class CreateNewServiceEntry extends Activity implements Spinner.OnItemSel
         Spinner component = (Spinner) findViewById(R.id.SEcomponent);
 
         Modules.spinner(this, getInfo.projectNames, project);
-        Modules.spinner(this, getInfo.people, creator);
+        Modules.spinner(this, getInfo.peopleNames, creator);
         Modules.spinner(this, getInfo.systemNames, system);
         Modules.spinner(this, getInfo.componentNames, component);
 

@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,14 +34,9 @@ public class MainActivity extends Activity {
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
     static JSONObject selected_project = null;
-    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
-    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
-    static ArrayList<Boolean> checkValues = new ArrayList<>();
     static String ProjectFile = "FilterSettings.txt";
     ExpandableListAdapter expandable;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -52,10 +48,14 @@ public class MainActivity extends Activity {
     static String componentURL = "components/";
     static String documentURL = "documents/";
     static String serviceURL = "service_entries/";
+    static String edgeURL = "edge/";
 
     // lists
-    static ArrayAdapter<String> listAdapter;
-    static String edgeURL = "edge/";
+    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
+    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
+    static ArrayList<Boolean> checkValues = new ArrayList<>();
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,36 +167,28 @@ public class MainActivity extends Activity {
 
         // Adding child data
         listDataHeader.add("Projects");
-        listDataHeader.add("Main Module 2");
-        listDataHeader.add("Main Module 3");
-        listDataHeader.add("Main Module 4");
+        listDataHeader.add("Systems");
+        listDataHeader.add("Components");
+        listDataHeader.add("Service Entries");
 
         // Adding child data
         List<String> projects = new ArrayList<String>();
-        for (String str : getInfo.projectNames)
-        {
-            projects.add(str);
-        }
-
-        List<String> two = new ArrayList<String>();
-        two.add("1");
-        two.add("2");
-        two.add("3");
-
-        List<String> three = new ArrayList<String>();
-        three.add("1");
-        three.add("2");
-        three.add("3");
-
-        List<String> four = new ArrayList<String>();
-        four.add("1");
-        four.add("2");
-        four.add("3");
+        Collections.addAll(projects, getInfo.projectNames);
+        projects.remove(0);
+        List<String> systems = new ArrayList<String>();
+        Collections.addAll(systems, getInfo.systemNames);
+        systems.remove(0);
+        List<String> components = new ArrayList<String>();
+        Collections.addAll(components, getInfo.componentNames);
+        components.remove(0);
+        List<String> serviceEntries = new ArrayList<String>();
+        Collections.addAll(serviceEntries, getInfo.serviceNames);
+        serviceEntries.remove(0);
 
         listDataChild.put(listDataHeader.get(0), projects); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), two);
-        listDataChild.put(listDataHeader.get(2), three);
-        listDataChild.put(listDataHeader.get(3), four);
+        listDataChild.put(listDataHeader.get(1), systems);
+        listDataChild.put(listDataHeader.get(2), components);
+        listDataChild.put(listDataHeader.get(3), serviceEntries);
 
         expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(expandable);

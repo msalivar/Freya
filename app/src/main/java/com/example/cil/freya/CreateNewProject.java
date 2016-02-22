@@ -47,7 +47,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             Modules.read(ProjectFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
 
-        Modules.spinner (this, getInfo.people, prininvest);
+        Modules.spinner (this, getInfo.peopleNames, prininvest);
 
     }
     public void onClick(View v)

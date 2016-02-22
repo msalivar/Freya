@@ -50,7 +50,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         Spinner manager = (Spinner) findViewById(R.id.manager);
         Spinner site = (Spinner) findViewById(R.id.site);
 
-        Modules.spinner (this, getInfo.people, manager);
+        Modules.spinner (this, getInfo.peopleNames, manager);
         Modules.spinner (this, getInfo.siteNames, site);
 
         try{

@@ -12,28 +12,32 @@ import java.util.concurrent.ExecutionException;
 public class getInfo
 {
     // put JSONs in here
-    static String[] projectNames;
-    static int  projectNumber[];
     //  static String projectUID [];
     // 0 value is "choose investigator"
     static JSONArray projects;
-    static String people[];
+    static String projectNames[];
+    static int  projectNumber[];
+    static JSONArray people;
+    static String peopleNames[];
     static int peopleNumber[];
-    static String siteNames [];
+    static JSONArray sites;
+    static String siteNames[];
     static int siteNumber[];
-    static String systemNames [];
+    static JSONArray systems;
+    static String systemNames[];
     static int systemNumber[];
-    static String deploymentNames [];
+    static JSONArray deployments;
+    static String deploymentNames[];
     static int deploymentNumber[];
-    static String componentNames [];
+    static JSONArray components;
+    static String componentNames[];
     static int componentNumber[];
-    static String documentNames [];
+    static JSONArray documents;
+    static String documentNames[];
     static int documentNumber[];
-    static String serviceNames [];
+    static JSONArray services;
+    static String serviceNames[];
     static int serviceNumber[];
-
-
-
 
     static public void getAllRequests (){
         getPeople();
@@ -46,7 +50,7 @@ public class getInfo
         getService();
     }
 
-    static public JSONArray convertObjecttoArray(String convert, String Type)
+    static public JSONArray convertObjectToArray(String convert, String Type)
     {
         JSONArray array = null;
         try
@@ -69,7 +73,7 @@ public class getInfo
             people_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.peopleURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray people = convertObjecttoArray(people_str, "People");
+        people = convertObjectToArray(people_str, "People");
         // create people list
         PeopleNames(people);
     }
@@ -81,13 +85,13 @@ public class getInfo
             // if there are entries, keeps app from crashing
             if (people != null) {
                 // gather investigator list
-                getInfo.people = new String[people.length() + 1];
-                getInfo.people[0] = "Choose Person";
+                peopleNames = new String[people.length() + 1];
+                peopleNames[0] = "Choose Person";
                 peopleNumber = new int[people.length()];
                 // combine first and last name. put in investigator array
                 for (int i = 0; i < people.length(); i++) {
                     JSONObject p = (JSONObject) people.get(i);
-                    getInfo.people[i + 1] = p.getString("First Name") + " " + p.getString("Last Name");
+                    peopleNames[i + 1] = p.getString("First Name") + " " + p.getString("Last Name");
                     peopleNumber[i] = p.getInt("Person");
                 }
             }
@@ -102,8 +106,7 @@ public class getInfo
             // set up from the URL
             projects_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.projectsURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
-        projects = convertObjecttoArray(projects_str,"Projects");
-
+        projects = convertObjectToArray(projects_str,"Projects");
         // create projects list
         ProjectNames(projects);
     }
@@ -143,9 +146,9 @@ public class getInfo
             site_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.siteURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray site = convertObjecttoArray(site_str, "Sites");
+        sites = convertObjectToArray(site_str, "Sites");
         // create people list
-        siteNames(site);
+        siteNames(sites);
     }
 
     static void siteNames (JSONArray sites){
@@ -179,9 +182,9 @@ public class getInfo
             system_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.systemURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray system = convertObjecttoArray(system_str, "Systems");
+        systems = convertObjectToArray(system_str, "Systems");
         // create people list
-        systemNames(system);
+        systemNames(systems);
     }
 
     static void systemNames (JSONArray system){
@@ -214,9 +217,9 @@ public class getInfo
             deployment_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.deploymentURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray deployment = convertObjecttoArray(deployment_str, "Deployments");
+        deployments = convertObjectToArray(deployment_str, "Deployments");
         // create people list
-        deploymentNames(deployment);
+        deploymentNames(deployments);
     }
 
     static void deploymentNames (JSONArray deployment){
@@ -249,7 +252,7 @@ public class getInfo
             component_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.componentURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray components = convertObjecttoArray(component_str, "Components");
+        components = convertObjectToArray(component_str, "Components");
         // create people list
         componentNames(components);
     }
@@ -284,7 +287,8 @@ public class getInfo
             document_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.documentURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray documents = convertObjecttoArray(document_str, "Components");
+        // TODO: Why does this become null?
+        documents = convertObjectToArray(document_str, "Components");
         // create people list
         documentNames(documents);
     }
@@ -319,9 +323,9 @@ public class getInfo
             service_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.serviceURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray service = convertObjecttoArray(service_str, "ServiceEntries");
+        services = convertObjectToArray(service_str, "ServiceEntries");
         // create people list
-        serviceNames(service);
+        serviceNames(services);
     }
 
     static void serviceNames (JSONArray service){
