@@ -261,7 +261,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/notes"
+            android:id="@+id/doc_notes"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Enter Notes"
@@ -280,7 +280,7 @@
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:background="@drawable/button"
-            android:layout_below="@+id/notes"
+            android:layout_below="@+id/doc_notes"
             android:layout_marginRight="20dp"
             android:layout_marginTop="40dp"
             android:layout_alignParentRight="true"/>
@@ -294,8 +294,8 @@
             android:layout_height="50dp"
             android:background="@drawable/button"
             android:layout_marginRight="20dp"
-            android:layout_alignBottom="@+id/newSiteButton"
-            android:layout_toStartOf="@+id/site_name"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/doc_notes"/>
 
     </RelativeLayout>
 </ScrollView>

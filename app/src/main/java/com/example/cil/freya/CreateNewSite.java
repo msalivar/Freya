@@ -89,7 +89,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         //Create JSONObject here
         JSONObject JSON = createSiteJSON();
 
-        CreateNewProject.complete.put("Site", JSON);
+        getInfo.complete.put("Sites", JSON);
     }
 
     public JSONObject createSiteJSON() throws JSONException{
@@ -101,7 +101,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         info = (EditText) findViewById(R.id.site_name);
         jsonParam.put("Name",info.getText().toString());
 
-        info = (EditText) findViewById(R.id.notes);
+        info = (EditText) findViewById(R.id.doc_notes);
         jsonParam.put("Notes",info.getText().toString());
 
         info = (EditText) findViewById(R.id.alias);

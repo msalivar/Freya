@@ -32,7 +32,7 @@ public class getInfo
     static String serviceNames [];
     static int serviceNumber[];
 
-
+    static JSONObject complete = new JSONObject();
 
 
     static public void getAllRequests (){

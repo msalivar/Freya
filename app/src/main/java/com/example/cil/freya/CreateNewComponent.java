@@ -34,10 +34,10 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_components);
-       /* createButton = (Button) findViewById(R.id.newComponentButton);
+        createButton = (Button) findViewById(R.id.newComponentButton);
         createButton.setOnClickListener(this);
         backButton = (Button) findViewById(R.id.backComponentButton);
-        backButton.setOnClickListener(this);*/
+        backButton.setOnClickListener(this);
 
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
         Modules.spinner (this, getInfo.deploymentNames, deployment);
@@ -74,7 +74,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         JSONArray system = new JSONArray();
         system.put(JSON);
 
-        CreateNewProject.complete.put("Component", system);
+        getInfo.complete.put("Component", system);
     }
 
     public void onClick(View v)
@@ -85,7 +85,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
             case (R.id.newComponentButton):
                 try
                 {newComponent();} catch (JSONException e) {e.printStackTrace();}
-                intent = new Intent(this, CreateNewComponent.class);
+                intent = new Intent(this, CreateNewDocument.class);
                 startActivity(intent);
                 try{
                     Modules.write(info, ComponentFile, this);}
@@ -93,7 +93,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
                 break;
 
             case (R.id.backComponentButton):
-                intent = new Intent(this, CreateNewSystem.class);
+                intent = new Intent(this, CreateNewDeployment.class);
                 startActivity(intent);
                 try{
                     Modules.write(info, ComponentFile, this);}
@@ -110,7 +110,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        info = (EditText) findViewById(R.id.name);
+        info = (EditText) findViewById(R.id.compname);
         jsonParam.put("Name", info.getText().toString());
 
         info = (EditText) findViewById(R.id.manufacturer);
@@ -123,7 +123,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Serial Number", info.getText().toString());
 
         // may need to be a spinner
-        info = (EditText) findViewById(R.id.serial_number);
+        info = (EditText) findViewById(R.id.vendor);
         jsonParam.put("Vendor", info.getText().toString());
 
         info = (EditText) findViewById(R.id.supplier);

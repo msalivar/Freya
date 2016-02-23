@@ -229,7 +229,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/notes"
+            android:id="@+id/doc_notes"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Enter Notes"
@@ -238,6 +238,32 @@
             android:layout_marginTop="23dp"
             android:layout_below="@+id/component_label"
             android:layout_alignStart="@+id/SEname_label"/>
+
+        <Button
+            android:id="@+id/newServiceButton"
+
+            android:text="Post"
+            android:textColor="@color/unr_silver"
+            android:textSize="25dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_below="@+id/doc_notes"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_alignParentRight="true"/>
+
+        <Button
+            android:id="@+id/backServiceButton"
+            android:text="Back"
+            android:textColor="@color/unr_silver"
+            android:textSize="25dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/component_label"/>
 
     </RelativeLayout>
 </ScrollView>

@@ -71,7 +71,7 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
         JSONArray system = new JSONArray();
         system.put(JSON);
 
-        CreateNewProject.complete.put("Deployment", system);
+        getInfo.complete.put("Deployment", system);
     }
 
     public JSONObject createDeploymentJSON() throws JSONException{
@@ -82,7 +82,7 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        info = (EditText) findViewById(R.id.manager);
+        info = (EditText) findViewById(R.id.compname);
         jsonParam.put("Name", info);
 
         info = (EditText) findViewById(R.id.purpose);

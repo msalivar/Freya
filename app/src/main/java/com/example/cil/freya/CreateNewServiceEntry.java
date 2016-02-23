@@ -1,9 +1,11 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -19,11 +21,12 @@ import java.util.UUID;
 /**
  * Created by cil on 2/18/16.
  */
-public class CreateNewServiceEntry extends Activity implements Spinner.OnItemSelectedListener
+public class CreateNewServiceEntry extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     EditText info;
     int projNumb, creatorNumb, systemNumb, componentNumb;
-    String ServiceEntryFile = "ServiceEntryFile.txt";;
+    String ServiceEntryFile = "ServiceEntryFile.txt";
+    Button createButton, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +43,11 @@ public class CreateNewServiceEntry extends Activity implements Spinner.OnItemSel
         Modules.spinner(this, getInfo.people, creator);
         Modules.spinner(this, getInfo.systemNames, system);
         Modules.spinner(this, getInfo.componentNames, component);
+
+        createButton = (Button) findViewById(R.id.newServiceButton);
+        createButton.setOnClickListener(this);
+        backButton = (Button) findViewById(R.id.backServiceButton);
+        backButton.setOnClickListener(this);
 
         try {Modules.read(ServiceEntryFile, this);}
         catch (FileNotFoundException e) {e.printStackTrace();}
@@ -72,6 +80,7 @@ public class CreateNewServiceEntry extends Activity implements Spinner.OnItemSel
         }
     }
 
+
     @Override
     public void onNothingSelected(AdapterView<?> parent)
     {
@@ -83,7 +92,31 @@ public class CreateNewServiceEntry extends Activity implements Spinner.OnItemSel
         //Create JSONObject here
         JSONObject JSON = createServiceEntryJSON();
 
-        CreateNewProject.complete.put("Service Entry", JSON);
+        getInfo.complete.put("Service Entry", JSON);
+    }
+
+    @Override
+    public void onClick(View v)
+    {        Intent intent;
+        switch (v.getId())
+        {
+            case (R.id.newServiceButton):
+                new CRUD.writeMessage().execute(getInfo.complete);
+              /*  try
+                {newServiceEntry();} catch (JSONException e) {e.printStackTrace();}
+                intent = new Intent(this, CreateNew.class);
+                startActivity(intent);
+                try{
+                    Modules.write(info, ServiceEntryFile, this);}
+                catch(FileNotFoundException e){e.printStackTrace();}*/
+                break;
+
+            case (R.id.backServiceButton):
+                intent = new Intent(this, CreateNewDocument.class);
+                startActivity(intent);
+                break;
+        }
+
     }
 
     public JSONObject createServiceEntryJSON() throws JSONException
@@ -122,5 +155,6 @@ public class CreateNewServiceEntry extends Activity implements Spinner.OnItemSel
 
         return jsonParam;
     }
+
 
 }

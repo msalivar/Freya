@@ -125,7 +125,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
     {
         switch (view.getId())
         {
-            case (R.id.manager):
+            case (R.id.compname):
                 if (position > 0)
                     managerNumb = getInfo.peopleNumber[position - 1];
                 break;
@@ -151,7 +151,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         JSONArray system = new JSONArray();
         system.put(JSON);
 
-        CreateNewProject.complete.put("System", system);
+        getInfo.complete.put("Systems", system);
     }
 
     public JSONObject createSystemJSON() throws JSONException{
@@ -166,7 +166,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         info = (EditText) findViewById(R.id.location);
         jsonParam.put("Installation Location",info);
 
-        info = (EditText) findViewById(R.id.name);
+        info = (EditText) findViewById(R.id.sysname);
         jsonParam.put("Name", info.getText().toString());
 
         info = (EditText) findViewById(R.id.power);

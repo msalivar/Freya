@@ -83,7 +83,7 @@
         <EditText
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/notes"
+            android:id="@+id/doc_notes"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
             android:hint="Enter Notes"
@@ -307,6 +307,32 @@
             android:layout_marginLeft="15dp"
             android:layout_alignTop="@+id/service_label"
             android:layout_alignEnd="@+id/name_label"/>
+
+        <Button
+            android:id="@+id/newDocumentButton"
+            android:text="Next"
+            android:textColor="@color/unr_silver"
+            android:textSize="25dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/service_label"
+            android:layout_below="@+id/service_label"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/backDocumentButton"
+            android:text="Back"
+            android:textColor="@color/unr_silver"
+            android:textSize="25dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_marginRight="20dp"
+            android:layout_alignTop="@+id/newDocumentButton"
+            android:layout_alignStart="@+id/service_label"/>
 
         </RelativeLayout>
     </ScrollView>
