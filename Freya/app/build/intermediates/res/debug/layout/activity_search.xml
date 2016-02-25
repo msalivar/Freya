@@ -47,7 +47,7 @@
         android:layout_alignTop="@+id/editText"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/photoButton"
         android:text="Search"
         android:textColor="@color/unr_silver"
         android:textSize="30sp"
@@ -88,4 +88,4 @@
         android:layout_alignTop="@+id/editText3"
         android:layout_alignStart="@+id/editText2"/>
 </RelativeLayout>
-<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya-Hannah/app/src/main/res/layout/activity_search.xml -->
+<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya/app/src/main/res/layout/activity_search.xml -->

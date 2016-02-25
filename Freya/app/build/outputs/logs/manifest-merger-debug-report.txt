@@ -39,8 +39,11 @@ ADDED from AndroidManifest.xml:10:5
 		ADDED from AndroidManifest.xml:10:22
 application
 ADDED from AndroidManifest.xml:13:5
-MERGED from com.android.support:appcompat-v7:23.1.1:22:5
-MERGED from com.android.support:support-v4:23.1.1:22:5
+MERGED from com.android.support:appcompat-v7:23.1.0:22:5
+MERGED from com.android.support:support-v4:23.1.0:22:5
+MERGED from com.google.android.gms:play-services-appindexing:8.1.0:19:5
+MERGED from com.google.android.gms:play-services-basement:8.1.0:20:5
+MERGED from com.android.support:support-v4:23.1.0:22:5
 	android:label
 		ADDED from AndroidManifest.xml:16:9
 	android:allowBackup
@@ -109,10 +112,28 @@ activity#com.example.cil.freya.CreateNewSystem
 ADDED from AndroidManifest.xml:56:9
 	android:name
 		ADDED from AndroidManifest.xml:57:13
+activity#com.example.cil.freya.CreateNewDocument
+ADDED from AndroidManifest.xml:59:9
+	android:name
+		ADDED from AndroidManifest.xml:60:13
+activity#com.example.cil.freya.CreateNewServiceEntry
+ADDED from AndroidManifest.xml:62:9
+	android:name
+		ADDED from AndroidManifest.xml:63:13
+meta-data#com.google.android.gms.version
+ADDED from AndroidManifest.xml:67:9
+MERGED from com.google.android.gms:play-services-basement:8.1.0:21:9
+	android:name
+		ADDED from AndroidManifest.xml:68:13
+	android:value
+		ADDED from AndroidManifest.xml:69:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from com.android.support:appcompat-v7:23.1.1:20:5
-MERGED from com.android.support:support-v4:23.1.1:20:5
+MERGED from com.android.support:appcompat-v7:23.1.0:20:5
+MERGED from com.android.support:support-v4:23.1.0:20:5
+MERGED from com.google.android.gms:play-services-appindexing:8.1.0:18:5
+MERGED from com.google.android.gms:play-services-basement:8.1.0:18:5
+MERGED from com.android.support:support-v4:23.1.0:20:5
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0

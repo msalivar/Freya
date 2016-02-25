@@ -11,4 +11,4 @@
           android:minHeight="?android:attr/listPreferredItemHeightSmall"
           android:textColor="@color/unr_blue"
           android:background="@color/unr_off_white"/>
-<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya-Hannah/app/src/main/res/layout/menu_layout.xml -->
+<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya/app/src/main/res/layout/menu_layout.xml -->
