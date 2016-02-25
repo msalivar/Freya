@@ -56,7 +56,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        switch (view.getId())
+        switch (parent.getId())
         {
             case (R.id.SEprojects):
                 if (position > 0)
@@ -73,7 +73,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
                     systemNumb = getInfo.systemNumber[position - 1];
                 break;
 
-            case (R.id.SEcomponents):
+            case (R.id.SEcomponent):
                 if (position > 0)
                     componentNumb = getInfo.componentNumber[position - 1];
                 break;
@@ -101,6 +101,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         switch (v.getId())
         {
             case (R.id.newServiceButton):
+                try {newServiceEntry();} catch (JSONException e) {e.printStackTrace();}
                 new CRUD.writeMessage().execute(getInfo.complete);
               /*  try
                 {newServiceEntry();} catch (JSONException e) {e.printStackTrace();}
@@ -135,7 +136,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         info = (EditText) findViewById(R.id.SEnotes);
         jsonParam.put("Notes", info.getText().toString());
 
-        info = (EditText) findViewById(R.id.operations);
+        info = (EditText) findViewById(R.id.operation);
         jsonParam.put("Operations", info.getText().toString());
 
         jsonParam.put("Project", projNumb);

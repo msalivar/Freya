@@ -123,9 +123,9 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
-        switch (view.getId())
+        switch (parent.getId())
         {
-            case (R.id.compname):
+            case (R.id.manager):
                 if (position > 0)
                     managerNumb = getInfo.peopleNumber[position - 1];
                 break;

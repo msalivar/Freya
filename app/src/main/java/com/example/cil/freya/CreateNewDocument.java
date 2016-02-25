@@ -97,7 +97,6 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
             info = (EditText) findViewById(R.id.document_name);
             jsonParam.put("Name",info.getText().toString());
 
-
             info = (EditText) findViewById(R.id.doc_notes);
             jsonParam.put("Notes",info.getText().toString());
 
@@ -122,7 +121,7 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-       switch (view.getId()){
+       switch (parent.getId()){
            case(R.id.document_project):
                if (position > 0)
                    proNumb = getInfo.projectNumber[position - 1];

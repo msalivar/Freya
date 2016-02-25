@@ -284,7 +284,7 @@ public class getInfo
             document_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.documentURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         // try to fill JSON
-        JSONArray documents = convertObjecttoArray(document_str, "Components");
+        JSONArray documents = convertObjecttoArray(document_str, "Documents");
         // create people list
         documentNames(documents);
     }

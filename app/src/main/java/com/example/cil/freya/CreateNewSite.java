@@ -129,7 +129,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         jsonParam.put("GPS Landmark", info.getText().toString());
 
         //I have no idea how photos work
-        //jsonParam.put("Landmark Photo", null);
+        jsonParam.put("Landmark Photo", null);
 //        if (selectedImage != null)
 //        {
 //            ByteArrayOutputStream baos = new ByteArrayOutputStream();

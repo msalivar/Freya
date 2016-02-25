@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,13 +49,8 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
-        switch (view.getId())
-        {
-            case (R.id.deployment):
-                if (position > 0)
-                    deploymentNumb = getInfo.deploymentNumber[position - 1];
-                break;
-        }
+        if (position > 0)
+            deploymentNumb = getInfo.deploymentNumber[position - 1];
     }
 
     @Override
@@ -71,10 +65,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         //Create JSONObject here
         JSONObject JSON = createComponentJSON();
 
-        JSONArray system = new JSONArray();
-        system.put(JSON);
-
-        getInfo.complete.put("Component", system);
+        getInfo.complete.put("Components", JSON);
     }
 
     public void onClick(View v)
@@ -117,7 +108,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Manufacturer", info.getText().toString());
 
         info = (EditText) findViewById(R.id.model);
-        jsonParam.put("Model",info);
+        jsonParam.put("Model",info.getText().toString());
 
         info = (EditText) findViewById(R.id.serial_number);
         jsonParam.put("Serial Number", info.getText().toString());
@@ -147,6 +138,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Creation Date", date);
 
         // needs photo
+        jsonParam.put("Photo",null);
 
         return jsonParam;
     }

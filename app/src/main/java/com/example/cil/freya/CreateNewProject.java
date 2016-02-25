@@ -108,7 +108,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         info = (EditText) findViewById(R.id.compname);
         jsonParam.put("Name", info.getText().toString());
 
-
         jsonParam.put("Principal Investigator",inNumb);
 
         info = (EditText) findViewById(R.id.funding);
@@ -117,7 +116,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         jsonParam.put("Modification Date", date);
 
         jsonParam.put("Creation Date", date);
-
 
         jsonParam.put("Started Date", date);
 

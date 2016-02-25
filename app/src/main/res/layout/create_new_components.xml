@@ -10,7 +10,7 @@
             android:orientation="vertical"
             android:paddingTop="15dp"
             android:background="@color/unr_off_white"
-            tools:context="com.example.cil.freya.CreateNewSite" android:fillViewport="false"
+            tools:context="com.example.cil.freya.CreateNewComponent" android:fillViewport="false"
             android:paddingBottom="15dp">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

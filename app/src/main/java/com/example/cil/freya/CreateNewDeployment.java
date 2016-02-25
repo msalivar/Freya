@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,10 +67,7 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
         //Create JSONObject here
         JSONObject JSON = createDeploymentJSON();
 
-        JSONArray system = new JSONArray();
-        system.put(JSON);
-
-        getInfo.complete.put("Deployment", system);
+        getInfo.complete.put("Deployment", JSON);
     }
 
     public JSONObject createDeploymentJSON() throws JSONException{
@@ -82,23 +78,23 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        info = (EditText) findViewById(R.id.compname);
-        jsonParam.put("Name", info);
+        info = (EditText) findViewById(R.id.deployname);
+        jsonParam.put("Name", info.getText().toString());
 
         info = (EditText) findViewById(R.id.purpose);
-        jsonParam.put("Purpose", info);
+        jsonParam.put("Purpose", info.getText().toString());
 
         info = (EditText) findViewById(R.id.centeroffset);
-        jsonParam.put("Center Offset", info);
+        jsonParam.put("Center Offset", info.getText().toString());
 
         info = (EditText) findViewById(R.id.location);
-        jsonParam.put("Location", info);
+        jsonParam.put("Location", info.getText().toString());
 
         info = (EditText) findViewById(R.id.height);
-        jsonParam.put("Height From Ground", info);
+        jsonParam.put("Height From Ground", info.getText().toString());
 
         info = (EditText) findViewById(R.id.parentLogger);
-        jsonParam.put("Parent Logger", info);
+        jsonParam.put("Parent Logger", info.getText().toString());
 
         jsonParam.put("Established Date", date);
 
