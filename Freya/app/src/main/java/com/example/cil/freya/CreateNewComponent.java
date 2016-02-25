@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,10 +33,10 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_components);
-       /* createButton = (Button) findViewById(R.id.newComponentButton);
+        createButton = (Button) findViewById(R.id.newComponentButton);
         createButton.setOnClickListener(this);
         backButton = (Button) findViewById(R.id.backComponentButton);
-        backButton.setOnClickListener(this);*/
+        backButton.setOnClickListener(this);
 
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
         Modules.spinner (this, getInfo.deploymentNames, deployment);
@@ -50,13 +49,8 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
-        switch (view.getId())
-        {
-            case (R.id.deployment):
-                if (position > 0)
-                    deploymentNumb = getInfo.deploymentNumber[position - 1];
-                break;
-        }
+        if (position > 0)
+            deploymentNumb = getInfo.deploymentNumber[position - 1];
     }
 
     @Override
@@ -71,10 +65,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         //Create JSONObject here
         JSONObject JSON = createComponentJSON();
 
-        JSONArray system = new JSONArray();
-        system.put(JSON);
-
-        CreateNewProject.complete.put("Component", system);
+        getInfo.complete.put("Components", JSON);
     }
 
     public void onClick(View v)
@@ -85,7 +76,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
             case (R.id.newComponentButton):
                 try
                 {newComponent();} catch (JSONException e) {e.printStackTrace();}
-                intent = new Intent(this, CreateNewComponent.class);
+                intent = new Intent(this, CreateNewDocument.class);
                 startActivity(intent);
                 try{
                     Modules.write(info, ComponentFile, this);}
@@ -93,7 +84,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
                 break;
 
             case (R.id.backComponentButton):
-                intent = new Intent(this, CreateNewSystem.class);
+                intent = new Intent(this, CreateNewDeployment.class);
                 startActivity(intent);
                 try{
                     Modules.write(info, ComponentFile, this);}
@@ -110,20 +101,20 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        info = (EditText) findViewById(R.id.name);
+        info = (EditText) findViewById(R.id.compname);
         jsonParam.put("Name", info.getText().toString());
 
         info = (EditText) findViewById(R.id.manufacturer);
         jsonParam.put("Manufacturer", info.getText().toString());
 
         info = (EditText) findViewById(R.id.model);
-        jsonParam.put("Model",info);
+        jsonParam.put("Model",info.getText().toString());
 
         info = (EditText) findViewById(R.id.serial_number);
         jsonParam.put("Serial Number", info.getText().toString());
 
         // may need to be a spinner
-        info = (EditText) findViewById(R.id.serial_number);
+        info = (EditText) findViewById(R.id.vendor);
         jsonParam.put("Vendor", info.getText().toString());
 
         info = (EditText) findViewById(R.id.supplier);
@@ -147,6 +138,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Creation Date", date);
 
         // needs photo
+        jsonParam.put("Photo",null);
 
         return jsonParam;
     }

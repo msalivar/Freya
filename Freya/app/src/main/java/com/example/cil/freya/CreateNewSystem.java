@@ -123,7 +123,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
     {
-        switch (view.getId())
+        switch (parent.getId())
         {
             case (R.id.manager):
                 if (position > 0)
@@ -151,7 +151,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         JSONArray system = new JSONArray();
         system.put(JSON);
 
-        CreateNewProject.complete.put("System", system);
+        getInfo.complete.put("Systems", system);
     }
 
     public JSONObject createSystemJSON() throws JSONException{
@@ -166,7 +166,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         info = (EditText) findViewById(R.id.location);
         jsonParam.put("Installation Location",info);
 
-        info = (EditText) findViewById(R.id.name);
+        info = (EditText) findViewById(R.id.sysname);
         jsonParam.put("Name", info.getText().toString());
 
         info = (EditText) findViewById(R.id.power);

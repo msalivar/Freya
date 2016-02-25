@@ -27,7 +27,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
     Button createButton;
-    static JSONObject complete = new JSONObject();
     String ProjectFile = "ProjectFile.txt";
     private EditText txtEditor;
     int inNumb;
@@ -42,7 +41,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         createButton.setOnClickListener(this);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
-        txtEditor = (EditText) findViewById(R.id.manager);
+        txtEditor = (EditText) findViewById(R.id.compname);
         try{
             Modules.read(ProjectFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
@@ -89,7 +88,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         JSONArray project = new JSONArray();
         project.put(JSON);
 
-        complete.put("Project", project);
+        getInfo.complete.put("Projects", project);
     }
 
     public JSONObject createProjectJSON() throws JSONException
@@ -106,9 +105,8 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        info = (EditText) findViewById(R.id.manager);
+        info = (EditText) findViewById(R.id.compname);
         jsonParam.put("Name", info.getText().toString());
-
 
         jsonParam.put("Principal Investigator",inNumb);
 
@@ -118,7 +116,6 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         jsonParam.put("Modification Date", date);
 
         jsonParam.put("Creation Date", date);
-
 
         jsonParam.put("Started Date", date);
 

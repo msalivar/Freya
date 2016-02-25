@@ -2,7 +2,6 @@ package com.example.cil.freya;
 
 import android.os.AsyncTask;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -60,9 +59,10 @@ public class CRUD {
         }
     }
 
-    // write message to people URL. Same issue. Used as template
+    // write message to edge URL. Same issue. Used as template
     public static class writeMessage extends AsyncTask<JSONObject, Void, Void>
     {
+
         @Override
         protected Void doInBackground(JSONObject... params) {
             // connect to URL
@@ -85,7 +85,7 @@ public class CRUD {
 
                 // get output writer
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
-                out.write( params [0].toString());
+                out.write(params [0].toString());
                 out.close();
 
                 // if connection is good

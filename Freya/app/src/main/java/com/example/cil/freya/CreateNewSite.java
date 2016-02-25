@@ -23,7 +23,6 @@ import java.util.UUID;
  * Created by cil on 11/18/15.
  */
 public class CreateNewSite extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Button createButton, previousButton;
     Spinner proj;
     int numb;
@@ -90,7 +89,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         //Create JSONObject here
         JSONObject JSON = createSiteJSON();
 
-        CreateNewProject.complete.put("Site", JSON);
+        getInfo.complete.put("Sites", JSON);
     }
 
     public JSONObject createSiteJSON() throws JSONException{
@@ -102,7 +101,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         info = (EditText) findViewById(R.id.site_name);
         jsonParam.put("Name",info.getText().toString());
 
-        info = (EditText) findViewById(R.id.notes);
+        info = (EditText) findViewById(R.id.doc_notes);
         jsonParam.put("Notes",info.getText().toString());
 
         info = (EditText) findViewById(R.id.alias);
@@ -130,7 +129,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         jsonParam.put("GPS Landmark", info.getText().toString());
 
         //I have no idea how photos work
-        //jsonParam.put("Landmark Photo", null);
+        jsonParam.put("Landmark Photo", null);
 //        if (selectedImage != null)
 //        {
 //            ByteArrayOutputStream baos = new ByteArrayOutputStream();

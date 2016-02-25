@@ -1,15 +1,17 @@
 package com.example.cil.freya;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -21,9 +23,12 @@ import java.util.UUID;
 /**
  * Created by cil on 2/5/16.
  */
-public class CreateNewDocument extends MainActivity implements OnItemSelectedListener
+public class CreateNewDocument extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
              int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
+             Button backButton,createButton;
+             String DocumentFile = "DocumentFile.txt";
+             EditText info;
 
         @Override
         protected void onCreate (Bundle savedInstanceState)
@@ -42,14 +47,43 @@ public class CreateNewDocument extends MainActivity implements OnItemSelectedLis
             Modules.spinner(this, getInfo.deploymentNames, selectedDeployment);
             Modules.spinner(this, getInfo.componentNames, selectedComponent);
             Modules.spinner(this, getInfo.serviceNames, selectedServiceEntry);
+
+            createButton = (Button) findViewById(R.id.newDocumentButton);
+            createButton.setOnClickListener(this);
+            backButton = (Button) findViewById(R.id.backDocumentButton);
+            backButton.setOnClickListener(this);
         }
+
+    @Override
+    public void onClick(View v)
+    {
+        Intent intent;
+        switch (v.getId())
+        {
+            case (R.id.newDocumentButton):
+                try
+                {newDocument();} catch (JSONException e) {e.printStackTrace();}
+                intent = new Intent(this, CreateNewServiceEntry.class);
+                startActivity(intent);
+                try{
+                    Modules.write(info, DocumentFile, this);}
+                catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+
+            case (R.id.backDocumentButton):
+                intent = new Intent(this, CreateNewComponent.class);
+                startActivity(intent);
+                break;
+        }
+
+    }
 
         public void newDocument()throws JSONException
         {
             //Create JSONObject here
             JSONObject JSON = createDocumentJSON();
 
-            CreateNewProject.complete.put("Document", JSON);
+            getInfo.complete.put("Document", JSON);
         }
 
         public JSONObject createDocumentJSON() throws JSONException{
@@ -87,7 +121,7 @@ public class CreateNewDocument extends MainActivity implements OnItemSelectedLis
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-       switch (view.getId()){
+       switch (parent.getId()){
            case(R.id.document_project):
                if (position > 0)
                    proNumb = getInfo.projectNumber[position - 1];
@@ -120,4 +154,6 @@ public class CreateNewDocument extends MainActivity implements OnItemSelectedLis
     {
     // automatically generated
     }
+
+
 }
