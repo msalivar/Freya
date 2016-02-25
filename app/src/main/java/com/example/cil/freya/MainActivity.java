@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,30 +14,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
-    private ListView mDrawerList;
+    ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
-    private final int SELECT_PHOTO = 1;
-    Bitmap selectedImage = null;
     static JSONObject selected_project = null;
-    static JSONArray projects;
-    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
-    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
-    static ArrayList<Boolean> checkValues = new ArrayList<>();
     static String ProjectFile = "FilterSettings.txt";
+    ExpandableListAdapter expandable;
+    ExpandableListView expListView;
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -46,21 +44,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
     static String projectsURL = "projects/";
     static String siteURL = "sites/";
     static String systemURL = "systems/";
-    static String deplomentURL = "deployments/";
-    static String componentURL = "component/";
+    static String deploymentURL = "deployments/";
+    static String componentURL = "components/";
     static String documentURL = "documents/";
     static String serviceURL = "service_entries/";
+    static String edgeURL = "edge/";
 
     // lists
-    static ArrayAdapter<String> listAdapter;
-    static ListView projectList;
-    static String edgeURL = "edge/";
+    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
+    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
+    static ArrayList<Boolean> checkValues = new ArrayList<>();
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView)findViewById(R.id.navList);
@@ -90,7 +92,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // go to getAllRequest
         getInfo.getAllRequests();
 
-        // load state testing, will be used to implement saving infomation into the app so syncing will not have to occur everytime the user opens the app
+        // create expandable list view
+        expListView = (ExpandableListView) findViewById(R.id.expList);
+        prepareListData();
+
+        // load state testing, will be used to implement saving information into the app so syncing will not have to occur every time the user opens the app
         if (savedInstanceState != null)
         {
             getInfo.projectNames = savedInstanceState.getStringArray(null);
@@ -103,8 +109,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             try
             {
                 // create listen and set listener
-                projectList = (ListView) findViewById(R.id.projectList);
-                projectList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                expListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     // what happens when the list is clicked on
                     @Override
@@ -120,7 +125,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             // for everything in the JSON
                             for (int i = 0; i < getInfo.projects.length(); i++)
                             {
-                                // get the object 
+                                // get the object
                                 JSONObject p = (JSONObject) getInfo.projects.get(i);
                                 // search for name
                                 String val = p.getString("Name");
@@ -132,11 +137,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                 }
 
                             }
-                            //test 
+                            //test
                             Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
                             // start projectDisplay intent
-                            Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
-                            startActivity(intent);
+                            // Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
+                            // startActivity(intent);
                         } catch (JSONException e)
                         {
                             // if list empty, print to logcat
@@ -145,8 +150,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 });
                 // redisplay the list and set listen
-                listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, getInfo.projectNames);
-                projectList.setAdapter(listAdapter);
+                prepareListData();
             }
             catch (NullPointerException e)
             {
@@ -157,17 +161,50 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-// when creating a drawer
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        listDataHeader.add("Projects");
+        listDataHeader.add("Systems");
+        listDataHeader.add("Components");
+        listDataHeader.add("Service Entries");
+
+        // Adding child data
+        List<String> projects = new ArrayList<String>();
+        Collections.addAll(projects, getInfo.projectNames);
+        projects.remove(0);
+        List<String> systems = new ArrayList<String>();
+        Collections.addAll(systems, getInfo.systemNames);
+        systems.remove(0);
+        List<String> components = new ArrayList<String>();
+        Collections.addAll(components, getInfo.componentNames);
+        components.remove(0);
+        List<String> serviceEntries = new ArrayList<String>();
+        Collections.addAll(serviceEntries, getInfo.serviceNames);
+        serviceEntries.remove(0);
+
+        listDataChild.put(listDataHeader.get(0), projects); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), systems);
+        listDataChild.put(listDataHeader.get(2), components);
+        listDataChild.put(listDataHeader.get(3), serviceEntries);
+
+        expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        expListView.setAdapter(expandable);
+    }
+
+    // when creating a drawer
     public void addDrawerItems()
     {
         // list of options
-        String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component" };
+        String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" , "Create New Service Entry"};
         //  display and set listener
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
 
-// once GUI  is created
+    // once GUI  is created
     @Override
     protected void onPostCreate(Bundle savedInstanceState)
     {
@@ -176,65 +213,70 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mDrawerToggle.syncState();
     }
 
-// generated, does nothing
-    @Override
-    public void onClick(View v) {
-
-    }
-
-// drawer lsitener
-    private class DrawerItemClickListener implements ListView.OnItemClickListener
+    // drawer listener
+    public class DrawerItemClickListener implements ListView.OnItemClickListener
     {
         // got to onItemClick
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) { selectItem(position); }
     }
 
-// if an item is selected from the drawer
-    private void selectItem(int position)
+    // if an item is selected from the drawer
+    public void selectItem(int position)
     {
         /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image*//*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
 
 
-    switch (position) {
-        case 0:
-            // start filtering intent
-            Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
-            startActivity(intent);
-            break;
+        switch (position) {
+            case 0:
+                // start filtering intent
+                Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
+                startActivity(intent);
+                break;
 
-        case 1:
-            // start NewSite intent
-            intent = new Intent(MainActivity.this, CreateNewProject.class);
-            startActivity(intent);
-            break;
+            case 1:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewProject.class);
+                startActivity(intent);
+                break;
 
-        case 2:
-            // start NewSite intent
-            intent = new Intent(MainActivity.this, CreateNewSite.class);
-            startActivity(intent);
-            break;
+            case 2:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewSite.class);
+                startActivity(intent);
+                break;
 
-        case 3:
-            // start NewSite intent
-            intent = new Intent(MainActivity.this, CreateNewSystem.class);
-            startActivity(intent);
-            break;
+            case 3:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewSystem.class);
+                startActivity(intent);
+                break;
 
-        case 4:
-            // start NewSite intent
-            intent = new Intent(MainActivity.this, CreateNewDeployment.class);
-            startActivity(intent);
-            break;
+            case 4:
+                // start NewSite intent
+                intent = new Intent(MainActivity.this, CreateNewDeployment.class);
+                startActivity(intent);
+                break;
 
-        case 5:
-            // start component intent
-            intent = new Intent(MainActivity.this, CreateNewComponent.class);
-            startActivity(intent);
-            break;
+            case 5:
+                // start component intent
+                intent = new Intent(MainActivity.this, CreateNewComponent.class);
+                startActivity(intent);
+                break;
 
+            case 6:
+                // start document intent
+                intent = new Intent(MainActivity.this, CreateNewDocument.class);
+                startActivity(intent);
+                break;
+
+            case 7:
+                // start document intent
+                intent = new Intent(MainActivity.this, CreateNewServiceEntry.class);
+                startActivity(intent);
+                break;
 
        /* else if (position == 3)
         {
@@ -244,12 +286,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
         }*/
-        default:
-            // close the drawer
-            mDrawerList.setItemChecked(position, true);
-            //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
-            mDrawerLayout.closeDrawer(mDrawerList);
-    }
+            default:
+                // close the drawer
+                mDrawerList.setItemChecked(position, true);
+                //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
+                mDrawerLayout.closeDrawer(mDrawerList);
+        }
 
     }
 
@@ -275,7 +317,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }*/
     }
 
-// automatically generated
+    // automatically generated
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -303,8 +345,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
             getInfo.getAllRequests();
-            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, getInfo.projectNames);
-            projectList.setAdapter(listAdapter);
+            prepareListData();
             return true;
         }
         // if upload is chosen
@@ -353,70 +394,4 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        }
 //        return jsonParam;
 //    }
-
-
 }
-
-
-
-
-
-
-
-
-
-//    public void readProjectFilter() throws FileNotFoundException
-//    {
-//        try {
-//            FileInputStream FileIn = openFileInput(ProjectFile);
-//            InputStreamReader InputRead= new InputStreamReader(FileIn);
-//
-//            char[] inputBuffer= new char[100];
-//            String s = "";
-//            int charRead;
-//
-//            while ((charRead=InputRead.read(inputBuffer))>0) {
-//                // char to string conversion
-//                String ReadString = String.copyValueOf(inputBuffer,0,charRead);
-//                s += ReadString;
-//            }
-//            InputRead.close();
-//            Boolean[] newValues = new Boolean[projectEntries.size()];
-//            Arrays.fill(newValues, true);
-//            String[] array = s.split(",");
-//            for(String str : array)
-//            {
-//                String[] contents = str.split(";");
-//                for(int i = 0; i < projectEntries.size(); i++)
-//                {
-//                    if(Objects.equals(projectEntries.get(i).getName(), contents[0]))
-//                    {
-//                        newValues[i] = Boolean.valueOf(contents[1]);
-//                    }
-//                }
-//            }
-//            checkValues.clear();
-//            Collections.addAll(checkValues, newValues);
-//            List<String> checked = new LinkedList<>();
-//            for (int i = 0; i < projectEntries.size(); i++)
-//            {
-//                if (checkValues.get(i))
-//                {
-//                    checked.add(projectEntries.get(i).getName());
-//                }
-//            }
-//            listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
-//            projectList.setAdapter(listAdapter);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//       }
-//}
-
-
-
-
-
-
-

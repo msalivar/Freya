@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -19,68 +22,132 @@ import java.util.UUID;
 /**
  * Created by sammie on 12/7/15.
  */
-public class CreateNewComponent extends Activity {
+public class CreateNewComponent extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+    Button createButton, backButton;
+    String ComponentFile = "ComponentFile.txt";
+    EditText info;
+    int deploymentNumb;
 
-// display create new component GUI
+    // display create new component GUI
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_components);
+       /* createButton = (Button) findViewById(R.id.newComponentButton);
+        createButton.setOnClickListener(this);
+        backButton = (Button) findViewById(R.id.backComponentButton);
+        backButton.setOnClickListener(this);*/
+
+        Spinner deployment = (Spinner) findViewById(R.id.deployment);
+        Modules.spinner (this, getInfo.deploymentNames, deployment);
+
+        try{
+            Modules.read(ComponentFile, this);}
+        catch(FileNotFoundException e){e.printStackTrace();}
     }
 
-
-        public void newComponent() throws JSONException
+    @Override
+    public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
+    {
+        switch (view.getId())
         {
-
-            //Create JSONObject here
-            JSONObject JSON = createComponentJSON();
-
-            JSONArray system = new JSONArray();
-            system.put(JSON);
-
-            CreateNewProject.complete.put("Component", system);
+            case (R.id.deployment):
+                if (position > 0)
+                    deploymentNumb = getInfo.deploymentNumber[position - 1];
+                break;
         }
+    }
 
-        public JSONObject createComponentJSON() throws JSONException{
-            JSONObject jsonParam = new JSONObject();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
-            String date = sdf.format(new Date());
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+        // automatically generated
+    }
 
+    public void newComponent() throws JSONException
+    {
 
-            jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+        //Create JSONObject here
+        JSONObject JSON = createComponentJSON();
 
-            EditText info = (EditText) findViewById(R.id.name);
-            jsonParam.put("Name", info.getText().toString());
+        JSONArray system = new JSONArray();
+        system.put(JSON);
 
-            info = (EditText) findViewById(R.id.manufacturer);
-            jsonParam.put("Manufacturer", info.getText().toString());
+        CreateNewProject.complete.put("Component", system);
+    }
 
-            info = (EditText) findViewById(R.id.model);
-            jsonParam.put("Model",info);
+    public void onClick(View v)
+    {
+        Intent intent;
+        switch (v.getId())
+        {
+            case (R.id.newComponentButton):
+                try
+                {newComponent();} catch (JSONException e) {e.printStackTrace();}
+                intent = new Intent(this, CreateNewComponent.class);
+                startActivity(intent);
+                try{
+                    Modules.write(info, ComponentFile, this);}
+                catch(FileNotFoundException e){e.printStackTrace();}
+                break;
 
-            info = (EditText) findViewById(R.id.serial_number);
-            jsonParam.put("Serial Number", info.getText().toString());
-
-            info = (EditText) findViewById(R.id.supplier);
-            jsonParam.put("Supplier", info.getText().toString());
-
-            info = (EditText) findViewById(R.id.serial_number);
-            jsonParam.put("Serial Number", info.getText().toString());
-
-            info = (EditText) findViewById(R.id.installation);
-            jsonParam.put("installation Details", info.getText().toString());
-
-            info = (EditText) findViewById(R.id.wiring_notes);
-            jsonParam.put("Wiring Notes", info.getText().toString());
-
-            jsonParam.put("Installation Date", date);
-
-            jsonParam.put("Modification Date", date);
-
-            jsonParam.put("Last Calibrated Date", date);
-
-            jsonParam.put("Creation Date", date);
-
-            return jsonParam;
+            case (R.id.backComponentButton):
+                intent = new Intent(this, CreateNewSystem.class);
+                startActivity(intent);
+                try{
+                    Modules.write(info, ComponentFile, this);}
+                catch(FileNotFoundException e){e.printStackTrace();}
+                break;
         }
+    }
+
+    public JSONObject createComponentJSON() throws JSONException{
+        JSONObject jsonParam = new JSONObject();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+        String date = sdf.format(new Date());
+
+
+        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+
+        info = (EditText) findViewById(R.id.name);
+        jsonParam.put("Name", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.manufacturer);
+        jsonParam.put("Manufacturer", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.model);
+        jsonParam.put("Model",info);
+
+        info = (EditText) findViewById(R.id.serial_number);
+        jsonParam.put("Serial Number", info.getText().toString());
+
+        // may need to be a spinner
+        info = (EditText) findViewById(R.id.serial_number);
+        jsonParam.put("Vendor", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.supplier);
+        jsonParam.put("Supplier", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.installation);
+        jsonParam.put("installation Details", info.getText().toString());
+
+        info = (EditText) findViewById(R.id.wiring_notes);
+        jsonParam.put("Wiring Notes", info.getText().toString());
+
+        // needs spinner
+        jsonParam.put("Deployment", deploymentNumb);
+
+        jsonParam.put("Installation Date", date);
+
+        jsonParam.put("Modification Date", date);
+
+        jsonParam.put("Last Calibrated Date", date);
+
+        jsonParam.put("Creation Date", date);
+
+        // needs photo
+
+        return jsonParam;
+    }
 }

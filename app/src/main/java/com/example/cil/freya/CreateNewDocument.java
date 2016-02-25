@@ -1,13 +1,11 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,19 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
-import android.widget.AdapterView.OnItemSelectedListener;
+
+;
 
 
 /**
  * Created by cil on 2/5/16.
  */
-/*public class CreateNewDocument extends Activity implements OnItemSelectedListener
+public class CreateNewDocument extends MainActivity implements OnItemSelectedListener
 {
-   Spinner selectedProject;
-    Spinner selectedSite;
-    Spinner selectedDeployment;
-    Spinner selectedComponent;
-    Spinner selectedServiceEntry;
+             int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
 
         @Override
         protected void onCreate (Bundle savedInstanceState)
@@ -36,70 +31,21 @@ import android.widget.AdapterView.OnItemSelectedListener;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.create_new_document);
 
-            selectedProject = (Spinner) findViewById(R.id.document_project);
-            selectedSite = (Spinner) findViewById(R.id.document_site);
-            selectedDeployment = (Spinner) findViewById(R.id.document_deployment);
-            selectedComponent = (Spinner) findViewById(R.id.document_component);
-            selectedServiceEntry = (Spinner) findViewById(R.id.document_service);
+            Spinner selectedProject = (Spinner) findViewById(R.id.document_project);
+            Spinner selectedSite = (Spinner) findViewById(R.id.document_site);
+            Spinner selectedDeployment = (Spinner) findViewById(R.id.document_deployment);
+            Spinner selectedComponent = (Spinner) findViewById(R.id.document_component);
+            Spinner selectedServiceEntry = (Spinner) findViewById(R.id.document_service);
 
-            try
-            {
-                ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.projectNames);
-                spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                selectedProject.setAdapter(spinAdapter);
-                selectedProject.setOnItemSelectedListener(this);
-            }catch (NullPointerException e){
-                Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-            try
-            {
-                ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.siteNames);
-                spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                selectedSite.setAdapter(spinAdapter);
-                selectedSite.setOnItemSelectedListener(this);
-            }catch (NullPointerException e){
-                Toast.makeText(this, "Unable to populate Sites. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-            try
-            {
-                ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.deploymentNames);
-                spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                selectedDeployment.setAdapter(spinAdapter);
-                selectedDeployment.setOnItemSelectedListener(this);
-            }catch (NullPointerException e){
-                Toast.makeText(this, "Unable to populate Deployment. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-            try
-            {
-                ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.componentNames);
-                spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                selectedComponent.setAdapter(spinAdapter);
-                selectedComponent.setOnItemSelectedListener(this);
-            }catch (NullPointerException e){
-                Toast.makeText(this, "Unable to populate Component. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-            try
-            {
-                ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.serviceNames);
-                spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                selectedServiceEntry.setAdapter(spinAdapter);
-                selectedServiceEntry.setOnItemSelectedListener(this);
-            }catch (NullPointerException e){
-                Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
+            Modules.spinner(this, getInfo.projectNames, selectedProject);
+            Modules.spinner(this, getInfo.siteNames, selectedSite);
+            Modules.spinner(this, getInfo.deploymentNames, selectedDeployment);
+            Modules.spinner(this, getInfo.componentNames, selectedComponent);
+            Modules.spinner(this, getInfo.serviceNames, selectedServiceEntry);
         }
 
-        public void newDocument()throws JSONException{
+        public void newDocument()throws JSONException
+        {
             //Create JSONObject here
             JSONObject JSON = createDocumentJSON();
 
@@ -121,13 +67,19 @@ import android.widget.AdapterView.OnItemSelectedListener;
             jsonParam.put("Notes",info.getText().toString());
 
             info = (EditText) findViewById(R.id.path);
-            jsonParam.put("Alias", info.getText().toString());
+            jsonParam.put("Path", info.getText().toString());
 
             jsonParam.put("Modification Date", date);
 
-            jsonParam.put("Creation Date", date);
+            jsonParam.put("Project", proNumb);
 
-            //not finished
+            jsonParam.put("Site", siteNumb);
+
+            jsonParam.put("Deployment", deployNumb);
+
+            jsonParam.put("Component", componentNumb);
+
+            jsonParam.put("Service Entry", serviceNumb);
 
             return jsonParam;
         }
@@ -135,13 +87,37 @@ import android.widget.AdapterView.OnItemSelectedListener;
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        // still need to fill out, get switch for multiple spinners?
+       switch (view.getId()){
+           case(R.id.document_project):
+               if (position > 0)
+                   proNumb = getInfo.projectNumber[position - 1];
+               break;
 
+           case(R.id.document_site):
+               if (position > 0)
+                   siteNumb = getInfo.siteNumber[position - 1];
+               break;
+
+           case (R.id.document_deployment):
+               if (position > 0)
+                   deployNumb = getInfo.deploymentNumber[position - 1];
+               break;
+
+           case (R.id.document_component):
+               if (position > 0)
+                   componentNumb = getInfo.componentNumber[position - 1];
+               break;
+
+           case (R.id.document_service):
+               if (position > 0)
+                   serviceNumb = getInfo.serviceNumber[position - 1];
+               break;
+       }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent)
     {
-
+    // automatically generated
     }
-}*/
+}

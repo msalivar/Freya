@@ -1,6 +1,5 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,11 +19,11 @@ import java.util.UUID;
 /**
  * Created by cil on 1/21/16.
  */
-public class CreateNewDeployment extends Activity implements View.OnClickListener
+public class CreateNewDeployment extends MainActivity implements View.OnClickListener
 {
     Button createButton, backButton;
-    String DeploymentFile = "DepolymentFile.txt";
-    EditText info;
+    String DeploymentFile = "DeploymentFile.txt";
+    EditText info = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +35,8 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         backButton = (Button) findViewById(R.id.backDeploymentButton);
         backButton.setOnClickListener(this);
 
-        try{components.read(DeploymentFile,this);}
+        try{
+            Modules.read(DeploymentFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
     }
 
@@ -50,7 +50,8 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
                 {newDeployment();} catch (JSONException e) {e.printStackTrace();}
                 intent = new Intent(this, CreateNewComponent.class);
                 startActivity(intent);
-                try{components.write(info,DeploymentFile,this);}
+                try{
+                    Modules.write(info, DeploymentFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
                 break;
 
@@ -78,11 +79,10 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
-        EditText info = null;
 
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
-        info = (EditText) findViewById(R.id.projName);
+        info = (EditText) findViewById(R.id.manager);
         jsonParam.put("Name", info);
 
         info = (EditText) findViewById(R.id.purpose);
@@ -98,7 +98,6 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         jsonParam.put("Height From Ground", info);
 
         info = (EditText) findViewById(R.id.parentLogger);
-
         jsonParam.put("Parent Logger", info);
 
         jsonParam.put("Established Date", date);
