@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,7 +66,10 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         //Create JSONObject here
         JSONObject JSON = createComponentJSON();
 
-        getInfo.complete.put("Components", JSON);
+        JSONArray component = new JSONArray();
+        component.put(JSON);
+
+        getInfo.complete.put("Components", component);
     }
 
     public void onClick(View v)
@@ -121,7 +125,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Supplier", info.getText().toString());
 
         info = (EditText) findViewById(R.id.installation);
-        jsonParam.put("installation Details", info.getText().toString());
+        jsonParam.put("Installation Details", info.getText().toString());
 
         info = (EditText) findViewById(R.id.wiring_notes);
         jsonParam.put("Wiring Notes", info.getText().toString());
@@ -138,7 +142,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Creation Date", date);
 
         // needs photo
-        jsonParam.put("Photo",null);
+        jsonParam.put("Photo", null);
 
         return jsonParam;
     }

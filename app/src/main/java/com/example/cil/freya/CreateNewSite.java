@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -89,7 +90,10 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         //Create JSONObject here
         JSONObject JSON = createSiteJSON();
 
-        getInfo.complete.put("Sites", JSON);
+        JSONArray site = new JSONArray();
+        site.put(JSON);
+
+        getInfo.complete.put("Sites", site);
     }
 
     public JSONObject createSiteJSON() throws JSONException{

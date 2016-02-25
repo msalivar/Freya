@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -83,7 +84,10 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
             //Create JSONObject here
             JSONObject JSON = createDocumentJSON();
 
-            getInfo.complete.put("Document", JSON);
+            JSONArray document = new JSONArray();
+            document.put(JSON);
+
+            getInfo.complete.put("Documents", document);
         }
 
         public JSONObject createDocumentJSON() throws JSONException{
@@ -102,6 +106,8 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
 
             info = (EditText) findViewById(R.id.path);
             jsonParam.put("Path", info.getText().toString());
+
+            jsonParam.put("Creation Date", date);
 
             jsonParam.put("Modification Date", date);
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,7 +41,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         Spinner component = (Spinner) findViewById(R.id.SEcomponent);
 
         Modules.spinner(this, getInfo.projectNames, project);
-        Modules.spinner(this, getInfo.people, creator);
+        Modules.spinner(this, getInfo.peopleNames, creator);
         Modules.spinner(this, getInfo.systemNames, system);
         Modules.spinner(this, getInfo.componentNames, component);
 
@@ -92,7 +93,10 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         //Create JSONObject here
         JSONObject JSON = createServiceEntryJSON();
 
-        getInfo.complete.put("Service Entry", JSON);
+        JSONArray service = new JSONArray();
+        service.put(JSON);
+
+        getInfo.complete.put("ServiceEntries", service);
     }
 
     @Override
