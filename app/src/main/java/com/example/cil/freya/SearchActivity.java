@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class SearchActivity extends Activity
+public class SearchActivity extends MainActivity
 {
     // Declare Variables
     String[] types;
@@ -17,7 +17,7 @@ public class SearchActivity extends Activity
         // Open search activity layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        
+
         // Populate spinner with different modules
         types = new String[8];
         types[0] = "People";
@@ -28,7 +28,7 @@ public class SearchActivity extends Activity
         types[5] = "Component";
         types[6] = "Document";
         types[7] = "Service Entry";
-        
+
         // Display populated spinner on layout
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, types);

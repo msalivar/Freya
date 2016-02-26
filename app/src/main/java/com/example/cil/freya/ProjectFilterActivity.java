@@ -1,41 +1,86 @@
 package com.example.cil.freya;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class ProjectFilterActivity extends Activity
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ProjectFilterActivity extends MainActivity implements View.OnClickListener
 {
     // Declare variables
-    ListView projectList;
-    ProjectEntry[] listItems;
+    CustomListAdapter adapter = null;
+    Button saveButton;
 
     // Create project list screen
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         // Display new activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_filter);
-        projectList = (ListView)findViewById(R.id.projectList);
-        
-        // Populate list with a template
+        saveButton = (Button)findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
+        for(Boolean entry : MainActivity.projectHideValues)
+        {
+            if (entry) { MainActivity.checkValues.add(true); }
+            else { MainActivity.checkValues.add(false); }
+        }
         // Options can be checked on the screen
-        listItems = new ProjectEntry[5];
-        listItems[0] = new ProjectEntry("One", false);
-        listItems[1] = new ProjectEntry("Two", true);
-        listItems[2] = new ProjectEntry("Three", true);
-        listItems[3] = new ProjectEntry("Four", true);
-        listItems[4] = new ProjectEntry("Five", true);
-        CustomListAdapter adapter = new CustomListAdapter(this, listItems);
-        projectList.setAdapter(adapter);
+        adapter = new CustomListAdapter(this, R.layout.row, MainActivity.projectEntries, MainActivity.checkValues);
+        ListView listView = (ListView) findViewById(R.id.projectList);
+        listView.setAdapter(adapter);
+    }
+    @Override
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case (R.id.saveButton):
+                String toWrite = "";
+                for (int i = 0; i < MainActivity.projectEntries.size(); i++)
+                {
+                    toWrite += MainActivity.projectEntries.get(i).getName() + ";" + MainActivity.checkValues.get(i).toString() + ',';
+                }
+                try
+                {
+                    write(toWrite);
+                    List<String> checked = new LinkedList<>();
+                    for (int i = 0; i < MainActivity.projectEntries.size(); i++)
+                    {
+                        if (MainActivity.checkValues.get(i))
+                        {
+                            checked.add(MainActivity.projectEntries.get(i).getName());
+                        }
+                    }
+                    // TODO: Update Adapter
+                    //MainActivity.listAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, checked);
+                    //MainActivity.projectList.setAdapter(MainActivity.listAdapter);
+                } catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                finish();
+        }
+    }
+
+    public void write(String input) throws FileNotFoundException
+    {
+        try {
+            FileOutputStream FileOut = openFileOutput(MainActivity.ProjectFile, MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(FileOut);
+            outputWriter.write(input);
+            outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

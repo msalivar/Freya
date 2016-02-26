@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Displays the new sites screen.
+<!-- Displays the new deployments screen.
     Displays all labels and boxes for the user to enter data.
     Aligns to the screen according to size!-->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             xmlns:tools="http://schemas.android.com/tools"
             android:weightSum="1"
             android:orientation="vertical"
             android:paddingTop="15dp"
             android:background="@color/unr_off_white"
-            tools:context="com.example.cil.freya.CreateNewSite" android:fillViewport="false"
-            android:paddingBottom="15dp">
+            tools:context="com.example.cil.freya.CreateNewDeployment">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:weightSum="1"
                     android:orientation="vertical"
                     android:paddingTop="15dp"
                     android:background="@color/unr_off_white"
-                    tools:context="com.example.cil.freya.CreateNewSite">
+                    tools:context="com.example.cil.freya.CreateNewDeployment">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/alias_label"
+            android:id="@+id/centeroffset_label"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
-            android:text="Alias"
+            android:text="Center Offset"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
             android:editable="false"
@@ -39,15 +38,18 @@
             android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/centeroffset"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/purpose_label"/>
 
         <EditText
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/alias"
+            android:id="@+id/centeroffset"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
-            android:hint="Enter Alias"
+            android:hint="Enter Center Offset"
             android:textColorHint="@color/hint_color"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
@@ -57,41 +59,47 @@
             android:layout_marginRight="15dp"
             android:inputType="textCapWords"
             android:password="false"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="150dp" />
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/centeroffset_label"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/landmark_label"
+            android:id="@+id/height_label"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
-            android:text="GPS Landmark"
+            android:text="Height From Ground"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:inputType="none"
-            android:layout_below="@+id/alias_label"
-            android:layout_alignStart="@+id/alias_label"
-            android:layout_marginTop="15dp" />
+            android:paddingRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/centeroffset"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/centeroffset_label"/>
 
         <EditText
-            android:layout_width="202dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/landmark"
-            android:hint="Enter GPS Landmark"
-            android:textColorHint="@color/hint_color"
+            android:id="@+id/height"
             android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
             android:textSize="20dp"
+            android:hint="Enter Height"
+            android:textColorHint="@color/hint_color"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:editable="false"
             android:paddingStart="10dp"
-            android:layout_alignTop="@+id/landmark_label"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginRight="15dp"
+            android:inputType="textCapWords"
+            android:password="false"
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/height_label"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -105,64 +113,38 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:inputType="none"
-            android:layout_below="@+id/landmark_label"
-            android:layout_alignStart="@+id/landmark_label"
-            android:layout_marginTop="15dp" />
+            android:paddingRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/location"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/height_label"/>
 
         <EditText
-            android:layout_width="202dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:id="@+id/location"
-            android:hint="Enter Location"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"
+            android:hint="Enter Height"
             android:textColorHint="@color/hint_color"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
-            android:paddingStart="10dp"
-            android:layout_alignTop="@+id/location_label"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/landOwner_label"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="Land Owner"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
+            android:layout_alignParentEnd="true"
             android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:inputType="none"
-            android:layout_below="@+id/location_label"
-            android:layout_alignStart="@+id/location_label"
-            android:layout_marginTop="15dp"/>
-
-        <EditText
-            android:layout_width="202dp"
-            android:layout_height="50dp"
-            android:id="@+id/landOwner"
-            android:hint="Enter Land Owner"
-            android:textColorHint="@color/hint_color"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
             android:paddingStart="10dp"
-            android:layout_alignTop="@+id/landOwner_label"
-            android:layout_alignParentEnd="true"/>
+            android:layout_marginRight="15dp"
+            android:inputType="textCapWords"
+            android:password="false"
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/location_label"/>
+
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/site_name_label"
+            android:id="@+id/name_label"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
             android:text="Name"
@@ -171,123 +153,147 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:inputType="none"
-            android:layout_below="@+id/landOwner_label"
-            android:layout_alignStart="@+id/landmark_label"
-            android:layout_marginTop="15dp" />
+            android:paddingRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/centeroffset"
+            android:layout_alignParentEnd="true"/>
 
         <EditText
-            android:layout_width="202dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/site_name"
+            android:id="@+id/deployname"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"
             android:hint="Enter Name"
             android:textColorHint="@color/hint_color"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:editable="false"
             android:paddingStart="10dp"
-            android:layout_alignTop="@+id/site_name_label"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginRight="15dp"
+            android:inputType="textCapWords"
+            android:password="false"
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/name_label"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/permit_label"
+            android:id="@+id/parentLogger_label"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
-            android:text="Permit Holder"
+            android:text="Parent Logger"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:inputType="none"
-            android:layout_below="@+id/site_name_label"
-            android:layout_alignStart="@+id/landmark_label"
-            android:layout_marginTop="15dp" />
+            android:paddingRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/centeroffset"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/name_label"/>
 
         <EditText
-            android:layout_width="202dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/permit"
-            android:hint="Enter Permit Holder"
+            android:id="@+id/parentLogger"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"
+            android:hint="Enter Parent Logger"
             android:textColorHint="@color/hint_color"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:editable="false"
             android:paddingStart="10dp"
-            android:layout_alignBottom="@+id/permit_label"
-            android:layout_alignStart="@+id/alias"/>
+            android:layout_marginRight="15dp"
+            android:inputType="textCapWords"
+            android:password="false"
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/parentLogger_label"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/project_label"
+            android:id="@+id/purpose_label"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp"
-            android:text="Project"
+            android:text="Purpose"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:inputType="none"
-            android:layout_below="@+id/permit_label"
-            android:layout_alignStart="@+id/landmark_label"
-            android:layout_marginTop="15dp" />
+            android:paddingRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/centeroffset"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/parentLogger_label"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:id="@+id/purpose"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"
+            android:hint="Enter Purpose"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:background="@drawable/shapes"
+            android:layout_alignParentEnd="true"
+            android:editable="false"
+            android:paddingStart="10dp"
+            android:layout_marginRight="15dp"
+            android:inputType="textCapWords"
+            android:password="false"
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/purpose_label"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/DeploySystem_label"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"
+            android:text="System"
+            android:textColor="@color/unr_blue"
+            android:background="@drawable/shapes"
+            android:editable="false"
+            android:paddingStart="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:inputType="none"
+            android:paddingRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignEnd="@+id/centeroffset"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/location_label"/>
 
         <Spinner
-            android:layout_width="fill_parent"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/project"
+            android:id="@+id/DeploySystem"
             android:inputType="textCapWords"
             android:textColor="@color/unr_blue"
-            android:paddingTop="3dip"
             android:gravity="bottom"
             android:background="@drawable/shapes"
-            android:layout_alignTop="@+id/permit_label"
-            android:layout_alignStart="@+id/alias"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="64dp"
             android:paddingLeft="10dp"
-            android:dropDownSelector="@color/unr_blue"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/doc_notes"
+            android:dropDownSelector="@color/unr_blue"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:hint="Enter Notes"
-            android:textColor="@color/unr_blue"
-            android:inputType="textCapSentences"
-            android:layout_marginTop="23dp"
-            android:layout_below="@+id/project_label"
-            android:layout_alignStart="@+id/permit_label"/>
+            android:layout_alignTop="@+id/DeploySite_label"
+            android:layout_alignEnd="@+id/name_label"/>
 
         <Button
-            android:id="@+id/newSiteButton"
-
+            android:id="@+id/newDeploymentButton"
             android:text="Next"
-            android:textColor="@color/unr_silver"
-            android:textSize="25dp"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button"
-            android:layout_below="@+id/doc_notes"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_alignParentRight="true"/>
-
-        <Button
-            android:id="@+id/backSiteButton"
-            android:text="Back"
             android:textColor="@color/unr_silver"
             android:textSize="25dp"
             android:layout_width="120dp"
@@ -295,7 +301,22 @@
             android:background="@drawable/button"
             android:layout_marginRight="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/doc_notes"/>
+            android:layout_alignEnd="@+id/location"
+            android:layout_below="@+id/DeploySystem_label"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/backDeploymentButton"
+
+            android:text="Previous"
+            android:textColor="@color/unr_silver"
+            android:textSize="22dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/location_label"/>
 
     </RelativeLayout>
 </ScrollView>

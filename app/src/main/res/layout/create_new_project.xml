@@ -3,10 +3,10 @@
     Displays labels and boxes for the user to enter data.
     Aligns everything according to the screen of the device!-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:weightSum="1"
-              android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1"
+                android:orientation="vertical"
                 android:paddingTop="15dp"
                 android:background="@color/unr_off_white">
 
@@ -24,7 +24,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:inputType="none"
-        android:layout_alignEnd="@+id/name"
+        android:layout_alignEnd="@+id/compname"
         android:paddingRight="15dp"
         android:layout_marginTop="15dp"/>
 
@@ -33,7 +33,7 @@
         android:layout_height="50dp"
         android:id="@+id/grant"
         android:layout_gravity="center_horizontal"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:hint="Enter Grant Number"
         android:textColorHint="@color/hint_color"
         android:textColor="@color/unr_blue"
@@ -69,7 +69,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:id="@+id/name"
+        android:id="@+id/compname"
         android:hint="Enter Project Name"
         android:textColorHint="@color/hint_color"
         android:layout_gravity="center_horizontal"
@@ -114,10 +114,10 @@
         android:textColorHint="@color/hint_color"
         android:background="@drawable/shapes"
         android:layout_alignEnd="@+id/prininvest"
-        android:layout_alignStart="@+id/name"
+        android:layout_alignStart="@+id/compname"
         android:paddingLeft="10dp"
         android:layout_marginTop="75dp"
-        android:layout_alignTop="@+id/name"/>
+        android:layout_alignTop="@+id/compname"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -139,7 +139,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/institution"
+        android:id="@+id/institutionName"
         android:layout_gravity="center_horizontal"
         android:inputType="textCapWords"
         android:textSize="20dp"
@@ -181,23 +181,23 @@
         android:gravity="bottom"
         android:background="@drawable/shapes"
         android:layout_alignTop="@+id/insitution_label"
-        android:layout_alignStart="@+id/institution"
+        android:layout_alignStart="@+id/institutionName"
         android:layout_marginRight="15dp"
         android:layout_marginTop="75dp"
         android:paddingLeft="10dp"
         android:dropDownSelector="@color/unr_blue"/>
     <Button
-        android:id="@+id/post"
-
-        android:text="Post"
+        android:id="@+id/newProjectButton"
+        android:text="Next"
         android:textColor="@color/unr_silver"
-        android:textSize="30sp"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:background="@drawable/button"
-        android:layout_below="@+id/investigator_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@+id/prininvest"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"/>
 
 
 </RelativeLayout>

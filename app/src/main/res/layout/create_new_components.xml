@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Creates the layout for the Create New Components screen.
     Displays the labels and boxes for users input!-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:weightSum="1"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:background="@color/unr_off_white"
+            tools:context="com.example.cil.freya.CreateNewComponent" android:fillViewport="false"
+            android:paddingBottom="15dp">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:weightSum="1"
-    android:orientation="vertical"
-    android:paddingTop="15dp"
-    android:background="@color/unr_off_white">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1"
+                android:orientation="vertical"
+                android:paddingTop="15dp"
+                android:background="@color/unr_off_white">
 
     <EditText
         android:layout_width="match_parent"
@@ -130,7 +142,7 @@
     <EditText
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:id="@+id/name"
+        android:id="@+id/compname"
         android:layout_gravity="center_horizontal"
         android:inputType="textCapWords"
         android:textSize="20dp"
@@ -242,14 +254,83 @@
         android:hint="Enter Vendor"
         android:textColorHint="@color/hint_color"
         android:background="@drawable/shapes"
-        android:layout_marginRight="15dp"
         android:paddingLeft="10dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/vendor_label" />
+        android:layout_above="@+id/deployment_label"
+        android:layout_alignEnd="@+id/vendor_label"/>
 
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/deployment_label"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:text="Deployment"
+        android:textColor="@color/unr_blue"
+        android:background="@drawable/shapes"
+        android:editable="false"
+        android:paddingStart="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="none"
+        android:layout_below="@+id/vendor_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"/>
 
+    <Spinner
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/deployment"
+        android:inputType="textCapWords"
+        android:textColor="@color/unr_blue"
+        android:paddingTop="3dip"
+        android:gravity="bottom"
+        android:background="@drawable/shapes"
+        android:layout_alignParentBottom="false"
+        android:layout_alignEnd="@+id/deployment_label"
+        android:layout_alignTop="@+id/deployment_label"/>
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="64dp"
+        android:paddingLeft="10dp"
+        android:dropDownSelector="@color/unr_blue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/wiring_notes"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Enter Wiring Notes"
+        android:textColor="@color/unr_blue"
+        android:inputType="textCapSentences"
+        android:layout_below="@+id/deployment_label"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/newComponentButton"
+
+        android:text="Next"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="17dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/deployment"/>
+
+    <Button
+        android:id="@+id/backComponentButton"
+        android:text="Back"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/wiring_notes"
+        android:layout_alignStart="@+id/wiring_notes"/>
 
 </RelativeLayout>
+</ScrollView>

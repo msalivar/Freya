@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 // used as a template to display JSONS on a new intent. This example shows how to display the people JSON
-public class DisplayMessageActivity extends Activity
+public class DisplayMessageActivity extends MainActivity
 {
     // create GUI
     @Override
@@ -25,7 +25,7 @@ public class DisplayMessageActivity extends Activity
         {
             for(int j = 0; j < people.length; j++)
             {
-                
+
                 JSONObject obj = new JSONObject(people[j]);
                 // add parts to a JSON to message string
                 message += "Creation Date: " + obj.getString("Creation Date") + "\n";
