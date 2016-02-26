@@ -14,32 +14,31 @@ public class getInfo
     // put JSONs in here
     //  static String projectUID [];
     // 0 value is "choose investigator"
-    static JSONArray projects;
-    static String projectNames[];
-    static int  projectNumber[];
-    static JSONArray people;
-    static String peopleNames[];
-    static int peopleNumber[];
-    static JSONArray sites;
-    static String siteNames[];
-    static int siteNumber[];
-    static JSONArray systems;
-    static String systemNames[];
-    static int systemNumber[];
-    static JSONArray deployments;
-    static String deploymentNames[];
-    static int deploymentNumber[];
-    static JSONArray components;
-    static String componentNames[];
-    static int componentNumber[];
-    static JSONArray documents;
-    static String documentNames[];
-    static int documentNumber[];
-    static JSONArray services;
-    static String serviceNames[];
-    static int serviceNumber[];
-
-    static JSONObject complete = new JSONObject();
+    public static JSONArray projects;
+    public static String projectNames[];
+    public static int  projectNumber[];
+    public static JSONArray people;
+    public static String peopleNames[];
+    public static int peopleNumber[];
+    public static JSONArray sites;
+    public static String siteNames[];
+    public static int siteNumber[];
+    public static JSONArray systems;
+    public static String systemNames[];
+    public static int systemNumber[];
+    public static JSONArray deployments;
+    public static String deploymentNames[];
+    public static int deploymentNumber[];
+    public static JSONArray components;
+    public static String componentNames[];
+    public static int componentNumber[];
+    public static JSONArray documents;
+    public static String documentNames[];
+    public static int documentNumber[];
+    public static JSONArray services;
+    public static String serviceNames[];
+    public static int serviceNumber[];
+    public static JSONObject complete = new JSONObject();
 
 
     static public void getAllRequests (){

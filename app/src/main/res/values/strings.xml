@@ -13,4 +13,12 @@
     <string name="profile_name">User Name</string>
     <!--The first value in the spinner in createNewProject. this way it cannot be selected as aan optioni-->
     <string name="spinner_prompt">Choose Investigator</string>
+    <string name="title_activity_people_display">PeopleDisplayActivity</string>
+    <string name="title_activity_project_display">ProjectDisplayActivity</string>
+    <string name="title_activity_site_display">SiteDisplayActivity</string>
+    <string name="title_activity_system_display">SystemDisplayActivity</string>
+    <string name="title_activity_deployment_display">DeploymentDisplayActivity</string>
+    <string name="title_activity_component_display">ComponentDisplayActivity</string>
+    <string name="title_activity_document_display">DocumentDisplayActivity</string>
+    <string name="title_activity_service_entry_display">ServiceEntryDisplayActivity</string>
 </resources>
