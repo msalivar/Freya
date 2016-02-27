@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
+<<<<<<< Updated upstream
     </option>
   </component>
   <component name="NullableNotNullManager">
@@ -32,6 +36,8 @@
           <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
         </list>
       </value>
+=======
+>>>>>>> Stashed changes
     </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">

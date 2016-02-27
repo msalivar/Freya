@@ -2,6 +2,7 @@ package com.example.cil.freya;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -19,7 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cil.freya.ModuleDisplayActivities.ComponentDisplayActivity;
 import com.example.cil.freya.ModuleDisplayActivities.ProjectDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.ServiceEntryDisplayActivity;
 import com.example.cil.freya.ModuleDisplayActivities.SystemDisplayActivity;
 
 import org.json.JSONException;
@@ -104,7 +107,7 @@ public class MainActivity extends Activity {
                 // listDataHeader.get(groupPosition)
                 // listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
                 selectedModuleIndex = childPosition;
-                switch(listDataHeader.get(groupPosition))
+                switch (listDataHeader.get(groupPosition))
                 {
                     case "Projects":
                         Intent project = new Intent(MainActivity.this, ProjectDisplayActivity.class);
@@ -115,10 +118,12 @@ public class MainActivity extends Activity {
                         startActivity(system);
                         break;
                     case "Components":
-                        // TODO: Implement this
+                        Intent component = new Intent(MainActivity.this, ComponentDisplayActivity.class);
+                        startActivity(component);
                         break;
                     case "Service Entries":
-                        // TODO: Implement this
+                        Intent serviceEntry = new Intent(MainActivity.this, ServiceEntryDisplayActivity.class);
+                        startActivity(serviceEntry);
                         break;
                 }
                 return false;
@@ -145,29 +150,73 @@ public class MainActivity extends Activity {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
+        listDataHeader.add("People");
         listDataHeader.add("Projects");
+        listDataHeader.add("Sites");
         listDataHeader.add("Systems");
+        listDataHeader.add("Deployments");
         listDataHeader.add("Components");
+        listDataHeader.add("Documents");
         listDataHeader.add("Service Entries");
 
         // Adding child data
+        List<String> people = new ArrayList<String>();
+        if (getInfo.peopleNames.length> 0)
+        {
+            Collections.addAll(people, getInfo.peopleNames);
+            people.remove(0);
+        }
         List<String> projects = new ArrayList<String>();
-        Collections.addAll(projects, getInfo.projectNames);
-        projects.remove(0);
+        if (getInfo.projectNames.length> 0)
+        {
+            Collections.addAll(projects, getInfo.projectNames);
+            projects.remove(0);
+        }
+        List<String> sites = new ArrayList<String>();
+        if (getInfo.siteNames.length > 0)
+        {
+            Collections.addAll(sites, getInfo.siteNames);
+            sites.remove(0);
+        }
         List<String> systems = new ArrayList<String>();
-        Collections.addAll(systems, getInfo.systemNames);
-        systems.remove(0);
+        if (getInfo.systemNames.length > 0)
+        {
+            Collections.addAll(systems, getInfo.systemNames);
+            systems.remove(0);
+        }
+        List<String> deployments = new ArrayList<String>();
+        if (getInfo.deploymentNames.length > 0)
+        {
+            Collections.addAll(deployments, getInfo.deploymentNames);
+            deployments.remove(0);
+        }
         List<String> components = new ArrayList<String>();
-        Collections.addAll(components, getInfo.componentNames);
-        components.remove(0);
+        if (getInfo.componentNames.length > 0)
+        {
+            Collections.addAll(components, getInfo.componentNames);
+            components.remove(0);
+        }
+        List<String> documents = new ArrayList<String>();
+        if (getInfo.documentNames.length > 0)
+        {
+            Collections.addAll(documents, getInfo.documentNames);
+            documents.remove(0);
+        }
         List<String> serviceEntries = new ArrayList<String>();
-        Collections.addAll(serviceEntries, getInfo.serviceNames);
-        serviceEntries.remove(0);
+        if (getInfo.serviceNames.length > 0)
+        {
+            Collections.addAll(serviceEntries, getInfo.serviceNames);
+            serviceEntries.remove(0);
+        }
 
-        listDataChild.put(listDataHeader.get(0), projects); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), systems);
-        listDataChild.put(listDataHeader.get(2), components);
-        listDataChild.put(listDataHeader.get(3), serviceEntries);
+        listDataChild.put(listDataHeader.get(0), people); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), projects);
+        listDataChild.put(listDataHeader.get(2), sites);
+        listDataChild.put(listDataHeader.get(3), systems);
+        listDataChild.put(listDataHeader.get(4), deployments);
+        listDataChild.put(listDataHeader.get(5), components);
+        listDataChild.put(listDataHeader.get(6), documents);
+        listDataChild.put(listDataHeader.get(7), serviceEntries);
 
         expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(expandable);

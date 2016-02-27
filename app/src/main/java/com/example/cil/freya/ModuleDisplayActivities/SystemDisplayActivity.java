@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.cil.freya.MainActivity;
 import com.example.cil.freya.R;
@@ -28,7 +29,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_display);
+        setContentView(R.layout.activity_system_display);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
@@ -44,7 +45,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         site = (Spinner) findViewById(R.id.site);
         ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.siteNames);
         siteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        manager.setAdapter(siteAdapter);
+        site.setAdapter(siteAdapter);
         getInfo(MainActivity.selectedModuleIndex);
     }
 
@@ -59,45 +60,53 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
             power.setText(thisSystem.getString("Power"));
             sysname.setText(thisSystem.getString("Name"));
 
-            int personIndex = thisSystem.getInt("Manager");
-            String theirName = "null";
-            for (int i = 0; i < getInfo.people.length(); i++)
+            if (!thisSystem.isNull("Manager"))
             {
-                if (getInfo.people.getJSONObject(i).getInt("Person") == personIndex)
+                int personIndex = thisSystem.getInt("Manager");
+                String theirName = "error: not found";
+                for (int i = 0; i < getInfo.people.length(); i++)
                 {
-                    JSONObject dude = getInfo.people.getJSONObject(i);
-                    theirName = dude.getString("First Name") + " " + dude.getString("Last Name");
-                    break;
+                    if (getInfo.people.getJSONObject(i).getInt("Person") == personIndex)
+                    {
+                        JSONObject dude = getInfo.people.getJSONObject(i);
+                        theirName = dude.getString("First Name") + " " + dude.getString("Last Name");
+                        break;
+                    }
+                }
+                for (int i = 0; i < getInfo.peopleNames.length; i++)
+                {
+                    if (Objects.equals(getInfo.peopleNames[i], theirName))
+                    {
+                        manager.setSelection(i);
+                        break;
+                    }
                 }
             }
-            for (int i = 0; i < getInfo.peopleNames.length; i++)
-            {
-                if (Objects.equals(getInfo.peopleNames[i], theirName))
-                {
-                    manager.setSelection(i);
-                    break;
-                }
-            }
+            else { manager.setSelection(0); }
 
-            int siteIndex = thisSystem.getInt("Site");
-            String siteName = "null";
-            for (int i = 0; i < getInfo.sites.length(); i++)
+            if (!thisSystem.isNull("Site"))
             {
-                if (getInfo.sites.getJSONObject(i).getInt("Site") == siteIndex)
+                int siteIndex = thisSystem.getInt("Site");
+                String siteName = "error: not found";
+                for (int i = 0; i < getInfo.sites.length(); i++)
                 {
-                    JSONObject dude = getInfo.sites.getJSONObject(i);
-                    theirName = dude.getString("Name");
-                    break;
+                    if (getInfo.sites.getJSONObject(i).getInt("Site") == siteIndex)
+                    {
+                        JSONObject dude = getInfo.sites.getJSONObject(i);
+                        siteName = dude.getString("Name");
+                        break;
+                    }
+                }
+                for (int i = 0; i < getInfo.siteNames.length; i++)
+                {
+                    if (Objects.equals(getInfo.siteNames[i], siteName))
+                    {
+                        site.setSelection(i);
+                        break;
+                    }
                 }
             }
-            for (int i = 0; i < getInfo.siteNames.length; i++)
-            {
-                if (Objects.equals(getInfo.siteNames[i], siteName))
-                {
-                    site.setSelection(i);
-                    break;
-                }
-            }
+            else { site.setSelection(0); }
 
         } catch (JSONException e)
         {
@@ -121,4 +130,9 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Toast.makeText(this, "Please use cancel or save to exit.", Toast.LENGTH_SHORT).show();
+    }
 }

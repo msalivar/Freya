@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.cil.freya.MainActivity;
 import com.example.cil.freya.R;
@@ -54,25 +55,30 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
             name.setText(thisProject.getString("Name"));
             funding.setText(thisProject.getString("Original Funding Agency"));
             institution.setText(thisProject.getString("Institution Name"));
-            int personIndex = thisProject.getInt("Principal Investigator");
-            String theirName = "null";
-            for (int i = 0; i < getInfo.people.length(); i++)
+
+            if (!thisProject.isNull("Principal Investigator"))
             {
-                if (getInfo.people.getJSONObject(i).getInt("Person") == personIndex)
+                int personIndex = thisProject.getInt("Principal Investigator");
+                String theirName = "error: not found";
+                for (int i = 0; i < getInfo.people.length(); i++)
                 {
-                    JSONObject dude = getInfo.people.getJSONObject(i);
-                    theirName = dude.getString("First Name") + " " + dude.getString("Last Name");
-                    break;
+                    if (getInfo.people.getJSONObject(i).getInt("Person") == personIndex)
+                    {
+                        JSONObject dude = getInfo.people.getJSONObject(i);
+                        theirName = dude.getString("First Name") + " " + dude.getString("Last Name");
+                        break;
+                    }
+                }
+                for (int i = 0; i < getInfo.peopleNames.length; i++)
+                {
+                    if (Objects.equals(getInfo.peopleNames[i], theirName))
+                    {
+                        investigator.setSelection(i);
+                        break;
+                    }
                 }
             }
-            for (int i = 0; i < getInfo.peopleNames.length; i++)
-            {
-                if (Objects.equals(getInfo.peopleNames[i], theirName))
-                {
-                    investigator.setSelection(i);
-                    break;
-                }
-            }
+            else { investigator.setSelection(0); }
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -93,5 +99,11 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Toast.makeText(this, "Please use cancel or save to exit.", Toast.LENGTH_SHORT).show();
     }
 }

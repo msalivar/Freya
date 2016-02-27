@@ -62,7 +62,11 @@ public class getInfo
         } catch (JSONException e)
         {e.printStackTrace();}
 
-        return array;
+        if (array == null)
+        {
+            return new JSONArray();
+        }
+        else { return array; }
     }
 
     // get peopleJSON from server
