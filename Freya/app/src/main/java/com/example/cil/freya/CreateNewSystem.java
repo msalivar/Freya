@@ -1,6 +1,5 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -25,7 +24,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/19/15.
  */
-public class CreateNewSystem extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewSystem extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     Button createButton, backButton, photoButton;
     String SystemFile = "SystemFile.txt";
@@ -50,7 +49,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         Spinner manager = (Spinner) findViewById(R.id.manager);
         Spinner site = (Spinner) findViewById(R.id.site);
 
-        Modules.spinner (this, getInfo.people, manager);
+        Modules.spinner (this, getInfo.peopleNames, manager);
         Modules.spinner (this, getInfo.siteNames, site);
 
         try{
@@ -101,6 +100,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
                 {newSystem();} catch (JSONException e) {e.printStackTrace();}
                 intent = new Intent(this, CreateNewDeployment.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 try{
                     Modules.write(info, SystemFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
@@ -109,6 +109,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
             case (R.id.backSystemButton):
                 intent = new Intent(this, CreateNewSite.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 try{
                     Modules.write(info, SystemFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
@@ -184,7 +185,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         jsonParam.put("Modification Date", date);
 
         // need photo info
-        jsonParam.put ("Photo", null);
+        jsonParam.put ("Photo", 0);
 
         // from site
         jsonParam.put("Site", siteNumb);

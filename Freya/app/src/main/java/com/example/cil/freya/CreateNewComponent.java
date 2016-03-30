@@ -1,14 +1,17 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,14 +21,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-/**
- * Created by sammie on 12/7/15.
- */
-public class CreateNewComponent extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener {
-    Button createButton, backButton;
+public class CreateNewComponent extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+    Button createButton, backButton, CompButton;
     String ComponentFile = "ComponentFile.txt";
     EditText info;
     int deploymentNumb;
+    private final int SELECT_PHOTO = 1;
+    private final int TAKE_PHOTO = 2;
 
     // display create new component GUI
     @Override
@@ -39,7 +41,10 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         backButton.setOnClickListener(this);
 
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
-        Modules.spinner (this, getInfo.deploymentNames, deployment);
+        Modules.spinner(this, getInfo.deploymentNames, deployment);
+        CompButton = (Button) findViewById(R.id.CompPhoto);
+        CompButton.setOnClickListener(this);
+        registerForContextMenu(CompButton);
 
         try{
             Modules.read(ComponentFile, this);}
@@ -65,8 +70,21 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         //Create JSONObject here
         JSONObject JSON = createComponentJSON();
 
-        getInfo.complete.put("Components", JSON);
+        JSONArray component = new JSONArray();
+        component.put(JSON);
+
+        getInfo.complete.put("Components", component);
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        menu.setHeaderTitle("Pick One");
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
 
     public void onClick(View v)
     {
@@ -78,6 +96,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
                 {newComponent();} catch (JSONException e) {e.printStackTrace();}
                 intent = new Intent(this, CreateNewDocument.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 try{
                     Modules.write(info, ComponentFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
@@ -86,10 +105,37 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
             case (R.id.backComponentButton):
                 intent = new Intent(this, CreateNewDeployment.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 try{
                     Modules.write(info, ComponentFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
                 break;
+            case (R.id.CompPhoto):
+                this.openContextMenu(v);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        super.onContextItemSelected(item);
+        switch (item.getItemId())
+        {
+            case R.id.choose_photo:
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                return true;
+            case R.id.take_photo:
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                //Uri fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+                //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+                // start the image capture Intent
+                startActivityForResult(cameraIntent, TAKE_PHOTO);
+
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -121,7 +167,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Supplier", info.getText().toString());
 
         info = (EditText) findViewById(R.id.installation);
-        jsonParam.put("installation Details", info.getText().toString());
+        jsonParam.put("Installation Details", info.getText().toString());
 
         info = (EditText) findViewById(R.id.wiring_notes);
         jsonParam.put("Wiring Notes", info.getText().toString());
@@ -138,7 +184,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         jsonParam.put("Creation Date", date);
 
         // needs photo
-        jsonParam.put("Photo",null);
+        jsonParam.put("Photo", 0);
 
         return jsonParam;
     }

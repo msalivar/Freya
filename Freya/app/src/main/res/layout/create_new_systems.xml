@@ -167,7 +167,7 @@
     <Button
         android:id="@+id/backSystemButton"
 
-        android:text="Previous"
+        android:text="Back"
         android:textColor="@color/unr_silver"
         android:textSize="22dp"
         android:layout_width="120dp"

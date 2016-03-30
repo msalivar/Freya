@@ -261,7 +261,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/doc_notes"
+            android:id="@+id/site_notes"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Enter Notes"
@@ -280,10 +280,10 @@
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:background="@drawable/button"
-            android:layout_below="@+id/doc_notes"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_alignParentRight="true"/>
+            android:layout_below="@+id/sitePhoto"
+            android:layout_alignEnd="@+id/site_notes"
+            android:layout_marginEnd="26dp"/>
 
         <Button
             android:id="@+id/backSiteButton"
@@ -295,7 +295,21 @@
             android:background="@drawable/button"
             android:layout_marginRight="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/doc_notes"/>
+            android:layout_below="@+id/sitePhoto"
+            android:layout_alignStart="@+id/site_notes"/>
+
+        <Button
+            android:id="@+id/sitePhoto"
+            android:text="photo"
+            android:textColor="@color/unr_silver"
+            android:textSize="25dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/site_notes"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
 </ScrollView>

@@ -329,8 +329,21 @@
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/wiring_notes"
+        android:layout_below="@+id/CompPhoto"
         android:layout_alignStart="@+id/wiring_notes"/>
+
+    <Button
+        android:id="@+id/CompPhoto"
+        android:text="Photo"
+        android:textColor="@color/unr_silver"
+        android:textSize="25dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@+id/wiring_notes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"/>
+
 
 </RelativeLayout>
 </ScrollView>

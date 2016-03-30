@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/10/15.
  */
-public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewProject extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
@@ -46,7 +46,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             Modules.read(ProjectFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
 
-        Modules.spinner (this, getInfo.people, prininvest);
+        Modules.spinner (this, getInfo.peopleNames, prininvest);
 
     }
     public void onClick(View v)
@@ -59,6 +59,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
                 {e.printStackTrace();}
                 Intent intent = new Intent(this, CreateNewSite.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 try{
                     Modules.write(info, ProjectFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}

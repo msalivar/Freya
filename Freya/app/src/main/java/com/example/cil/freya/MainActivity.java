@@ -16,31 +16,31 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.cil.freya.ModuleDisplayActivities.ComponentDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.DeploymentDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.DocumentDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.ProjectDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.ServiceEntryDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.SiteDisplayActivity;
+import com.example.cil.freya.ModuleDisplayActivities.SystemDisplayActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
-    static JSONObject selected_project = null;
-    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
-    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
-    static ArrayList<Boolean> checkValues = new ArrayList<>();
     static String ProjectFile = "FilterSettings.txt";
     ExpandableListAdapter expandable;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    public static int selectedModuleIndex = -1;
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -52,10 +52,14 @@ public class MainActivity extends Activity {
     static String componentURL = "components/";
     static String documentURL = "documents/";
     static String serviceURL = "service_entries/";
+    static String edgeURL = "edge/";
 
     // lists
-    static ArrayAdapter<String> listAdapter;
-    static String edgeURL = "edge/";
+    static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
+    static ArrayList<Boolean> projectHideValues = new ArrayList<>();
+    static ArrayList<Boolean> checkValues = new ArrayList<>();
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,7 @@ public class MainActivity extends Activity {
         actionBar.setIcon(R.drawable.upload_icon);
         actionBar.setIcon(R.drawable.search_icon);
 
-        // infate action bar
+        // inflate action bar
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // go to getAllRequest
@@ -94,6 +98,48 @@ public class MainActivity extends Activity {
 
         // create expandable list view
         expListView = (ExpandableListView) findViewById(R.id.expList);
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
+        {
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+            {
+                // listDataHeader.get(groupPosition)
+                // listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
+                selectedModuleIndex = childPosition;
+                switch (listDataHeader.get(groupPosition))
+                {
+                    case "Projects":
+                        Intent project = new Intent(MainActivity.this, ProjectDisplayActivity.class);
+                        startActivity(project);
+                        break;
+                    case "Systems":
+                        Intent system = new Intent(MainActivity.this, SystemDisplayActivity.class);
+                        startActivity(system);
+                        break;
+                    case "Components":
+                        Intent component = new Intent(MainActivity.this, ComponentDisplayActivity.class);
+                        startActivity(component);
+                        break;
+                    case "Service Entries":
+                        Intent serviceEntry = new Intent(MainActivity.this, ServiceEntryDisplayActivity.class);
+                        startActivity(serviceEntry);
+                        break;
+                    case "Deployments":
+                        Intent deployment = new Intent(MainActivity.this, DeploymentDisplayActivity.class);
+                        startActivity(deployment);
+                        break;
+                    case "Sites":
+                        Intent site = new Intent(MainActivity.this, SiteDisplayActivity.class);
+                        startActivity(site);
+                        break;
+                    case "Documents":
+                        Intent document = new Intent(MainActivity.this, DocumentDisplayActivity.class);
+                        startActivity(document);
+                        break;
+                }
+                return false;
+            }
+        });
+
         prepareListData();
 
         // load state testing, will be used to implement saving information into the app so syncing will not have to occur every time the user opens the app
@@ -105,59 +151,8 @@ public class MainActivity extends Activity {
         // if no load state
         else
         {
-            // if list is empty, will throw exception
-            try
-            {
-                // create listen and set listener
-                expListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                {
-                    // what happens when the list is clicked on
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                    {
-                        // get the selected name
-                        String selected_name = ((TextView) view).getText().toString();
-                        selected_project = null;
-                        String pTitle;
-                        // throws JSON exception if the project cannot be found
-                        try
-                        {
-                            // for everything in the JSON
-                            for (int i = 0; i < getInfo.projects.length(); i++)
-                            {
-                                // get the object
-                                JSONObject p = (JSONObject) getInfo.projects.get(i);
-                                // search for name
-                                String val = p.getString("Name");
-                                // if it's the name the user is looking for, assign it to selected name
-                                if (val == selected_name)
-                                {
-                                    selected_project = p;
-                                    break;
-                                }
-
-                            }
-                            //test
-                            Toast.makeText(getApplicationContext(), selected_project.getString("Name"), Toast.LENGTH_SHORT).show();
-                            // start projectDisplay intent
-                            // Intent intent = new Intent(MainActivity.this, ProjectDisplay.class);
-                            // startActivity(intent);
-                        } catch (JSONException e)
-                        {
-                            // if list empty, print to logcat
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                // redisplay the list and set listen
-                prepareListData();
-            }
-            catch (NullPointerException e)
-            {
-                // usually shown when the app cant connect to the server
-                Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
+            // usually shown when the app cant connect to the server
+            //Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -166,37 +161,73 @@ public class MainActivity extends Activity {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
+        listDataHeader.add("People");
         listDataHeader.add("Projects");
-        listDataHeader.add("Main Module 2");
-        listDataHeader.add("Main Module 3");
-        listDataHeader.add("Main Module 4");
+        listDataHeader.add("Sites");
+        listDataHeader.add("Systems");
+        listDataHeader.add("Deployments");
+        listDataHeader.add("Components");
+        listDataHeader.add("Documents");
+        listDataHeader.add("Service Entries");
 
         // Adding child data
-        List<String> projects = new ArrayList<String>();
-        for (String str : getInfo.projectNames)
+        List<String> people = new ArrayList<String>();
+        if (getInfo.peopleNames.length> 0)
         {
-            projects.add(str);
+            Collections.addAll(people, getInfo.peopleNames);
+            people.remove(0);
+        }
+        List<String> projects = new ArrayList<String>();
+        if (getInfo.projectNames.length> 0)
+        {
+            Collections.addAll(projects, getInfo.projectNames);
+            projects.remove(0);
+        }
+        List<String> sites = new ArrayList<String>();
+        if (getInfo.siteNames.length > 0)
+        {
+            Collections.addAll(sites, getInfo.siteNames);
+            sites.remove(0);
+        }
+        List<String> systems = new ArrayList<String>();
+        if (getInfo.systemNames.length > 0)
+        {
+            Collections.addAll(systems, getInfo.systemNames);
+            systems.remove(0);
+        }
+        List<String> deployments = new ArrayList<String>();
+        if (getInfo.deploymentNames.length > 0)
+        {
+            Collections.addAll(deployments, getInfo.deploymentNames);
+            deployments.remove(0);
+        }
+        List<String> components = new ArrayList<String>();
+        if (getInfo.componentNames.length > 0)
+        {
+            Collections.addAll(components, getInfo.componentNames);
+            components.remove(0);
+        }
+        List<String> documents = new ArrayList<String>();
+        if (getInfo.documentNames.length > 0)
+        {
+            Collections.addAll(documents, getInfo.documentNames);
+            documents.remove(0);
+        }
+        List<String> serviceEntries = new ArrayList<String>();
+        if (getInfo.serviceNames.length > 0)
+        {
+            Collections.addAll(serviceEntries, getInfo.serviceNames);
+            serviceEntries.remove(0);
         }
 
-        List<String> two = new ArrayList<String>();
-        two.add("1");
-        two.add("2");
-        two.add("3");
-
-        List<String> three = new ArrayList<String>();
-        three.add("1");
-        three.add("2");
-        three.add("3");
-
-        List<String> four = new ArrayList<String>();
-        four.add("1");
-        four.add("2");
-        four.add("3");
-
-        listDataChild.put(listDataHeader.get(0), projects); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), two);
-        listDataChild.put(listDataHeader.get(2), three);
-        listDataChild.put(listDataHeader.get(3), four);
+        listDataChild.put(listDataHeader.get(0), people); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), projects);
+        listDataChild.put(listDataHeader.get(2), sites);
+        listDataChild.put(listDataHeader.get(3), systems);
+        listDataChild.put(listDataHeader.get(4), deployments);
+        listDataChild.put(listDataHeader.get(5), components);
+        listDataChild.put(listDataHeader.get(6), documents);
+        listDataChild.put(listDataHeader.get(7), serviceEntries);
 
         expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(expandable);
@@ -242,48 +273,56 @@ public class MainActivity extends Activity {
                 // start filtering intent
                 Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 1:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewProject.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 2:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewSite.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 3:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewSystem.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 4:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewDeployment.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 5:
                 // start component intent
                 intent = new Intent(MainActivity.this, CreateNewComponent.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 6:
                 // start document intent
                 intent = new Intent(MainActivity.this, CreateNewDocument.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 break;
 
             case 7:
                 // start document intent
                 intent = new Intent(MainActivity.this, CreateNewServiceEntry.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 break;
 
        /* else if (position == 3)
@@ -361,6 +400,7 @@ public class MainActivity extends Activity {
             // start createnewproject intent
             Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
             startActivity(intent);
+            overridePendingTransition(0, 0);
             return true;
         }
         //  if search is chosen
@@ -368,6 +408,7 @@ public class MainActivity extends Activity {
             // create new searchactivity intent
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
+            overridePendingTransition(0,0);
             return super.onOptionsItemSelected(item);
         }
 

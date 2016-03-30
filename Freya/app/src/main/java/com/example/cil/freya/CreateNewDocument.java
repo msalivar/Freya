@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,6 +66,7 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
                 {newDocument();} catch (JSONException e) {e.printStackTrace();}
                 intent = new Intent(this, CreateNewServiceEntry.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 try{
                     Modules.write(info, DocumentFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
@@ -73,6 +75,7 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
             case (R.id.backDocumentButton):
                 intent = new Intent(this, CreateNewComponent.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 break;
         }
 
@@ -83,7 +86,10 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
             //Create JSONObject here
             JSONObject JSON = createDocumentJSON();
 
-            getInfo.complete.put("Document", JSON);
+            JSONArray document = new JSONArray();
+            document.put(JSON);
+
+            getInfo.complete.put("Documents", document);
         }
 
         public JSONObject createDocumentJSON() throws JSONException{
@@ -102,6 +108,8 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
 
             info = (EditText) findViewById(R.id.path);
             jsonParam.put("Path", info.getText().toString());
+
+            jsonParam.put("Creation Date", date);
 
             jsonParam.put("Modification Date", date);
 
