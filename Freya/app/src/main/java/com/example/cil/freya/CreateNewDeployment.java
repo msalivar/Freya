@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class CreateNewDeployment extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
-    Button createButton, backButton;
+    Button createButton;
     String DeploymentFile = "DeploymentFile.txt";
     EditText info = null;
     int sysNum;
@@ -35,8 +35,6 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
         setContentView(R.layout.create_new_deployment);
         createButton = (Button) findViewById(R.id.newDeploymentButton);
         createButton.setOnClickListener(this);
-        backButton = (Button) findViewById(R.id.backDeploymentButton);
-        backButton.setOnClickListener(this);
 
         Spinner deploysys = (Spinner) findViewById(R.id.DeploySystem);
         Modules.spinner(this, getInfo.systemNames, deploysys);
@@ -54,19 +52,13 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
             case (R.id.newDeploymentButton):
                 try
                 {newDeployment();} catch (JSONException e) {e.printStackTrace();}
-                intent = new Intent(this, CreateNewComponent.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
                 try{
                     Modules.write(info, DeploymentFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
+                finish();
                 break;
 
-            case (R.id.backDeploymentButton):
-                intent = new Intent(this, CreateNewSystem.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-                break;
         }
     }
 

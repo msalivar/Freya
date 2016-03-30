@@ -188,16 +188,16 @@
         android:dropDownSelector="@color/unr_blue"/>
     <Button
         android:id="@+id/newProjectButton"
-        android:text="Next"
+        android:text="Save"
         android:textColor="@color/unr_silver"
         android:textSize="25dp"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
-        android:layout_below="@+id/prininvest"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentRight="true"/>
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/investigator_label"
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

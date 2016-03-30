@@ -1,11 +1,16 @@
 package com.example.cil.freya;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,12 +20,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -33,7 +40,7 @@ import java.util.UUID;
  */
 public class CreateNewSite extends MainActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
-    Button createButton, previousButton,siteButton;
+    Button createButton, siteButton;
     Spinner proj;
     int numb;
     String SiteFile = "SiteFile.txt";
@@ -42,6 +49,8 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
     private final int TAKE_PHOTO = 2;
     Bitmap selectedImage = null;
     ImageView imageView;
+    private Uri imageUri;
+    boolean writeAccepted, cameraAccepted;
 
 
 
@@ -52,8 +61,6 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         setContentView(R.layout.create_new_site);
         createButton = (Button) findViewById(R.id.newSiteButton);
         createButton.setOnClickListener(this);
-        previousButton = (Button) findViewById(R.id.backSiteButton);
-        previousButton.setOnClickListener(this);
         siteButton = (Button) findViewById(R.id.sitePhoto);
         siteButton.setOnClickListener(this);
         registerForContextMenu(siteButton);
@@ -80,15 +87,6 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
                     Modules.write(info, SiteFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
 
-                break;
-
-            case (R.id.backSiteButton):
-                intent = new Intent(this, CreateNewProject.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-                try{
-                    Modules.write(info, SiteFile, this);}
-                catch(FileNotFoundException e){e.printStackTrace();}
                 break;
 
             case (R.id.sitePhoto):
@@ -131,17 +129,21 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
                 startActivityForResult(photoPickerIntent, SELECT_PHOTO);
                 return true;
             case R.id.take_photo:
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, TAKE_PHOTO);
-
+                if (!hasPermission(MainActivity.readPerm[0])) { requestPermissions(MainActivity.readPerm, MainActivity.readRequestCode); }
+                if (!hasPermission(MainActivity.cameraPerm[0])) { requestPermissions(MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File photo = new File(Environment.getExternalStorageDirectory(),  "HotPic.jpg");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+                imageUri = Uri.fromFile(photo);
+                startActivityForResult(intent, TAKE_PHOTO);
                 return true;
             default:
                 return false;
         }
     }
 
+
     @Override
-    // photo picker code, not currently implemented, but in place for implemenation
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
     {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
@@ -150,16 +152,58 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
             case SELECT_PHOTO:
                 if (resultCode == RESULT_OK)
                 {
-                    try {
+                    try
+                    {
                         final Uri imageUri = imageReturnedIntent.getData();
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         selectedImage = BitmapFactory.decodeStream(imageStream);
-                        imageView.setImageBitmap(selectedImage);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
+                break;
+
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK)
+                {
+                    Uri thisUri = imageUri;
+                    getContentResolver().notifyChange(thisUri, null);
+                    ContentResolver cr = getContentResolver();
+                    Bitmap bitmap;
+                    try
+                    {
+                        selectedImage = android.provider.MediaStore.Images.Media.getBitmap(cr, thisUri);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
+                                .show();
+                        Log.e("Camera", e.toString());
+                    }
+                }
+                break;
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults)
+    {
+        switch(permsRequestCode)
+        {
+            case 200:
+                writeAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+                break;
+            case 201:
+                cameraAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+    }
+
+    private boolean hasPermission(String permission)
+    {
+        if(MainActivity.isMarshmellow())
+        {
+            return(checkSelfPermission(permission)==PackageManager.PERMISSION_GRANTED);
+        }
+        return true;
     }
 
     public void newSite() throws JSONException
@@ -225,15 +269,13 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         if (selectedImage != null)
         {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            byte[] bArray = baos.toByteArray();
-            String encoded = Base64.encodeToString(bArray, Base64.DEFAULT);
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String encoded = Base64.encodeToString(b, Base64.DEFAULT);
+            // Not sure if this is needed ^ TODO: testing needed
             jsonParam.put("Landmark Photo", encoded);
         }
-        else
-        {
-            jsonParam.put("Landmark Photo", 0);
-        }
+        else { jsonParam.put("Landmark Photo", 0); }
 
         return jsonParam;
     }

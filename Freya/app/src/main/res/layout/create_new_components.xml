@@ -309,28 +309,17 @@
     <Button
         android:id="@+id/newComponentButton"
 
-        android:text="Next"
+        android:text="Save"
         android:textColor="@color/unr_silver"
         android:textSize="25dp"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:layout_marginRight="20dp"
-        android:layout_marginEnd="17dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/deployment"/>
-
-    <Button
-        android:id="@+id/backComponentButton"
-        android:text="Back"
-        android:textColor="@color/unr_silver"
-        android:textSize="25dp"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button"
-        android:layout_marginRight="20dp"
+        android:layout_alignStart="@+id/CompPhoto"
         android:layout_below="@+id/CompPhoto"
-        android:layout_alignStart="@+id/wiring_notes"/>
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/CompPhoto"
@@ -341,8 +330,7 @@
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:layout_below="@+id/wiring_notes"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

@@ -1,7 +1,5 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,14 +53,12 @@ public class CreateNewProject extends MainActivity implements View.OnClickListen
         {
             case (R.id.newProjectButton):
                 try
-                {newProject();} catch (JSONException e)
-                {e.printStackTrace();}
-                Intent intent = new Intent(this, CreateNewSite.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
+                {newProject();} catch (JSONException e){e.printStackTrace();}
+                overridePendingTransition(0, 0);
                 try{
                     Modules.write(info, ProjectFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
+                finish();
                 break;
         }
     }

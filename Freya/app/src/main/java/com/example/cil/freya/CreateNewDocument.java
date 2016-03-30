@@ -27,7 +27,7 @@ import java.util.UUID;
 public class CreateNewDocument extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
              int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
-             Button backButton,createButton;
+             Button createButton;
              String DocumentFile = "DocumentFile.txt";
              EditText info;
 
@@ -51,8 +51,6 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
 
             createButton = (Button) findViewById(R.id.newDocumentButton);
             createButton.setOnClickListener(this);
-            backButton = (Button) findViewById(R.id.backDocumentButton);
-            backButton.setOnClickListener(this);
         }
 
     @Override
@@ -64,19 +62,13 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
             case (R.id.newDocumentButton):
                 try
                 {newDocument();} catch (JSONException e) {e.printStackTrace();}
-                intent = new Intent(this, CreateNewServiceEntry.class);
-                startActivity(intent);
                 overridePendingTransition(0, 0);
                 try{
                     Modules.write(info, DocumentFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
+                finish();
                 break;
 
-            case (R.id.backDocumentButton):
-                intent = new Intent(this, CreateNewComponent.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-                break;
         }
 
     }

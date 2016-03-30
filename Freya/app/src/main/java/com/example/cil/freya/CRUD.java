@@ -69,7 +69,7 @@ public class CRUD {
             String sb = "";
             URL url;
             HttpURLConnection urlConnection = null;
-            String test = "http://sensor.nevada.edu/GS/Services/edge/";
+            String test = "https://sensor.nevada.edu/GS/Services/edge/";
             try {
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -101,9 +101,8 @@ public class CRUD {
                     br.close();
 
                     System.out.println("" + sb);
-
                 }else{
-                    //  prints wrror code from server
+                    //  prints error code from server
                     System.out.println(urlConnection.getResponseMessage());
                 }
             } catch (IOException e) {
@@ -127,7 +126,7 @@ public class CRUD {
             URL url = null;
             HttpURLConnection urlConnection = null;
             // URL is attached to theunique ID to identify which part of the JSON needs to be deleted
-            String test = "http://sensor.nevada.edu/GS/Services/people/" + params [0] + "/";
+            String test = "https://sensor.nevada.edu/GS/Services/people/" + params [0] + "/";
             try {
                 // connect to URL
                 url = new URL(test);
@@ -166,7 +165,7 @@ public class CRUD {
             int one = 1;
             HttpURLConnection urlConnection = null;
             // update via Unqiue ID
-            String test = "http://sensor.nevada.edu/GS/Services/people/" + params [0] + "/";
+            String test = "https://sensor.nevada.edu/GS/Services/people/" + params [0] + "/";
             try {
                 // connect to URL
                 url = new URL(test);

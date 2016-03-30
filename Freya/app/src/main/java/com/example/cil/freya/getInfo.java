@@ -1,15 +1,21 @@
 package com.example.cil.freya;
 
+import android.app.Application;
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by cil on 2/5/16.
  */
-public class getInfo
+public class getInfo extends Application
 {
     // put JSONs in here
     //  static String projectUID [];
@@ -39,17 +45,30 @@ public class getInfo
     public static String serviceNames[];
     public static int serviceNumber[];
     public static JSONObject complete = new JSONObject();
+    static String filename = "backup";
 
 
-    static public void getAllRequests (){
-        getPeople();
-        getProjects();
-        getSites();
-        getSystems();
-        getDeployment();
-        getComponent();
-        getDocuments();
-        getService();
+    static public void getAllRequests (Context cxt){
+        try {getPeople(cxt);} catch (FileNotFoundException e) {e.printStackTrace();}
+        getProjects(cxt);
+        getSystems(cxt);
+        getDeployment(cxt);
+        getSites(cxt);
+        getComponent(cxt);
+        getDocuments(cxt);
+        getService(cxt);
+    }
+
+    //TODO: get to work
+    static public void writeToFile(String write, Context ctx) throws FileNotFoundException {
+       // if (!hasPermission (MainActivity.readPerm[0])) { requestPermissions (MainActivity.readPerm, MainActivity.readRequestCode); }
+        //if (!hasPermission (MainActivity.cameraPerm[0])) { requestPermissions (MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
+        try {
+            FileOutputStream FileOut = ctx.openFileOutput(filename, ctx.MODE_PRIVATE);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(FileOut);
+            outputWriter.write(write);
+            outputWriter.close();
+        } catch (Exception e) { e.printStackTrace();}
     }
 
     static public JSONArray convertObjectToArray(String convert, String Type)
@@ -70,7 +89,7 @@ public class getInfo
     }
 
     // get peopleJSON from server
-    static public void getPeople()
+    static public void getPeople(Context cxt) throws FileNotFoundException
     {
         String people_str = null;
         // try to read from URL
@@ -78,6 +97,8 @@ public class getInfo
             // set up from the URL
             people_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.peopleURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
+        writeToFile(people_str, cxt);
+
         // try to fill JSON
         people = convertObjectToArray(people_str, "People");
         // create people list
@@ -105,7 +126,7 @@ public class getInfo
     }
 
 
-    static public void getProjects()
+    static public void getProjects(Context cxt)
     {
         String projects_str = "";
         try {
@@ -143,7 +164,7 @@ public class getInfo
     }
 
     // get siteJSON from server
-    static public void getSites()
+    static public void getSites(Context cxt)
     {
         String site_str = null;
         // try to read from URL
@@ -179,7 +200,7 @@ public class getInfo
     }
 
 
-    static public void getSystems()
+    static public void getSystems(Context cxt)
     {
         String system_str = null;
         // try to read from URL
@@ -214,7 +235,7 @@ public class getInfo
         } catch (JSONException e) { e.printStackTrace();}
     }
 
-    static public void getDeployment()
+    static public void getDeployment(Context cxt)
     {
         String deployment_str = null;
         // try to read from URL
@@ -249,7 +270,7 @@ public class getInfo
         } catch (JSONException e) { e.printStackTrace();}
     }
 
-    static public void getComponent()
+    static public void getComponent(Context cxt)
     {
         String component_str = null;
         // try to read from URL
@@ -284,7 +305,7 @@ public class getInfo
         } catch (JSONException e) { e.printStackTrace();}
     }
 
-    static public void getDocuments()
+    static public void getDocuments(Context cxt)
     {
         String document_str = null;
         // try to read from URL
@@ -320,7 +341,7 @@ public class getInfo
         } catch (JSONException e) { e.printStackTrace();}
     }
 
-    static public void getService()
+    static public void getService(Context cxt)
     {
         String service_str = null;
         // try to read from URL

@@ -1,11 +1,16 @@
 package com.example.cil.freya;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,12 +20,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -36,11 +43,13 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
     EditText info;
     int projNumb, creatorNumb, systemNumb, componentNumb;
     String ServiceEntryFile = "ServiceEntryFile.txt";
-    Button createButton, backButton, SEButton;
+    Button createButton, SEButton;
     private final int SELECT_PHOTO = 1;
     private final int TAKE_PHOTO = 2;
+    private Uri imageUri;
     Bitmap selectedImage;
     ImageView imageView;
+    boolean writeAccepted, cameraAccepted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,8 +69,6 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
 
         createButton = (Button) findViewById(R.id.newServiceButton);
         createButton.setOnClickListener(this);
-        backButton = (Button) findViewById(R.id.backServiceButton);
-        backButton.setOnClickListener(this);
         SEButton = (Button) findViewById(R.id.SEPhoto);
         SEButton.setOnClickListener(this);
         registerForContextMenu(SEButton);
@@ -80,21 +87,92 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
     }
 
     @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        super.onContextItemSelected(item);
+        switch (item.getItemId())
+        {
+            case R.id.choose_photo:
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                return true;
+            case R.id.take_photo:
+                if (!hasPermission(MainActivity.readPerm[0])) { requestPermissions(MainActivity.readPerm, MainActivity.readRequestCode); }
+                if (!hasPermission(MainActivity.cameraPerm[0])) { requestPermissions(MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File photo = new File(Environment.getExternalStorageDirectory(),  "HotPic.jpg");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+                imageUri = Uri.fromFile(photo);
+                startActivityForResult(intent, TAKE_PHOTO);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
     // photo picker code, not currently implemented, but in place for implemenation
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
     {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-               // if (resultCode == Activity.RESULT_OK)
-             //   {
-                    try {
+        switch (requestCode)
+        {
+            case SELECT_PHOTO:
+                if (resultCode == RESULT_OK)
+                {
+                    try
+                    {
                         final Uri imageUri = imageReturnedIntent.getData();
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         selectedImage = BitmapFactory.decodeStream(imageStream);
-                        imageView.setImageBitmap(selectedImage);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                //}
+                }
+                break;
+
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK)
+                {
+                    Uri thisUri = imageUri;
+                    getContentResolver().notifyChange(thisUri, null);
+                    ContentResolver cr = getContentResolver();
+                    Bitmap bitmap;
+                    try
+                    {
+                        selectedImage = android.provider.MediaStore.Images.Media.getBitmap(cr, thisUri);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
+                                .show();
+                        Log.e("Camera", e.toString());
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults)
+    {
+        switch(permsRequestCode)
+        {
+            case 200:
+                writeAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+                break;
+            case 201:
+                cameraAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+    }
+
+    private boolean hasPermission(String permission)
+    {
+        if(MainActivity.isMarshmellow())
+        {
+            return(checkSelfPermission(permission)==PackageManager.PERMISSION_GRANTED);
+        }
+        return true;
     }
 
     @Override
@@ -125,30 +203,6 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
     }
 
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
-        super.onContextItemSelected(item);
-        switch (item.getItemId())
-        {
-            case R.id.choose_photo:
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-                return true;
-            case R.id.take_photo:
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                //Uri fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-                //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-                // start the image capture Intent
-                startActivityForResult(cameraIntent, TAKE_PHOTO);
-
-                return true;
-            default:
-                return false;
-        }
-    }
-
 
     @Override
     public void onNothingSelected(AdapterView<?> parent)
@@ -174,21 +228,12 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
         {
             case (R.id.newServiceButton):
                 try {newServiceEntry();} catch (JSONException e) {e.printStackTrace();}
-                new CRUD.writeMessage().execute(getInfo.complete);
-              /*  try
-                {newServiceEntry();} catch (JSONException e) {e.printStackTrace();}
-                intent = new Intent(this, CreateNew.class);
-                startActivity(intent);
                 try{
                     Modules.write(info, ServiceEntryFile, this);}
-                catch(FileNotFoundException e){e.printStackTrace();}*/
+                catch(FileNotFoundException e){e.printStackTrace();}
+                finish();
                 break;
 
-            case (R.id.backServiceButton):
-                intent = new Intent(this, CreateNewDocument.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-                break;
             case (R.id.SEPhoto):
                 this.openContextMenu(v);
                 break;
@@ -228,16 +273,16 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
 
         jsonParam.put("Creation Date", date);
 
-
         if (selectedImage != null)
         {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            byte[] bArray = baos.toByteArray();
-            String encoded = Base64.encodeToString(bArray, Base64.DEFAULT);
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String encoded = Base64.encodeToString(b, Base64.DEFAULT);
+            // Not sure if this is needed ^ TODO: testing needed
             jsonParam.put("Photo", encoded);
         }
-        else { jsonParam.put("Photo", null);}
+        else { jsonParam.put("Photo", 0); }
 
         return jsonParam;
     }

@@ -1,11 +1,16 @@
 package com.example.cil.freya;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
@@ -25,13 +30,17 @@ import com.example.cil.freya.ModuleDisplayActivities.ProjectDisplayActivity;
 import com.example.cil.freya.ModuleDisplayActivities.ServiceEntryDisplayActivity;
 import com.example.cil.freya.ModuleDisplayActivities.SiteDisplayActivity;
 import com.example.cil.freya.ModuleDisplayActivities.SystemDisplayActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener{
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
@@ -41,9 +50,16 @@ public class MainActivity extends Activity{
     ExpandableListAdapter expandable;
     ExpandableListView expListView;
     public static int selectedModuleIndex = -1;
+    public static String[] readPerm = {"android.permission.READ_EXTERNAL_STORAGE"};
+    public static String[] cameraPerm = {"android.permission.CAMERA"};
+    public static String[] writePerm = {"android.permission.WRITE_EXTERNAL_STORAGE"};
+    public static int readRequestCode = 200;
+    public static int cameraRequestCode = 201;
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mLastLocation;
 
     // URL list
-    static String mainURL = "http://sensor.nevada.edu/GS/Services/";
+    static String mainURL = "https://sensor.nevada.edu/GS/Services/";
     static String peopleURL = "people/";
     static String projectsURL = "projects/";
     static String siteURL = "sites/";
@@ -66,6 +82,9 @@ public class MainActivity extends Activity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO
+        GPSAccessPermission();
 
         // create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -94,7 +113,7 @@ public class MainActivity extends Activity{
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // go to getAllRequest
-        getInfo.getAllRequests();
+        getInfo.getAllRequests(this);
 
         // create expandable list view
         expListView = (ExpandableListView) findViewById(R.id.expList);
@@ -154,6 +173,8 @@ public class MainActivity extends Activity{
             // usually shown when the app cant connect to the server
             //Toast.makeText(this, "Unable to populate Projects. Sync before trying again.", Toast.LENGTH_LONG).show();
         }
+
+        buildGoogleApiClient();
     }
 
     private void prepareListData() {
@@ -252,6 +273,61 @@ public class MainActivity extends Activity{
         mDrawerToggle.syncState();
     }
 
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    protected void GPSAccessPermission(){
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if(permissionCheck != 0){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+           System.out.print(mLastLocation);
+        } else {
+            // Toast.makeText(this, R.string.no_location_detected, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+
+    }
+
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        mGoogleApiClient.connect();
+    }
+
     // drawer listener
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
@@ -325,43 +401,11 @@ public class MainActivity extends Activity{
                 overridePendingTransition(0,0);
                 break;
 
-       /* else if (position == 3)
-        {
-            // start photo picker intent
-            // mDrawerLayout.closeDrawer(mDrawerList);
-            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/*");
-            startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-        }*/
             default:
                 // close the drawer
                 mDrawerList.setItemChecked(position, true);
-                //getActionBar().setTitle(mDrawerList.getItemAtPosition(position).toString());
                 mDrawerLayout.closeDrawer(mDrawerList);
         }
-
-    }
-
-    @Override
-    // photo picker code, not currently implemented, but in place for implemenation
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
-    {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        /*switch (requestCode)
-        {
-            case SELECT_PHOTO:
-                if (resultCode == RESULT_OK)
-                {
-                    try {
-                        final Uri imageUri = imageReturnedIntent.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        selectedImage = BitmapFactory.decodeStream(imageStream);
-                        imageView.setImageBitmap(selectedImage);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-        }*/
     }
 
     // automatically generated
@@ -391,15 +435,14 @@ public class MainActivity extends Activity{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
-            getInfo.getAllRequests();
+            getInfo.getAllRequests(this);
             prepareListData();
             return true;
         }
         // if upload is chosen
         if (id == R.id.upload) {
-            // start createnewproject intent
-            Intent intent = new Intent(MainActivity.this, CreateNewProject.class);
-            startActivity(intent);
+            new CRUD.writeMessage().execute(getInfo.complete);
+
             overridePendingTransition(0, 0);
             return true;
         }
@@ -413,6 +456,11 @@ public class MainActivity extends Activity{
         }
 
         return false;
+    }
+
+    public static boolean isMarshmellow()
+    {
+        return (Build.VERSION.SDK_INT> Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 
 // the people test JSON. Was our first try. Is included for refrence, but is no longer used
