@@ -78,14 +78,12 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         {
             case (R.id.newSiteButton):
                 try{newSite();} catch (JSONException e) {e.printStackTrace();}
-
-                intent = new Intent(this, CreateNewSystem.class);
-                startActivity(intent);
                 overridePendingTransition(0, 0);
 
                 try{
                     Modules.write(info, SiteFile, this);}
                 catch(FileNotFoundException e){e.printStackTrace();}
+                finish();
 
                 break;
 

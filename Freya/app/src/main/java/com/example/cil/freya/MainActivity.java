@@ -59,7 +59,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     protected Location mLastLocation;
 
     // URL list
-    static String mainURL = "https://sensor.nevada.edu/GS/Services/";
+    static String mainURL = "http://sensor.nevada.edu/GS/Services/";
     static String peopleURL = "people/";
     static String projectsURL = "projects/";
     static String siteURL = "sites/";

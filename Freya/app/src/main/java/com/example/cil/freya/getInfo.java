@@ -8,8 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -45,7 +43,6 @@ public class getInfo extends Application
     public static String serviceNames[];
     public static int serviceNumber[];
     public static JSONObject complete = new JSONObject();
-    static String filename = "backup";
 
 
     static public void getAllRequests (Context cxt){
@@ -59,17 +56,6 @@ public class getInfo extends Application
         getService(cxt);
     }
 
-    //TODO: get to work
-    static public void writeToFile(String write, Context ctx) throws FileNotFoundException {
-       // if (!hasPermission (MainActivity.readPerm[0])) { requestPermissions (MainActivity.readPerm, MainActivity.readRequestCode); }
-        //if (!hasPermission (MainActivity.cameraPerm[0])) { requestPermissions (MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
-        try {
-            FileOutputStream FileOut = ctx.openFileOutput(filename, ctx.MODE_PRIVATE);
-            OutputStreamWriter outputWriter = new OutputStreamWriter(FileOut);
-            outputWriter.write(write);
-            outputWriter.close();
-        } catch (Exception e) { e.printStackTrace();}
-    }
 
     static public JSONArray convertObjectToArray(String convert, String Type)
     {
@@ -97,7 +83,7 @@ public class getInfo extends Application
             // set up from the URL
             people_str = new CRUD.readMessage().execute(MainActivity.mainURL+MainActivity.peopleURL).get();
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
-        writeToFile(people_str, cxt);
+       // FileHandler.writeToFile(people_str);
 
         // try to fill JSON
         people = convertObjectToArray(people_str, "People");

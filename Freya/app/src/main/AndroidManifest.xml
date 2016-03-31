@@ -53,6 +53,8 @@
         </activity>
         <activity android:name=".CreateNewServiceEntry">
         </activity>
+        <application android:name="com.example.cil.freya.StaticContextHandler">
+        </application>
 
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for

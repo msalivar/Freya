@@ -69,7 +69,7 @@ public class CRUD {
             String sb = "";
             URL url;
             HttpURLConnection urlConnection = null;
-            String test = "https://sensor.nevada.edu/GS/Services/edge/";
+            String test = "http://sensor.nevada.edu/GS/Services/edge/";
             try {
                 url = new URL(test);
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -217,4 +217,5 @@ public class CRUD {
             return null;
         }
     }
+
 }
