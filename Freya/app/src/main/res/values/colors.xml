@@ -6,7 +6,6 @@
     <color name="unr_blue">#FF09396B</color>
     <color name="unr_off_white">#E4E4E4</color>
     <color name="hint_color">#FF919093</color>
-    <color name="background_material_light">#ffffff</color>
     <color name="background_material_light_1">#5900ff</color>
     <color name="primary_material_light">#09396b</color>
     <color name="background_light">#ffffff</color>
@@ -18,4 +17,11 @@
     <color name="black">#000000</color>
     <color name="foreground_material_light">#ff0000</color>
     <color name="windowBackground">#e4e4e4</color>
+
+    <!-- New Color Scheme-->
+    <color name="accentColor">#38C3DD</color>
+    <color name="endOfFade">#0986A3</color>
+    <color name="startOfFade">#20ABBD</color>
+    <color name="highlightColor">#006884</color>
+    <color name="white">#ffffff</color>
 </resources>

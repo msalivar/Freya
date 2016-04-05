@@ -3,19 +3,19 @@
     <item android:state_pressed="true" >
         <shape>
             <solid
-                android:color="#FF496C91" />
+                android:color="@color/accentColor" />
             <corners
                 android:radius="10dp" />
             <stroke
                 android:width="3dp"
-                android:color="@color/unr_blue"/>
+                android:color="@color/highlightColor"/>
 
         </shape>
     </item>
     <item>
         <shape>
             <solid
-                android:color="@color/unr_blue"
+                android:color="@color/accentColor"
                 />
             <corners
                 android:radius="10dp"

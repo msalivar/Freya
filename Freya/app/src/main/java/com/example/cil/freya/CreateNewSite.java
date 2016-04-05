@@ -221,16 +221,13 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         JSONObject jsonParam = new JSONObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
 
-        /*LocationManager lm = (LocationManager) getSystemService(this.LOCATION_SERVICE);
+//      jsonParam.put("Latitude",location.getLatitude());
+//        jsonParam.put("Longitude",location.getLongitude());
+//        jsonParam.put("Altitude",location.getAltitude());
+//        jsonParam.put("Latitude",location.get());
+//
+//        jsonParam.put("Location", location.toString());
 
-      /* jsonParam.put("Latitude",location.getLatitude());
-        jsonParam.put("Longitude",location.getLongitude());
-        jsonParam.put("Altitude",location.getAltitude());
-        jsonParam.put("Latitude",location.get());*/
-        /*Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        jsonParam.put("Location", location.toString());
-*/
         jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
 
         info = (EditText) findViewById(R.id.site_name);
@@ -243,8 +240,8 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         jsonParam.put("Alias", info.getText().toString());
 
 
-        info = (EditText) findViewById(R.id.location);
-        jsonParam.put("Location", info.getText().toString());
+       // info = (EditText) findViewById(R.id.location);
+        jsonParam.put("Location", MainActivity.mLastLocation.toString());
 
         info = (EditText) findViewById(R.id.landOwner);
         jsonParam.put("Land Owner", info.getText().toString());

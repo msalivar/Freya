@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class CRUD {
     }
 
     // write message to edge URL. Same issue. Used as template
-    public static class writeMessage extends AsyncTask<JSONObject, Void, Void>
+    public static class writeMessage extends AsyncTask<JSONObject, Context, Void>
     {
 
         @Override

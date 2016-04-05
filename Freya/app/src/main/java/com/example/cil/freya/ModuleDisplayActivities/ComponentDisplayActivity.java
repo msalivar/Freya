@@ -30,8 +30,12 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_component_display);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+//        cancelButton = (Button) findViewById(R.id.cancelButton);
+//        cancelButton.setOnClickListener(this);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("Component");
+
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         installation = (EditText) findViewById(R.id.installation);

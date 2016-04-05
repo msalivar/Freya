@@ -2,24 +2,49 @@
 <!--Creates the layout for the Create New Components screen.
     Displays the labels and boxes for users input!-->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             xmlns:tools="http://schemas.android.com/tools"
-            android:weightSum="1"
             android:orientation="vertical"
-            android:paddingTop="15dp"
-            android:background="@color/unr_off_white"
-            tools:context="com.example.cil.freya.CreateNewComponent" android:fillViewport="false"
-            android:paddingBottom="15dp">
+            tools:context="com.example.cil.freya.CreateNewComponent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <Button
+        android:id="@+id/saveButton"
+        android:background="@drawable/button"
+
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="25dp"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:alpha=".9"
+        android:layout_marginBottom="5dp"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/cancelButton"-->
+        <!--android:text="Cancel"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="25dp"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@drawable/button"/>-->
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:weightSum="1"
                     android:orientation="vertical"
                     android:paddingTop="15dp"
-                    android:background="@color/unr_off_white">
+                    android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
         <EditText
             android:layout_width="match_parent"
@@ -39,22 +64,25 @@
             android:layout_marginTop="15dp"/>
 
         <EditText
+            android:id="@+id/installation"
+            android:background="@drawable/shapes"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/installation"
             android:layout_gravity="center_horizontal"
+
+
             android:textSize="20dp"
-            android:hint="Installation Details"
             android:textColorHint="@color/hint_color"
             android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
+            android:hint="Installation Details"
             android:layout_alignParentEnd="true"
             android:editable="false"
             android:paddingStart="10dp"
             android:layout_marginRight="15dp"
             android:inputType="textCapWords"
             android:password="false"
-            android:layout_alignTop="@+id/installation_label" />
+            android:layout_alignTop="@+id/installation_label"
+            />
 
         <EditText
             android:layout_width="match_parent"
@@ -289,10 +317,10 @@
             android:layout_alignParentBottom="false"
             android:layout_alignEnd="@+id/deployment_label"
             android:layout_alignTop="@+id/deployment_label"/>
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="64dp"
-        android:paddingLeft="10dp"
-        android:dropDownSelector="@color/unr_blue"/>
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="64dp"
+            android:paddingLeft="10dp"
+            android:dropDownSelector="@color/unr_blue"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -305,29 +333,6 @@
             android:inputType="textCapSentences"
             android:layout_below="@+id/deployment_label"
             android:layout_alignParentStart="true"/>
-
-        <Button
-            android:id="@+id/saveButton"
-            android:text="Save"
-            android:textColor="@color/unr_silver"
-            android:textSize="25dp"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button"
-            android:layout_marginRight="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/deployment"/>
-
-        <Button
-            android:id="@+id/cancelButton"
-            android:text="Cancel"
-            android:textColor="@color/unr_silver"
-            android:textSize="25dp"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button"
-            android:layout_below="@+id/wiring_notes"
-            android:layout_alignStart="@+id/wiring_notes" android:layout_marginLeft="30dp"/>
-
-    </RelativeLayout>
-</ScrollView>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

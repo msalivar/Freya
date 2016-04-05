@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     public static int readRequestCode = 200;
     public static int cameraRequestCode = 201;
     protected GoogleApiClient mGoogleApiClient;
-    protected Location mLastLocation;
+    public static Location mLastLocation;
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -441,8 +441,8 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         }
         // if upload is chosen
         if (id == R.id.upload) {
+            Context cxt = getApplicationContext();
             new CRUD.writeMessage().execute(getInfo.complete);
-
             overridePendingTransition(0, 0);
             return true;
         }
