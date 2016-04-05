@@ -38,8 +38,9 @@
             android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_alignParentEnd="true"/>
+            android:layout_marginTop="19dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
 
         <EditText
             android:layout_width="200dp"
@@ -51,14 +52,13 @@
             android:textColorHint="@color/hint_color"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_alignParentEnd="true"
             android:editable="false"
             android:paddingStart="10dp"
             android:layout_marginRight="15dp"
             android:inputType="textCapWords"
             android:password="false"
-            android:layout_marginLeft="150dp"
-            android:layout_alignTop="@+id/name_label"/>
+            android:layout_above="@+id/notes_label"
+            android:layout_alignStart="@+id/document_project"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -72,13 +72,11 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/name_label"/>
+            android:layout_marginTop="19dp"
+            android:layout_below="@+id/name_label"
+            android:layout_alignStart="@+id/name_label"/>
 
         <EditText
             android:layout_width="200dp"
@@ -90,14 +88,13 @@
             android:textColorHint="@color/hint_color"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_alignParentEnd="true"
             android:editable="false"
             android:paddingStart="10dp"
-            android:layout_marginRight="15dp"
             android:inputType="textCapWords"
             android:password="false"
-            android:layout_marginLeft="150dp"
-            android:layout_alignTop="@+id/notes_label"/>
+            android:layout_alignTop="@+id/notes_label"
+            android:layout_alignEnd="@+id/document_name"
+            android:layout_alignStart="@+id/document_name"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -111,13 +108,12 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/notes_label"/>
+            android:layout_below="@+id/notes_label"
+            android:layout_alignEnd="@+id/notes_label"
+            android:layout_alignStart="@+id/notes_label"/>
 
         <EditText
             android:layout_width="200dp"
@@ -129,14 +125,13 @@
             android:textColorHint="@color/hint_color"
             android:textColor="@color/unr_blue"
             android:background="@drawable/shapes"
-            android:layout_alignParentEnd="true"
             android:editable="false"
             android:paddingStart="10dp"
-            android:layout_marginRight="15dp"
             android:inputType="textCapWords"
             android:password="false"
-            android:layout_marginLeft="150dp"
-            android:layout_alignTop="@+id/path_label"/>
+            android:layout_alignTop="@+id/path_label"
+            android:layout_alignStart="@+id/doc_notes"
+            android:layout_alignEnd="@+id/notes_label"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -150,13 +145,12 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/path_label"/>
+            android:layout_below="@+id/path_label"
+            android:layout_alignEnd="@+id/notes_label"
+            android:layout_alignStart="@+id/path_label"/>
 
         <Spinner
             android:layout_width="200dp"
@@ -184,13 +178,12 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/project_label"/>
+            android:layout_below="@+id/project_label"
+            android:layout_alignEnd="@+id/notes_label"
+            android:layout_alignStart="@+id/project_label"/>
 
         <Spinner
             android:layout_width="200dp"
@@ -218,13 +211,12 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/site_label"/>
+            android:layout_below="@+id/site_label"
+            android:layout_alignEnd="@+id/document_deployment"
+            android:layout_alignStart="@+id/site_label"/>
 
         <Spinner
             android:layout_width="200dp"
@@ -252,13 +244,12 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/deployment_label"/>
+            android:layout_below="@+id/deployment_label"
+            android:layout_alignEnd="@+id/document_component"
+            android:layout_alignStart="@+id/service_label"/>
 
         <Spinner
             android:layout_width="200dp"
@@ -286,13 +277,12 @@
             android:editable="false"
             android:paddingStart="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:inputType="none"
             android:paddingRight="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignEnd="@+id/name_label"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/component_label"/>
+            android:layout_below="@+id/component_label"
+            android:layout_alignEnd="@+id/notes_label"
+            android:layout_alignStart="@+id/deployment_label"/>
 
         <Spinner
             android:layout_width="200dp"

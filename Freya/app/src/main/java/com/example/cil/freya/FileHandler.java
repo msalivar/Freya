@@ -37,9 +37,6 @@ public class FileHandler
         } catch (Exception e) { e.printStackTrace();}
     }
 
-    public static void write(String write){
-        write(write);
-    }
 
     public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults)
     {

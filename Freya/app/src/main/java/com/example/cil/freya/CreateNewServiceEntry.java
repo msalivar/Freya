@@ -218,7 +218,7 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
         JSONArray service = new JSONArray();
         service.put(JSON);
 
-        getInfo.complete.put("ServiceEntries", service);
+        getInfo.complete.put("Service Entries", service);
     }
 
     @Override
@@ -248,8 +248,6 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         String date = sdf.format(new Date());
 
-        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
-
         info = (EditText) findViewById(R.id.SEname);
         jsonParam.put("Name", info.getText().toString());
 
@@ -273,15 +271,18 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
 
         jsonParam.put("Creation Date", date);
 
+        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
+
         if (selectedImage != null)
         {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 3, baos);
             byte[] b = baos.toByteArray();
             String encoded = Base64.encodeToString(b, Base64.DEFAULT);
             // Not sure if this is needed ^ TODO: testing needed
             jsonParam.put("Photo", encoded);
         }
+
         else { jsonParam.put("Photo", 0); }
 
         return jsonParam;

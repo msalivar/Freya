@@ -85,15 +85,17 @@ public class CRUD {
 
                 // get output writer
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
-                out.write(params [0].toString());
+                out.write(params[0].toString());
                 out.close();
 
                 // if connection is good
                 int HttpResult = urlConnection.getResponseCode();
                 // output
                 if(HttpResult == HttpURLConnection.HTTP_OK){
+
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             urlConnection.getInputStream(),"utf-8"));
+
                     String line;
                     while ((line = br.readLine()) != null) {
                         sb += (line + "\n");
