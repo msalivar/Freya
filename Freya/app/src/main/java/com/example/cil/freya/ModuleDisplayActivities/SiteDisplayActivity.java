@@ -32,6 +32,10 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_display);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("Site");
+
         cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);

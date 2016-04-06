@@ -30,8 +30,12 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deployment_display);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("Deployment");
+
+//        cancelButton = (Button) findViewById(R.id.cancelButton);
+//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         deployName = (EditText) findViewById(R.id.deployname);
@@ -100,10 +104,10 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-            case (R.id.cancelButton):
-                // Values will not be changed and work will be lost, maybe show a warning here?
-                finish();
-                break;
+//            case (R.id.cancelButton):
+//                // Values will not be changed and work will be lost, maybe show a warning here?
+//                finish();
+//                break;
         }
     }
 

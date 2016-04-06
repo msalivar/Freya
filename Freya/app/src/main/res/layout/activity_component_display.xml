@@ -23,7 +23,8 @@
         android:layout_marginLeft="15dp"
         android:layout_alignParentBottom="true"
         android:alpha=".9"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        />
 
     <!--<Button-->
         <!--android:id="@+id/cancelButton"-->
@@ -46,293 +47,473 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/installation_label"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="Installation"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/hint_color"
             android:layout_marginLeft="15dp"
-            android:inputType="none"
-            android:paddingRight="15dp"
-            android:layout_marginTop="15dp"/>
-
-        <EditText
-            android:id="@+id/installation"
-            android:background="@drawable/shapes"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-
-
-            android:textSize="20dp"
-            android:textColorHint="@color/hint_color"
-            android:textColor="@color/unr_blue"
-            android:hint="Installation Details"
-            android:layout_alignParentEnd="true"
-            android:editable="false"
-            android:paddingStart="10dp"
-            android:layout_marginRight="15dp"
-            android:inputType="textCapWords"
-            android:password="false"
-            android:layout_alignTop="@+id/installation_label"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/manufacturer_label"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="Manufacturer"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:inputType="none"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/installation_label" />
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/manufacturer"
-            android:hint="Enter Manufacturer"
-            android:textColorHint="@color/hint_color"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
-            android:paddingStart="10dp"
-            android:layout_alignTop="@+id/manufacturer_label"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/model_label"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="Model"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:inputType="none"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/manufacturer_label" />
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/model"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor="@color/unr_blue"
-            android:hint="Enter Model"
-            android:textColorHint="@color/hint_color"
-            android:background="@drawable/shapes"
-            android:paddingLeft="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/model_label"
             android:layout_marginRight="15dp" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/installation_label"
+            android:text="Installation:"
+
+            android:background="@android:color/transparent"
+
+            android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
+            android:textSize="20dp"
+            android:textColor="@color/unr_blue"
+
+            android:editable="false"
+            android:inputType="none"/>
+
+        <EditText
+            android:id="@+id/installation"
+            android:hint="Installation Details"
+            android:layout_alignTop="@+id/installation_label"
+
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"
+            />
+
+        <View
+            android:id="@+id/divider1"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/installation"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+        <EditText
+            android:id="@+id/manufacturer_label"
+            android:text="Manufacturer:"
+            android:background="@android:color/transparent"
+
+            android:layout_below="@+id/divider1"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
+            android:textSize="20dp"
+            android:textColor="@color/unr_blue"
+
+            android:editable="false"
+            android:inputType="none"/>
+
+        <EditText
+            android:id="@+id/manufacturer"
+            android:layout_alignTop="@id/manufacturer_label"
+            android:hint="Enter Manufacturer"
+
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"/>
+
+        <View
+            android:id="@+id/divider2"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/manufacturer"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+        <EditText
+            android:id="@+id/model_label"
+            android:text="Model:"
+            android:layout_below="@+id/divider2"
+            android:background="@android:color/transparent"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
+            android:textSize="20dp"
+            android:textColor="@color/unr_blue"
+
+            android:editable="false"
+            android:inputType="none"/>
+
+        <EditText
+            android:id="@+id/model"
+            android:hint="Enter Model"
+            android:layout_alignTop="@+id/model_label"
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences" />
+
+        <View
+            android:id="@+id/divider3"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/model"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+        <EditText
             android:id="@+id/name_label"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="Name"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:inputType="none"
-            android:layout_marginTop="15dp"
+            android:layout_below="@+id/divider3"
+            android:text="Name:"
+            android:background="@android:color/transparent"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="15dp"
-            android:layout_below="@+id/model_label" />
+            android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
+            android:textSize="20dp"
+            android:textColor="@color/unr_blue"
+
+            android:editable="false"
+            android:inputType="none"/>
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
             android:id="@+id/compname"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor = "@color/unr_blue"
             android:hint="Enter Name"
-            android:textColorHint="@color/hint_color"
-            android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
             android:layout_alignTop="@+id/name_label"
-            android:layout_alignParentEnd="true" />
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"/>
+
+
+        <View
+            android:id="@+id/divider4"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/compname"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:id="@+id/serial_number_label"
+            android:text="Serial Number:"
+            android:background="@android:color/transparent"
+            android:layout_below="@id/divider4"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
             android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
             android:textSize="20dp"
-            android:text="Serial Number"
             android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
+
             android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:inputType="none"
-            android:layout_below="@+id/name_label"
-            android:layout_alignParentEnd="false"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp" />
+            android:inputType="none"/>
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
             android:id="@+id/serial_number"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor = "@color/unr_blue"
             android:hint="Enter Serial Number"
-            android:textColorHint="@color/hint_color"
-            android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
+            android:layout_alignTop="@+id/serial_number_label"
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/serial_number_label" />
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"/>
+
+        <View
+            android:id="@+id/divider5"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/serial_number"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:id="@+id/supplier_label"
+            android:text="Supplier:"
+            android:layout_below="@id/divider5"
+            android:background="@android:color/transparent"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
             android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
             android:textSize="20dp"
-            android:text="Supplier"
             android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
+
             android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:inputType="none"
-            android:layout_below="@+id/serial_number_label"
-            android:layout_alignParentEnd="false"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp" />
+            android:inputType="none"/>
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_alignTop="@+id/supplier_label"
             android:id="@+id/supplier"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor = "@color/unr_blue"
             android:hint="Enter Supplier"
-            android:textColorHint="@color/hint_color"
-            android:background="@drawable/shapes"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:layout_alignParentStart="false"
-            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/supplier_label" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/vendor_label"
             android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
             android:textSize="20dp"
-            android:text="Vendor"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:inputType="none"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/supplier_label"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="15dp" />
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/vendor"
-            android:layout_gravity="center_horizontal"
-            android:inputType="textCapWords"
-            android:textSize="20dp"
-            android:textColor = "@color/unr_blue"
-            android:hint="Enter Vendor"
             android:textColorHint="@color/hint_color"
-            android:background="@drawable/shapes"
-            android:paddingLeft="10dp"
-            android:layout_above="@+id/deployment_label"
-            android:layout_alignEnd="@+id/vendor_label"/>
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"/>
 
+        <View
+            android:id="@+id/divider6"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/supplier"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/vendor_label"
+            android:text="Vendor:"
+            android:layout_below="@id/divider6"
+            android:background="@android:color/transparent"
+
+            android:layout_width="150dp"
             android:layout_height="50dp"
-            android:id="@+id/deployment_label"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="Deployment"
-            android:textColor="@color/unr_blue"
-            android:background="@drawable/shapes"
-            android:editable="false"
-            android:paddingStart="15dp"
-            android:layout_marginRight="15dp"
-            android:inputType="none"
-            android:layout_below="@+id/vendor_label"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
+            android:textSize="20dp"
+            android:textColor="@color/unr_blue"
+
+            android:editable="false"
+            android:inputType="none"/>
+
+        <EditText
+            android:id="@+id/vendor"
+            android:hint="Enter Vendor"
+            android:layout_alignTop="@+id/vendor_label"
+            android:background="@android:color/transparent"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"/>
+
+        <View
+            android:id="@+id/divider7"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/vendor"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+        <EditText
+            android:id="@+id/deployment_label"
+            android:text="Deployment:"
+            android:layout_below="@id/divider7"
+            android:background="@android:color/transparent"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_horizontal"
+
+            android:paddingLeft="15dp"
+
+            android:textSize="20dp"
+            android:textColor="@color/unr_blue"
+
+            android:editable="false"
+            android:inputType="none"/>
 
         <Spinner
-            android:layout_width="200dp"
-            android:layout_height="50dp"
             android:id="@+id/deployment"
-            android:inputType="textCapWords"
-            android:textColor="@color/unr_blue"
-            android:paddingTop="3dip"
-            android:gravity="bottom"
-            android:background="@drawable/shapes"
-            android:layout_alignParentBottom="false"
-            android:layout_alignEnd="@+id/deployment_label"
-            android:layout_alignTop="@+id/deployment_label"/>
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="64dp"
-            android:paddingLeft="10dp"
-            android:dropDownSelector="@color/unr_blue"/>
+            android:background="@android:color/transparent"
 
-        <EditText
+            android:layout_alignTop="@id/deployment_label"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"
+            />
+        <View
+            android:id="@+id/divider8"
+            android:background="@android:color/darker_gray"
+
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/wiring_notes"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/deployment_label"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            />
+
+        <EditText
+            android:id="@+id/wiring_notes"
             android:hint="Enter Wiring Notes"
-            android:textColor="@color/unr_blue"
-            android:inputType="textCapSentences"
+            android:background="@android:color/transparent"
             android:layout_below="@+id/deployment_label"
-            android:layout_alignParentStart="true"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center_horizontal"
+
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+
+            android:textSize="20dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/unr_blue"
+            android:editable="true"
+            android:minLines="1"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences"
+            android:layout_marginBottom="50dp" />
+
+        <View
+            android:id="@+id/divider9"
+            android:background="@android:color/darker_gray"
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/wiring_notes"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

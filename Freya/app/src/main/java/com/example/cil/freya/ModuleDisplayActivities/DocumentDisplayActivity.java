@@ -31,8 +31,12 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_display);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("Document");
+
+//        cancelButton = (Button) findViewById(R.id.cancelButton);
+//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         name = (EditText) findViewById(R.id.document_name);
@@ -213,10 +217,10 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-            case (R.id.cancelButton):
-                // Values will not be changed and work will be lost, maybe show a warning here?
-                finish();
-                break;
+//            case (R.id.cancelButton):
+//                // Values will not be changed and work will be lost, maybe show a warning here?
+//                finish();
+//                break;
         }
     }
 

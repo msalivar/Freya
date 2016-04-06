@@ -30,6 +30,10 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_display);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("Project");
+
         cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);

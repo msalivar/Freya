@@ -30,6 +30,10 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_entry_display);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("Service Entry");
+
         cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);

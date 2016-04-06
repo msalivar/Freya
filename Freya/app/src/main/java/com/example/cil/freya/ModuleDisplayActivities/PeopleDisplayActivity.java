@@ -13,6 +13,9 @@ public class PeopleDisplayActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people_display);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("People");
     }
 
 }

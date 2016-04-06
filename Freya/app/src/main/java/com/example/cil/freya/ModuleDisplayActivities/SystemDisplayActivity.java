@@ -30,6 +30,10 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_display);
+
+        // Sets Name of Screen in top left corner
+        getActionBar().setTitle("System");
+
         cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);

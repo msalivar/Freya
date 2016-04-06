@@ -106,10 +106,10 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-            case (R.id.cancelButton):
-                // Values will not be changed and work will be lost, maybe show a warning here?
-                finish();
-                break;
+//            case (R.id.cancelButton):
+//                // Values will not be changed and work will be lost, maybe show a warning here?
+//                finish();
+//                break;
         }
     }
 

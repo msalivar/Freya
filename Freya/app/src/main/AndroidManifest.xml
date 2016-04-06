@@ -29,31 +29,44 @@
         </activity>
         <activity
             android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message">
+            android:label="@string/title_activity_display_message"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".CreateNewProject"
-            android:label="@string/title_ProjectCreate">
+            android:label="@string/title_ProjectCreate"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".ChooseProjects">
+        <activity android:name=".ChooseProjects"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".ProjectFilterActivity">
+        <activity android:name=".ProjectFilterActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".SearchActivity">
+        <activity android:name=".SearchActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
         </activity>
-        <activity android:name=".CreateNewSite">
+        <activity android:name=".CreateNewSite"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".CreateNewComponent">
+        <activity android:name=".CreateNewComponent"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".CreateNewDeployment">
+        <activity android:name=".CreateNewDeployment"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".CreateNewSystem">
+        <activity android:name=".CreateNewSystem"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".CreateNewDocument">
+        <activity android:name=".CreateNewDocument"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".CreateNewServiceEntry">
+        <activity android:name=".CreateNewServiceEntry"
+            android:windowSoftInputMode="adjustPan">
         </activity>
-        <application android:name="com.example.cil.freya.StaticContextHandler">
+        <application android:name="com.example.cil.freya.StaticContextHandler"
+            android:windowSoftInputMode="adjustPan">
         </application>
 
         <!--
@@ -66,35 +79,43 @@
 
         <activity
             android:name=".ModuleDisplayActivities.PeopleDisplayActivity"
-            android:label="@string/title_activity_people_display">
+            android:label="@string/title_activity_people_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.ProjectDisplayActivity"
-            android:label="@string/title_activity_project_display">
+            android:label="@string/title_activity_project_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.SiteDisplayActivity"
-            android:label="@string/title_activity_site_display">
+            android:label="@string/title_activity_site_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.SystemDisplayActivity"
-            android:label="@string/title_activity_system_display">
+            android:label="@string/title_activity_system_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.DeploymentDisplayActivity"
-            android:label="@string/title_activity_deployment_display">
+            android:label="@string/title_activity_deployment_display"
+            android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.ComponentDisplayActivity"
-            android:label="@string/title_activity_component_display">
+            android:label="@string/title_activity_component_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.DocumentDisplayActivity"
-            android:label="@string/title_activity_document_display">
+            android:label="@string/title_activity_document_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.ServiceEntryDisplayActivity"
-            android:label="@string/title_activity_service_entry_display">
+            android:label="@string/title_activity_service_entry_display"
+            android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 
