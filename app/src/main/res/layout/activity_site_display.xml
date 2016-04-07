@@ -51,7 +51,7 @@
                 android:text="GPS Landmark:"
                 style="@style/LabelTheme"
                 android:layout_below="@+id/divider1"
-                />
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/landmark"
@@ -62,6 +62,7 @@
             <View
                 android:id="@+id/divider2"
                 android:layout_alignBottom="@id/landmark"
+                android:layout_marginBottom="150dp"
                 style="@style/DividerTheme"
                 />
 

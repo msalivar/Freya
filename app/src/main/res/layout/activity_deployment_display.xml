@@ -104,7 +104,6 @@
             android:id="@+id/height_label"
             android:text="Height From Ground:"
             android:layout_alignTop="@id/divider4"
-            android:paddingTop="2dp"
             style="@style/LabelTheme"/>
 
         <EditText
