@@ -2,6 +2,9 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,11 +50,12 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         vendor = (EditText) findViewById(R.id.vendor);
         wiring_notes = (EditText) findViewById(R.id.wiring_notes);
         deployment = (Spinner) findViewById(R.id.deployment);
-        ArrayAdapter<String> componentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.deploymentNames);
-        componentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> componentAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.deploymentNames);
+        componentAdapter.setDropDownViewResource(R.layout.spinner_item);
         deployment.setAdapter(componentAdapter);
         getInfo(MainActivity.selectedModuleIndex);
     }
+
 
     private void getInfo(int projectIndex)
     {
@@ -106,10 +110,6 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-//            case (R.id.cancelButton):
-//                // Values will not be changed and work will be lost, maybe show a warning here?
-//                finish();
-//                break;
         }
     }
 

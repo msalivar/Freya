@@ -43,12 +43,12 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         power = (EditText) findViewById(R.id.power);
         sysname = (EditText) findViewById(R.id.sysname);
         manager = (Spinner) findViewById(R.id.manager);
-        ArrayAdapter<String> managerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.peopleNames);
-        managerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> managerAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.peopleNames);
+        managerAdapter.setDropDownViewResource(R.layout.spinner_item);
         manager.setAdapter(managerAdapter);
         site = (Spinner) findViewById(R.id.site);
-        ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.siteNames);
-        siteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.siteNames);
+        siteAdapter.setDropDownViewResource(R.layout.spinner_item);
         site.setAdapter(siteAdapter);
         getInfo(MainActivity.selectedModuleIndex);
     }

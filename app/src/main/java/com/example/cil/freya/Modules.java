@@ -50,8 +50,8 @@ public class Modules
 
         try
         {
-            ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(cxt, android.R.layout.simple_spinner_item, names);
-            spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(cxt, R.layout.spinner_item, names);
+            spinAdapter.setDropDownViewResource(R.layout.spinner_item);
             proj.setAdapter(spinAdapter);
             proj.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) cxt);
         }catch (NullPointerException e){

@@ -34,8 +34,8 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Project");
 
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+//        cancelButton = (Button) findViewById(R.id.cancelButton);
+//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         grant = (EditText) findViewById(R.id.grant);
@@ -43,8 +43,8 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         funding = (EditText) findViewById(R.id.funding);
         institution = (EditText) findViewById(R.id.institutionName);
         investigator = (Spinner) findViewById(R.id.prininvest);
-        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.peopleNames);
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.peopleNames);
+        spinAdapter.setDropDownViewResource(R.layout.spinner_item);
         investigator.setAdapter(spinAdapter);
         getInfo(MainActivity.selectedModuleIndex);
     }
@@ -98,10 +98,10 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-            case (R.id.cancelButton):
-                // Values will not be changed and work will be lost, maybe show a warning here?
-                finish();
-                break;
+//            case (R.id.cancelButton):
+//                // Values will not be changed and work will be lost, maybe show a warning here?
+//                finish();
+//                break;
         }
     }
 

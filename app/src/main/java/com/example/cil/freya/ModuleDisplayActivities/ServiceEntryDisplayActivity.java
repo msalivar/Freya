@@ -34,8 +34,8 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Service Entry");
 
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+//        cancelButton = (Button) findViewById(R.id.cancelButton);
+//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         name = (EditText) findViewById(R.id.SEname);
@@ -43,23 +43,23 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
         SEnotes = (EditText) findViewById(R.id.SEnotes);
 
         project = (Spinner) findViewById(R.id.SEprojects);
-        ArrayAdapter<String> pAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.projectNames);
-        pAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> pAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.projectNames);
+        pAdapter.setDropDownViewResource(R.layout.spinner_item);
         project.setAdapter(pAdapter);
 
         creator = (Spinner) findViewById(R.id.creator);
-        ArrayAdapter<String> cAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.peopleNames);
-        cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> cAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.peopleNames);
+        cAdapter.setDropDownViewResource(R.layout.spinner_item);
         creator.setAdapter(cAdapter);
 
         system = (Spinner) findViewById(R.id.SEsystem);
-        ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.systemNames);
-        sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.systemNames);
+        sAdapter.setDropDownViewResource(R.layout.spinner_item);
         system.setAdapter(sAdapter);
 
         component = (Spinner) findViewById(R.id.SEcomponent);
-        ArrayAdapter<String> compAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.componentNames);
-        compAdapter .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> compAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.componentNames);
+        compAdapter .setDropDownViewResource(R.layout.spinner_item);
         component.setAdapter(compAdapter );
 
         getInfo(MainActivity.selectedModuleIndex);
@@ -186,10 +186,10 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-            case (R.id.cancelButton):
-                // Values will not be changed and work will be lost, maybe show a warning here?
-                finish();
-                break;
+//            case (R.id.cancelButton):
+//                // Values will not be changed and work will be lost, maybe show a warning here?
+//                finish();
+//                break;
         }
     }
 

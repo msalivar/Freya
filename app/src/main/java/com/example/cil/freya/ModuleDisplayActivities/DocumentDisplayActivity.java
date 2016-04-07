@@ -44,28 +44,28 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
         path = (EditText) findViewById(R.id.path);
 
         project = (Spinner) findViewById(R.id.document_project);
-        ArrayAdapter<String> pAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.projectNames);
-        pAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> pAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.projectNames);
+        pAdapter.setDropDownViewResource(R.layout.spinner_item);
         project.setAdapter(pAdapter);
 
         site = (Spinner) findViewById(R.id.document_site);
-        ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.siteNames);
-        sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.siteNames);
+        sAdapter.setDropDownViewResource(R.layout.spinner_item);
         site.setAdapter(sAdapter);
 
         deployment = (Spinner) findViewById(R.id.document_deployment);
-        ArrayAdapter<String> dAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.deploymentNames);
-        dAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> dAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.deploymentNames);
+        dAdapter.setDropDownViewResource(R.layout.spinner_item);
         deployment.setAdapter(dAdapter);
 
         component = (Spinner) findViewById(R.id.document_component);
-        ArrayAdapter<String> cAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.componentNames);
-        cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> cAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.componentNames);
+        cAdapter.setDropDownViewResource(R.layout.spinner_item);
         component.setAdapter(cAdapter);
 
         service_entry = (Spinner) findViewById(R.id.document_service);
-        ArrayAdapter<String> serAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.serviceNames);
-        serAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> serAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.serviceNames);
+        serAdapter.setDropDownViewResource(R.layout.spinner_item);
         service_entry.setAdapter(serAdapter);
 
         getInfo(MainActivity.selectedModuleIndex);

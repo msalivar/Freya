@@ -36,8 +36,8 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Site");
 
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+//        cancelButton = (Button) findViewById(R.id.cancelButton);
+//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         alias = (EditText) findViewById(R.id.alias);
@@ -48,8 +48,8 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
         permit = (EditText) findViewById(R.id.permit);
         doc_notes = (EditText) findViewById(R.id.doc_notes);
         project = (Spinner) findViewById(R.id.project);
-        ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.projectNames);
-        sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.projectNames);
+        sAdapter.setDropDownViewResource(R.layout.spinner_item);
         project.setAdapter(sAdapter);
         getInfo(MainActivity.selectedModuleIndex);
     }
@@ -106,10 +106,10 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-            case (R.id.cancelButton):
-                // Values will not be changed and work will be lost, maybe show a warning here?
-                finish();
-                break;
+//            case (R.id.cancelButton):
+//                // Values will not be changed and work will be lost, maybe show a warning here?
+//                finish();
+//                break;
         }
     }
 

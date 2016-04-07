@@ -50,7 +50,7 @@ public class SearchActivity extends MainActivity implements View.OnClickListener
         // Display populated spinner on layout
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, types);
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinAdapter.setDropDownViewResource(R.layout.spinner_item);
         typeSpinner.setAdapter(spinAdapter);
         searchView = (ListView) findViewById(R.id.searchView);
     }

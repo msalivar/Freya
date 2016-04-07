@@ -29,12 +29,10 @@
         </activity>
         <activity
             android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".CreateNewProject"
-            android:label="@string/title_ProjectCreate"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".ChooseProjects"
@@ -100,7 +98,7 @@
         <activity
             android:name=".ModuleDisplayActivities.DeploymentDisplayActivity"
             android:label="@string/title_activity_deployment_display"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ModuleDisplayActivities.ComponentDisplayActivity"

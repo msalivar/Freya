@@ -46,8 +46,8 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
         location = (EditText) findViewById(R.id.location);
 
         system = (Spinner) findViewById(R.id.DeploySystem);
-        ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInfo.systemNames);
-        siteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.systemNames);
+        siteAdapter.setDropDownViewResource(R.layout.spinner_item);
         system.setAdapter(siteAdapter);
         getInfo(MainActivity.selectedModuleIndex);
     }

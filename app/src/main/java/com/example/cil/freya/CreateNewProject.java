@@ -34,6 +34,9 @@ public class CreateNewProject extends MainActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // Set Title
+        getActionBar().setTitle("Create New Project");
         setContentView(R.layout.create_new_project);
         createButton = (Button) findViewById(R.id.newProjectButton);
         createButton.setOnClickListener(this);
