@@ -20,7 +20,7 @@ public class Modules
 {
     static public void write(EditText info,String fileName, Context ctx) throws FileNotFoundException {
         try {
-            FileOutputStream FileOut = ctx.openFileOutput(fileName, ctx.MODE_PRIVATE);
+            FileOutputStream FileOut = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(FileOut);
             outputWriter.write(info.getText().toString());
             outputWriter.close();

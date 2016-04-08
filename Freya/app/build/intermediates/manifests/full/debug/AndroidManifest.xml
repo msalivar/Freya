@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cil.freya"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
+
+    <!-- these are the permission nesscary for the app to work properly -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" /> <!-- Permissions required for GCM -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> <!-- Optional permission for App measurement to run. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- the activites. Each entry includes at least an activity name. Main activity has a title. and cetain types of intents -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/MainTheme" >
+        <activity
+            android:name="com.example.cil.freya.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.DisplayMessageActivity"
+            android:label="@string/title_activity_display_message"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewProject"
+            android:label="@string/title_ProjectCreate"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ChooseProjects"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ProjectFilterActivity"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.SearchActivity"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewSite"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewComponent"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewDeployment"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewSystem"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewDocument"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewServiceEntry"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <application
+            android:name="com.example.cil.freya.StaticContextHandler"
+            android:windowSoftInputMode="adjustPan" >
+        </application>
+
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.PeopleDisplayActivity"
+            android:label="@string/title_activity_people_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.ProjectDisplayActivity"
+            android:label="@string/title_activity_project_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.SiteDisplayActivity"
+            android:label="@string/title_activity_site_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.SystemDisplayActivity"
+            android:label="@string/title_activity_system_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.DeploymentDisplayActivity"
+            android:label="@string/title_activity_deployment_display"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.ComponentDisplayActivity"
+            android:label="@string/title_activity_component_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.DocumentDisplayActivity"
+            android:label="@string/title_activity_document_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.ModuleDisplayActivities.ServiceEntryDisplayActivity"
+            android:label="@string/title_activity_service_entry_display"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
+            android:theme="@style/Theme.IAPTheme" />
+
+        <provider
+            android:name="com.google.android.gms.measurement.AppMeasurementContentProvider"
+            android:authorities="com.example.cil.freya.google_measurement_service"
+            android:exported="false" />
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.measurement.UPLOAD" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
+    </application>
+
+</manifest>

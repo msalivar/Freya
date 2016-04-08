@@ -62,13 +62,13 @@
             <View
                 android:id="@+id/divider2"
                 android:layout_alignBottom="@id/landmark"
-                android:layout_marginBottom="150dp"
+                android:layout_marginBottom="-5dp"
                 style="@style/DividerTheme"
                 />
 
             <EditText
                 android:id="@+id/location_label"
-                android:text="Location"
+                android:text="Location:"
                 android:layout_below="@id/divider2"
                 style="@style/LabelTheme"/>
 
@@ -86,7 +86,7 @@
 
             <EditText
                 android:id="@+id/landOwner_label"
-                android:text="Land Owner"
+                android:text="Land Owner:"
                 android:layout_below="@id/divider3"
                 style="@style/LabelTheme"/>
 
@@ -104,7 +104,7 @@
 
             <EditText
                 android:id="@+id/site_name_label"
-                android:text="Name"
+                android:text="Name:"
                 android:layout_below="@id/divider4"
                 style="@style/LabelTheme"/>
 
@@ -122,7 +122,7 @@
 
             <EditText
                 android:id="@+id/permit_label"
-                android:text="Permit Holder"
+                android:text="Permit Holder:"
                 android:layout_below="@id/divider5"
                 style="@style/LabelTheme"/>
 
@@ -140,7 +140,7 @@
 
             <EditText
                 android:id="@+id/project_label"
-                android:text="Project"
+                android:text="Project:"
                 android:layout_below="@id/divider6"
                 style="@style/LabelTheme"/>
 

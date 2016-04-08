@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Displays the new deployments screen.
+    Displays all labels and boxes for the user to enter data.
+    Aligns to the screen according to size!-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            tools:context="com.example.cil.freya.CreateNewDeployment">
+
+    <Button
+        android:id="@+id/saveButton"
+        android:background="@drawable/button"
+
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="25dp"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:alpha=".9"
+        android:layout_marginBottom="5dp"
+        />
+
+    <!--<Button-->
+        <!--android:id="@+id/cancelButton"-->
+        <!--android:text="Cancel"-->
+        <!--android:textColor="@color/unr_silver"-->
+        <!--android:textSize="25dp"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@drawable/button"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignStart="@+id/location_label"/>-->
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/name_label"
+            android:layout_width="150dp"
+
+            android:layout_height="50dp"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+            android:text="Name:"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/deployname"
+            android:hint="Enter Name"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/name_label"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp"
+            />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/deployname"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray"
+            />
+
+        <EditText
+            android:id="@+id/parentLogger_label"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+
+            android:layout_below="@+id/divider1"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+            android:text="Parent Logger:"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/parentLogger"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/parentLogger_label"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:hint="Enter Parent Logger"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp"/>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/parentLogger"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray"
+            />
+
+        <EditText
+            android:id="@+id/purpose_label"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/divider2"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+            android:text="Purpose:"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/purpose"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/purpose_label"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:hint="Enter Purpose"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/purpose"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray"
+            />
+
+        <EditText
+            android:id="@+id/centeroffset_label"
+            android:layout_alignTop="@id/divider3"
+            android:text="Center Offset:"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/centeroffset"
+            android:hint="Enter Center Offset"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/divider3"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp"/>
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/centeroffset"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray"
+            />
+
+        <EditText
+            android:id="@+id/height_label"
+            android:text="Height From Ground:"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/divider4"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/height"
+            android:layout_alignTop="@+id/divider4"
+            android:hint="Enter Height"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp"/>
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/height"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray"
+            />
+
+        <EditText
+            android:id="@+id/location_label"
+            android:text="Location:"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/divider5"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/location"
+            android:hint="Enter Location"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/divider5"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp"/>
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="match_parent"
+
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/location"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray"
+            />
+
+        <EditText
+            android:id="@+id/DeploySystem_label"
+            android:text="System:"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/divider6"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:editable="false"
+
+            android:inputType="none"
+
+            android:paddingLeft="15dp"
+
+            android:textColor="@color/unr_blue"
+            android:textSize="20dp"
+            android:layout_marginBottom="50dp"/>
+
+        <Spinner
+            android:id="@+id/DeploySystem"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/divider6"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:editable="true"
+            android:gravity="top|left"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/unr_blue"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20dp"
+            android:layout_marginBottom="50dp" />
+
+    </RelativeLayout>
+    </ScrollView>
+    </RelativeLayout>
+<!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/layout/activity_deployment_display.xml -->

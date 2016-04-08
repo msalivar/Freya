@@ -56,6 +56,13 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         getInfo(MainActivity.selectedModuleIndex);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
     private void getInfo(int projectIndex)
     {

@@ -2,6 +2,7 @@ package com.example.cil.freya;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -30,7 +31,7 @@ public class FileHandler
     {
         permCheck();
         try {
-            FileOutputStream FileOut = StaticContextHandler.getAppContext().openFileOutput(filename, StaticContextHandler.getAppContext().MODE_PRIVATE);
+            FileOutputStream FileOut = StaticContextHandler.getAppContext().openFileOutput(filename, Context.MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(FileOut);
             outputWriter.write(write);
             outputWriter.close();

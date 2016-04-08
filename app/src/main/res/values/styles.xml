@@ -12,11 +12,10 @@
         <item name="android:colorForeground">@color/unr_blue</item>
         <item name="android:dropDownListViewStyle">@style/Theme.MyListView</item>
     </style>
-    <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/white</item>
-        <item name="android:colorControlNormal">@color/white</item>
+    <style name="ActionBarStyle">
+        <item name="android:textColor">@color/unr_blue</item>
     </style>
-    <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light.ListView">
+    <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light">
         <item name="android:listSelector">@color/unr_blue</item>
     </style>
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">

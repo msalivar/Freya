@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,8 +52,12 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_components);
-        createButton = (Button) findViewById(R.id.newComponentButton);
-        createButton.setOnClickListener(this);
+
+        // Sets title in action bar
+        getActionBar().setTitle("Create New Component");
+
+//        createButton = (Button) findViewById(R.id.newComponentButton);
+//        createButton.setOnClickListener(this);
 
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
         Modules.spinner(this, getInfo.deploymentNames, deployment);

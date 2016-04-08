@@ -115,6 +115,7 @@
         <View
             android:id="@+id/divider5"
             android:layout_alignBottom="@id/height"
+            android:layout_marginBottom="-5dp"
             style="@style/DividerTheme"
             />
 

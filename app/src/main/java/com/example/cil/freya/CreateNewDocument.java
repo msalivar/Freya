@@ -18,8 +18,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-;
-
 
 /**
  * Created by cil on 2/5/16.
