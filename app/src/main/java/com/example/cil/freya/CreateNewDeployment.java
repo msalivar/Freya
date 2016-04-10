@@ -1,7 +1,10 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,7 +24,7 @@ import java.util.UUID;
 /**
  * Created by cil on 1/21/16.
  */
-public class CreateNewDeployment extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewDeployment extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     Button createButton;
     String DeploymentFile = "DeploymentFile.txt";
@@ -32,9 +35,9 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_deployment);
-        createButton = (Button) findViewById(R.id.newDeploymentButton);
-        createButton.setOnClickListener(this);
+        setContentView(R.layout.deployment_display);
+
+        getActionBar().setTitle("Create New Deployment");
 
         Spinner deploysys = (Spinner) findViewById(R.id.DeploySystem);
         Modules.spinner(this, getInfo.systemNames, deploysys);
@@ -44,12 +47,32 @@ public class CreateNewDeployment extends MainActivity implements View.OnClickLis
         catch(FileNotFoundException e){e.printStackTrace();}
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.upload_photo).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
+    }
+
     public void onClick(View v)
     {
-        Intent intent;
         switch (v.getId())
         {
-            case (R.id.newDeploymentButton):
+            case (R.id.saveButton):
                 try
                 {newDeployment();} catch (JSONException e) {e.printStackTrace();}
                 overridePendingTransition(0, 0);

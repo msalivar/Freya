@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +40,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/18/15.
  */
-public class CreateNewSite extends MainActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener
+public class CreateNewSite extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
     Button createButton, siteButton;
     Spinner proj;
@@ -58,9 +60,10 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_site);
-        createButton = (Button) findViewById(R.id.newSiteButton);
-        createButton.setOnClickListener(this);
+        setContentView(R.layout.site_display);
+
+        getActionBar().setTitle("Create New Site");
+
         siteButton = (Button) findViewById(R.id.sitePhoto);
         siteButton.setOnClickListener(this);
         registerForContextMenu(siteButton);
@@ -69,14 +72,34 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         Modules.spinner(this, getInfo.projectNames, proj);
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.upload_photo).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
+    }
+
 
 
     public void onClick(View v)
     {
-        Intent intent;
         switch (v.getId())
         {
-            case (R.id.newSiteButton):
+            case (R.id.saveButton):
                 try{newSite();} catch (JSONException e) {e.printStackTrace();}
                 overridePendingTransition(0, 0);
 
@@ -233,7 +256,7 @@ public class CreateNewSite extends MainActivity implements View.OnClickListener,
         info = (EditText) findViewById(R.id.site_name);
         jsonParam.put("Name", info.getText().toString());
 
-        info = (EditText) findViewById(R.id.site_notes);
+        info = (EditText) findViewById(R.id.doc_notes);
         jsonParam.put("Notes", info.getText().toString());
 
         info = (EditText) findViewById(R.id.alias);

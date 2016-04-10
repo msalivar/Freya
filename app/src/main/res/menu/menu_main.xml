@@ -21,4 +21,10 @@
           android:layout_marginRight="50dp"
         />
 
+    <item
+        android:title="Upload Photo"
+        android:id="@+id/upload_photo"
+        android:showAsAction="always"
+        />
+
 </menu>

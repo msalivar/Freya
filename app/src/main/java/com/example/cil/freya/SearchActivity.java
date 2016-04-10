@@ -33,8 +33,7 @@ public class SearchActivity extends MainActivity implements View.OnClickListener
         // Open search activity layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        searchButton = (Button)findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(this);
+
         keyword = (EditText) findViewById(R.id.keyword);
 
         // Populate spinner with different modules
@@ -48,7 +47,7 @@ public class SearchActivity extends MainActivity implements View.OnClickListener
         types[6] = "Service Entry";
 
         // Display populated spinner on layout
-        typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
+        typeSpinner = (Spinner) findViewById(R.id.filter);
         ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, types);
         spinAdapter.setDropDownViewResource(R.layout.spinner_item);
         typeSpinner.setAdapter(spinAdapter);
@@ -60,7 +59,7 @@ public class SearchActivity extends MainActivity implements View.OnClickListener
     {
         switch (view.getId())
         {
-            case (R.id.searchButton):
+            case (R.id.search_button):
                 values = getSearchResults(keyword.getText().toString(), typeSpinner.getSelectedItem().toString());
                 if (values.size() == 0)
                 {

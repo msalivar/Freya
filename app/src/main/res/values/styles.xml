@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/tools">
-    <!--creating the action bar and setting the colors and types
-        sets main themes for the action bar throughout the app-->
-    <style name="MainTheme" parent="@style/Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:colorBackground">@color/background_light</item>
-        <item name="android:colorPrimary">@color/primary_material_light</item>
-        <item name="colorPrimary">@android:color/background_light</item>
-        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
-        <item name="android:navigationBarColor">@color/unr_blue</item>
-        <item name="android:colorAccent">@color/unr_blue</item>
-        <item name="android:colorForeground">@color/unr_blue</item>
-        <item name="android:dropDownListViewStyle">@style/Theme.MyListView</item>
+<!--Defaults for the main screen of the app.
+    Sets colors, backgrounds, and shapes to be used
+    throughout the app screens!-->
+<resources>
+    <style name="MainTheme" parent="android:Theme.Material.Light">
+        <!-- Sets the action bar color of the app-->
+        <item name="android:colorPrimary">@color/primary_color</item>
+
+        <!-- Sets the text color in the action bar-->
+        <item name="android:textColorPrimary">@color/white</item>
+
+        <!-- Sets the status bar color-->
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+
+        <!-- Sets color of bottom bar on phone (home, back, etc.)-->
+        <item name="android:navigationBarColor">@color/primary_color</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
-    <style name="ActionBarStyle">
-        <item name="android:textColor">@color/unr_blue</item>
-    </style>
-    <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light">
-        <item name="android:listSelector">@color/unr_blue</item>
-        <item name="android:textColor">@color/unr_blue</item>
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+
+        <!-- Color of bars that turn into arrows when navigation drawer is clicked-->
+        <item name="color">@color/white</item>
     </style>
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:layout_width">225dp</item>
@@ -35,7 +40,9 @@
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:textColor">@color/unr_blue</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:editable">false</item>
     </style>
     <style name="InputTheme">
         <item name="android:background">@android:color/transparent</item>
@@ -49,7 +56,7 @@
         <item name="android:paddingRight">15dp</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColorHint">@color/hint_color</item>
-        <item name="android:textColor">@color/unr_blue</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="android:editable">true</item>
         <item name="android:minLines">1</item>
         <item name="android:gravity">top|left</item>
@@ -57,7 +64,7 @@
         <item name="android:inputType">textMultiLine|textCapSentences</item>
     </style>
     <style name="DividerTheme">
-        <item name="android:background">@color/hint_color</item>
+        <item name="android:background">@color/divider_color</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginLeft">15dp</item>

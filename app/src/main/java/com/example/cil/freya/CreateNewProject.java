@@ -1,6 +1,9 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,7 +23,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/10/15.
  */
-public class CreateNewProject extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
@@ -37,9 +40,8 @@ public class CreateNewProject extends MainActivity implements View.OnClickListen
 
         // Set Title
         getActionBar().setTitle("Create New Project");
-        setContentView(R.layout.create_new_project);
-        createButton = (Button) findViewById(R.id.newProjectButton);
-        createButton.setOnClickListener(this);
+
+        setContentView(R.layout.project_display);
         prininvest = (Spinner) findViewById(R.id.prininvest);
 
         txtEditor = (EditText) findViewById(R.id.compname);
@@ -50,11 +52,33 @@ public class CreateNewProject extends MainActivity implements View.OnClickListen
         Modules.spinner (this, getInfo.peopleNames, prininvest);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.upload_photo).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
+    }
+
     public void onClick(View v)
     {
         switch (v.getId())
         {
-            case (R.id.newProjectButton):
+            case (R.id.saveButton):
                 try
                 {newProject();} catch (JSONException e){e.printStackTrace();}
                 overridePendingTransition(0, 0);

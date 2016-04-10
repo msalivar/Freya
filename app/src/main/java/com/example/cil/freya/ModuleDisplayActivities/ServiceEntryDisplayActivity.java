@@ -31,7 +31,7 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_entry_display);
+        setContentView(R.layout.service_entry_display);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Service Entry");
@@ -77,6 +77,9 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
         switch(menu.getItemId()){
             case R.id.cancel_button:
                 finish();
+                return true;
+            case R.id.upload_photo:
+                // TODO
                 return true;
             default:
                 return super.onOptionsItemSelected(menu);

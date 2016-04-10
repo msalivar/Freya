@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
-    private ListView mDrawerList;
+    ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
     static String ProjectFile = "FilterSettings.txt";
     ExpandableListAdapter expandable;
@@ -260,7 +260,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         // list of options
         String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" , "Create New Service Entry"};
         //  display and set listener
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.menu_layout, osArray);
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.navigation_drawer, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
 
@@ -420,6 +420,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.upload_photo).setVisible(false);
         return true;
     }
 

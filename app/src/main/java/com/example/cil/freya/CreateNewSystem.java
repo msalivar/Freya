@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +39,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/19/15.
  */
-public class CreateNewSystem extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewSystem extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     Button createButton, photoButton;
     String SystemFile = "SystemFile.txt";
@@ -53,9 +55,10 @@ public class CreateNewSystem extends MainActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_systems);
-        createButton = (Button) findViewById(R.id.newSystemButton);
-        createButton.setOnClickListener(this);
+        setContentView(R.layout.system_display);
+
+        getActionBar().setTitle("Create New System");
+
         photoButton = (Button) findViewById(R.id.photoButton);
         photoButton.setOnClickListener(this);
         registerForContextMenu(photoButton);
@@ -69,6 +72,26 @@ public class CreateNewSystem extends MainActivity implements View.OnClickListene
         try{
             Modules.read(SystemFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 
     @Override
@@ -173,7 +196,7 @@ public class CreateNewSystem extends MainActivity implements View.OnClickListene
         Intent intent;
         switch (v.getId())
         {
-            case (R.id.newSystemButton):
+            case (R.id.saveButton):
                 try
                 {newSystem();} catch (JSONException e) {e.printStackTrace();}
                 overridePendingTransition(0, 0);

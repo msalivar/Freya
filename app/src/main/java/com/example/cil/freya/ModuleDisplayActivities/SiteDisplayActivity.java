@@ -33,7 +33,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_site_display);
+        setContentView(R.layout.site_display);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Site");
@@ -66,6 +66,9 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
         switch(menu.getItemId()){
             case R.id.cancel_button:
                 finish();
+                return true;
+            case R.id.upload_photo:
+                // TODO
                 return true;
             default:
                 return super.onOptionsItemSelected(menu);

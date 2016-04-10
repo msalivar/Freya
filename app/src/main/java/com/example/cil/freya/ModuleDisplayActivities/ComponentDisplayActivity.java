@@ -2,16 +2,12 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,7 +31,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_component_display);
+        setContentView(R.layout.component_display);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Component");
@@ -69,6 +65,9 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         switch(menu.getItemId()){
             case R.id.cancel_button:
                 finish();
+                return true;
+            case R.id.upload_photo:
+                // TODO
                 return true;
             default:
                 return super.onOptionsItemSelected(menu);

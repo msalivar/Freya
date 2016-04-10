@@ -31,7 +31,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_display);
+        setContentView(R.layout.project_display);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Project");
@@ -53,6 +53,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        menu.findItem(R.id.upload_photo).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

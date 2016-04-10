@@ -1,7 +1,10 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,7 +25,7 @@ import java.util.UUID;
 /**
  * Created by cil on 2/5/16.
  */
-public class CreateNewDocument extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewDocument extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
              int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
              Button createButton;
@@ -33,7 +36,9 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
         protected void onCreate (Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.create_new_document);
+            setContentView(R.layout.document_display);
+
+            getActionBar().setTitle("Create New Document");
 
             Spinner selectedProject = (Spinner) findViewById(R.id.document_project);
             Spinner selectedSite = (Spinner) findViewById(R.id.document_site);
@@ -46,18 +51,36 @@ public class CreateNewDocument extends MainActivity implements View.OnClickListe
             Modules.spinner(this, getInfo.deploymentNames, selectedDeployment);
             Modules.spinner(this, getInfo.componentNames, selectedComponent);
             Modules.spinner(this, getInfo.serviceNames, selectedServiceEntry);
-
-            createButton = (Button) findViewById(R.id.newDocumentButton);
-            createButton.setOnClickListener(this);
         }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.upload_photo).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
+    }
 
     @Override
     public void onClick(View v)
     {
-        Intent intent;
         switch (v.getId())
         {
-            case (R.id.newDocumentButton):
+            case (R.id.saveButton):
                 try
                 {newDocument();} catch (JSONException e) {e.printStackTrace();}
                 overridePendingTransition(0, 0);

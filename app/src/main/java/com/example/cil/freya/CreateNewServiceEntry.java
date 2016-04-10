@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +40,7 @@ import java.util.UUID;
 /**
  * Created by cil on 2/18/16.
  */
-public class CreateNewServiceEntry extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewServiceEntry extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     EditText info;
     int projNumb, creatorNumb, systemNumb, componentNumb;
@@ -55,7 +57,9 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_service_entry);
+        setContentView(R.layout.service_entry_display);
+
+        getActionBar().setTitle("Create New Service Entry");
 
         Spinner project = (Spinner) findViewById(R.id.SEprojects);
         Spinner creator = (Spinner) findViewById(R.id.creator);
@@ -67,14 +71,32 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
         Modules.spinner(this, getInfo.systemNames, system);
         Modules.spinner(this, getInfo.componentNames, component);
 
-        createButton = (Button) findViewById(R.id.newServiceButton);
-        createButton.setOnClickListener(this);
         SEButton = (Button) findViewById(R.id.SEPhoto);
         SEButton.setOnClickListener(this);
         registerForContextMenu(SEButton);
 
         try {Modules.read(ServiceEntryFile, this);}
         catch (FileNotFoundException e) {e.printStackTrace();}
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 
     @Override
@@ -223,10 +245,10 @@ public class CreateNewServiceEntry extends MainActivity implements View.OnClickL
 
     @Override
     public void onClick(View v)
-    {        Intent intent;
+    {
         switch (v.getId())
         {
-            case (R.id.newServiceButton):
+            case (R.id.saveButton):
                 try {newServiceEntry();} catch (JSONException e) {e.printStackTrace();}
                 try{
                     Modules.write(info, ServiceEntryFile, this);}

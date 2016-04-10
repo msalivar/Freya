@@ -31,7 +31,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deployment_display);
+        setContentView(R.layout.deployment_display);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Deployment");
@@ -56,6 +56,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        menu.findItem(R.id.upload_photo).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

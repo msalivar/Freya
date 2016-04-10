@@ -17,14 +17,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:divider="@color/unr_silver"
+        android:divider="@color/divider_color"
         android:dividerHeight="1.0sp"
         android:layout_above="@+id/saveButton">
     </ListView>
 
     <Button
         android:text="Save"
-        android:textColor="@color/unr_silver"
+        android:textColor="@color/divider_color"
         android:textSize="25dp"
         android:layout_width="120dp"
         android:layout_height="50dp"

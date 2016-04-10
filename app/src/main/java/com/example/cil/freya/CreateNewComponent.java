@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,8 +36,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-public class CreateNewComponent extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
-    Button createButton, CompButton;
+public class CreateNewComponent extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+    Button CompButton;
     String ComponentFile = "ComponentFile.txt";
     EditText info;
     int deploymentNumb;
@@ -51,7 +52,7 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_components);
+        setContentView(R.layout.component_display);
 
         // Sets title in action bar
         getActionBar().setTitle("Create New Component");
@@ -68,6 +69,26 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
         try{
             Modules.read(ComponentFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.sync).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.upload_photo:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 
     @Override
@@ -126,7 +147,7 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
     {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        menu.setHeaderTitle("Pick One");
+        menu.setHeaderTitle("Pick An Option Below");
         inflater.inflate(R.menu.context_menu, menu);
     }
 
@@ -136,7 +157,7 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
         Intent intent;
         switch (v.getId())
         {
-            case (R.id.newComponentButton):
+            case (R.id.saveButton):
                 try {newComponent();} catch (JSONException e) {e.printStackTrace();}
                 overridePendingTransition(0, 0);
                 try{

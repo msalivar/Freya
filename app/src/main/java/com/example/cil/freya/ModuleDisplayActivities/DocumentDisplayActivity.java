@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.cil.freya.MainActivity;
 import com.example.cil.freya.R;
-import com.example.cil.freya.SearchActivity;
 import com.example.cil.freya.getInfo;
 
 import org.json.JSONArray;
@@ -32,7 +31,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_document_display);
+        setContentView(R.layout.document_display);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Document");
@@ -75,6 +74,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        menu.findItem(R.id.upload_photo).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
