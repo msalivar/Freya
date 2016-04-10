@@ -2,6 +2,8 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,15 +29,13 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
 {
     EditText installation, manufacturer, model, compname, serial_number, supplier, vendor, wiring_notes;
     Spinner deployment;
-    Button cancelButton, saveButton;
+    Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_component_display);
-//        cancelButton = (Button) findViewById(R.id.cancelButton);
-//        cancelButton.setOnClickListener(this);
 
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Component");
@@ -63,6 +64,16 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.cancel_button:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
+    }
 
     private void getInfo(int projectIndex)
     {

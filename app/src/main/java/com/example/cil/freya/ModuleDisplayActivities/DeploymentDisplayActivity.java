@@ -2,6 +2,8 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +25,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
 {
     EditText deployName, parentLogger, purpose, centerOffset, height, location;
     Spinner system;
-    Button cancelButton, saveButton;
+    Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +36,6 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Deployment");
 
-//        cancelButton = (Button) findViewById(R.id.cancelButton);
-//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         deployName = (EditText) findViewById(R.id.deployname);
@@ -50,6 +50,24 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
         siteAdapter.setDropDownViewResource(R.layout.spinner_item);
         system.setAdapter(siteAdapter);
         getInfo(MainActivity.selectedModuleIndex);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.cancel_button:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 
     private void getInfo(int projectIndex)
@@ -104,10 +122,6 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-//            case (R.id.cancelButton):
-//                // Values will not be changed and work will be lost, maybe show a warning here?
-//                finish();
-//                break;
         }
     }
 

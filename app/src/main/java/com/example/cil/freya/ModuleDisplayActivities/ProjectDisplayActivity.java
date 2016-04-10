@@ -2,6 +2,8 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +25,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
 {
     EditText grant, name, funding, institution;
     Spinner investigator;
-    Button cancelButton, saveButton;
+    Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +36,6 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Project");
 
-//        cancelButton = (Button) findViewById(R.id.cancelButton);
-//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         grant = (EditText) findViewById(R.id.grant);
@@ -47,6 +47,24 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         spinAdapter.setDropDownViewResource(R.layout.spinner_item);
         investigator.setAdapter(spinAdapter);
         getInfo(MainActivity.selectedModuleIndex);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.cancel_button:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 
     private void getInfo(int projectIndex)
@@ -98,10 +116,6 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                 // TODO: Write to files and stuff here
                 finish();
                 break;
-//            case (R.id.cancelButton):
-//                // Values will not be changed and work will be lost, maybe show a warning here?
-//                finish();
-//                break;
         }
     }
 

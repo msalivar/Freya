@@ -2,6 +2,8 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,7 +26,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
 {
     EditText name, notes, path;
     Spinner project, site, deployment, component, service_entry;
-    Button cancelButton, saveButton;
+    Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,8 +37,6 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
         // Sets Name of Screen in top left corner
         getActionBar().setTitle("Document");
 
-//        cancelButton = (Button) findViewById(R.id.cancelButton);
-//        cancelButton.setOnClickListener(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         name = (EditText) findViewById(R.id.document_name);
@@ -69,6 +69,24 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
         service_entry.setAdapter(serAdapter);
 
         getInfo(MainActivity.selectedModuleIndex);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.activity_display_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.cancel_button:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 
     private void getInfo(int projectIndex)

@@ -17,6 +17,7 @@
     </style>
     <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light">
         <item name="android:listSelector">@color/unr_blue</item>
+        <item name="android:textColor">@color/unr_blue</item>
     </style>
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:layout_width">225dp</item>
