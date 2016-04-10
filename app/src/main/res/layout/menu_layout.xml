@@ -9,7 +9,7 @@
           android:paddingStart="?android:attr/listPreferredItemPaddingStart"
           android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
           android:minHeight="?android:attr/listPreferredItemHeightSmall"
-          android:textColor="@color/unr_silver"
+          android:textColor="@color/unr_blue"
           android:start="@color/unr_off_white"/>
 
 

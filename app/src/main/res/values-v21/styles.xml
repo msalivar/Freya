@@ -21,6 +21,7 @@
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@color/unr_silver</item>
+        <item name="android:textColor">@color/unr_blue</item>
     </style>
     <style name="ListView" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/black</item>
