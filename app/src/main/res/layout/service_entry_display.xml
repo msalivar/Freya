@@ -20,7 +20,7 @@
                 android:weightSum="1"
                 android:orientation="vertical"
                 android:paddingTop="15dp"
-                android:background="@color/white">
+                android:background="@color/background_color">
 
         <RelativeLayout
             android:layout_width="fill_parent"

@@ -57,8 +57,6 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         // Sets title in action bar
         getActionBar().setTitle("Create New Component");
 
-//        createButton = (Button) findViewById(R.id.newComponentButton);
-//        createButton.setOnClickListener(this);
 
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
         Modules.spinner(this, getInfo.deploymentNames, deployment);
@@ -84,7 +82,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     public boolean onOptionsItemSelected(MenuItem menu){
         switch(menu.getItemId()){
             case R.id.upload_photo:
-                // TODO
+//                this.openContextMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(menu);
@@ -154,7 +152,6 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
 
     public void onClick(View v)
     {
-        Intent intent;
         switch (v.getId())
         {
             case (R.id.saveButton):

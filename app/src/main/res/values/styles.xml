@@ -4,6 +4,7 @@
     throughout the app screens!-->
 <resources>
     <style name="MainTheme" parent="android:Theme.Material.Light">
+
         <!-- Sets the action bar color of the app-->
         <item name="android:colorPrimary">@color/primary_color</item>
 
@@ -24,6 +25,7 @@
         <!-- Color of bars that turn into arrows when navigation drawer is clicked-->
         <item name="color">@color/white</item>
     </style>
+
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:layout_width">225dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -55,7 +57,7 @@
         <item name="android:paddingLeft">5dp</item>
         <item name="android:paddingRight">15dp</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textColorHint">@color/divider_color</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:editable">true</item>
         <item name="android:minLines">1</item>
