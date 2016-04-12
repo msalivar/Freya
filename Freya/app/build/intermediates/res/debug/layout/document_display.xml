@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Displays the new deployments screen.
+    Displays all labels and boxes for the user to enter data.
+    Aligns to the screen according to size!-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            tools:context="com.example.cil.freya.CreateNewDocument">
+
+    <Button
+        style="@style/SaveButtonTheme"
+        />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/background_color"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:weightSum="1">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <View
+            style="@style/DividerTheme" />
+
+        <EditText
+            android:id="@+id/name_label"
+            android:text="Name:"
+            style="@style/LabelTheme"/>
+
+        <EditText
+            android:id="@+id/document_name"
+            android:hint="Enter Name"
+            style="@style/InputTheme"
+            />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_alignBottom="@id/document_name"
+            style="@style/DividerTheme"
+            />
+
+        <EditText
+            android:id="@+id/notes_label"
+            android:text="Notes:"
+            android:layout_alignTop="@+id/divider1"
+            style="@style/LabelTheme"/>
+
+        <EditText
+            android:id="@+id/doc_notes"
+            android:hint="Enter Notes"
+            android:layout_alignTop="@id/divider1"
+            style="@style/InputTheme"
+            />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_alignBottom="@id/doc_notes"
+            style="@style/DividerTheme"
+            />
+
+        <EditText
+            android:id="@+id/path_label"
+            android:text="Path:"
+            android:layout_alignTop="@+id/divider2"
+            style="@style/LabelTheme"
+            />
+
+        <EditText
+            android:id="@+id/path"
+            android:hint="Enter Path"
+            style="@style/InputTheme"
+            android:layout_alignTop="@id/divider2"/>
+
+        <View
+            android:id="@+id/divider3"
+            style="@style/DividerTheme"
+            android:layout_alignBottom="@id/path"/>
+
+        <EditText
+            android:id="@+id/project_label"
+            android:text="Project:"
+            android:layout_alignTop="@+id/divider3"
+            style="@style/LabelTheme"
+            />
+
+        <Spinner
+            android:id="@+id/document_project"
+            android:layout_alignTop="@id/project_label"
+            style="@style/spinnerItemStyle"
+            />
+
+        <View
+            android:id="@+id/divider4"
+            style="@style/DividerTheme"
+            android:layout_alignBottom="@id/project_label"/>
+
+        <EditText
+            android:id="@+id/site_label"
+            android:text="Site:"
+            android:layout_alignTop="@+id/divider4"
+            style="@style/LabelTheme"/>
+
+        <Spinner
+            android:id="@+id/document_site"
+            android:layout_alignTop="@id/site_label"
+            style="@style/spinnerItemStyle"
+            />
+
+        <View
+            android:id="@+id/divider5"
+            style="@style/DividerTheme"
+            android:layout_alignBottom="@id/site_label"/>
+
+        <EditText
+            android:id="@+id/deployment_label"
+            android:text="Deployment:"
+            android:layout_alignTop="@+id/divider5"
+            style="@style/LabelTheme"/>
+
+        <Spinner
+            android:id="@+id/document_deployment"
+            android:layout_alignTop="@id/deployment_label"
+            style="@style/spinnerItemStyle"
+            />
+
+        <View
+            android:id="@+id/divider6"
+            style="@style/DividerTheme"
+            android:layout_alignBottom="@id/deployment_label"/>
+
+        <EditText
+            android:id="@+id/component_label"
+            android:text="Component:"
+            android:layout_alignTop="@+id/divider6"
+            style="@style/LabelTheme"
+            />
+
+        <Spinner
+            android:id="@+id/document_component"
+            android:layout_alignTop="@id/component_label"
+            style="@style/spinnerItemStyle"/>
+        <View
+            android:id="@+id/divider7"
+            style="@style/DividerTheme"
+            android:layout_alignBottom="@id/component_label"/>
+        <EditText
+            android:id="@+id/service_label"
+            android:text="Service Entry:"
+            android:layout_alignTop="@+id/divider7"
+            style="@style/LabelTheme"
+            android:layout_marginBottom="50dp"/>
+
+        <Spinner
+            android:id="@+id/document_service"
+            android:layout_alignTop="@id/service_label"
+            style="@style/spinnerItemStyle"
+            />
+
+        <View
+            android:id="@+id/divider8"
+            style="@style/DividerTheme"
+            android:layout_alignBottom="@id/service_label"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout><!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya-master/app/src/main/res/layout/document_display.xml -->
