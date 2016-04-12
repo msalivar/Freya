@@ -58,6 +58,8 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         setContentView(R.layout.system_display);
 
         getActionBar().setTitle("Create New System");
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
 
         photoButton = (Button) findViewById(R.id.photoButton);
         photoButton.setOnClickListener(this);

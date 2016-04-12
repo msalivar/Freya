@@ -57,7 +57,8 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         // Sets title in action bar
         getActionBar().setTitle("Create New Component");
 
-
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
         Modules.spinner(this, getInfo.deploymentNames, deployment);
         CompButton = (Button) findViewById(R.id.CompPhoto);

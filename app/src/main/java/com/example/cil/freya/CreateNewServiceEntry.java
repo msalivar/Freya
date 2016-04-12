@@ -60,6 +60,8 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         setContentView(R.layout.service_entry_display);
 
         getActionBar().setTitle("Create New Service Entry");
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
 
         Spinner project = (Spinner) findViewById(R.id.SEprojects);
         Spinner creator = (Spinner) findViewById(R.id.creator);

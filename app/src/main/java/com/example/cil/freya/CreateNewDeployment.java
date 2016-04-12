@@ -38,6 +38,8 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         setContentView(R.layout.deployment_display);
 
         getActionBar().setTitle("Create New Deployment");
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
 
         Spinner deploysys = (Spinner) findViewById(R.id.DeploySystem);
         Modules.spinner(this, getInfo.systemNames, deploysys);

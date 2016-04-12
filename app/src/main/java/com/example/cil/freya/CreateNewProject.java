@@ -40,6 +40,8 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
 
         // Set Title
         getActionBar().setTitle("Create New Project");
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
 
         setContentView(R.layout.project_display);
         prininvest = (Spinner) findViewById(R.id.prininvest);

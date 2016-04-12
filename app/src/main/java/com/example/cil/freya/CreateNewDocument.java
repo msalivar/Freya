@@ -27,10 +27,10 @@ import java.util.UUID;
  */
 public class CreateNewDocument extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
-             int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
-             Button createButton;
-             String DocumentFile = "DocumentFile.txt";
-             EditText info;
+     int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
+     Button createButton;
+     String DocumentFile = "DocumentFile.txt";
+     EditText info;
 
         @Override
         protected void onCreate (Bundle savedInstanceState)
@@ -39,6 +39,8 @@ public class CreateNewDocument extends Activity implements View.OnClickListener,
             setContentView(R.layout.document_display);
 
             getActionBar().setTitle("Create New Document");
+            Button saveButton = (Button) findViewById(R.id.saveButton);
+            saveButton.setOnClickListener(this);
 
             Spinner selectedProject = (Spinner) findViewById(R.id.document_project);
             Spinner selectedSite = (Spinner) findViewById(R.id.document_site);

@@ -63,6 +63,8 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         setContentView(R.layout.site_display);
 
         getActionBar().setTitle("Create New Site");
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
 
         siteButton = (Button) findViewById(R.id.sitePhoto);
         siteButton.setOnClickListener(this);
@@ -77,7 +79,6 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.search).setVisible(false);
-        menu.findItem(R.id.upload_photo).setVisible(false);
         menu.findItem(R.id.sync).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
