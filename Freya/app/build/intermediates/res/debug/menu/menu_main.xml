@@ -21,5 +21,11 @@
           android:layout_marginRight="50dp"
         />
 
+    <item
+        android:title="Upload Photo"
+        android:id="@+id/upload_photo"
+        android:showAsAction="always"
+        />
+
 </menu>
-<!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/menu/menu_main.xml -->
+<!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/menu/menu_main.xml -->

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/choose_photo"
+        android:title="Choose Photo"/>
+    <item
+        android:id="@+id/take_photo"
+        android:title="Take Photo"/>
+</menu><!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/menu/context_menu.xml -->

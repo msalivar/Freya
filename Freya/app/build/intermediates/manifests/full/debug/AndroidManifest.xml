@@ -43,12 +43,10 @@
         </activity>
         <activity
             android:name="com.example.cil.freya.DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.example.cil.freya.CreateNewProject"
-            android:label="@string/title_ProjectCreate"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
@@ -124,7 +122,7 @@
         <activity
             android:name="com.example.cil.freya.ModuleDisplayActivities.DeploymentDisplayActivity"
             android:label="@string/title_activity_deployment_display"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.example.cil.freya.ModuleDisplayActivities.ComponentDisplayActivity"

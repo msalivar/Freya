@@ -21,8 +21,8 @@
             android:text="Browse Projects"
             android:id="@+id/browseButton"
             android:width="300dp"
-            android:textColor="@color/unr_silver"
-            android:background="@color/unr_blue"
+            android:textColor="@color/text_color"
+            android:background="@color/background_color"
             android:layout_marginTop="80dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
@@ -34,8 +34,8 @@
             android:text="Create New Project"
             android:id="@+id/createButton"
             android:width="300dp"
-            android:textColor="@color/unr_silver"
-            android:background="@color/unr_blue"
+            android:textColor="@color/text_color"
+            android:background="@color/background_color"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="false"
@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:text="Sync"
             android:id="@+id/sync"
-            android:background="@color/unr_blue"
-            android:textColor="@color/unr_silver"
+            android:background="@color/background_color"
+            android:textColor="@color/text_color"
             android:width="80dp"
             android:layout_marginBottom="27dp"
             android:layout_alignStart="@+id/createButton"
@@ -65,9 +65,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="@color/unr_off_white"
-        android:divider="@color/unr_silver"
+        android:background="@color/background_color"
+        android:divider="@color/divider_color"
         android:dividerHeight="4sp"/>
 
 </android.support.v4.widget.DrawerLayout>
-<!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/layout-land/activity_main.xml -->
+<!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/layout-land/activity_main.xml -->

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
     <attr format="boolean" name="isLightTheme"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="mediaRouteButtonStyle"/>
     <attr format="reference" name="mediaRouteConnectingDrawable"/>
@@ -14,7 +14,7 @@
     <attr format="reference" name="mediaRoutePauseDrawable"/>
     <attr format="reference" name="mediaRoutePlayDrawable"/>
     <attr format="reference" name="mediaRouteSettingsDrawable"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="string" name="title"/>
     <bool name="abc_action_bar_embed_tabs">true</bool>
@@ -29,31 +29,21 @@
     <color name="abc_search_url_text_normal">#7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="accentColor">#38C3DD</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
+    <color name="accent_material_light">@color/material_deep_teal_500</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="accent_material_light">#09396b</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <color name="background_color">#F6F4F3</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="background_light">#ffffff</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="background_material_light_1">#5900ff</color>
     <color name="black">#000000</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
@@ -61,9 +51,14 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="button_color">#84BCDA</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/common_colors.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/common_colors.xml -->
     <eat-comment/>
     <color name="common_action_bar_splitter">#d2d2d2</color>
     <color name="common_signin_btn_dark_text_default">@android:color/white</color>
@@ -75,30 +70,25 @@
     <color name="common_signin_btn_light_text_disabled">#FFAAAAAA</color>
     <color name="common_signin_btn_light_text_focused">#FF737373</color>
     <color name="common_signin_btn_light_text_pressed">@android:color/white</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="endOfFade">#0986A3</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <color name="divider_color">#9197AE</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="foreground_material_dark">@android:color/white</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="foreground_material_light">#ff0000</color>
-    <color name="highlightColor">#006884</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
+    <color name="foreground_material_light">@android:color/black</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="hint_color">#FF919093</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <color name="hint_color">#A0A4B8</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
@@ -114,54 +104,34 @@
     <color name="material_grey_800">#ff424242</color>
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="primary_color">#0471A6</color>
+    <color name="primary_dark">#041932</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="primary_dark_material_dark">@android:color/black</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="primary_dark_material_light">#06274a</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
+    <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="primary_material_light">#09396b</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
+    <color name="primary_material_light">@color/material_grey_100</color>
     <color name="primary_text_default_material_dark">#ffffffff</color>
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="primary_text_material_dark">#c9c8cb</color>
-    <color name="primary_text_material_light">#c9c8cb</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="ripple_material_dark">#33ffffff</color>
     <color name="ripple_material_light">#1f000000</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
     <color name="secondary_text_default_material_light">#8a000000</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="startOfFade">#20ABBD</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="switch_thumb_disabled_material_dark">#ff616161</color>
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="unr_blue">#FF09396B</color>
-    <color name="unr_light_silver">#FFEDEDED</color>
-    <color name="unr_off_white">#E4E4E4</color>
-    <color name="unr_silver">#FFC9C8CB</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/res/values/wallet_colors.xml -->
+    <color name="text_color">#033860</color>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/res/values/wallet_colors.xml -->
     <eat-comment/>
     <color name="wallet_bright_foreground_disabled_holo_light">#ffb2b2b2</color>
     <color name="wallet_bright_foreground_holo_dark">#fff3f3f3</color>
@@ -176,10 +146,9 @@
     <color name="wallet_hint_foreground_holo_light">#808080</color>
     <color name="wallet_holo_blue_light">#ff33b5e5</color>
     <color name="wallet_link_text_light">#0000ee</color>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="white">#ffffff</color>
-    <color name="windowBackground">#e4e4e4</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
     <declare-styleable name="ActionBarLayout"><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ActionMenuItemView"><attr name="android:minWidth"/></declare-styleable>
@@ -215,7 +184,7 @@
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
     <declare-styleable name="WalletFragmentOptions"><attr format="enum" name="appTheme"><enum name="holo_dark" value="0"/><enum name="holo_light" value="1"/></attr><attr format="enum" name="environment"><enum name="production" value="1"/><enum name="test" value="3"/><enum name="sandbox" value="0"/><enum name="strict_sandbox" value="2"/></attr><attr format="reference" name="fragmentStyle"/><attr format="enum" name="fragmentMode"><enum name="buyButton" value="1"/><enum name="selectionDetails" value="2"/></attr></declare-styleable>
     <declare-styleable name="WalletFragmentStyle"><attr format="dimension" name="buyButtonHeight"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="dimension" name="buyButtonWidth"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="enum" name="buyButtonText"><enum name="buy_with" value="5"/><enum name="logo_only" value="6"/><enum name="donate_with" value="7"/><enum name="buy_with_google" value="1"/><enum name="buy_now" value="2"/><enum name="book_now" value="3"/><enum name="donate_with_google" value="4"/></attr><attr format="enum" name="buyButtonAppearance"><enum name="google_wallet_classic" value="1"/><enum name="google_wallet_grayscale" value="2"/><enum name="google_wallet_monochrome" value="3"/><enum name="classic" value="1"/><enum name="grayscale" value="2"/><enum name="monochrome" value="3"/></attr><attr format="reference" name="maskedWalletDetailsTextAppearance"/><attr format="reference" name="maskedWalletDetailsHeaderTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsBackground"/><attr format="reference" name="maskedWalletDetailsButtonTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsButtonBackground"/><attr format="color" name="maskedWalletDetailsLogoTextColor"/><attr format="enum" name="maskedWalletDetailsLogoImageType"><enum name="google_wallet_classic" value="1"/><enum name="google_wallet_monochrome" value="2"/><enum name="classic" value="1"/><enum name="monochrome" value="2"/></attr></declare-styleable>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -284,46 +253,46 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="mr_media_route_controller_art_max_height">320dp</dimen>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="SEcomponents" type="id"/>
     <item name="SEname" type="id"/>
     <item name="SEnotes" type="id"/>
     <item name="SEprojects" type="id"/>
     <item name="SEsystem" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="backComponentButton" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/res/values/cast_ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/res/values/cast_ids.xml -->
     <eat-comment/>
     <item name="cast_notification_id" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="creator" type="id"/>
     <item name="deployment" type="id"/>
@@ -334,10 +303,10 @@
     <item name="document_project" type="id"/>
     <item name="document_service" type="id"/>
     <item name="document_site" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="home" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="landOwner" type="id"/>
     <item name="manager" type="id"/>
@@ -346,31 +315,31 @@
     <item name="operations" type="id"/>
     <item name="path" type="id"/>
     <item name="photoButton" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="project" type="id"/>
     <item name="site" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="split_action_bar" type="id"/>
     <item name="up" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/ids.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="wiring_notes" type="id"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
     <integer name="cancel_button_image_alpha">127</integer>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/version.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/version.xml -->
     <eat-comment/>
     <integer name="google_play_services_version">8115000</integer>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -392,23 +361,23 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="accept">Accept</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings"/>
     <string name="app_name">NRDC</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/auth_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/auth_strings.xml -->
     <eat-comment/>
     <string name="auth_google_play_services_client_facebook_display_name">Facebook</string>
     <string name="auth_google_play_services_client_google_display_name">Google</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/res/values/cast_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/res/values/cast_strings.xml -->
     <eat-comment/>
     <string name="cast_notification_connected_message">Connected to <ns1:g id="name">%1$s</ns1:g></string>
     <string name="cast_notification_connecting_message">Connecting to <ns1:g id="name">%1$s</ns1:g></string>
     <string name="cast_notification_disconnect">Disconnect</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/common_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text"><ns1:g id="app_name">%1$s</ns1:g> requires an update to the Android Wear app.</string>
     <string name="common_android_wear_update_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run unless you update the Android Wear app.</string>
@@ -440,22 +409,22 @@
     <string name="common_google_play_services_updating_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are currently updating.</string>
     <string name="common_google_play_services_updating_title">Google Play services are updating</string>
     <string name="common_open_on_phone">Open on phone</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/res/values/base_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/res/values/base_strings.xml -->
     <eat-comment/>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="create">Create</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
     <string name="decline">Decline</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="delete">Delete</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="mr_media_route_button_content_description">Cast</string>
     <string name="mr_media_route_chooser_searching">Searching for devices\u2026</string>
@@ -467,20 +436,20 @@
     <string name="mr_media_route_controller_stop">Stop casting</string>
     <string name="mr_system_route_name">System</string>
     <string name="mr_user_route_category_name">Devices</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="profile_name">User Name</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="read">Read</string>
     <string name="spinner_prompt">Choose Investigator</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_ProjectCreate">Start New Project</string>
     <string name="title_activity_component_display">ComponentDisplayActivity</string>
@@ -494,16 +463,10 @@
     <string name="title_activity_system_display">SystemDisplayActivity</string>
     <string name="title_imagePicker">Image Picker</string>
     <string name="update">Update</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/res/values/wallet_strings.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/res/values/wallet_strings.xml -->
     <eat-comment/>
     <string name="wallet_buy_button_place_holder">Buy with Google</string>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
-    <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/white</item>
-        <item name="android:colorControlNormal">@color/white</item>
-    </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
@@ -1444,19 +1407,68 @@
         <item name="android:minWidth">56dp</item>
         <item name="android:scaleType">center</item>
     </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="MainTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorBackground">@color/background_light</item>
-        <item name="android:colorPrimary">@color/primary_material_light</item>
-        <item name="colorPrimary">@android:color/background_light</item>
-        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
-        <item name="android:navigationBarColor">@color/unr_blue</item>
-        <item name="android:colorAccent">@color/unr_blue</item>
-        <item name="android:colorForeground">@color/unr_blue</item>
-        <item name="android:dropDownListViewStyle">@style/Theme.MyListView</item>
+    <style name="DividerTheme">
+        <item name="android:background">@color/divider_color</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
     </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+
+        <!-- Color of bars that turn into arrows when navigation drawer is clicked-->
+        <item name="color">@color/white</item>
+    </style>
+    <style name="InputTheme">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">220dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColorHint">@color/divider_color</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:editable">true</item>
+        <item name="android:minLines">1</item>
+        <item name="android:gravity">top|left</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:inputType">textMultiLine|textCapSentences</item>
+    </style>
+    <style name="LabelTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:editable">false</item>
+    </style>
+    <style name="MainTheme" parent="android:Theme.Material.Light">
+
+        <!-- Sets the action bar color of the app-->
+        <item name="android:colorPrimary">@color/primary_color</item>
+
+        <!-- Sets the text color in the action bar-->
+        <item name="android:textColorPrimary">@color/white</item>
+
+        <!-- Sets the status bar color-->
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+
+        <!-- Sets color of bottom bar on phone (home, back, etc.)-->
+        <item name="android:navigationBarColor">@color/primary_color</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
@@ -1602,6 +1614,25 @@
         <item name="android:paddingLeft">@dimen/abc_action_bar_overflow_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_overflow_padding_end_material</item>
     </style>
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="SaveButtonTheme">
+        <item name="android:id">@id/saveButton</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:text">Save</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:alpha">.9</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
+    <eat-comment/>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
     <style name="TextAppearance.AppCompat.Body2" parent="Base.TextAppearance.AppCompat.Body2"/>
@@ -1691,7 +1722,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_iap_style.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/res/values/admob_iap_style.xml -->
     <eat-comment/>
     <style name="Theme.IAPTheme" parent="android:Theme">
     <item name="android:windowIsTranslucent">true</item>
@@ -1701,7 +1732,7 @@
     <item name="android:windowIsFloating">true</item>
     <item name="android:backgroundDimEnabled">false</item>
   </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Theme.MediaRouter" parent="">
         <item name="mediaRouteButtonStyle">@style/Widget.MediaRouter.MediaRouteButton</item>
@@ -1723,19 +1754,14 @@
         <item name="mediaRoutePlayDrawable">@drawable/mr_ic_play_light</item>
         <item name="mediaRoutePauseDrawable">@drawable/mr_ic_pause_light</item>
     </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
-    <style name="Theme.MyListView" parent="@android:style/Widget.Holo.Light.ListView">
-        <item name="android:listSelector">@color/unr_blue</item>
-    </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat"/>
     <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>
     <style name="ThemeOverlay.AppCompat.Dark.ActionBar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/res/values/wallet_styles.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/res/values/wallet_styles.xml -->
     <eat-comment/>
     <style name="WalletFragmentDefaultButtonTextAppearance">
         <item name="android:textColor">@color/wallet_primary_text_holo_light</item>
@@ -1769,7 +1795,7 @@
         <item name="maskedWalletDetailsLogoTextColor">@color/wallet_bright_foreground_holo_dark</item>
         <item name="maskedWalletDetailsLogoImageType">google_wallet_classic</item>
     </style>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>
@@ -1864,7 +1890,7 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/home/sammie/Desktop/Senior%20Project/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
+    <!-- From: file:/home/cil/Desktop/Freya/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget.MediaRouter.Light.MediaRouteButton" parent="Widget.AppCompat.Light.ActionButton">
         <item name="android:minWidth">56dp</item>
@@ -1881,5 +1907,16 @@
         <item name="android:focusable">true</item>
         <item name="android:contentDescription">@string/mr_media_route_button_content_description</item>
         <item name="externalRouteEnabledDrawable">@drawable/mr_ic_media_route_mono_dark</item>
+    </style>
+    <!-- From: file:/home/cil/Desktop/Freya/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:layout_width">225dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">15dp</item>
     </style>
 </resources>
