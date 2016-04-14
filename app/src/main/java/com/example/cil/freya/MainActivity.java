@@ -107,7 +107,6 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         actionBar.setDisplayShowCustomEnabled(true);
 
         // put in icons from drawables
-        actionBar.setIcon(R.drawable.sync_icon);
         actionBar.setIcon(R.drawable.upload_icon);
         actionBar.setIcon(R.drawable.search_icon);
 
@@ -260,7 +259,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     private void addDrawerItems()
     {
         // list of options
-        String[] osArray = { "Project Options","Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" , "Create New Service Entry"};
+        String[] osArray = { "Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" , "Create New Service Entry"};
         //  display and set listener
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.navigation_drawer, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -346,57 +345,51 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
 
 
+        Intent intent;
         switch (position) {
             case 0:
-                // start filtering intent
-                Intent intent = new Intent(MainActivity.this, ProjectFilterActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 1:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewProject.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;
 
-            case 2:
+            case 1:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewSite.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;
 
-            case 3:
+            case 2:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewSystem.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;
 
-            case 4:
+            case 3:
                 // start NewSite intent
                 intent = new Intent(MainActivity.this, CreateNewDeployment.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;
 
-            case 5:
+            case 4:
                 // start component intent
                 intent = new Intent(MainActivity.this, CreateNewComponent.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;
 
-            case 6:
+            case 5:
                 // start document intent
                 intent = new Intent(MainActivity.this, CreateNewDocument.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;
 
-            case 7:
+            case 6:
                 // start document intent
                 intent = new Intent(MainActivity.this, CreateNewServiceEntry.class);
                 startActivity(intent);
@@ -448,14 +441,6 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
             new CRUD.writeMessage().execute(par);
             overridePendingTransition(0, 0);
             return true;
-        }
-        //  if search is chosen
-        if (id == R.id.search) {
-            // create new searchactivity intent
-            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0,0);
-            return super.onOptionsItemSelected(item);
         }
 
         return false;

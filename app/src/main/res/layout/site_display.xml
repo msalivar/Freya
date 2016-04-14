@@ -67,20 +67,77 @@
                 />
 
             <EditText
-                android:id="@+id/location_label"
-                android:text="Location:"
-                android:layout_below="@id/divider2"
-                style="@style/LabelTheme"/>
+                android:layout_marginTop="10dp"
+                android:id="@+id/installation_location_label"
+                android:text="Installation\nLocation:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/divider2"/>
+
+            <Button
+                android:layout_marginTop="5dp"
+                android:id="@+id/installation_location"
+                android:text="Get Current Location"
+                android:layout_width="200dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/installation_location_label"/>
 
             <EditText
-                android:id="@+id/location"
-                android:hint="Enter Location"
-                android:layout_alignTop="@+id/location_label"
-                style="@style/InputTheme"/>
+                android:layout_marginTop="5dp"
+                android:id="@+id/latitude_label"
+                android:text="Latitude:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/installation_location_label"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/latitude"
+                android:hint="Enter Latitude"
+                style="@style/InputTheme"
+                android:layout_alignTop="@id/latitude_label"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/longitude_label"
+                android:text="Longitude:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/latitude"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/longitude"
+                android:hint="Enter Longitude"
+                style="@style/InputTheme"
+                android:layout_alignTop="@id/longitude_label"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/altitude_label"
+                android:text="Altitude:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/longitude"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/altitude"
+                android:hint="Enter Altitude"
+                style="@style/InputTheme"
+                android:layout_alignTop="@id/altitude_label"
+                android:textSize="18dp"/>
 
             <View
                 android:id="@+id/divider3"
-                android:layout_alignBottom="@id/location"
+                android:layout_alignBottom="@id/altitude"
                 style="@style/DividerTheme"
                 />
 
