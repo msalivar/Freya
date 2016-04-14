@@ -25,6 +25,11 @@ public class SearchActivity extends MainActivity implements View.OnClickListener
     ListView searchView;
     Button searchButton;
 
+    public SearchActivity()
+    {
+        super();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

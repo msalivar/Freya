@@ -1,11 +1,15 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 // class to choose projects from
 public class ChooseProjects extends MainActivity
 {
+
+    public ChooseProjects()
+    {
+        super();
+    }
 
     // when create, display projects list
     @Override

@@ -1,6 +1,5 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -10,6 +9,11 @@ import org.json.JSONObject;
 // used as a template to display JSONS on a new intent. This example shows how to display the people JSON
 public class DisplayMessageActivity extends MainActivity
 {
+    public DisplayMessageActivity()
+    {
+        super();
+    }
+
     // create GUI
     @Override
     protected void onCreate(Bundle savedInstanceState)

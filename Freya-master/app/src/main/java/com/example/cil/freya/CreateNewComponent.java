@@ -1,6 +1,5 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -54,6 +52,10 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    public CreateNewComponent()
+    {
+        super();
+    }
 
 
     // display create new component GUI

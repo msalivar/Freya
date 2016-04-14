@@ -252,8 +252,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         //is this the correct format?
         //milliseconds to minutes
 
-
-        jsonParam.put("Time Zone Offset", TimeZone.getDefault().getRawOffset());
+        jsonParam.put("Time Zone Offset", (TimeZone.getDefault().getRawOffset()/1000)/60);
 
         jsonParam.put("Project", numb);
 

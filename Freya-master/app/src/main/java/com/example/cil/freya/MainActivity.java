@@ -155,6 +155,8 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                         Intent document = new Intent(MainActivity.this, DocumentDisplayActivity.class);
                         startActivity(document);
                         break;
+                    case "Unsynced":
+                        break;
                 }
                 return false;
             }
@@ -191,6 +193,8 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         listDataHeader.add("Components");
         listDataHeader.add("Documents");
         listDataHeader.add("Service Entries");
+        listDataHeader.add("Unsynced");
+
 
         // Adding child data
         List<String> people = new ArrayList<String>();
@@ -241,6 +245,11 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
             Collections.addAll(serviceEntries, getInfo.serviceNames);
             serviceEntries.remove(0);
         }
+        List<String> unsynced = new ArrayList<String>();
+        if (getInfo.complete.length() > 0)
+        {
+            Collections.addAll(unsynced, "Name");
+        }
 
         listDataChild.put(listDataHeader.get(0), people); // Header, Child data
         listDataChild.put(listDataHeader.get(1), projects);
@@ -250,11 +259,26 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         listDataChild.put(listDataHeader.get(5), components);
         listDataChild.put(listDataHeader.get(6), documents);
         listDataChild.put(listDataHeader.get(7), serviceEntries);
+        listDataChild.put(listDataHeader.get(8), unsynced);
 
         expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(expandable);
     }
 
+    @Override
+    public void onRestart(){
+
+        super.onRestart();
+        List<String> unsynced = new ArrayList<String>();
+        if (getInfo.complete.length() > 0)
+        {
+            Collections.addAll(unsynced, "Name");
+        }
+        listDataChild.put(listDataHeader.get(8), unsynced);
+        expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        expListView.setAdapter(expandable);
+
+    }
     // when creating a drawer
     private void addDrawerItems()
     {

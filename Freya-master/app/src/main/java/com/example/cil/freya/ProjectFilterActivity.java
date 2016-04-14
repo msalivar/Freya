@@ -1,9 +1,7 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -18,6 +16,11 @@ public class ProjectFilterActivity extends MainActivity implements View.OnClickL
     // Declare variables
     CustomListAdapter adapter = null;
     Button saveButton;
+
+    public ProjectFilterActivity()
+    {
+        super();
+    }
 
     // Create project list screen
     @Override
