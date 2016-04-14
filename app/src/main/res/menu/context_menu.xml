@@ -5,6 +5,6 @@
         android:title="Choose Photo"
         />
     <item
-        android:id="@+id/take_photo"
+        android:id="@+id/takePhoto"
         android:title="Take Photo"/>
 </menu>

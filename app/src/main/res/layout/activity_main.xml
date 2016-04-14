@@ -35,8 +35,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="@color/background_color"
-        android:divider="@color/divider_color"
+        android:background="@drawable/gradient_background"
+        android:divider="@color/white"
         android:dividerHeight="0.75sp"/>
 
 

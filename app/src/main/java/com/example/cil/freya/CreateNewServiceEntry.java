@@ -11,10 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -73,10 +70,10 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         Modules.spinner(this, getInfo.systemNames, system);
         Modules.spinner(this, getInfo.componentNames, component);
 
-        Button takephoto = (Button) findViewById(R.id.take_photo);
+        Button takephoto = (Button) findViewById(R.id.takePhoto);
         takephoto.setOnClickListener(this);
 
-        Button uploadphoto = (Button) findViewById(R.id.upload_photo);
+        Button uploadphoto = (Button) findViewById(R.id.uploadPhoto);
         uploadphoto.setOnClickListener(this);
 
         try {Modules.read(ServiceEntryFile, this);}
@@ -214,13 +211,13 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
                 finish();
                 break;
 
-            case R.id.upload_photo:
+            case R.id.uploadPhoto:
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, SELECT_PHOTO);
                 break;
 
-            case R.id.take_photo:
+            case R.id.takePhoto:
                 if (!hasPermission(MainActivity.readPerm[0])) { requestPermissions(MainActivity.readPerm, MainActivity.readRequestCode); }
                 if (!hasPermission(MainActivity.cameraPerm[0])) { requestPermissions(MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

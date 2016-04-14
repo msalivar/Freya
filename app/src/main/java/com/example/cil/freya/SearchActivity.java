@@ -1,12 +1,10 @@
 package com.example.cil.freya;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -65,7 +63,7 @@ public class SearchActivity extends MainActivity implements View.OnClickListener
                 {
                     values.add("No Results Found");
                 }
-                ArrayAdapter<String> lAdapter = new ArrayAdapter<>(this, R.layout.list_view_layout, values);
+                ArrayAdapter<String> lAdapter = new ArrayAdapter<>(this, R.layout.search_view, values);
                 searchView.setAdapter(lAdapter);
                 break;
         }

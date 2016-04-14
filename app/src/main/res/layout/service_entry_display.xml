@@ -157,6 +157,7 @@
 
             <Button
                 style="@style/UploadPhoto"
+                android:id="@+id/uploadPhoto"
                 android:layout_below="@+id/photo_label"
                 />
 

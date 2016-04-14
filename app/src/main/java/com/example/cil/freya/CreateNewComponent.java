@@ -4,21 +4,24 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,7 +39,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-public class CreateNewComponent extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+public class CreateNewComponent extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
     String ComponentFile = "ComponentFile.txt";
     EditText info;
     int deploymentNumb;
@@ -45,6 +48,13 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     private final int TAKE_PHOTO = 2;
     private Uri imageUri;
     boolean writeAccepted, cameraAccepted;
+
+    private String[] mPlanetTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+
+
 
     // display create new component GUI
     @Override
@@ -61,16 +71,62 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         Spinner deployment = (Spinner) findViewById(R.id.deployment);
         Modules.spinner(this, getInfo.deploymentNames, deployment);
 
-        Button takephoto = (Button) findViewById(R.id.take_photo);
+        Button takephoto = (Button) findViewById(R.id.takePhoto);
         takephoto.setOnClickListener(this);
 
-        Button uploadphoto = (Button) findViewById(R.id.upload_photo);
+        Button uploadphoto = (Button) findViewById(R.id.uploadPhoto);
         uploadphoto.setOnClickListener(this);
 
         try{
             Modules.read(ComponentFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
+
+        mPlanetTitles = new String[]{"Test1", "Test2"};
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
+        {
+            public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
+            public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
+
+
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,13 +176,13 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
                 finish();
                 break;
 
-            case R.id.upload_photo:
+            case R.id.uploadPhoto:
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, SELECT_PHOTO);
                 break;
 
-            case R.id.take_photo:
+            case R.id.takePhoto:
                 if (!hasPermission (MainActivity.readPerm[0])) { requestPermissions(MainActivity.readPerm, MainActivity.readRequestCode); }
                 if (!hasPermission (MainActivity.cameraPerm[0])) { requestPermissions(MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
