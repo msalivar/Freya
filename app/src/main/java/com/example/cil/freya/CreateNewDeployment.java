@@ -116,7 +116,8 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         info = (EditText) findViewById(R.id.centeroffset);
         jsonParam.put("Center Offset", info.getText().toString());
 
-        info = (EditText) findViewById(R.id.location);
+        // TODO needs to be latitude longitude and altitude
+        info = (EditText) findViewById(R.id.longitude);
         jsonParam.put("Location", info.getText().toString());
 
         info = (EditText) findViewById(R.id.height);

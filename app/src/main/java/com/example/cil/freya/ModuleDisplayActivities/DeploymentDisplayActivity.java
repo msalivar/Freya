@@ -43,7 +43,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
         purpose = (EditText) findViewById(R.id.purpose);
         centerOffset = (EditText) findViewById(R.id.centeroffset);
         height = (EditText) findViewById(R.id.height);
-        location = (EditText) findViewById(R.id.location);
+        location = (EditText) findViewById(R.id.longitude);
 
         system = (Spinner) findViewById(R.id.DeploySystem);
         ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.systemNames);

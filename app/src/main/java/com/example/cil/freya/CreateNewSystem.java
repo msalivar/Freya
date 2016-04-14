@@ -223,8 +223,8 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         EditText info = (EditText) findViewById(R.id.details);
         jsonParam.put("Details", info.getText().toString());
 
-        //from gps
-        info = (EditText) findViewById(R.id.location);
+        //TODO needs to be longitude, latitude and altitude
+        info = (EditText) findViewById(R.id.longitude);
         jsonParam.put("Installation Location",info);
 
         info = (EditText) findViewById(R.id.sysname);

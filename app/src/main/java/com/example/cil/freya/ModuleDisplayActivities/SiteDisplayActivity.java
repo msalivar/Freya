@@ -42,7 +42,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
         saveButton.setOnClickListener(this);
         alias = (EditText) findViewById(R.id.alias);
         landmark = (EditText) findViewById(R.id.landmark);
-        location = (EditText) findViewById(R.id.location);
+        location = (EditText) findViewById(R.id.longitude);
         landOwner = (EditText) findViewById(R.id.landOwner);
         site_name = (EditText) findViewById(R.id.site_name);
         permit = (EditText) findViewById(R.id.permit);
