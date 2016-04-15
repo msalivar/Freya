@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -47,6 +50,8 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
     private final int TAKE_PHOTO = 2;
     private Uri imageUri;
     boolean writeAccepted, cameraAccepted;
+    private int permissionCheckUpload;
+    private int permissionCheckTake;
 
     public CreateNewComponent()
     {
@@ -96,6 +101,56 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
             deploymentNumb = getInfo.deploymentNumber[position - 1];
     }
 
+    public void takePhotoPermissions(){
+        permissionCheckTake = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
+
+        if(permissionCheckTake != 0){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    2);
+        }
+
+        // Checks again so that the camera can open
+        permissionCheckTake = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
+
+    }
+
+    public void takePhoto(){
+        if(permissionCheckTake == 0) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File photo = new File(Environment.getExternalStorageDirectory(), "HotPic.jpg");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+            imageUri = Uri.fromFile(photo);
+            startActivityForResult(intent, TAKE_PHOTO);
+        }
+
+    }
+
+    public void uploadPhotoPermissions(){
+        permissionCheckUpload = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if(permissionCheckUpload != 0){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    3);
+        }
+
+        // Checks again so gallery can open
+        permissionCheckUpload = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+
+    }
+
+    public void uploadPhoto(){
+        if(permissionCheckUpload == 0) {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+        }
+    }
+
+
     @Override
     public void onNothingSelected(AdapterView<?> parent)
     {
@@ -129,19 +184,13 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
                 break;
 
             case R.id.uploadPhoto:
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                uploadPhotoPermissions();
+                uploadPhoto();
                 break;
 
             case R.id.takePhoto:
-                if (!hasPermission (MainActivity.readPerm[0])) { requestPermissions(MainActivity.readPerm, MainActivity.readRequestCode); }
-                if (!hasPermission (MainActivity.cameraPerm[0])) { requestPermissions(MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File photo = new File(Environment.getExternalStorageDirectory(),  "HotPic.jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-                imageUri = Uri.fromFile(photo);
-                startActivityForResult(intent, TAKE_PHOTO);
+                takePhotoPermissions();
+                takePhoto();
                 break;
         }
     }
@@ -186,28 +235,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults)
-    {
-        switch(permsRequestCode)
-        {
-            case 200:
-                writeAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
-                break;
-            case 201:
-                cameraAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
-                break;
-        }
-    }
 
-    private boolean hasPermission(String permission)
-    {
-        if(MainActivity.isMarshmellow())
-        {
-            return(checkSelfPermission(permission)==PackageManager.PERMISSION_GRANTED);
-        }
-        return true;
-    }
 
     public JSONObject createComponentJSON() throws JSONException{
         JSONObject jsonParam = new JSONObject();

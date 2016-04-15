@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -50,6 +53,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
     private Uri imageUri;
     boolean writeAccepted, cameraAccepted;
     EditText lat, longi, alt;
+    int permissionCheckTake, permissionCheckUpload;
 
 
     @Override
@@ -104,19 +108,13 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
                 break;
 
             case R.id.uploadPhoto:
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                uploadPhotoPermissions();
+                uploadPhoto();
                 break;
 
             case R.id.takePhoto:
-                if (!hasPermission(MainActivity.readPerm[0])) { requestPermissions(MainActivity.readPerm, MainActivity.readRequestCode); }
-                if (!hasPermission(MainActivity.cameraPerm[0])) { requestPermissions(MainActivity.cameraPerm, MainActivity.cameraRequestCode); }
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File photo = new File(Environment.getExternalStorageDirectory(),  "HotPic.jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-                imageUri = Uri.fromFile(photo);
-                startActivityForResult(intent, TAKE_PHOTO);
+                takePhotoPermissions();
+                takePhoto();
                 break;
 
             case (R.id.installation_location):
@@ -130,19 +128,55 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         }
     }
 
+    public void takePhotoPermissions(){
+        permissionCheckTake = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
-        if (position > 0)
-            numb = getInfo.projectNumber[position - 1];
+        if(permissionCheckTake != 0){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    2);
+        }
+
+        // Checks again so that the camera can open
+        permissionCheckTake = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
+
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent)
-    {
+    public void takePhoto(){
+        if(permissionCheckTake == 0) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File photo = new File(Environment.getExternalStorageDirectory(), "HotPic.jpg");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+            imageUri = Uri.fromFile(photo);
+            startActivityForResult(intent, TAKE_PHOTO);
+        }
 
     }
+
+    public void uploadPhotoPermissions(){
+        permissionCheckUpload = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if(permissionCheckUpload != 0){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    3);
+        }
+
+        // Checks again so gallery can open
+        permissionCheckUpload = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+
+    }
+
+    public void uploadPhoto(){
+        if(permissionCheckUpload == 0) {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)
@@ -151,59 +185,34 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         switch (requestCode)
         {
             case SELECT_PHOTO:
-                if (resultCode == RESULT_OK)
+
+                try
                 {
-                    try
-                    {
-                        final Uri imageUri = imageReturnedIntent.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        selectedImage = BitmapFactory.decodeStream(imageStream);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    final Uri imageUri = imageReturnedIntent.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    selectedImage = BitmapFactory.decodeStream(imageStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
+
                 break;
 
             case TAKE_PHOTO:
-                if (resultCode == RESULT_OK)
+
+                Uri thisUri = imageUri;
+                getContentResolver().notifyChange(thisUri, null);
+                ContentResolver cr = getContentResolver();
+                try
                 {
-                    Uri thisUri = imageUri;
-                    getContentResolver().notifyChange(thisUri, null);
-                    ContentResolver cr = getContentResolver();
-                    try
-                    {
-                        selectedImage = android.provider.MediaStore.Images.Media.getBitmap(cr, thisUri);
-                    } catch (Exception e) {
-                        Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
-                                .show();
-                        Log.e("Camera", e.toString());
-                    }
+                    selectedImage = android.provider.MediaStore.Images.Media.getBitmap(cr, thisUri);
+                } catch (Exception e) {
+                    Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
+                            .show();
+                    Log.e("Camera", e.toString());
                 }
-                break;
-        }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults)
-    {
-        switch(permsRequestCode)
-        {
-            case 200:
-                writeAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
-                break;
-            case 201:
-                cameraAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
                 break;
         }
-    }
-
-    private boolean hasPermission(String permission)
-    {
-        if(MainActivity.isMarshmellow())
-        {
-            return(checkSelfPermission(permission)==PackageManager.PERMISSION_GRANTED);
-        }
-        return true;
     }
 
     public void newSite() throws JSONException
@@ -274,4 +283,13 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
