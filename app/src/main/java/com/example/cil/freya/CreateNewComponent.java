@@ -37,7 +37,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-public class CreateNewComponent extends MainActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+public class CreateNewComponent extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener {
     String ComponentFile = "ComponentFile.txt";
     EditText info;
     int deploymentNumb;
@@ -46,11 +46,6 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
     private final int TAKE_PHOTO = 2;
     private Uri imageUri;
     boolean writeAccepted, cameraAccepted;
-
-    private String[] mPlanetTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
 
     public CreateNewComponent()
     {
@@ -64,6 +59,7 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.component_display);
+        super.onCreateDrawer(savedInstanceState);
 
         // Sets title in action bar
         getActionBar().setTitle("Create New Component");
@@ -83,52 +79,7 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
             Modules.read(ComponentFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
 
-        mPlanetTitles = new String[]{"Test1", "Test2"};
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.navList);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
-        {
-            public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
-            public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-
-
     }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle your other action bar items...
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,7 +88,6 @@ public class CreateNewComponent extends MainActivity implements View.OnClickList
         menu.findItem(R.id.sync).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public void onItemSelected (AdapterView<?> parent, View view, int position, long id)

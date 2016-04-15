@@ -41,12 +41,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends Activity implements GoogleApiClient.ConnectionCallbacks,
+public class MainActivity extends NavigationDrawer implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
 
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle mDrawerToggle;
-    ListView mDrawerList;
     public final static String JSON_TEXT = "MESSAGE";
     static String ProjectFile = "FilterSettings.txt";
     ExpandableListAdapter expandable;
@@ -84,34 +81,10 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        super.onCreateDrawer(savedInstanceState);
 
         //TODO
         GPSAccessPermission();
-
-        // create the drawer
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView)findViewById(R.id.navList);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0)
-        {
-            public void onDrawerClosed(View view) { super.onDrawerClosed(view); }
-            public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
-        };
-        // enable drawer listener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        addDrawerItems();
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowCustomEnabled(true);
-
-        // put in icons from drawables
-        actionBar.setIcon(R.drawable.upload_icon);
-        actionBar.setIcon(R.drawable.search_icon);
-
-        // inflate action bar
-        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // go to getAllRequest
         getInfo.getAllRequests(this);
@@ -266,6 +239,13 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public void onRestart(){
 
         super.onRestart();
@@ -278,24 +258,6 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(expandable);
 
-    }
-    // when creating a drawer
-    private void addDrawerItems()
-    {
-        // list of options
-        String[] osArray = { "Create New Project","Create New Site", "Create New System", "Create New Deployment", "Create New Component", "Create New Document" , "Create New Service Entry"};
-        //  display and set listener
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.navigation_drawer, osArray);
-        mDrawerList.setAdapter(mAdapter);
-    }
-
-    // once GUI  is created
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState)
-    {
-        // will do stuff once saved states are enabled
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -353,93 +315,15 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         mGoogleApiClient.connect();
     }
 
-    // drawer listener
-    private class DrawerItemClickListener implements ListView.OnItemClickListener
-    {
-        // got to onItemClick
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) { selectItem(position); }
-    }
 
-    // if an item is selected from the drawer
-    private void selectItem(int position)
-    {
-        /*Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image*//*");
-            startActivityForResult(photoPickerIntent, SELECT_PHOTO);*/
+    static class AsyncParams{
+        JSONObject complete;
+        Context cxt;
 
-
-        Intent intent;
-        switch (position) {
-            case 0:
-                // start NewSite intent
-                intent = new Intent(MainActivity.this, CreateNewProject.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 1:
-                // start NewSite intent
-                intent = new Intent(MainActivity.this, CreateNewSite.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 2:
-                // start NewSite intent
-                intent = new Intent(MainActivity.this, CreateNewSystem.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 3:
-                // start NewSite intent
-                intent = new Intent(MainActivity.this, CreateNewDeployment.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 4:
-                // start component intent
-                intent = new Intent(MainActivity.this, CreateNewComponent.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 5:
-                // start document intent
-                intent = new Intent(MainActivity.this, CreateNewDocument.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                break;
-
-            case 6:
-                // start document intent
-                intent = new Intent(MainActivity.this, CreateNewServiceEntry.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-                break;
-
-            default:
-                // close the drawer
-                mDrawerList.setItemChecked(position, true);
-                mDrawerLayout.closeDrawer(mDrawerList);
+        AsyncParams(JSONObject complete, Context cxt){
+            this.complete = complete;
+            this.cxt = cxt;
         }
-    }
-
-    // automatically generated
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     @Override
@@ -461,23 +345,13 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         // if upload is chosen
         if (id == R.id.upload) {
             Context cxt = getApplicationContext();
-           AsyncParams par = new AsyncParams(getInfo.complete, cxt);
+            AsyncParams par = new AsyncParams(getInfo.complete, cxt);
             new CRUD.writeMessage().execute(par);
             overridePendingTransition(0, 0);
             return true;
         }
 
         return false;
-    }
-
-    static class AsyncParams{
-        JSONObject complete;
-        Context cxt;
-
-        AsyncParams(JSONObject complete, Context cxt){
-            this.complete = complete;
-            this.cxt = cxt;
-        }
     }
 
 

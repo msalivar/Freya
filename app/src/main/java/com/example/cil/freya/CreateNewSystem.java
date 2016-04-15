@@ -36,7 +36,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/19/15.
  */
-public class CreateNewSystem extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewSystem extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     String SystemFile = "SystemFile.txt";
     EditText info;
@@ -53,6 +53,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.system_display);
+        super.onCreateDrawer(savedInstanceState);
 
         getActionBar().setTitle("Create New System");
         Button saveButton = (Button) findViewById(R.id.saveButton);

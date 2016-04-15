@@ -2,6 +2,22 @@
 <!--Creates the layout for new projects screen.
     Displays labels and boxes for the user to enter data.
     Aligns everything according to the screen of the device!-->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:background="@drawable/gradient_background"
+        android:divider="@color/white"
+        android:dividerHeight="0.75sp"/>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -125,3 +141,4 @@
             </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>

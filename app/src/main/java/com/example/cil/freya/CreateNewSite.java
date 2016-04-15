@@ -37,7 +37,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/18/15.
  */
-public class CreateNewSite extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener
+public class CreateNewSite extends NavigationDrawer implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
     Spinner proj;
     int numb;
@@ -57,6 +57,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.site_display);
+        super.onCreateDrawer(savedInstanceState);
 
         getActionBar().setTitle("Create New Site");
         Button saveButton = (Button) findViewById(R.id.saveButton);

@@ -37,7 +37,7 @@ import java.util.UUID;
 /**
  * Created by cil on 2/18/16.
  */
-public class CreateNewServiceEntry extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewServiceEntry extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     EditText info;
     int projNumb, creatorNumb, systemNumb, componentNumb;
@@ -55,6 +55,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_entry_display);
+        super.onCreateDrawer(savedInstanceState);
 
         getActionBar().setTitle("Create New Service Entry");
         Button saveButton = (Button) findViewById(R.id.saveButton);

@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * Created by cil on 1/21/16.
  */
-public class CreateNewDeployment extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewDeployment extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     String DeploymentFile = "DeploymentFile.txt";
     EditText info = null;
@@ -34,6 +34,7 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deployment_display);
+        super.onCreateDrawer(savedInstanceState);
 
         getActionBar().setTitle("Create New Deployment");
         Button saveButton = (Button) findViewById(R.id.saveButton);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import org.json.JSONArray;
@@ -22,7 +23,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/10/15.
  */
-public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewProject extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
@@ -36,6 +37,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_display);
+        super.onCreateDrawer(savedInstanceState);
 
         // Set Title
         getActionBar().setTitle("Create New Project");
@@ -51,7 +53,7 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
             Modules.read(ProjectFile, this);}
         catch(FileNotFoundException e){e.printStackTrace();}
 
-        Modules.spinner (this, getInfo.peopleNames, prininvest);
+        Modules.spinner(this, getInfo.peopleNames, prininvest);
 
     }
 
