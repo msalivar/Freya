@@ -25,7 +25,7 @@ import java.util.UUID;
 /**
  * Created by cil on 2/5/16.
  */
-public class CreateNewDocument extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewDocument extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
      int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
      String DocumentFile = "DocumentFile.txt";
@@ -36,7 +36,6 @@ public class CreateNewDocument extends NavigationDrawer implements View.OnClickL
         {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.document_display);
-            super.onCreateDrawer(savedInstanceState);
 
             getActionBar().setTitle("Create New Document");
             Button saveButton = (Button) findViewById(R.id.saveButton);

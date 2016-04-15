@@ -112,7 +112,7 @@ public class NavigationDrawer extends Activity{
         switch (position) {
             case 0:
                 // start NewSite intent
-                intent = new Intent(view.getContext(), CreateNewProject.class);
+                intent = new Intent(NavigationDrawer.this, CreateNewProject.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 break;

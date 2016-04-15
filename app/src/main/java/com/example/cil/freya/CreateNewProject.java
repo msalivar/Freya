@@ -23,7 +23,7 @@ import java.util.UUID;
 /**
  * Created by cil on 11/10/15.
  */
-public class CreateNewProject extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener
+public class CreateNewProject extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     static String projectsURL = MainActivity.mainURL + MainActivity.edgeURL;
     Spinner prininvest;
@@ -37,7 +37,6 @@ public class CreateNewProject extends NavigationDrawer implements View.OnClickLi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_display);
-        super.onCreateDrawer(savedInstanceState);
 
         // Set Title
         getActionBar().setTitle("Create New Project");

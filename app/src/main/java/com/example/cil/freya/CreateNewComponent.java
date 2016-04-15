@@ -1,5 +1,6 @@
 package com.example.cil.freya;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,7 +38,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-public class CreateNewComponent extends NavigationDrawer implements View.OnClickListener, Spinner.OnItemSelectedListener {
+public class CreateNewComponent extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener {
     String ComponentFile = "ComponentFile.txt";
     EditText info;
     int deploymentNumb;
@@ -59,7 +60,6 @@ public class CreateNewComponent extends NavigationDrawer implements View.OnClick
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.component_display);
-        super.onCreateDrawer(savedInstanceState);
 
         // Sets title in action bar
         getActionBar().setTitle("Create New Component");
