@@ -53,7 +53,6 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.activity_display_menu, menu);
-        menu.findItem(R.id.uploadPhoto).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

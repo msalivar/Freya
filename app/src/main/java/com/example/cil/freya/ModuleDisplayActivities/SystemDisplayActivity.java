@@ -23,9 +23,9 @@ import java.util.Objects;
 
 public class SystemDisplayActivity extends Activity implements View.OnClickListener
 {
-    EditText details, location, power, sysname;
+    EditText details, power, sysname;
     Spinner manager, site;
-    Button saveButton;
+    Button saveButton, location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,7 +39,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
         details = (EditText) findViewById(R.id.details);
-        location = (EditText) findViewById(R.id.installation_location);
+        location = (Button) findViewById(R.id.installation_location);
         power = (EditText) findViewById(R.id.power);
         sysname = (EditText) findViewById(R.id.sysname);
         manager = (Spinner) findViewById(R.id.manager);
@@ -65,9 +65,6 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         switch(menu.getItemId()){
             case R.id.cancel_button:
                 finish();
-                return true;
-            case R.id.uploadPhoto:
-                // TODO
                 return true;
             default:
                 return super.onOptionsItemSelected(menu);

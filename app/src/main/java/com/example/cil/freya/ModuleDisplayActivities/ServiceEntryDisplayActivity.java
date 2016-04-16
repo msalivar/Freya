@@ -78,9 +78,6 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
             case R.id.cancel_button:
                 finish();
                 return true;
-            case R.id.uploadPhoto:
-                // TODO
-                return true;
             default:
                 return super.onOptionsItemSelected(menu);
         }

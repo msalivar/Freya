@@ -67,9 +67,6 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
             case R.id.cancel_button:
                 finish();
                 return true;
-            case R.id.uploadPhoto:
-                // TODO
-                return true;
             default:
                 return super.onOptionsItemSelected(menu);
         }
