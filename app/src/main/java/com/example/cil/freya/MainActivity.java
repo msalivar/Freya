@@ -34,6 +34,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -158,6 +160,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
+        listDataHeader.add("Unsynced");
         listDataHeader.add("People");
         listDataHeader.add("Projects");
         listDataHeader.add("Sites");
@@ -166,10 +169,20 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         listDataHeader.add("Components");
         listDataHeader.add("Documents");
         listDataHeader.add("Service Entries");
-        listDataHeader.add("Unsynced");
 
 
         // Adding child data
+        List<String> unsynced = new ArrayList<String>();
+        if (getInfo.complete.length() > 0)
+        {
+            try
+            {
+                for(int i = 0; i < getInfo.complete.getJSONArray("Components").length(); i++)
+                {
+                    unsynced.add(getInfo.complete.getJSONArray("Components").getJSONObject(i).getString("Name") + " (Component)");
+                }
+            } catch (JSONException e) { e.printStackTrace(); }
+        }
         List<String> people = new ArrayList<String>();
         if (getInfo.peopleNames.length> 0)
         {
@@ -218,21 +231,16 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
             Collections.addAll(serviceEntries, getInfo.serviceNames);
             serviceEntries.remove(0);
         }
-        List<String> unsynced = new ArrayList<String>();
-        if (getInfo.complete.length() > 0)
-        {
-            Collections.addAll(unsynced, "Name");
-        }
 
-        listDataChild.put(listDataHeader.get(0), people); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), projects);
-        listDataChild.put(listDataHeader.get(2), sites);
-        listDataChild.put(listDataHeader.get(3), systems);
-        listDataChild.put(listDataHeader.get(4), deployments);
-        listDataChild.put(listDataHeader.get(5), components);
-        listDataChild.put(listDataHeader.get(6), documents);
-        listDataChild.put(listDataHeader.get(7), serviceEntries);
-        listDataChild.put(listDataHeader.get(8), unsynced);
+        listDataChild.put(listDataHeader.get(0), unsynced);
+        listDataChild.put(listDataHeader.get(1), people); // Header, Child data
+        listDataChild.put(listDataHeader.get(2), projects);
+        listDataChild.put(listDataHeader.get(3), sites);
+        listDataChild.put(listDataHeader.get(4), systems);
+        listDataChild.put(listDataHeader.get(5), deployments);
+        listDataChild.put(listDataHeader.get(6), components);
+        listDataChild.put(listDataHeader.get(7), documents);
+        listDataChild.put(listDataHeader.get(8), serviceEntries);
 
         expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(expandable);
@@ -344,10 +352,10 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         }
         // if upload is chosen
         if (id == R.id.upload) {
-            Context cxt = getApplicationContext();
+            /*Context cxt = getApplicationContext();
             AsyncParams par = new AsyncParams(getInfo.complete, cxt);
             new CRUD.writeMessage().execute(par);
-            overridePendingTransition(0, 0);
+            overridePendingTransition(0, 0);*/
             return true;
         }
 

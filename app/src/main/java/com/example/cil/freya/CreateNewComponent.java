@@ -163,12 +163,18 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         //Create JSONObject here
         JSONObject JSON = createComponentJSON();
 
-        JSONArray component = new JSONArray();
-        component.put(JSON);
-
-        getInfo.complete.put("Components", component);
+        if (getInfo.complete.isNull("Components"))
+        {
+            JSONArray component = new JSONArray();
+            component.put(JSON);
+            getInfo.complete.put("Components", component);
+        }
+        else
+        {
+            getInfo.complete.getJSONArray("Components").put(JSON);
+        }
+        // TODO: MainActivity.prepareListData();
     }
-
 
     public void onClick(View v)
     {
