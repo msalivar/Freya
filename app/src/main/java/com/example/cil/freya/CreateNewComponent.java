@@ -299,4 +299,15 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
 
         return jsonParam;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.cancel_button:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
+    }
 }

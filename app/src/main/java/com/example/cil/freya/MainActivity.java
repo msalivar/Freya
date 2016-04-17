@@ -159,6 +159,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.cancel_button).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

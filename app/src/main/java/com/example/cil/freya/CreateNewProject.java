@@ -3,6 +3,7 @@ package com.example.cil.freya;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -134,5 +135,16 @@ public class CreateNewProject extends Activity implements View.OnClickListener, 
         jsonParam.put("Started Date", date);
 
         return jsonParam;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu){
+        switch(menu.getItemId()){
+            case R.id.cancel_button:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menu);
+        }
     }
 }
