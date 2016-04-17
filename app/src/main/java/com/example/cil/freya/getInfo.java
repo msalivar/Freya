@@ -43,6 +43,7 @@ public class getInfo extends Application
     public static String serviceNames[];
     public static int serviceNumber[];
     public static JSONObject complete = new JSONObject();
+    public static JSONObject unsynced = new JSONObject();
 
 
     static public void getAllRequests (Context cxt){

@@ -21,20 +21,20 @@ public class ExpandableListHandler
     public ExpandableListAdapter prepareListData(Context c) {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-        //int amount_unsynced = getInfo.complete.length();
+        //int amount_unsynced = getInfo.unsynced.length();
         List<String> unsynced = new ArrayList<String>();
 
         // Adding child data
-        if (getInfo.complete.length() > 0)
+        if (getInfo.unsynced.length() > 0)
         {
             listDataHeader.add("Unsynced"); //(" + String.valueOf(amount_unsynced) + ")");
-            if (getInfo.complete.length() > 0)
+            if (getInfo.unsynced.length() > 0)
             {
                 try
                 {
-                    for(int i = 0; i < getInfo.complete.getJSONArray("Components").length(); i++)
+                    for(int i = 0; i < getInfo.unsynced.getJSONArray("Components").length(); i++)
                     {
-                        unsynced.add(getInfo.complete.getJSONArray("Components").getJSONObject(i).getString("Name") + " (Component)");
+                        unsynced.add(getInfo.unsynced.getJSONArray("Components").getJSONObject(i).getString("Name") + " (Component)");
                     }
                 } catch (JSONException e) { e.printStackTrace(); }
             }
@@ -99,7 +99,7 @@ public class ExpandableListHandler
             serviceEntries.remove(0);
         }
 
-        if (getInfo.complete.length() > 0)
+        if (getInfo.unsynced.length() > 0)
         {
             listDataChild.put(listDataHeader.get(0), unsynced);
             listDataChild.put(listDataHeader.get(1), people); // Header, Child data

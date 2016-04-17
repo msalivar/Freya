@@ -167,11 +167,11 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
 
         super.onRestart();
         List<String> unsynced = new ArrayList<String>();
-        if (getInfo.complete.length() > 0)
+        if (getInfo.unsynced.length() > 0)
         {
             Collections.addAll(unsynced, "Name");
         }
-        ListHandler.listDataChild.put(ListHandler.listDataHeader.get(8), unsynced);
+        ListHandler.listDataChild.put(ListHandler.listDataHeader.get(0), unsynced);
         expListView.setAdapter(ListHandler.prepareListData(this));
 
     }
@@ -265,10 +265,15 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         }
         // if upload is chosen
         if (id == R.id.upload) {
-            /*Context cxt = getApplicationContext();
+            Context cxt = getApplicationContext();
+
             AsyncParams par = new AsyncParams(getInfo.complete, cxt);
             new CRUD.writeMessage().execute(par);
-            overridePendingTransition(0, 0);*/
+
+            // update here
+
+            getInfo.complete = new JSONObject();
+            overridePendingTransition(0, 0);
             return true;
         }
 

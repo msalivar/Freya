@@ -138,7 +138,6 @@ public class CRUD {
             if (result.response == 200)
             {
                 Toast.makeText(result.cxt, "Post Successful", Toast.LENGTH_LONG).show();
-                getInfo.complete = new JSONObject();
             }
             else
                 Toast.makeText(result.cxt, "Error: " + result.response, Toast.LENGTH_LONG).show();
