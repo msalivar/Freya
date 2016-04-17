@@ -46,10 +46,10 @@ import java.util.List;
 public class MainActivity extends NavigationDrawer implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
 
+    private static MainActivity instance;
     public final static String JSON_TEXT = "MESSAGE";
     static String ProjectFile = "FilterSettings.txt";
-    ExpandableListAdapter expandable;
-    ExpandableListView expListView;
+    public static ExpandableListView expListView;
     public static int selectedModuleIndex = -1;
     public static String[] readPerm = {"android.permission.READ_EXTERNAL_STORAGE"};
     public static String[] cameraPerm = {"android.permission.CAMERA"};
@@ -58,6 +58,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
     public static int cameraRequestCode = 201;
     protected static GoogleApiClient mGoogleApiClient;
     public static Location mLastLocation;
+    public static ExpandableListHandler ListHandler = new ExpandableListHandler();
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -75,8 +76,6 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
     static ArrayList<ProjectEntry> projectEntries = new ArrayList<>();
     static ArrayList<Boolean> projectHideValues = new ArrayList<>();
     static ArrayList<Boolean> checkValues = new ArrayList<>();
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +83,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         super.onCreateDrawer(savedInstanceState);
+        instance = this;
 
         //TODO
         GPSAccessPermission();
@@ -100,7 +100,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
                 // listDataHeader.get(groupPosition)
                 // listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
                 selectedModuleIndex = childPosition;
-                switch (listDataHeader.get(groupPosition))
+                switch (ListHandler.listDataHeader.get(groupPosition))
                 {
                     case "Projects":
                         Intent project = new Intent(MainActivity.this, ProjectDisplayActivity.class);
@@ -137,7 +137,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
             }
         });
 
-        prepareListData();
+        expListView.setAdapter(ListHandler.prepareListData(this));
 
         // load state testing, will be used to implement saving information into the app so syncing will not have to occur every time the user opens the app
         if (savedInstanceState != null)
@@ -153,97 +153,6 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         }
 
         buildGoogleApiClient();
-    }
-
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listDataHeader.add("Unsynced");
-        listDataHeader.add("People");
-        listDataHeader.add("Projects");
-        listDataHeader.add("Sites");
-        listDataHeader.add("Systems");
-        listDataHeader.add("Deployments");
-        listDataHeader.add("Components");
-        listDataHeader.add("Documents");
-        listDataHeader.add("Service Entries");
-
-
-        // Adding child data
-        List<String> unsynced = new ArrayList<String>();
-        if (getInfo.complete.length() > 0)
-        {
-            try
-            {
-                for(int i = 0; i < getInfo.complete.getJSONArray("Components").length(); i++)
-                {
-                    unsynced.add(getInfo.complete.getJSONArray("Components").getJSONObject(i).getString("Name") + " (Component)");
-                }
-            } catch (JSONException e) { e.printStackTrace(); }
-        }
-        List<String> people = new ArrayList<String>();
-        if (getInfo.peopleNames.length> 0)
-        {
-            Collections.addAll(people, getInfo.peopleNames);
-            people.remove(0);
-        }
-        List<String> projects = new ArrayList<String>();
-        if (getInfo.projectNames.length> 0)
-        {
-            Collections.addAll(projects, getInfo.projectNames);
-            projects.remove(0);
-        }
-        List<String> sites = new ArrayList<String>();
-        if (getInfo.siteNames.length > 0)
-        {
-            Collections.addAll(sites, getInfo.siteNames);
-            sites.remove(0);
-        }
-        List<String> systems = new ArrayList<String>();
-        if (getInfo.systemNames.length > 0)
-        {
-            Collections.addAll(systems, getInfo.systemNames);
-            systems.remove(0);
-        }
-        List<String> deployments = new ArrayList<String>();
-        if (getInfo.deploymentNames.length > 0)
-        {
-            Collections.addAll(deployments, getInfo.deploymentNames);
-            deployments.remove(0);
-        }
-        List<String> components = new ArrayList<String>();
-        if (getInfo.componentNames.length > 0)
-        {
-            Collections.addAll(components, getInfo.componentNames);
-            components.remove(0);
-        }
-        List<String> documents = new ArrayList<String>();
-        if (getInfo.documentNames.length > 0)
-        {
-            Collections.addAll(documents, getInfo.documentNames);
-            documents.remove(0);
-        }
-        List<String> serviceEntries = new ArrayList<String>();
-        if (getInfo.serviceNames.length > 0)
-        {
-            Collections.addAll(serviceEntries, getInfo.serviceNames);
-            serviceEntries.remove(0);
-        }
-
-        listDataChild.put(listDataHeader.get(0), unsynced);
-        listDataChild.put(listDataHeader.get(1), people); // Header, Child data
-        listDataChild.put(listDataHeader.get(2), projects);
-        listDataChild.put(listDataHeader.get(3), sites);
-        listDataChild.put(listDataHeader.get(4), systems);
-        listDataChild.put(listDataHeader.get(5), deployments);
-        listDataChild.put(listDataHeader.get(6), components);
-        listDataChild.put(listDataHeader.get(7), documents);
-        listDataChild.put(listDataHeader.get(8), serviceEntries);
-
-        expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        expListView.setAdapter(expandable);
     }
 
     @Override
@@ -262,9 +171,8 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         {
             Collections.addAll(unsynced, "Name");
         }
-        listDataChild.put(listDataHeader.get(8), unsynced);
-        expandable = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        expListView.setAdapter(expandable);
+        ListHandler.listDataChild.put(ListHandler.listDataHeader.get(8), unsynced);
+        expListView.setAdapter(ListHandler.prepareListData(this));
 
     }
 
@@ -283,6 +191,11 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     1);
         }
+    }
+
+    public static Context getContext()
+    {
+        return instance;
     }
 
     @Override
@@ -347,7 +260,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
             getInfo.getAllRequests(this);
-            prepareListData();
+            expListView.setAdapter(ListHandler.prepareListData(this));
             return true;
         }
         // if upload is chosen
@@ -368,7 +281,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         return (Build.VERSION.SDK_INT> Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 
-// the people test JSON. Was our first try. Is included for refrence, but is no longer used
+// the people test JSON. Was our first try. Is included for reference, but is no longer used
 //    public JSONObject createPeopleJSON() throws JSONException, UnsupportedEncodingException
 //    {
 //        JSONObject jsonParam = new JSONObject();

@@ -173,7 +173,7 @@ public class CreateNewComponent extends Activity implements View.OnClickListener
         {
             getInfo.complete.getJSONArray("Components").put(JSON);
         }
-        // TODO: MainActivity.prepareListData();
+        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
     }
 
     public void onClick(View v)

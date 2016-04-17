@@ -109,6 +109,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         {
             getInfo.complete.getJSONArray("Components").put(JSON);
         }
+        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
     }
 
     public JSONObject createComponentJSON() throws JSONException{
