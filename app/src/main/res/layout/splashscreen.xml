@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
-    <ImageView android:id="@+id/splashscreen"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/gradient_background"/>
+    android:layout_height="fill_parent"
+    android:background="@drawable/gradient_background"
+    android:id="@+id/splashscreen">
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World, splash"/>
+        android:text="  NRDC \n QA App"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="60dp"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+
+       />
+
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text=" Hannah Munoz \n Samantha Grant \n Matthew Salivar"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="80dp"
+        android:textStyle="italic"
+        />
+
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="CS 426 Senior Projects \n Computer Science and Engineering \n University of Nevada, Reno"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        />
 
 </LinearLayout>
