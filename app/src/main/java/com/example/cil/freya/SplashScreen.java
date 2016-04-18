@@ -18,6 +18,6 @@ public class SplashScreen extends Activity {
                 startActivity(new Intent(SplashScreen.this, MainActivity.class));
                 finish();
             }
-        }, secondsDelayed * 3000);
+        }, secondsDelayed * 1000);
     }
 }
