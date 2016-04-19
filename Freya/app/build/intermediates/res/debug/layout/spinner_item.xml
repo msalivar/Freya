@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Layout for the spinner. Sets size, color, and placement of items!-->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    style="@style/spinnerItemStyle"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:textColor="@color/text_color"
+    android:textSize="20dp"
+    />
+<!-- From: file:/home/cil/Desktop/Freya-master/app/src/main/res/layout/spinner_item.xml -->

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Displays the new sites screen.
+    Displays all labels and boxes for the user to enter data.
+    Aligns to the screen according to size!-->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:background="@drawable/gradient_background"
+        android:divider="@color/white"
+        android:dividerHeight="0.75sp"/>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                tools:context="com.example.cil.freya.CreateNewComponent">
+
+    <Button
+        style="@style/SaveButtonTheme"
+        />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1"
+                android:orientation="vertical"
+                android:paddingTop="15dp"
+                android:background="@color/background_color"
+                android:layout_marginBottom="60dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <View
+                style="@style/DividerTheme" />
+
+            <EditText
+                android:id="@+id/alias_label"
+                android:text="Alias:"
+                style="@style/LabelTheme"/>
+
+            <EditText
+                android:id="@+id/alias"
+                android:hint="Enter Alias"
+                android:layout_alignTop="@id/alias_label"
+                style="@style/InputTheme"/>
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_alignBottom="@id/alias"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:id="@+id/landmark_label"
+                android:text="GPS Landmark:"
+                style="@style/LabelTheme"
+                android:layout_below="@+id/divider1"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/landmark"
+                android:hint="Enter GPS Landmark"
+                android:layout_alignTop="@id/landmark_label"
+                style="@style/InputTheme" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_alignBottom="@id/landmark"
+                android:layout_marginBottom="-5dp"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/installation_location_label"
+                android:text="Installation\nLocation:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/divider2"/>
+
+            <Button
+                android:layout_marginTop="5dp"
+                android:id="@+id/installation_location"
+                android:text="Get Current Location"
+                android:layout_width="200dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@id/installation_location_label"/>
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/latitude_label"
+                android:text="Latitude:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/installation_location_label"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/latitude"
+                android:hint="Enter Latitude"
+                style="@style/InputTheme"
+                android:layout_alignTop="@id/latitude_label"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/longitude_label"
+                android:text="Longitude:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/latitude"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/longitude"
+                android:hint="Enter Longitude"
+                style="@style/InputTheme"
+                android:layout_alignTop="@id/longitude_label"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/altitude_label"
+                android:text="Altitude:"
+                style="@style/LabelTheme"
+                android:layout_below="@id/longitude"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_marginTop="-3dp"
+                android:id="@+id/altitude"
+                android:hint="Enter Altitude"
+                style="@style/InputTheme"
+                android:layout_alignTop="@id/altitude_label"
+                android:textSize="18dp"/>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_alignBottom="@id/altitude"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:id="@+id/landOwner_label"
+                android:text="Land Owner:"
+                android:layout_below="@id/divider3"
+                style="@style/LabelTheme"/>
+
+            <EditText
+                android:id="@+id/landOwner"
+                android:hint="Enter Land Owner"
+                android:layout_alignTop="@id/landOwner_label"
+                style="@style/InputTheme"/>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_alignBottom="@id/landOwner"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:id="@+id/site_name_label"
+                android:text="Name:"
+                android:layout_below="@id/divider4"
+                style="@style/LabelTheme"/>
+
+            <EditText
+                android:id="@+id/site_name"
+                android:hint="Enter Name"
+                android:layout_alignTop="@id/site_name_label"
+                style="@style/InputTheme"/>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_alignBottom="@id/site_name"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:id="@+id/permit_label"
+                android:text="Permit Holder:"
+                android:layout_below="@id/divider5"
+                style="@style/LabelTheme"/>
+
+            <EditText
+                android:id="@+id/permit"
+                android:hint="Enter Permit Holder"
+                android:layout_alignTop="@id/permit_label"
+                style="@style/InputTheme"/>
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_alignBottom="@id/permit"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:id="@+id/project_label"
+                android:text="Project:"
+                android:layout_below="@id/divider6"
+                style="@style/LabelTheme"/>
+
+            <Spinner
+                android:id="@+id/project"
+                android:layout_alignTop="@+id/project_label"
+                style="@style/spinnerItemStyle"/>
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_alignBottom="@id/project"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:id="@+id/doc_notes"
+                android:hint="Enter Notes"
+                android:layout_below="@id/divider7"
+                style="@style/InputTheme"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:paddingLeft="15dp"
+
+                />
+            <View
+                android:id="@+id/divider8"
+                android:layout_alignBottom="@id/doc_notes"
+                style="@style/DividerTheme"
+                />
+
+            <EditText
+                android:text="Photo:"
+                android:id="@+id/photo_label"
+                style="@style/LabelTheme"
+                android:layout_below="@id/divider8"/>
+
+            <Button
+                style="@style/TakePhoto"
+                android:layout_below="@+id/photo_label"
+                />
+
+            <Button
+                style="@style/UploadPhoto"
+                android:id="@+id/uploadPhoto"
+                android:layout_below="@+id/photo_label"
+                />
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_marginTop="60dp"
+                android:layout_below="@id/photo_label"
+                android:layout_marginBottom="60dp"
+                style="@style/DividerTheme"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
+    </android.support.v4.widget.DrawerLayout><!-- From: file:/home/cil/Desktop/Freya-master/app/src/main/res/layout/site_display.xml -->
