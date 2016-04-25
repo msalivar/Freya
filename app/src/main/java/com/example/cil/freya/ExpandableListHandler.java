@@ -23,193 +23,146 @@ public class ExpandableListHandler
         listDataChild = new HashMap<String, List<String>>();
         //int amount_unsynced = getInfo.unsynced.length();
         List<String> unsynced = new ArrayList<String>();
+        int headerCount = 0;
 
         // Adding child data
         if (getInfo.unsynced.length() > 0)
         {
-            listDataHeader.add("Unsynced"); //(" + String.valueOf(amount_unsynced) + ")");
-            if (getInfo.unsynced.length() > 0)
+            try
             {
-                try
+                for(int i = 0; i < getInfo.unsynced.getJSONArray("Components").length(); i++)
                 {
-                    if (getInfo.unsynced.getJSONArray("Projects").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Projects").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Projects").getJSONObject(i).getString("Name") + " (Project)");
-                        }
-                    }
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
+                    unsynced.add(getInfo.unsynced.getJSONArray("Components").getJSONObject(i).getString("Name") + " (Component)");
                 }
-
-                try
-                {
-                    if (getInfo.unsynced.getJSONArray("Sites").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Sites").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Sites").getJSONObject(i).getString("Name") + " (Site)");
-                        }
-                    }
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-                try
-                {
-                    if (getInfo.unsynced.getJSONArray("Systems").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Systems").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Systems").getJSONObject(i).getString("Name") + " (System)");
-                        }
-                    }
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-                try
-                {
-                    if (getInfo.unsynced.getJSONArray("Deployments").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Deployments").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Deployments").getJSONObject(i).getString("Name") + " (Deployment)");
-                        }
-                    }
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-                try
-                {
-                    if (getInfo.unsynced.getJSONArray("Components").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Components").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Components").getJSONObject(i).getString("Name") + " (Component)");
-                        }
-                    }
-                } catch (JSONException e) { e.printStackTrace(); }
-
-
-
-                try
-                {
-                    if (getInfo.unsynced.getJSONArray("Documents").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Documents").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Documents").getJSONObject(i).getString("Name") + " (Document)");
-                        }
-                    }
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-                try
-                {
-                    if (getInfo.unsynced.getJSONArray("Service Entries").length() > 0)
-                    {
-                        for (int i = 0; i < getInfo.unsynced.getJSONArray("Service Entries").length(); i++)
-                        {
-                            unsynced.add(getInfo.unsynced.getJSONArray("Service Entries").getJSONObject(i).getString("Name") + " (Service Entry)");
-                        }
-                    }
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-            }
-
+            } catch (JSONException e) { e.printStackTrace(); }
+            listDataHeader.add("Unsynced"); //(" + String.valueOf(amount_unsynced) + ")");
+            listDataChild.put(listDataHeader.get(headerCount++), unsynced);
         }
-        listDataHeader.add("People");
-        listDataHeader.add("Projects");
-        listDataHeader.add("Sites");
-        listDataHeader.add("Systems");
-        listDataHeader.add("Deployments");
-        listDataHeader.add("Components");
-        listDataHeader.add("Documents");
-        listDataHeader.add("Service Entries");
 
-        // Adding child data
         List<String> people = new ArrayList<String>();
-        if (getInfo.peopleNames.length> 0)
+        if (getInfo.peopleNames.length > 0)
         {
             Collections.addAll(people, getInfo.peopleNames);
             people.remove(0);
         }
+        listDataHeader.add("People");
+        listDataChild.put(listDataHeader.get(headerCount++), people);
+
         List<String> projects = new ArrayList<String>();
-        if (getInfo.projectNames.length> 0)
+        if (getInfo.projectNames.length > 0)
         {
             Collections.addAll(projects, getInfo.projectNames);
             projects.remove(0);
         }
-        List<String> sites = new ArrayList<String>();
+        listDataHeader.add("Projects");
+        listDataChild.put(listDataHeader.get(headerCount++), projects);
+
         if (getInfo.siteNames.length > 0)
         {
-            Collections.addAll(sites, getInfo.siteNames);
-            sites.remove(0);
-        }
-        List<String> systems = new ArrayList<String>();
-        if (getInfo.systemNames.length > 0)
-        {
-            Collections.addAll(systems, getInfo.systemNames);
-            systems.remove(0);
-        }
-        List<String> deployments = new ArrayList<String>();
-        if (getInfo.deploymentNames.length > 0)
-        {
-            Collections.addAll(deployments, getInfo.deploymentNames);
-            deployments.remove(0);
-        }
-        List<String> components = new ArrayList<String>();
-        if (getInfo.componentNames.length > 0)
-        {
-            Collections.addAll(components, getInfo.componentNames);
-            components.remove(0);
-        }
-        List<String> documents = new ArrayList<String>();
-        if (getInfo.documentNames.length > 0)
-        {
-            Collections.addAll(documents, getInfo.documentNames);
-            documents.remove(0);
-        }
-        List<String> serviceEntries = new ArrayList<String>();
-        if (getInfo.serviceNames.length > 0)
-        {
-            Collections.addAll(serviceEntries, getInfo.serviceNames);
-            serviceEntries.remove(0);
+            List<String> sites = new ArrayList<String>();
+            for (int i = 0; i < getInfo.siteNames.length; i++)
+            {
+                if (!getInfo.siteHidden.get(i))
+                {
+                    sites.add(getInfo.siteNames[i]);
+                }
+            }
+            if (sites.size() > 0)
+            {
+                sites.remove(0);
+                listDataHeader.add("Sites");
+                listDataChild.put(listDataHeader.get(headerCount++), sites);
+            }
         }
 
-        if (getInfo.unsynced.length() > 0)
+        if (getInfo.systemNames.length > 0)
         {
-            listDataChild.put(listDataHeader.get(0), unsynced);
-            listDataChild.put(listDataHeader.get(1), people); // Header, Child data
-            listDataChild.put(listDataHeader.get(2), projects);
-            listDataChild.put(listDataHeader.get(3), sites);
-            listDataChild.put(listDataHeader.get(4), systems);
-            listDataChild.put(listDataHeader.get(5), deployments);
-            listDataChild.put(listDataHeader.get(6), components);
-            listDataChild.put(listDataHeader.get(7), documents);
-            listDataChild.put(listDataHeader.get(8), serviceEntries);
+            List<String> systems = new ArrayList<String>();
+            for (int i = 0; i < getInfo.systemNames.length; i++)
+            {
+                if (!getInfo.systemHidden.get(i))
+                {
+                    systems.add(getInfo.systemNames[i]);
+                }
+            }
+            if (systems.size() > 0)
+            {
+                systems.remove(0);
+                listDataHeader.add("Systems");
+                listDataChild.put(listDataHeader.get(headerCount++), systems);
+            }
         }
-        else
+
+        if (getInfo.deploymentNames.length > 0)
         {
-            listDataChild.put(listDataHeader.get(0), people); // Header, Child data
-            listDataChild.put(listDataHeader.get(1), projects);
-            listDataChild.put(listDataHeader.get(2), sites);
-            listDataChild.put(listDataHeader.get(3), systems);
-            listDataChild.put(listDataHeader.get(4), deployments);
-            listDataChild.put(listDataHeader.get(5), components);
-            listDataChild.put(listDataHeader.get(6), documents);
-            listDataChild.put(listDataHeader.get(7), serviceEntries);
+            List<String> deployments = new ArrayList<String>();
+            for (int i = 0; i < getInfo.deploymentNames.length; i++)
+            {
+                if (!getInfo.deploymentHidden.get(i))
+                {
+                    deployments.add(getInfo.deploymentNames[i]);
+                }
+            }
+            if (deployments.size() > 0)
+            {
+                deployments.remove(0);
+                listDataHeader.add("Deployments");
+                listDataChild.put(listDataHeader.get(headerCount++), deployments);
+            }
+        }
+
+        if (getInfo.componentNames.length > 0)
+        {
+            List<String> components = new ArrayList<String>();
+            for (int i = 0; i < getInfo.componentNames.length; i++)
+            {
+                if (!getInfo.componentHidden.get(i))
+                {
+                    components.add(getInfo.componentNames[i]);
+                }
+            }
+            if (components.size() > 0)
+            {
+                components.remove(0);
+                listDataHeader.add("Components");
+                listDataChild.put(listDataHeader.get(headerCount++), components);
+            }
+        }
+
+        if (getInfo.documentNames.length > 0)
+        {
+            List<String> documents = new ArrayList<String>();
+            for (int i = 0; i < getInfo.documentNames.length; i++)
+            {
+                if (!getInfo.documentHidden.get(i))
+                {
+                    documents.add(getInfo.documentNames[i]);
+                }
+            }
+            if (documents.size() > 0)
+            {
+                documents.remove(0);
+                listDataHeader.add("Documents");
+                listDataChild.put(listDataHeader.get(headerCount++), documents);
+            }
+        }
+
+        if (getInfo.serviceNames.length > 0)
+        {
+            List<String> serviceEntries = new ArrayList<String>();
+            for (int i = 0; i < getInfo.serviceNames.length; i++)
+            {
+                if (!getInfo.serviceHidden.get(i))
+                {
+                    serviceEntries.add(getInfo.serviceNames[i]);
+                }
+            }
+            if (serviceEntries.size() > 0)
+            {
+                serviceEntries.remove(0);
+                listDataHeader.add("Service Entries");
+                listDataChild.put(listDataHeader.get(headerCount++), serviceEntries);
+            }
         }
 
         expandable = new ExpandableListAdapter(c, listDataHeader, listDataChild);

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -19,31 +20,41 @@ public class getInfo extends Application
     //  static String projectUID [];
     // 0 value is "choose investigator"
     public static JSONArray projects;
-    public static String projectNames[];
-    public static int  projectNumber[];
     public static JSONArray people;
-    public static String peopleNames[];
-    public static int peopleNumber[];
     public static JSONArray sites;
-    public static String siteNames[];
-    public static int siteNumber[];
     public static JSONArray systems;
-    public static String systemNames[];
-    public static int systemNumber[];
     public static JSONArray deployments;
-    public static String deploymentNames[];
-    public static int deploymentNumber[];
     public static JSONArray components;
-    public static String componentNames[];
-    public static int componentNumber[];
     public static JSONArray documents;
-    public static String documentNames[];
-    public static int documentNumber[];
     public static JSONArray services;
-    public static String serviceNames[];
-    public static int serviceNumber[];
-    public static JSONObject unsynced = new JSONObject();
 
+    public static String projectNames[];
+    public static String peopleNames[];
+    public static String siteNames[];
+    public static String systemNames[];
+    public static String deploymentNames[];
+    public static String componentNames[];
+    public static String documentNames[];
+    public static String serviceNames[];
+
+    public static int projectNumber[];
+    public static int peopleNumber[];
+    public static int siteNumber[];
+    public static int systemNumber[];
+    public static int deploymentNumber[];
+    public static int componentNumber[];
+    public static int documentNumber[];
+    public static int serviceNumber[];
+
+    public static ArrayList<Boolean> projectHidden = new ArrayList<>();
+    public static ArrayList<Boolean> siteHidden = new ArrayList<>();
+    public static ArrayList<Boolean> systemHidden = new ArrayList<>();
+    public static ArrayList<Boolean> deploymentHidden = new ArrayList<>();
+    public static ArrayList<Boolean> componentHidden = new ArrayList<>();
+    public static ArrayList<Boolean> documentHidden = new ArrayList<>();
+    public static ArrayList<Boolean> serviceHidden = new ArrayList<>();
+
+    public static JSONObject unsynced = new JSONObject();
 
     static public void getAllRequests (Context cxt){
         try {getPeople(cxt);} catch (FileNotFoundException e) {e.printStackTrace();}
@@ -54,8 +65,14 @@ public class getInfo extends Application
         getComponent(cxt);
         getDocuments(cxt);
         getService(cxt);
+        for (int i = 0; i < projectNames.length; i++) { projectHidden.add(false); }
+        for (int i = 0; i < siteNames.length; i++) { siteHidden.add(false); }
+        for (int i = 0; i < systemNames.length; i++) { systemHidden.add(false); }
+        for (int i = 0; i < deploymentNames.length; i++) { deploymentHidden.add(false); }
+        for (int i = 0; i < componentNames.length; i++) { componentHidden.add(false); }
+        for (int i = 0; i < documentNames.length; i++) { documentHidden.add(false); }
+        for (int i = 0; i < serviceNames.length; i++) { serviceHidden.add(false); }
     }
-
 
     static public JSONArray convertObjectToArray(String convert, String Type)
     {
