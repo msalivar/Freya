@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--list  of colors used in the app. We can  called them by name an standardize all colors this way-->
+<resources>
+    <color name="primary_color">#0471A6</color>
+    <color name="primary_dark">#041932</color>
+    <color name="text_color">#033860</color>
+    <color name="button_color">#84BCDA</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="divider_color">#9197AE</color>
+    <color name="background_color">#F6F4F3</color>
+    <color name="hint_color">#A0A4B8</color>
+</resources>
