@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--used as an activity to check if json are read correctly. Outputs read JSON to a new activity-->
+<!-- matches to device height and width-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.cil.freya.DisplayMessageActivity">
+
+    <!-- aligns text correct. Default text is 'temp'-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jsonText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="temp"/>
+</RelativeLayout>
+<!-- From: file:/home/cil/Senior%20Projects%2015-16/Freya/app/src/main/res/layout/activity_display_message.xml -->

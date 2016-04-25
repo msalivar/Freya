@@ -37,7 +37,11 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+>>>>>>> 0c7013b56067ce8d642363fe736a517bd365eb6b
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
@@ -45,6 +49,7 @@
   </component>
   <component name="masterDetails">
     <states>
+<<<<<<< HEAD
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
           <splitter-proportions>
@@ -68,6 +73,8 @@
           </splitter-proportions>
         </settings>
       </state>
+=======
+>>>>>>> 0c7013b56067ce8d642363fe736a517bd365eb6b
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.7</last-edited>
@@ -80,6 +87,7 @@
           </splitter-proportions>
         </settings>
       </state>
+<<<<<<< HEAD
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
           <splitter-proportions>
@@ -91,6 +99,8 @@
           </splitter-proportions>
         </settings>
       </state>
+=======
+>>>>>>> 0c7013b56067ce8d642363fe736a517bd365eb6b
     </states>
   </component>
 </project>

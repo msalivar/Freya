@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cil.freya"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="23" />
+    <!-- these are the permission nesscary for the app to work properly -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- the activites. Each entry includes a tleast an activity name. Main activity has a title. and cetain types of intents -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/MainTheme" >
+        <activity
+            android:name="com.example.cil.freya.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.DisplayMessageActivity"
+            android:label="@string/title_activity_display_message" >
+        </activity>
+        <activity
+            android:name="com.example.cil.freya.CreateNewProject"
+            android:label="@string/title_ProjectCreate" >
+        </activity>
+        <activity android:name="com.example.cil.freya.ProjectDisplay" >
+        </activity>
+        <activity android:name="com.example.cil.freya.ChooseProjects" >
+        </activity>
+        <activity android:name="com.example.cil.freya.ProjectFilterActivity" >
+        </activity>
+        <activity android:name="com.example.cil.freya.SearchActivity" >
+        </activity>
+        <activity android:name="com.example.cil.freya.CreateNewSite" >
+        </activity>
+        <activity android:name="com.example.cil.freya.CreateNewComponent" >
+        </activity>
+        <activity android:name="com.example.cil.freya.CreateNewDeployment" >
+        </activity>
+        <activity android:name="com.example.cil.freya.CreateNewSystem" >
+        </activity>
+        <activity android:name="com.example.cil.freya.CreateNewDocument" >
+        </activity>
+        <activity android:name="com.example.cil.freya.CreateNewServiceEntry" >
+        </activity>
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>

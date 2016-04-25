@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/pre-dexed/debug/classes-2d22da6288da9f265395921c811db945f0649404.jar" />
+    </item>
+    <item
+        jar="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/home/cil/Senior Projects 15-16/Freya/app/build/intermediates/pre-dexed/debug/classes-78921258411e7c5dcd74490c0941202950350e42.jar" />
+    </item>
+
+</items>
