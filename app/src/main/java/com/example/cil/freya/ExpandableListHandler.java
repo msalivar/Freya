@@ -1,8 +1,11 @@
 package com.example.cil.freya;
 
 import android.content.Context;
+import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -169,4 +172,27 @@ public class ExpandableListHandler
         return expandable;
     }
 
+    public void toggleProject(int projectIndex, boolean toggle)
+    {
+        // sites, se, document
+        JSONArray modules = getInfo.projects;
+        try
+        {
+            JSONObject thisProject = modules.getJSONObject(projectIndex);
+            int pIndex = thisProject.getInt("Project");
+
+            JSONArray sites = getInfo.sites;
+            for(int i = 0; i < sites.length(); i++)
+            {
+                if(sites.getJSONObject(i).getInt("Project") == thisProject.getInt("Project"))
+                {
+                    getInfo.siteHidden.set(i, toggle);
+                }
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

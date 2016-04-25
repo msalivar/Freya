@@ -80,8 +80,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
             }
         });*/
 
-
-        if (Objects.equals(MainActivity.ListHandler.listDataHeader.get(groupPosition), "Unsynced"))
+        if (Objects.equals(MainActivity.ListHandler.listDataHeader.get(groupPosition), "Unsynced")
+                || Objects.equals(MainActivity.ListHandler.listDataHeader.get(groupPosition), "People"))
         {
             hideButton.setVisibility(View.INVISIBLE);
         }
@@ -92,17 +92,39 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
                 @Override
                 public void onClick(View view)
                 {
+                    boolean result;
                     if (hideButton.getText().equals("Enable"))
                     {
                         hideButton.setText("Disable");
                         hideButton.setBackgroundColor(ContextCompat.getColor(_context, R.color.text_color));
                         setHidden(false, groupPosition, childPosition);
+                        result = false;
                     } else
                     {
                         hideButton.setText("Enable");
                         hideButton.setBackgroundColor(ContextCompat.getColor(_context, R.color.button_color));
                         setHidden(true, groupPosition, childPosition);
+                        result = true;
                     }
+                    switch (MainActivity.ListHandler.listDataHeader.get(groupPosition))
+                    {
+                        case "Projects":
+                            MainActivity.ListHandler.toggleProject(childPosition, result);
+                            break;
+                        case "Systems":
+                            break;
+                        case "Components":
+                            break;
+                        case "Service Entries":
+                            break;
+                        case "Deployments":
+                            break;
+                        case "Sites":
+                            break;
+                        case "Documents":
+                            break;
+                    }
+                    MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
                 }
             });
         }
@@ -113,9 +135,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
     {
         switch (MainActivity.ListHandler.listDataHeader.get(groupPosition))
         {
-            case "Projects":
-                getInfo.projectHidden.set(childPosition, result);
-                break;
             case "Systems":
                 getInfo.systemHidden.set(childPosition, result);
                 break;
