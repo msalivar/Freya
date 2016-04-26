@@ -46,7 +46,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.peopleNames);
         spinAdapter.setDropDownViewResource(R.layout.spinner_item);
         investigator.setAdapter(spinAdapter);
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -67,12 +67,25 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         }
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.projects;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.projects;
         try
         {
-            JSONObject thisProject = modules.getJSONObject(projectIndex);
+            JSONObject thisProject = modules.getJSONObject(findEntry(entryName));
             grant.setText(thisProject.getString("Grant Number String"));
             name.setText(thisProject.getString("Name"));
             funding.setText(thisProject.getString("Original Funding Agency"));

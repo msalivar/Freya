@@ -38,7 +38,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
     public final static String JSON_TEXT = "MESSAGE";
     static String ProjectFile = "FilterSettings.txt";
     public static ExpandableListView expListView;
-    public static int selectedModuleIndex = -1;
+    public static String selectedModuleName = "";
     public static String[] readPerm = {"android.permission.READ_EXTERNAL_STORAGE"};
     public static String[] cameraPerm = {"android.permission.CAMERA"};
     public static String[] writePerm = {"android.permission.WRITE_EXTERNAL_STORAGE"};
@@ -46,7 +46,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
     public static int cameraRequestCode = 201;
     protected static GoogleApiClient mGoogleApiClient;
     public static Location mLastLocation;
-    public static ExpandableListHandler ListHandler = new ExpandableListHandler();
+    public static ExpandableListHandler ListHandler;
 
     // URL list
     static String mainURL = "http://sensor.nevada.edu/GS/Services/";
@@ -79,6 +79,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
 
         // go to getAllRequest
         getInfo.getAllRequests(this);
+        ListHandler = new ExpandableListHandler(getContext());
 
         // create expandable list view
         expListView = (ExpandableListView) findViewById(R.id.expList);
@@ -86,36 +87,40 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
             {
-                // listDataHeader.get(groupPosition)
-                // listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
-                selectedModuleIndex = childPosition;
                 switch (ListHandler.listDataHeader.get(groupPosition))
                 {
                     case "Projects":
+                        selectedModuleName = ListHandler.listDataChild.get("Projects").get(childPosition);
                         Intent project = new Intent(MainActivity.this, ProjectDisplayActivity.class);
                         startActivity(project);
                         break;
                     case "Systems":
+                        selectedModuleName = ListHandler.listDataChild.get("Systems").get(childPosition);
                         Intent system = new Intent(MainActivity.this, SystemDisplayActivity.class);
                         startActivity(system);
                         break;
                     case "Components":
+                        selectedModuleName = ListHandler.listDataChild.get("Components").get(childPosition);
                         Intent component = new Intent(MainActivity.this, ComponentDisplayActivity.class);
                         startActivity(component);
                         break;
                     case "Service Entries":
+                        selectedModuleName = ListHandler.listDataChild.get("Service Entries").get(childPosition);
                         Intent serviceEntry = new Intent(MainActivity.this, ServiceEntryDisplayActivity.class);
                         startActivity(serviceEntry);
                         break;
                     case "Deployments":
+                        selectedModuleName = ListHandler.listDataChild.get("Deployments").get(childPosition);
                         Intent deployment = new Intent(MainActivity.this, DeploymentDisplayActivity.class);
                         startActivity(deployment);
                         break;
                     case "Sites":
+                        selectedModuleName = ListHandler.listDataChild.get("Sites").get(childPosition);
                         Intent site = new Intent(MainActivity.this, SiteDisplayActivity.class);
                         startActivity(site);
                         break;
                     case "Documents":
+                        selectedModuleName = ListHandler.listDataChild.get("Documents").get(childPosition);
                         Intent document = new Intent(MainActivity.this, DocumentDisplayActivity.class);
                         startActivity(document);
                         break;
@@ -162,7 +167,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
             }
         });
 
-        expListView.setAdapter(ListHandler.prepareListData(this));
+        expListView.setAdapter(ListHandler.expandable);
 
         // load state testing, will be used to implement saving information into the app so syncing will not have to occur every time the user opens the app
         if (savedInstanceState != null)
@@ -272,7 +277,8 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
         //noinspection SimplifiableIfStatement
         if (id == R.id.sync) {
             getInfo.getAllRequests(this);
-            expListView.setAdapter(ListHandler.prepareListData(this));
+            ListHandler.resetChildren();
+            // TODO: Update list here
             return true;
         }
         // if upload is chosen

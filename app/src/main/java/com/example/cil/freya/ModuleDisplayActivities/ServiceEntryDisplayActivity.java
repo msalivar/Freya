@@ -62,7 +62,7 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
         compAdapter .setDropDownViewResource(R.layout.spinner_item);
         component.setAdapter(compAdapter );
 
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -83,12 +83,25 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
         }
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.services;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.services;
         try
         {
-            JSONObject thisService = modules.getJSONObject(projectIndex);
+            JSONObject thisService = modules.getJSONObject(findEntry(entryName));
             name.setText(thisService.getString("Name"));
             operations.setText(thisService.getString("Operation"));
             SEnotes.setText(thisService.getString("Notes"));

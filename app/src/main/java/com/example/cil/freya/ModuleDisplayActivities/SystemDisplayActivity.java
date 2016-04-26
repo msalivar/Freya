@@ -50,7 +50,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.siteNames);
         siteAdapter.setDropDownViewResource(R.layout.spinner_item);
         site.setAdapter(siteAdapter);
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -71,12 +71,25 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
         }
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.systems;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.systems;
         try
         {
-            JSONObject thisSystem = modules.getJSONObject(projectIndex);
+            JSONObject thisSystem = modules.getJSONObject(findEntry(entryName));
             details.setText(thisSystem.getString("Details"));
             location.setText(thisSystem.getString("Installation Location"));
             power.setText(thisSystem.getString("Power"));

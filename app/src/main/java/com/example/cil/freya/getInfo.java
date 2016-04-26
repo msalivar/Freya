@@ -46,13 +46,6 @@ public class getInfo extends Application
     public static int documentNumber[];
     public static int serviceNumber[];
 
-    public static ArrayList<Boolean> siteHidden = new ArrayList<>();
-    public static ArrayList<Boolean> systemHidden = new ArrayList<>();
-    public static ArrayList<Boolean> deploymentHidden = new ArrayList<>();
-    public static ArrayList<Boolean> componentHidden = new ArrayList<>();
-    public static ArrayList<Boolean> documentHidden = new ArrayList<>();
-    public static ArrayList<Boolean> serviceHidden = new ArrayList<>();
-
     public static JSONObject unsynced = new JSONObject();
 
     static public void getAllRequests (Context cxt){
@@ -64,12 +57,6 @@ public class getInfo extends Application
         getComponent(cxt);
         getDocuments(cxt);
         getService(cxt);
-        for (int i = 0; i < siteNames.length; i++) { siteHidden.add(true); }
-        for (int i = 0; i < systemNames.length; i++) { systemHidden.add(true); }
-        for (int i = 0; i < deploymentNames.length; i++) { deploymentHidden.add(true); }
-        for (int i = 0; i < componentNames.length; i++) { componentHidden.add(true); }
-        for (int i = 0; i < documentNames.length; i++) { documentHidden.add(true); }
-        for (int i = 0; i < serviceNames.length; i++) { serviceHidden.add(true); }
     }
 
     static public JSONArray convertObjectToArray(String convert, String Type)

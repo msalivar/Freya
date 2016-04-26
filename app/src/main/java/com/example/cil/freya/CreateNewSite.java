@@ -232,7 +232,7 @@ public class CreateNewSite extends Activity implements View.OnClickListener, Ada
         {
             getInfo.unsynced.getJSONArray("Sites").put(JSON);
         }
-        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
     }
 
     public JSONObject createSiteJSON() throws JSONException

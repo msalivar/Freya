@@ -51,7 +51,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
         ArrayAdapter<String> sAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.projectNames);
         sAdapter.setDropDownViewResource(R.layout.spinner_item);
         project.setAdapter(sAdapter);
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -72,12 +72,25 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
         }
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.sites;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.sites;
         try
         {
-            JSONObject thisService = modules.getJSONObject(projectIndex);
+            JSONObject thisService = modules.getJSONObject(findEntry(entryName));
             alias.setText(thisService.getString("Alias"));
             landmark.setText(thisService.getString("GPS Landmark"));
             //location.setText(thisService.getString("Location"));

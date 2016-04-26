@@ -60,7 +60,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         componentAdapter.setDropDownViewResource(R.layout.spinner_item);
         deployment.setAdapter(componentAdapter);
         deployment.setOnItemSelectedListener(this);
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
             case R.id.delete_button:
                 try
                 {
-                    new CRUD.deleteMessage().execute(getInfo.components.getJSONObject(MainActivity.selectedModuleIndex).getString("Unique Identifier"));
+                    new CRUD.deleteMessage().execute(getInfo.components.getJSONObject(findEntry(MainActivity.selectedModuleName)).getString("Unique Identifier"));
                 } catch (JSONException e)
                 {
                     e.printStackTrace();
@@ -119,7 +119,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         {
             getInfo.unsynced.getJSONArray("Components").put(JSON);
         }
-        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
     }
 
     public JSONObject createComponentJSON() throws JSONException{
@@ -174,12 +174,25 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         return jsonParam;
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.components;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.components;
         try
         {
-            JSONObject thisComponent = modules.getJSONObject(projectIndex);
+            JSONObject thisComponent = modules.getJSONObject(findEntry(entryName));
             installation.setText(thisComponent.getString("Installation Details"));
             manufacturer.setText(thisComponent.getString("Manufacturer"));
             model.setText(thisComponent.getString("Model"));

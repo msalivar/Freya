@@ -260,7 +260,7 @@ public class CreateNewSystem extends Activity implements View.OnClickListener, S
         {
             getInfo.unsynced.getJSONArray("Systems").put(JSON);
         }
-        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
     }
 
     public JSONObject createSystemJSON() throws JSONException{

@@ -96,7 +96,7 @@ public class CreateNewDocument extends Activity implements View.OnClickListener,
             {
                 getInfo.unsynced.getJSONArray("Documents").put(JSON);
             }
-        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
     }
 
     public JSONObject createDocumentJSON() throws JSONException {

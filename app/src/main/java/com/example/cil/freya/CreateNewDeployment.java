@@ -120,7 +120,7 @@ public class CreateNewDeployment extends Activity implements View.OnClickListene
         {
             getInfo.unsynced.getJSONArray("Deployments").put(JSON);
         }
-        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
     }
 
     public JSONObject createDeploymentJSON() throws JSONException{

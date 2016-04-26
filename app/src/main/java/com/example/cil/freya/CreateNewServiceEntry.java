@@ -235,7 +235,7 @@ public class CreateNewServiceEntry extends Activity implements View.OnClickListe
         {
             getInfo.unsynced.getJSONArray("Service Entries").put(JSON);
         }
-        MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
     }
 
     @Override

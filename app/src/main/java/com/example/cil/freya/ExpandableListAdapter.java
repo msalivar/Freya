@@ -1,29 +1,18 @@
 package com.example.cil.freya;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.cil.freya.ModuleDisplayActivities.ComponentDisplayActivity;
-import com.example.cil.freya.ModuleDisplayActivities.DeploymentDisplayActivity;
-import com.example.cil.freya.ModuleDisplayActivities.DocumentDisplayActivity;
-import com.example.cil.freya.ModuleDisplayActivities.ProjectDisplayActivity;
-import com.example.cil.freya.ModuleDisplayActivities.ServiceEntryDisplayActivity;
-import com.example.cil.freya.ModuleDisplayActivities.SiteDisplayActivity;
-import com.example.cil.freya.ModuleDisplayActivities.SystemDisplayActivity;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter
 {
@@ -97,13 +86,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
                     {
                         hideButton.setText("Disable");
                         hideButton.setBackgroundColor(ContextCompat.getColor(_context, R.color.text_color));
-                        setHidden(false, groupPosition, childPosition);
                         result = false;
                     } else
                     {
                         hideButton.setText("Enable");
                         hideButton.setBackgroundColor(ContextCompat.getColor(_context, R.color.button_color));
-                        setHidden(true, groupPosition, childPosition);
                         result = true;
                     }
                     switch (MainActivity.ListHandler.listDataHeader.get(groupPosition))
@@ -112,48 +99,27 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
                             MainActivity.ListHandler.toggleProject(childPosition, result);
                             break;
                         case "Systems":
+                            MainActivity.ListHandler.toggleSystem(childPosition, result);
                             break;
                         case "Components":
                             break;
                         case "Service Entries":
                             break;
                         case "Deployments":
+                            MainActivity.ListHandler.toggleDeployment(childPosition, result);
                             break;
                         case "Sites":
+                            MainActivity.ListHandler.toggleSite(childPosition, result);
                             break;
                         case "Documents":
                             break;
                     }
-                    MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+                    //MainActivity.expListView.setAdapter(MainActivity.ListHandler.prepareListData(MainActivity.getContext()));
+                    notifyDataSetChanged();
                 }
             });
         }
         return convertView;
-    }
-
-    private void setHidden(boolean result, int groupPosition, int childPosition)
-    {
-        switch (MainActivity.ListHandler.listDataHeader.get(groupPosition))
-        {
-            case "Systems":
-                getInfo.systemHidden.set(childPosition, result);
-                break;
-            case "Components":
-                getInfo.componentHidden.set(childPosition, result);
-                break;
-            case "Service Entries":
-                getInfo.serviceHidden.set(childPosition, result);
-                break;
-            case "Deployments":
-                getInfo.deploymentHidden.set(childPosition, result);
-                break;
-            case "Sites":
-                getInfo.siteHidden.set(childPosition, result);
-                break;
-            case "Documents":
-                getInfo.documentHidden.set(childPosition, result);
-                break;
-        }
     }
 
     @Override

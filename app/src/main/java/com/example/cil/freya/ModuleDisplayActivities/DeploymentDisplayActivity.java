@@ -49,7 +49,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
         ArrayAdapter<String> siteAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.systemNames);
         siteAdapter.setDropDownViewResource(R.layout.spinner_item);
         system.setAdapter(siteAdapter);
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -70,12 +70,25 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
         }
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.deployments;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.deployments;
         try
         {
-            JSONObject thisDeployment = modules.getJSONObject(projectIndex);
+            JSONObject thisDeployment = modules.getJSONObject(findEntry(entryName));
             deployName.setText(thisDeployment.getString("Name"));
             parentLogger.setText(thisDeployment.getString("Parent Logger"));
             purpose.setText(thisDeployment.getString("Purpose"));

@@ -67,7 +67,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
         serAdapter.setDropDownViewResource(R.layout.spinner_item);
         service_entry.setAdapter(serAdapter);
 
-        getInfo(MainActivity.selectedModuleIndex);
+        getInfo(MainActivity.selectedModuleName);
     }
 
     @Override
@@ -88,12 +88,25 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
         }
     }
 
-    private void getInfo(int projectIndex)
+    private int findEntry(String name) throws JSONException
+    {
+        JSONArray modules = getInfo.documents;
+        for(int i = 0; i < modules.length(); i++)
+        {
+            if (modules.getJSONObject(i).getString("Name").equals(name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void getInfo(String entryName)
     {
         JSONArray modules = getInfo.documents;
         try
         {
-            JSONObject thisProject = modules.getJSONObject(projectIndex);
+            JSONObject thisProject = modules.getJSONObject(findEntry(entryName));
             name.setText(thisProject.getString("Name"));
             notes.setText(thisProject.getString("Notes"));
             path.setText(thisProject.getString("Path"));
