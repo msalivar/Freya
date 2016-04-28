@@ -85,6 +85,7 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
                 {
                     try
                     {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         getInfo.unsynced.getJSONArray("Service Entries").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
 
                     } catch (JSONException e)
@@ -95,6 +96,7 @@ public class ServiceEntryDisplayActivity extends Activity implements View.OnClic
                 else {
                     Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
                 }
+                overridePendingTransition(0, 0);
                 finish();
                 return true;
 

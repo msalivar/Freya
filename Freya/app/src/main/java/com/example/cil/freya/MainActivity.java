@@ -127,10 +127,7 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
                         break;
                     case "Unsynced":
 
-                        //TODO: not working yet
-                        //String test = ListHandler.listDataChild.get(ListHandler.listDataHeader.get(groupPosition)).get(childPosition).toString();
                          String test = null;
-
                             test = Modules.findEntry(ListHandler.listDataChild.get("Unsynced").get(childPosition).toString());
 
                         switch (test){
@@ -261,6 +258,13 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
                 .build();
     }
 
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+//TODO: List should update here after deletion
+    }
+
     public void GPSAccessPermission(){
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -348,10 +352,10 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
 
             AsyncParams par = new AsyncParams(getInfo. unsynced, cxt);
             new CRUD.writeMessage().execute(par);
-            for (int i =0; i < getInfo.deleted.size(); i++)
-            {
-                new CRUD.deleteMessage().execute(getInfo.deleted.get(i));
-            }
+//            for (int i =0; i < getInfo.deleted.size(); i++)
+//            {
+//                new CRUD.deleteMessage().execute(getInfo.deleted.get(i));
+//            }
             overridePendingTransition(0, 0);
             return true;
         }

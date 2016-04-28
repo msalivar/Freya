@@ -90,6 +90,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
                 {
                     try
                     {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         getInfo.unsynced.getJSONArray("Documents").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
 
                     } catch (JSONException e)
@@ -100,6 +101,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
                 else {
                 Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
             }
+                overridePendingTransition(0, 0);
                 finish();
                 return true;
             default:

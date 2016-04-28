@@ -88,6 +88,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
                 {
                     try
                     {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         getInfo.unsynced.getJSONArray("Sites").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
 
                     } catch (JSONException e)
@@ -98,6 +99,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
                 else {
                     Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
                 }
+                overridePendingTransition(0, 0);
                 finish();
                 return true;
 

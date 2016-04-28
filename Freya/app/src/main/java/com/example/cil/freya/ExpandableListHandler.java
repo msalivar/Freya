@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Matt on 4/17/2016.
  */
-public class ExpandableListHandler
+public class ExpandableListHandler extends MainActivity
 {
     public List<String> listDataHeader = Arrays.asList("Unsynced", "People", "Projects", "Sites",
             "Systems", "Deployments", "Components", "Documents", "Service Entries");

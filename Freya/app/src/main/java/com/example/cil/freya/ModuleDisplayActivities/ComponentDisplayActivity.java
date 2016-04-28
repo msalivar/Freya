@@ -2,7 +2,6 @@ package com.example.cil.freya.ModuleDisplayActivities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.UUID;
 
 public class ComponentDisplayActivity extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
@@ -35,6 +33,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
     EditText info;
     int deploymentNumb;
     boolean unsyncedFlag = false;
+    JSONObject thisComponent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -82,12 +81,14 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
                 {
                     try
                     {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         getInfo.unsynced.getJSONArray("Components").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
 
                     } catch (JSONException e)
                     {
                         e.printStackTrace();
                     }
+                    overridePendingTransition(0, 0);
                     finish();
                     return true;
                 }
@@ -120,75 +121,6 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
     public void onNothingSelected(AdapterView<?> adapterView)
     {}
 
-    public void editComponent() throws JSONException
-    {
-        //Create JSONObject here
-        JSONObject JSON = createComponentJSON();
-
-        if (getInfo.unsynced.isNull("Components"))
-        {
-            JSONArray component = new JSONArray();
-            component.put(JSON);
-            getInfo.unsynced.put("Components", component);
-        }
-        else
-        {
-            getInfo.unsynced.getJSONArray("Components").put(JSON);
-        }
-        MainActivity.ListHandler.addChild("Unsynced", JSON.getString("Name"));
-    }
-
-    public JSONObject createComponentJSON() throws JSONException{
-        JSONObject jsonParam = new JSONObject();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
-        String date = sdf.format(new Date());
-        jsonParam.put("Unique Identifier", UUID.randomUUID().toString());
-
-        info = (EditText) findViewById(R.id.compname);
-        jsonParam.put("Name", info.getText().toString());
-
-        info = (EditText) findViewById(R.id.manufacturer);
-        jsonParam.put("Manufacturer", info.getText().toString());
-
-        info = (EditText) findViewById(R.id.model);
-        jsonParam.put("Model",info.getText().toString());
-
-        info = (EditText) findViewById(R.id.serial_number);
-        jsonParam.put("Serial Number", info.getText().toString());
-
-        // may need to be a spinner
-        info = (EditText) findViewById(R.id.vendor);
-        jsonParam.put("Vendor", info.getText().toString());
-
-        info = (EditText) findViewById(R.id.supplier);
-        jsonParam.put("Supplier", info.getText().toString());
-
-        info = (EditText) findViewById(R.id.installation);
-        jsonParam.put("Installation Details", info.getText().toString());
-
-        info = (EditText) findViewById(R.id.wiring_notes);
-        jsonParam.put("Wiring Notes", info.getText().toString());
-
-        // needs spinner
-        jsonParam.put("Deployment", deploymentNumb);
-        jsonParam.put("Installation Date", date);
-        jsonParam.put("Modification Date", date);
-        jsonParam.put("Last Calibrated Date", date);
-        jsonParam.put("Creation Date", date);
-
-        /*if (selectedImage != null)
-        {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-            byte[] b = baos.toByteArray();
-            String hexTest = String.format("%x", new BigInteger(1, b));
-            jsonParam.put("Photo", hexTest);
-        }*/
-        //else { jsonParam.put("Photo", 0); }
-        jsonParam.put("Photo", 0);
-
-        return jsonParam;
-    }
 
     private int findEntry(String name, JSONArray modules) throws JSONException
     {
@@ -200,6 +132,79 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
             }
         }
         return 0;
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case (R.id.saveButton):
+                if (unsyncedFlag)
+                {
+                    try
+                    {
+                        MainActivity.ListHandler.removeChild("Unsynced", thisComponent.getString("Name"));
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    try
+                    {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+                        String date = sdf.format(new Date());
+
+                        info = (EditText) findViewById(R.id.compname);
+                        thisComponent.put("Name", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.manufacturer);
+                        thisComponent.put("Manufacturer", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.model);
+                        thisComponent.put("Model",info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.serial_number);
+                        thisComponent.put("Serial Number", info.getText().toString());
+
+                        // may need to be a spinner
+                        info = (EditText) findViewById(R.id.vendor);
+                        thisComponent.put("Vendor", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.supplier);
+                        thisComponent.put("Supplier", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.installation);
+                        thisComponent.put("Installation Details", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.wiring_notes);
+                        thisComponent.put("Wiring Notes", info.getText().toString());
+
+                        // needs spinner
+                        thisComponent.put("Deployment", deploymentNumb);
+
+                        thisComponent.put("Modification Date", date);
+
+                        thisComponent.put("Last Calibrated Date", date);
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    try
+                    {
+                        MainActivity.ListHandler.addChild("Unsynced", thisComponent.getString("Name"));
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Toast.makeText(getBaseContext(),"Cannot edit data already synced to the Server", Toast.LENGTH_LONG);
+                }
+
+                finish();
+                break;
+        }
     }
 
 
@@ -217,7 +222,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
 
     private void getInfo(String entryName)
     {
-        JSONObject thisComponent = null;
+
         try {
             thisComponent = getInfo.components.getJSONObject(findEntry(entryName, getInfo.components));
         } catch (JSONException e) {
@@ -270,24 +275,6 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
-            case (R.id.saveButton):
-                try
-                {
-                    editComponent();
-                }
-                catch(JSONException e)
-                {
-                    Log.e("Component Edit Error", e.toString());
-                }
-                finish();
-                break;
-        }
-    }
 
     @Override
     public void onBackPressed()

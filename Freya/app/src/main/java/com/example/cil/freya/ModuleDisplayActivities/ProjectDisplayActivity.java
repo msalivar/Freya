@@ -1,17 +1,18 @@
 package com.example.cil.freya.ModuleDisplayActivities;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cil.freya.MainActivity;
+import com.example.cil.freya.Modules;
 import com.example.cil.freya.R;
 import com.example.cil.freya.getInfo;
 
@@ -19,15 +20,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
-public class ProjectDisplayActivity extends Activity implements View.OnClickListener
+public class ProjectDisplayActivity extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
     EditText grant, name, funding, institution;
     Spinner investigator;
     Button saveButton;
     boolean unsyncedFlag = false;
     JSONObject thisProject = null;
+    int inNumb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,16 +45,74 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
 
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
+
         grant = (EditText) findViewById(R.id.grant);
         name = (EditText) findViewById(R.id.compname);
         funding = (EditText) findViewById(R.id.funding);
         institution = (EditText) findViewById(R.id.institutionName);
         investigator = (Spinner) findViewById(R.id.prininvest);
-        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, getInfo.peopleNames);
-        spinAdapter.setDropDownViewResource(R.layout.spinner_item);
-        investigator.setAdapter(spinAdapter);
+        Modules.spinner(this, getInfo.peopleNames, investigator);
+
         getInfo(MainActivity.selectedModuleName);
     }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case (R.id.saveButton):
+                if (unsyncedFlag)
+                {
+                    try
+                    {
+                        // TODO: Write to files and stuff here
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+                        String date = sdf.format(new Date());
+
+                        EditText info = (EditText) findViewById(R.id.institutionName);
+                        thisProject.put("Institution Name", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.grant);
+                        thisProject.put("Grant Number String", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.compname);
+                        thisProject.put("Name", info.getText().toString());
+
+                        thisProject.put("Principal Investigator", inNumb);
+
+                        info = (EditText) findViewById(R.id.funding);
+                        thisProject.put("Original Funding Agency", info.getText().toString());
+
+                        thisProject.put("Modification Date", date);
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Toast.makeText(getBaseContext(),"Cannot edit data already synced to the Server", Toast.LENGTH_LONG);
+                }
+
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemSelected (AdapterView<?> parent, View view, int position, long id)
+    {
+        if (position > 0)
+            inNumb = getInfo.peopleNumber[position-1];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,18 +130,22 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
 
             case R.id.delete_button:
                 if (unsyncedFlag){
+
                     try
                     {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         getInfo.unsynced.getJSONArray("Projects").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
 
                     } catch (JSONException e)
                     {
                         e.printStackTrace();
                     }
+
                 }
                 else {
                     Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
                 }
+                overridePendingTransition(0, 0);
                 finish();
                 return true;
             // TODO: local deletes only right now
@@ -114,6 +181,8 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                 return super.onOptionsItemSelected(menu);
         }
     }
+
+
 
     private int findEntry(String name, JSONArray modules) throws JSONException
     {
@@ -189,18 +258,6 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
         } catch (JSONException e)
         {
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
-            case (R.id.saveButton):
-                // TODO: Write to files and stuff here
-                finish();
-                break;
         }
     }
 
