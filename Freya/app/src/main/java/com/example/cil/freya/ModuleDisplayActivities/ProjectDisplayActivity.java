@@ -66,6 +66,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                 {
                     try
                     {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         // TODO: Write to files and stuff here
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
                         String date = sdf.format(new Date());
@@ -85,7 +86,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                         thisProject.put("Original Funding Agency", info.getText().toString());
 
                         thisProject.put("Modification Date", date);
-
+                        MainActivity.ListHandler.addChild("Unsynced", thisProject.getString("Name"));
                     } catch (JSONException e)
                     {
                         e.printStackTrace();

@@ -1,10 +1,11 @@
 package com.example.cil.freya.ModuleDisplayActivities;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,14 +20,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
-public class DocumentDisplayActivity extends Activity implements View.OnClickListener
+public class DocumentDisplayActivity extends Activity implements View.OnClickListener, Spinner.OnItemSelectedListener
 {
+    int proNumb, siteNumb, deployNumb, componentNumb, serviceNumb;
     EditText name, notes, path;
     Spinner project, site, deployment, component, service_entry;
     Button saveButton;
     boolean unsyncedFlag = false;
+
+    JSONObject thisProject = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,6 +77,95 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
 
         getInfo(MainActivity.selectedModuleName);
     }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case (R.id.saveButton):
+                if (unsyncedFlag)
+                {
+
+                    try
+                    {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+                        String date = sdf.format(new Date());
+
+                        EditText info = (EditText) findViewById(R.id.document_name);
+                        thisProject.put("Name", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.doc_notes);
+                        thisProject.put("Notes", info.getText().toString());
+
+                        info = (EditText) findViewById(R.id.path);
+                        thisProject.put("Path", info.getText().toString());
+
+                        thisProject.put("Modification Date", date);
+
+                        thisProject.put("Project", proNumb);
+
+                        thisProject.put("Site", siteNumb);
+
+                        thisProject.put("Deployment", deployNumb);
+
+                        thisProject.put("Component", componentNumb);
+
+                        thisProject.put("Service Entry", serviceNumb);
+
+                        MainActivity.ListHandler.addChild("Unsynced", thisProject.getString("Name"));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Toast.makeText(getBaseContext(),"Cannot edit data already synced to the Server", Toast.LENGTH_LONG);
+                }
+
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case (R.id.document_project):
+                if (position > 0)
+                    proNumb = getInfo.projectNumber[position - 1];
+                break;
+
+            case (R.id.document_site):
+                if (position > 0)
+                    siteNumb = getInfo.siteNumber[position - 1];
+                break;
+
+            case (R.id.document_deployment):
+                if (position > 0)
+                    deployNumb = getInfo.deploymentNumber[position - 1];
+                break;
+
+            case (R.id.document_component):
+                if (position > 0)
+                    componentNumb = getInfo.componentNumber[position - 1];
+                break;
+
+            case (R.id.document_service):
+                if (position > 0)
+                    serviceNumb = getInfo.serviceNumber[position - 1];
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -136,7 +232,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
 
     private void getInfo(String entryName)
     {
-        JSONObject thisProject = null;
+
         try {
             thisProject = getInfo.documents.getJSONObject(findEntry(entryName, getInfo.documents));
         } catch (JSONException e) {
@@ -282,21 +378,6 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
-            case (R.id.saveButton):
-                // TODO: Write to files and stuff here
-                finish();
-                break;
-//            case (R.id.cancelButton):
-//                // Values will not be changed and work will be lost, maybe show a warning here?
-//                finish();
-//                break;
-        }
-    }
 
     @Override
     public void onBackPressed()

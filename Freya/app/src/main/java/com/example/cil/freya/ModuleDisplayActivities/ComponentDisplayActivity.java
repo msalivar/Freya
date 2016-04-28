@@ -142,15 +142,10 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
             case (R.id.saveButton):
                 if (unsyncedFlag)
                 {
+
                     try
                     {
-                        MainActivity.ListHandler.removeChild("Unsynced", thisComponent.getString("Name"));
-                    } catch (JSONException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    try
-                    {
+                        MainActivity.ListHandler.removeChild("Unsynced", MainActivity.selectedModuleName);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
                         String date = sdf.format(new Date());
 
@@ -185,14 +180,8 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
                         thisComponent.put("Modification Date", date);
 
                         thisComponent.put("Last Calibrated Date", date);
-
-                    } catch (JSONException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    try
-                    {
                         MainActivity.ListHandler.addChild("Unsynced", thisComponent.getString("Name"));
+
                     } catch (JSONException e)
                     {
                         e.printStackTrace();
