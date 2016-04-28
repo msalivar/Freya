@@ -27,6 +27,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
     Spinner project, permit, landOwner;
     Button saveButton;
     EditText lat, longi, alt;
+    boolean unsyncedFlag = false;
 
     // TODO: Unfinished
 
@@ -82,6 +83,24 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
             case R.id.cancel_button:
                 finish();
                 return true;
+            case R.id.delete_button:
+                if (unsyncedFlag)
+                {
+                    try
+                    {
+                        getInfo.unsynced.getJSONArray("Sites").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
+                }
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(menu);
         }
@@ -102,9 +121,10 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
 
     private int findUnsyncedEntry(String name, JSONObject modules) throws JSONException
     {
-        for(int i = 0; i < modules.length(); i++)
+        JSONArray t = modules.getJSONArray("Sites");
+        for(int i = 0; i < t.length(); i++)
         {
-            if (modules.getJSONArray("Sites").getJSONObject(i).getString("Name").equals(name))
+            if (t.getJSONObject(i).getString("Name").equals(name))
             {
                 return i;
             }
@@ -124,6 +144,7 @@ public class SiteDisplayActivity extends Activity implements View.OnClickListene
 
         try {
             thisService = getInfo.unsynced.getJSONArray("Sites").getJSONObject(findUnsyncedEntry(entryName, getInfo.unsynced));
+            unsyncedFlag = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }

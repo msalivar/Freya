@@ -34,6 +34,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
     Button saveButton;
     EditText info;
     int deploymentNumb;
+    boolean unsyncedFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,8 +76,24 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
             case R.id.cancel_button:
                 finish();
                 return true;
-            //TODO: make this work
+
             case R.id.delete_button:
+                if (unsyncedFlag)
+                {
+                    try
+                    {
+                        getInfo.unsynced.getJSONArray("Components").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    finish();
+                    return true;
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
+                }
              /*   try
                 {
                     new CRUD.deleteMessage().execute(getInfo.components.getJSONObject(findEntry(MainActivity.selectedModuleName)).getString("Unique Identifier"));
@@ -188,7 +205,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
 
     private int findUnsyncedEntry(String name, JSONObject modules) throws JSONException
     {
-        for(int i = 0; i < modules.length(); i++)
+        for(int i = 0; i < modules.getJSONArray("Components").length(); i++)
         {
             if (modules.getJSONArray("Components").getJSONObject(i).getString("Name").equals(name))
             {
@@ -209,6 +226,7 @@ public class ComponentDisplayActivity extends Activity implements View.OnClickLi
 
         try {
             thisComponent = getInfo.unsynced.getJSONArray("Components").getJSONObject(findUnsyncedEntry(entryName, getInfo.unsynced));
+            unsyncedFlag = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }

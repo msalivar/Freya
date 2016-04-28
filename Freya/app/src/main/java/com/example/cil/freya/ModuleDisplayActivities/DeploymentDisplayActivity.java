@@ -27,6 +27,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
     Spinner system;
     Button saveButton;
     EditText lat, longi, alt;
+    boolean unsyncedFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,6 +73,25 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
             case R.id.cancel_button:
                 finish();
                 return true;
+
+            case R.id.delete_button:
+                if (unsyncedFlag)
+                {
+                    try
+                    {
+                        getInfo.unsynced.getJSONArray("Deployments").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
+            }
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(menu);
         }
@@ -92,7 +112,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
 
     private int findUnsyncedEntry(String name, JSONObject modules) throws JSONException
     {
-        for(int i = 0; i < modules.length(); i++)
+        for(int i = 0; i < modules.getJSONArray("Deployments").length(); i++)
         {
             if (modules.getJSONArray("Deployments").getJSONObject(i).getString("Name").equals(name))
             {
@@ -114,6 +134,7 @@ public class DeploymentDisplayActivity extends Activity implements View.OnClickL
 
         try {
             thisDeployment = getInfo.unsynced.getJSONArray("Deployments").getJSONObject(findUnsyncedEntry(entryName, getInfo.unsynced));
+            unsyncedFlag = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -25,6 +25,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -134,30 +135,86 @@ public class MainActivity extends NavigationDrawer implements GoogleApiClient.Co
 
                         switch (test){
                             case "Projects":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Projects").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 project = new Intent(MainActivity.this, ProjectDisplayActivity.class);
                                 startActivity(project);
                                 break;
                             case "Systems":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Systems").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 system = new Intent(MainActivity.this, SystemDisplayActivity.class);
                                 startActivity(system);
                                 break;
                             case "Components":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Components").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 component = new Intent(MainActivity.this, ComponentDisplayActivity.class);
                                 startActivity(component);
                                 break;
                             case "Service Entries":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Service Entries").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 serviceEntry = new Intent(MainActivity.this, ServiceEntryDisplayActivity.class);
                                 startActivity(serviceEntry);
                                 break;
                             case "Deployments":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Deployments").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 deployment = new Intent(MainActivity.this, DeploymentDisplayActivity.class);
                                 startActivity(deployment);
                                 break;
                             case "Sites":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Sites").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 site = new Intent(MainActivity.this, SiteDisplayActivity.class);
                                 startActivity(site);
                                 break;
                             case "Documents":
+                                try
+                                {
+                                    JSONObject t = getInfo.unsynced.getJSONArray("Documents").getJSONObject(childPosition);
+                                    selectedModuleName = t.getString("Name");
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
                                 document = new Intent(MainActivity.this, DocumentDisplayActivity.class);
                                 startActivity(document);
                                 break;

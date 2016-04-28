@@ -26,6 +26,8 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
     EditText grant, name, funding, institution;
     Spinner investigator;
     Button saveButton;
+    boolean unsyncedFlag = false;
+    JSONObject thisProject = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,7 +65,23 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
                 finish();
                 return true;
 
-            // TODO: no deletes for right now
+            case R.id.delete_button:
+                if (unsyncedFlag){
+                    try
+                    {
+                        getInfo.unsynced.getJSONArray("Projects").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
+                }
+                finish();
+                return true;
+            // TODO: local deletes only right now
           /*  case R.id.delete_button:
                 try
                 {
@@ -112,7 +130,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
 
     private int findUnsyncedEntry(String name, JSONObject modules) throws JSONException
     {
-        for(int i = 0; i < modules.length(); i++)
+        for(int i = 0; i < modules.getJSONArray("Projects").length(); i++)
         {
             if (modules.getJSONArray("Projects").getJSONObject(i).getString("Name").equals(name))
             {
@@ -125,7 +143,6 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
 
     private void getInfo(String entryName)
     {
-        JSONObject thisProject = null;
         try {
             thisProject = getInfo.projects.getJSONObject(findEntry(entryName, getInfo.projects));
         } catch (JSONException e) {
@@ -134,6 +151,7 @@ public class ProjectDisplayActivity extends Activity implements View.OnClickList
 
         try {
             thisProject = getInfo.unsynced.getJSONArray("Projects").getJSONObject(findUnsyncedEntry(entryName, getInfo.unsynced));
+            unsyncedFlag = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }

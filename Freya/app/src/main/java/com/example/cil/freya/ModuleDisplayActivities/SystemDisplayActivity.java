@@ -26,6 +26,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
     EditText details, power, sysname, location;
     Spinner manager, site;
     Button saveButton;
+    boolean unsnycedFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,6 +67,23 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
             case R.id.cancel_button:
                 finish();
                 return true;
+            case R.id.delete_button:
+                if (unsnycedFlag)
+                {
+                    try
+                    {
+                        getInfo.unsynced.getJSONArray("Systems").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
+                }
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(menu);
         }
@@ -86,7 +104,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
 
     private int findUnsyncedEntry(String name, JSONObject modules) throws JSONException
     {
-        for(int i = 0; i < modules.length(); i++)
+        for(int i = 0; i < modules.getJSONArray("Systems").length(); i++)
         {
             if (modules.getJSONArray("Systems").getJSONObject(i).getString("Name").equals(name))
             {
@@ -107,6 +125,7 @@ public class SystemDisplayActivity extends Activity implements View.OnClickListe
 
         try {
             thisSystem = getInfo.unsynced.getJSONArray("Systems").getJSONObject(findUnsyncedEntry(entryName, getInfo.unsynced));
+            unsnycedFlag = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }

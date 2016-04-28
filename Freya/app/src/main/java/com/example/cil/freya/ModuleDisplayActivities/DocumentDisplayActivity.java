@@ -26,6 +26,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
     EditText name, notes, path;
     Spinner project, site, deployment, component, service_entry;
     Button saveButton;
+    boolean unsyncedFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,6 +84,24 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
             case R.id.cancel_button:
                 finish();
                 return true;
+
+            case R.id.delete_button:
+                if (unsyncedFlag)
+                {
+                    try
+                    {
+                        getInfo.unsynced.getJSONArray("Documents").remove(findUnsyncedEntry(MainActivity.selectedModuleName, getInfo.unsynced));
+
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                Toast.makeText(getBaseContext(),"You cannot delete data already synced to the server", Toast.LENGTH_LONG).show();
+            }
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(menu);
         }
@@ -103,7 +122,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
 
     private int findUnsyncedEntry(String name, JSONObject modules) throws JSONException
     {
-        for(int i = 0; i < modules.length(); i++)
+        for(int i = 0; i < modules.getJSONArray("Documents").length(); i++)
         {
             if (modules.getJSONArray("Documents").getJSONObject(i).getString("Name").equals(name))
             {
@@ -124,6 +143,7 @@ public class DocumentDisplayActivity extends Activity implements View.OnClickLis
 
         try {
             thisProject = getInfo.unsynced.getJSONArray("Documents").getJSONObject(findUnsyncedEntry(entryName, getInfo.unsynced));
+            unsyncedFlag = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }
