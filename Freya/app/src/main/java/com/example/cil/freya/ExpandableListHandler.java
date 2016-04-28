@@ -1,6 +1,7 @@
 package com.example.cil.freya;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -209,7 +210,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray sites = getInfo.sites;
             for(int i = 0; i < sites.length(); i++)
             {
-                if(sites.getJSONObject(i).get("Project") == thisEntry.get("Project"))
+                if(sites.getJSONObject(i).get("Project").toString().equals(thisEntry.get("Project").toString()))
                 {
                     if (toggle) { removeChild("Sites", sites.getJSONObject(i).getString("Name")); }
                     else { addChild("Sites", sites.getJSONObject(i).getString("Name")); }
@@ -218,7 +219,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray services = getInfo.services;
             for(int i = 0; i < services.length(); i++)
             {
-                if(services.getJSONObject(i).get("Project") == thisEntry.get("Project"))
+                if(services.getJSONObject(i).get("Project").toString().equals(thisEntry.get("Project").toString()))
                 {
                     if (toggle) { removeChild("Service Entries", services.getJSONObject(i).getString("Name")); }
                     else { addChild("Service Entries", services.getJSONObject(i).getString("Name")); }
@@ -227,7 +228,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray documents = getInfo.documents;
             for(int i = 0; i < documents.length(); i++)
             {
-                if(documents.getJSONObject(i).get("Project") == thisEntry.get("Project"))
+                if(documents.getJSONObject(i).get("Project").toString().equals(thisEntry.get("Project").toString()))
                 {
                     if (toggle) { removeChild("Documents", documents.getJSONObject(i).getString("Name")); }
                     else { addChild("Documents", documents.getJSONObject(i).getString("Name")); }
@@ -249,7 +250,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray systems = getInfo.systems;
             for(int i = 0; i < systems.length(); i++)
             {
-                if(systems.getJSONObject(i).get("Site") == thisEntry.get("Site"))
+                if(systems.getJSONObject(i).get("Site").toString().equals(thisEntry.get("Site").toString()))
                 {
                     if (toggle) { removeChild("Systems", systems.getJSONObject(i).getString("Name")); }
                     else { addChild("Systems", systems.getJSONObject(i).getString("Name")); }
@@ -258,7 +259,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray documents = getInfo.documents;
             for(int i = 0; i < documents.length(); i++)
             {
-                if(documents.getJSONObject(i).get("Site") == thisEntry.get("Site"))
+                if(documents.getJSONObject(i).get("Site").toString().equals(thisEntry.get("Site").toString()))
                 {
                     if (toggle) { removeChild("Documents", documents.getJSONObject(i).getString("Name")); }
                     else { addChild("Documents", documents.getJSONObject(i).getString("Name")); }
@@ -280,7 +281,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray services = getInfo.services;
             for(int i = 0; i < services.length(); i++)
             {
-                if(services.getJSONObject(i).get("System") == thisEntry.get("System"))
+                if(services.getJSONObject(i).get("System").toString().equals(thisEntry.get("System").toString()))
                 {
                     if (toggle) { removeChild("Service Entries", services.getJSONObject(i).getString("Name")); }
                     else { addChild("Service Entries", services.getJSONObject(i).getString("Name")); }
@@ -289,7 +290,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray deployments = getInfo.deployments;
             for(int i = 0; i < deployments.length(); i++)
             {
-                if(deployments.getJSONObject(i).get("System") == thisEntry.get("System"))
+                if(deployments.getJSONObject(i).get("System").toString().equals(thisEntry.get("System").toString()))
                 {
                     if (toggle) { removeChild("Deployments", deployments.getJSONObject(i).getString("Name")); }
                     else { addChild("Deployments", deployments.getJSONObject(i).getString("Name")); }
@@ -311,7 +312,7 @@ public class ExpandableListHandler extends MainActivity
             JSONArray components = getInfo.components;
             for(int i = 0; i < components.length(); i++)
             {
-                if(components.getJSONObject(i).get("Deployment") == thisEntry.get("Deployment"))
+                if(components.getJSONObject(i).get("Deployment").toString().equals(thisEntry.get("Deployment").toString()))
                 {
                     if (toggle) { removeChild("Components", components.getJSONObject(i).getString("Name")); }
                     else { addChild("Components", components.getJSONObject(i).getString("Name")); }
