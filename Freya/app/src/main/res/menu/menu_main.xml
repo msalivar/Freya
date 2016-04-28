@@ -1,0 +1,26 @@
+<!--putting in action bar icons-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+ <!-- put in the sync icon, set dimensions, give ID-->
+    <item android:id="@+id/sync" android:title="Sync"
+          android:showAsAction="always"
+          android:icon="@drawable/sync_icon"
+
+    />
+ <!-- put in the search upload, set dimensions, give ID-->
+    <item android:id="@+id/upload" android:title="Upload"
+           android:showAsAction="always"
+          android:icon="@drawable/upload_icon"
+
+        />
+
+    <!-- Puts Cancel option at top-->
+    <item
+        android:title="Cancel   "
+        android:id="@+id/cancel_button"
+        android:showAsAction="always"
+
+        />
+</menu>
